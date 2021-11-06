@@ -361,8 +361,6 @@ package STM32.RCC is
    --  011: Three wait sates 135 - 180 | 165 - 225 | 210 - 225 | 210 - 225
    --  100: Four wait sates  180 - 225 |       225 |           | 225 - 240
 
-   procedure Set_CPU_Cache (Enable : Boolean);
-
    -------------------
    -- VCORE Scaling --
    -------------------

@@ -34,7 +34,6 @@ with STM32_SVD.RCC;    use STM32_SVD.RCC;
 with STM32_SVD.PWR;    use STM32_SVD.PWR;
 with STM32_SVD.SYSCFG; use STM32_SVD.SYSCFG;
 with STM32_SVD.Flash;  use STM32_SVD.Flash;
-with STM32_SVD.SCB;    use STM32_SVD.SCB;
 
 package body STM32.RCC is
 
@@ -556,17 +555,6 @@ package body STM32.RCC is
    begin
       Flash_Periph.ACR.LATENCY := Latency'Enum_Rep;
    end Set_FLASH_Latency;
-
-   -------------------
-   -- Set_CPU_Cache --
-   -------------------
-
-   procedure Set_CPU_Cache (Enable : Boolean)
-   is
-   begin
-      SCB_Periph.CCR.DC := Enable; --  data cache
-      SCB_Periph.CCR.IC := Enable; --  instruction cache
-   end Set_CPU_Cache;
 
    -----------------------
    -- Set_VCORE_Scaling --
