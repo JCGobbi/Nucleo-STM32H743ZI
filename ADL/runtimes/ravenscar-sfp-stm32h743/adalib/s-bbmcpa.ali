@@ -1,0 +1,95 @@
+V "GNAT Lib v2021"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/Nucleo-STM32H743ZI/bb-runtimes/runtimes/ravenscar-sfp-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.bb.mcu_parameters%b  s-bbmcpa.adb	73166e13 NE OL PK
+W interfaces%s		interfac.ads		interfac.ali
+W interfaces.stm32%s	i-stm32.ads		i-stm32.ali
+W interfaces.stm32.pwr%s  i-stm32-pwr.ads	i-stm32-pwr.ali
+W interfaces.stm32.rcc%s  i-stm32-rcc.ads	i-stm32-rcc.ali
+W interfaces.stm32.syscfg%s  i-stm32-syscfg.ads	i-stm32-syscfg.ali
+W system.bb%s		s-bb.ads		s-bb.ali
+
+U system.bb.mcu_parameters%s  s-bbmcpa.ads	19c9d238 NE OL PR PK
+W interfaces%s		interfac.ads		interfac.ali
+W interfaces.stm32%s	i-stm32.ads		i-stm32.ali
+W interfaces.stm32.pwr%s  i-stm32-pwr.ads	i-stm32-pwr.ali
+W system.bb%s		s-bb.ads		s-bb.ali
+
+D interfac.ads		20211106182209 edec285f interfaces%s
+D i-stm32.ads		20211106182209 2692d073 interfaces.stm32%s
+D i-stm32-pwr.ads	20211106182209 220c7e53 interfaces.stm32.pwr%s
+D i-stm32-rcc.ads	20211106182209 ae19c4dc interfaces.stm32.rcc%s
+D i-stm32-syscfg.ads	20211106182209 ff238cc8 interfaces.stm32.syscfg%s
+D system.ads		20211106182209 8fcf39fb system%s
+D s-bb.ads		20211106182209 09e072ae system.bb%s
+D s-bbmcpa.ads		20211106182209 14b70eb6 system.bb.mcu_parameters%s
+D s-bbmcpa.adb		20211106182209 149756e2 system.bb.mcu_parameters%b
+D s-unstyp.ads		20211106182209 2b077493 system.unsigned_types%s
+G a e
+G c Z s b [pwr_initialize system__bb__mcu_parameters 45 14 none]
+G c Z s s [is_pwr_stabilized system__bb__mcu_parameters 47 13 none]
+G c Z s b [pwr_overdrive_enable system__bb__mcu_parameters 53 14 none]
+X 1 interfac.ads
+38K9*Interfaces 231e15 8|35r6 36r6 41r13 48r10 9|35r6 35r35 36r6 36r35 37r6
+. 37r35 57r20
+X 2 i-stm32.ads
+13K20*STM32 216e21 8|35w17 36r17 41r24 48r21 9|35r17 35r46 36r17 36r46 37r17
+. 37r46 57r31
+24M9*Bit 8|41r30
+26M9*UInt2
+28M9*UInt3
+X 3 i-stm32-pwr.ads
+12K26*PWR 661e25 8|36w23 48r27 9|35w23 35r52 57r37
+22M12*CR1_PLS_Field{2|28M9}
+37m7*PVDE{21M12} 9|50m22
+41m7*PLS{22M12} 9|49m22
+47m7*DBP{23M12} 9|53m22
+97m7*PVDO{84M12} 9|57r57
+104m7*ACTVOSRDY{85M12} 8|48r47
+360M12*D3CR_VOS_Field{2|26M9}
+378m7*VOS{360M12} 9|60m23 81m23
+606r7*CR1{30R9} 9|49m18 50m18 53m18
+608r7*CSR1{90R9} 8|48r42 9|57r52
+632r7*D3CR{364R9} 9|60m18 81m18
+658r4*PWR_Periph{604R9} 8|48r31 9|49m7 50m7 53m7 57r41 60m7 81m7
+X 4 i-stm32-rcc.ads
+12K26*RCC 4593e25 9|36w23 36r52
+2352m7*SYSCFGEN{2334M12} 9|82m26
+4453r7*APB4ENR{2348R9} 9|82m18
+4590r4*RCC_Periph{4363R9} 9|82m7
+X 5 i-stm32-syscfg.ads
+12K26*SYSCFG 848e28 9|37w23 37r52
+350m7*ODEN{345M12} 9|83m27
+774r7*PWRCR{348R9} 9|83m21
+845r4*SYSCFG_Periph{756R9} 9|83m7
+X 6 system.ads
+60K9*System 174e11 8|38r9 59r5 9|39r14 64r20 92r5
+X 7 s-bb.ads
+40K16*BB 6|60k9 7|95e14 8|38r16 59r12 9|39r21 64r27 92r12
+X 8 s-bbmcpa.ads
+38K19*MCU_Parameters 7|40k16 8|59l15 59e29 9|39b24 64r30 92l15 92t29
+43N4*Number_Of_Interrupts
+45U14*PWR_Initialize 9|45b14 67l8 67t22
+47V13*Is_PWR_Stabilized{boolean} 9|64s45
+53U14*PWR_Overdrive_Enable 9|73b14 90l8 90t28
+

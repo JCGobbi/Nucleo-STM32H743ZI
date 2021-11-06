@@ -1,0 +1,132 @@
+V "GNAT Lib v2021"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/Nucleo-STM32H743ZI/bb-runtimes/runtimes/ravenscar-full-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_EXCEPTIONS
+RV NO_FIXED_POINT
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U ada.real_time.delays%b  a-retide.adb		a1f547b6 NE OL PK
+W ada.real_time%s	a-reatim.adb		a-reatim.ali
+W system%s		system.ads		system.ali
+W system.task_primitives%s  s-taspri.ads	s-taspri.ali
+W system.task_primitives.operations%s  s-taprop.adb  s-taprop.ali
+
+U ada.real_time.delays%s  a-retide.ads		c7f5fe83 NE OL PK
+W ada.real_time%s	a-reatim.adb		a-reatim.ali
+
+D ada.ads		20211106182209 76789da1 ada%s
+D a-except.ads		20211106182209 946f3014 ada.exceptions%s
+D a-reatim.ads		20211106182210 cfe92427 ada.real_time%s
+D a-retide.ads		20211106182210 081cdaa4 ada.real_time.delays%s
+D a-retide.adb		20211106182210 32434500 ada.real_time.delays%b
+D a-string.ads		20211106182209 90ac6797 ada.strings%s
+D a-sttebu.ads		20211106182209 18209c64 ada.strings.text_buffers%s
+D a-stuten.ads		20211106182209 808c40ad ada.strings.utf_encoding%s
+D a-tags.ads		20211106182209 9eaa38c6 ada.tags%s
+D a-unccon.ads		20211106182209 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20211106182209 edec285f interfaces%s
+D i-stm32.ads		20211106182210 2692d073 interfaces.stm32%s
+D i-stm32-pwr.ads	20211106182210 220c7e53 interfaces.stm32.pwr%s
+D system.ads		20211106182210 5ad4ef55 system%s
+D s-bb.ads		20211106182209 09e072ae system.bb%s
+D s-bbbopa.ads		20211106182210 1fe8b530 system.bb.board_parameters%s
+D s-bbbosu.ads		20211106182210 0f820a2a system.bb.board_support%s
+D s-bbbosu.adb		20211106182210 21f80941 system.bb.board_support%b
+D s-bbsumu.adb		20211106182210 cbb92b04 system.bb.board_support.multiprocessors
+D s-bbcppr.ads		20211106182210 ac5bcd4d system.bb.cpu_primitives%s
+D s-bbcppr.adb		20211106182210 0d3346b0 system.bb.cpu_primitives%b
+D s-bcpcst.ads		20211106182210 1841a1ac system.bb.cpu_primitives.context_switch_trigger%s
+D s-bbcpsp.ads		20211106182210 ccfc81c7 system.bb.cpu_specific%s
+D s-bbinte.ads		20211106182210 c88d39da system.bb.interrupts%s
+D s-bbmcpa.ads		20211106182210 14b70eb6 system.bb.mcu_parameters%s
+D s-bbpara.ads		20211106182210 bd7d674e system.bb.parameters%s
+D s-bbprot.ads		20211106182210 f48a7e85 system.bb.protection%s
+D s-bbprot.adb		20211106182210 a4657a6f system.bb.protection%b
+D s-bbthre.ads		20211106182210 c94b446f system.bb.threads%s
+D s-bbthre.adb		20211106182210 40388c8b system.bb.threads%b
+D s-bbthqu.ads		20211106182210 cd23d79e system.bb.threads.queues%s
+D s-bbthqu.adb		20211106182210 d73a8d13 system.bb.threads.queues%b
+D s-bbtime.ads		20211106182210 ad086247 system.bb.time%s
+D s-bbtime.adb		20211106182210 1eb33bd4 system.bb.time%b
+D s-bbtiev.ads		20211106182210 110cc417 system.bb.timing_events%s
+D s-maccod.ads		20211106182209 6d68a701 system.machine_code%s
+D s-multip.ads		20211106182210 f33e0e35 system.multiprocessors%s
+D s-mufalo.ads		20211106182210 3dca0374 system.multiprocessors.fair_locks%s
+D s-musplo.ads		20211106182210 69fa25c4 system.multiprocessors.spin_locks%s
+D s-osinte.ads		20211106182210 229b14dd system.os_interface%s
+D s-parame.ads		20211106182210 8e90778f system.parameters%s
+D s-putima.ads		20211106182210 4e095881 system.put_images%s
+D s-secsta.ads		20211106182209 56a2861c system.secondary_stack%s
+D s-stalib.ads		20211106182210 472fbca8 system.standard_library%s
+D s-stm32.ads		20211106182210 1414a24c system.stm32%s
+D s-stoele.ads		20211106182209 2dc34a04 system.storage_elements%s
+D s-stoele.adb		20211106182209 ed88f8fb system.storage_elements%b
+D s-tasinf.ads		20211106182210 801abd01 system.task_info%s
+D s-taspri.ads		20211106182210 37f162b4 system.task_primitives%s
+D s-taprop.ads		20211106182210 5013f316 system.task_primitives.operations%s
+D s-taprop.adb		20211106182210 beae9bdd system.task_primitives.operations%b
+D s-taskin.ads		20211106182210 989d56fd system.tasking%s
+D s-tasdeb.ads		20211106182210 b275d76a system.tasking.debug%s
+D s-tasdeb.adb		20211106182210 16d62b3b system.tasking.debug%b
+D s-traent.ads		20211106182210 26a8d361 system.traceback_entries%s
+D s-unstyp.ads		20211106182209 2b077493 system.unsigned_types%s
+D unchconv.ads		20211106182209 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z s b [to_duration ada__real_time__delays 39 13 none]
+G c Z s b [delay_until ada__real_time__delays 42 14 none]
+X 1 ada.ads
+16K9*Ada 20e8 4|37r9 48r5 5|36r14 72r5
+X 3 a-reatim.ads
+40K13*Real_Time 1|16k9 3|181e18 4|37r13 39r30 48r9 5|36r18 72r9
+50M9*Time<33|46M9> 4|39r40 42r31 5|44r31 66r30
+X 4 a-retide.ads
+37K23*Delays 3|40k13 4|48l19 48e25 5|36b28 72l19 72t25
+39V13*To_Duration{duration} 39>26 5|66b13 70l8 70t19
+39m26 T{3|50M9} 5|66b26 67r28
+42U14*Delay_Until 42>27 5|44b14 55l8 55t19
+42m27 T{3|50M9} 5|44b27 53r39
+X 5 a-retide.adb
+38K12 STPO=38:48 50r10 53r10 53r28
+X 14 system.ads
+50K9*System 5|32r6 38r25 14|164e11
+X 21 s-bbcppr.adb
+106U14 SV_Call_Handler 107i24
+109U14 Sys_Tick_Handler 110i24
+112U14 Interrupt_Request_Handler 113i24
+X 33 s-bbtime.ads
+46M9*Time
+X 43 s-secsta.ads
+46P9*SS_Stack_Ptr(43R9)
+X 49 s-taspri.ads
+36K16*Task_Primitives 5|32r13 38r32 49|77e27
+X 50 s-taprop.ads
+44K32*Operations 5|32w29 38r48 50|122e38
+76V13*Self{52|67P9} 5|50s15
+93M9*Time<33|46M9> 5|53r33
+108U14*Delay_Until<33|137p14> 5|53s15
+X 51 s-taprop.adb
+64U14 Initialize_Slave 65i24
+X 52 s-taskin.ads
+67P9*Task_Id(65R9)
+324i7*Protected_Action_Nesting{natural} 5|50r27
+386r7*Common{307R9} 5|50r20
+398V13*Get_Sec_Stack{43|46P9} 399i<c,__gnat_get_secondary_stack>22
+

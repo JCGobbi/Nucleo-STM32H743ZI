@@ -1,0 +1,84 @@
+V "GNAT Lib v2021"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/Nucleo-STM32H743ZI/bb-runtimes/runtimes/ravenscar-sfp-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_EXCEPTIONS
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_IMPLEMENTATION_ATTRIBUTES
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_IMPLEMENTATION_RESTRICTIONS
+RR NO_ELABORATION_CODE
+
+U system.memory%b	s-memory.adb		b0299088 NE OL PK
+W system%s		system.ads		system.ali
+W system.storage_elements%s  s-stoele.adb	s-stoele.ali
+
+U system.memory%s	s-memory.ads		1d818119 EB NE OL PK
+W system%s		system.ads		system.ali
+
+D ada.ads		20211106182209 76789da1 ada%s
+D a-unccon.ads		20211106182209 0e9b276f ada.unchecked_conversion%s
+D system.ads		20211106182209 8fcf39fb system%s
+D s-memory.ads		20211106182209 924eb8e2 system.memory%s
+D s-memory.adb		20211106182209 0fa4626e system.memory%b
+D s-stoele.ads		20211106182209 2dc34a04 system.storage_elements%s
+D s-stoele.adb		20211106182209 ed88f8fb system.storage_elements%b
+G a e
+G c Z s b [alloc system__memory 47 13 none]
+G c Z b b [malloc system__memory 62 13 none]
+G c Z b b [calloc system__memory 65 13 none]
+G c Z b b [free system__memory 68 14 none]
+X 3 system.ads
+60K9*System 174e11 4|39r9 47r42 73r5 5|41r6 43r14 44r8 62r43 65r65 68r26
+. 75r42 83r30 140r43 150r51 160r26 166r5
+90M9*Address 4|47r49 5|55r18 62r50 65r72 68r33 75r49 78r27 89r19 140r50 150r58
+. 160r33
+95N4*Word_Size 5|83r37
+X 4 s-memory.ads
+39K16*Memory 3|60k9 4|71E31 73l12 73e18 5|43b21 166l12 166t18
+42M9*size_t 47r27 5|62r28 65r30 65r50 75r27 105r20 140r28 150r16 150r36
+47V13*Alloc{3|90M9} 47>20 71i<c,__gnat_malloc>22 5|75b13 134l8 134t13 142s14
+47m20 Size{42M9} 5|75b20 92r10 105r13 112r29
+X 5 s-memory.adb
+46e4 Heap_Start{character} 47r8 48m22 48r22 55m29 55r29
+51e4 Heap_End{character} 52m22 52r22 120m40 120r40
+55m4 Top{3|90M9} 116r17 128m13 128r13
+62V13 Malloc{3|90M9} 62>21 63i<c,malloc>22 140b13 143l8 143t14 153s14
+62m21 Size{4|42M9} 140b21 142r21
+65V13 Calloc{3|90M9} 65>21 65>38 66i<c,calloc>22 149b13 154l8 154t14
+65m21 N_Elem{4|42M9} 150b7 153r22
+65m38 Elem_Size{4|42M9} 150b24 153r31
+68U14 Free 68>20 69i<c,free>22 160b14 164l8 164t12
+68m20 Ptr{3|90M9} 160b20 161r28
+77V16*Compare_And_Swap{boolean} 78^10 79>10 80>10 81b33 127s20
+78p10 Ptr(3|90M9)
+79m10 Old_Val{6|104M9}
+80m10 New_Val{6|104M9}
+87N7 Max_Align 98r22 105r49 112r37 112r54 112r67
+88i7 Max_Size{6|61I12} 98m10 111m10 120r13 130r36
+89m7 Res{3|90M9} 116m10 120r59 129r30 130r30 133r14
+X 6 s-stoele.ads
+42K16*Storage_Elements 5|41w13 44r15 6|116e28
+54I9*Storage_Offset<integer>
+61I12*Storage_Count{54I9} 5|88r19 105r28 112r14 120r25
+75V14*"+"{3|90M9} 5|130s34
+90V14*"-"{54I9} 5|120s57
+104M9*Integer_Address 5|79r20 80r20 129r13 130r13
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<gprconfig>
+  <configuration>
+   <config><![CDATA[
+  Pikeos_Files := external ("PIKEOS_TARGET_FILES",
+                            "/opt/@version@/target/@target@");
+
+   package Compiler is
+     for Leading_Required_Switches ("C") use
+        Compiler'Leading_Required_Switches ("C") &
+        ("-I" & Pikeos_Files & "/include");
+   end Compiler;
+]]>
+   </config>
+  </configuration>
+</gprconfig>
