@@ -32,9 +32,9 @@ W system%s		system.ads		system.ali
 U system.atomic_counters%s  s-atocou.ads	ee88c2d8 BN NE OL PR PU PK
 W system%s		system.ads		system.ali
 
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-atocou.ads		20211106182210 b45c2d8d system.atomic_counters%s
-D s-atocou.adb		20211106182210 b65612c0 system.atomic_counters%b
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-atocou.ads		20211106193917 b45c2d8d system.atomic_counters%s
+D s-atocou.adb		20211106193917 b65612c0 system.atomic_counters%b
 G a e
 G c Z s b [increment system__atomic_counters 57 14 none]
 G c Z s b [decrement system__atomic_counters 61 13 none]

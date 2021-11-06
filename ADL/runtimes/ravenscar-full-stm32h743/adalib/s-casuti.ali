@@ -30,12 +30,12 @@ Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 U system.case_util%s	s-casuti.ads		65015901 NE OL PU PK
 W system%s		system.ads		system.ali
 
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-casuti.ads		20211106182209 3fd5b654 system.case_util%s
-D s-casuti.adb		20211106182209 d398e065 system.case_util%b
-D s-parame.ads		20211106182210 8e90778f system.parameters%s
-D s-secsta.ads		20211106182209 56a2861c system.secondary_stack%s
-D s-stoele.ads		20211106182209 2dc34a04 system.storage_elements%s
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-casuti.ads		20211106193917 3fd5b654 system.case_util%s
+D s-casuti.adb		20211106193917 d398e065 system.case_util%b
+D s-parame.ads		20211106193917 8e90778f system.parameters%s
+D s-secsta.ads		20211106193917 56a2861c system.secondary_stack%s
+D s-stoele.ads		20211106193917 2dc34a04 system.storage_elements%s
 G a e
 G c Z s b [to_upper system__case_util 47 13 none]
 G c Z s b [to_upper system__case_util 51 14 none]

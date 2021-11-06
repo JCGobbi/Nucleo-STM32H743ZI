@@ -27,11 +27,11 @@ W interfaces%s		interfac.ads		interfac.ali
 W system%s		system.ads		system.ali
 W system.fore_d%s
 
-D interfac.ads		20211106182209 edec285f interfaces%s
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-fore_d.ads		20211106182210 0dadc239 system.fore_d%s
-D s-fore_d.adb		20211106182209 3c30d9e3 system.fore_d%b
-D s-fode64.ads		20211106182210 882a9428 system.fore_decimal_64%s
+D interfac.ads		20211106193917 edec285f interfaces%s
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-fore_d.ads		20211106193917 0dadc239 system.fore_d%s
+D s-fore_d.adb		20211106193917 3c30d9e3 system.fore_d%b
+D s-fode64.ads		20211106193917 882a9428 system.fore_decimal_64%s
 G a e
 G c Z s s [fore_decimal system__fore_decimal_64__impl 42 13 43_4]
 X 1 interfac.ads

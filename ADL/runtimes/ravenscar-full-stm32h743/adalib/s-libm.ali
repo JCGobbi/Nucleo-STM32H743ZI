@@ -34,11 +34,11 @@ W ada%s			ada.ads			ada.ali
 W ada.numerics%s	a-numeri.ads		a-numeri.ali
 W system%s		system.ads		system.ali
 
-D ada.ads		20211106182209 76789da1 ada%s
-D a-numeri.ads		20211106182209 84bea7a3 ada.numerics%s
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-libm.ads		20211106182209 d880d3c9 system.libm%s
-D s-libm.adb		20211106182209 119c702e system.libm%b
+D ada.ads		20211106193917 76789da1 ada%s
+D a-numeri.ads		20211106193917 84bea7a3 ada.numerics%s
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-libm.ads		20211106193917 d880d3c9 system.libm%s
+D s-libm.adb		20211106193917 119c702e system.libm%b
 G a e
 X 1 ada.ads
 16K9*Ada 20e8 4|34r6 43r29 44r29 45r29 46r29 48r42 55r36 56r36 197r34 197r57

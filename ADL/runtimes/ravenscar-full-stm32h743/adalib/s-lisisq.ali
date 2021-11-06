@@ -30,11 +30,11 @@ W system%s		system.ads		system.ali
 W system.libm_prefix%s	s-libpre.ads		s-libpre.ali
 W system.libm_single%s	s-libsin.adb		s-libsin.ali
 
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-libpre.ads		20211106182209 f93cda94 system.libm_prefix%s
-D s-libsin.ads		20211106182209 7070a09c system.libm_single%s
-D s-lisisq.ads		20211106182209 7e2100ce system.libm_single.squareroot%s
-D s-lisisq.adb		20211106182209 7c592cb9 system.libm_single.squareroot%b
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-libpre.ads		20211106193917 f93cda94 system.libm_prefix%s
+D s-libsin.ads		20211106193917 7070a09c system.libm_single%s
+D s-lisisq.ads		20211106193917 7e2100ce system.libm_single.squareroot%s
+D s-lisisq.adb		20211106193917 7c592cb9 system.libm_single.squareroot%b
 G a e
 G c Z s b [sqrt system__libm_single__squareroot 40 13 none]
 X 1 system.ads

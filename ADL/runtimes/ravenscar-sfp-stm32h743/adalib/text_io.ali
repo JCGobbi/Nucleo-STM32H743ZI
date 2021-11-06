@@ -26,10 +26,10 @@ U text_io%s		text_io.ads		de7a8daa NE OL
 W ada%s			ada.ads			ada.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 
-D ada.ads		20211106182209 76789da1 ada%s
-D a-textio.ads		20211106182209 ffc84532 ada.text_io%s
-D system.ads		20211106182209 8fcf39fb system%s
-D text_io.ads		20211106182209 21b2c898 text_io%s
+D ada.ads		20211106193917 76789da1 ada%s
+D a-textio.ads		20211106193917 ffc84532 ada.text_io%s
+D system.ads		20211106193917 8fcf39fb system%s
+D text_io.ads		20211106193917 21b2c898 text_io%s
 G a e
 X 1 ada.ads
 16K9*Ada 20e8 4|22r6 24r25

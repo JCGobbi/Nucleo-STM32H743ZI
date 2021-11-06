@@ -29,13 +29,13 @@ W ada.wide_characters%s	a-widcha.ads		a-widcha.ali
 W system%s		system.ads		system.ali
 W system.utf_32%s	s-utf_32.adb		s-utf_32.ali
 
-D ada.ads		20211106182209 76789da1 ada%s
-D a-widcha.ads		20211106182209 a2b85d3d ada.wide_characters%s
-D a-wichun.ads		20211106182209 de294b78 ada.wide_characters.unicode%s
-D a-wichun.adb		20211106182209 ae7008e2 ada.wide_characters.unicode%b
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-utf_32.ads		20211106182210 24cf731d system.utf_32%s
-D s-utf_32.adb		20211106182209 86f0ff4f system.utf_32%b
+D ada.ads		20211106193917 76789da1 ada%s
+D a-widcha.ads		20211106193917 a2b85d3d ada.wide_characters%s
+D a-wichun.ads		20211106193917 de294b78 ada.wide_characters.unicode%s
+D a-wichun.adb		20211106193917 ae7008e2 ada.wide_characters.unicode%b
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-utf_32.ads		20211106193917 24cf731d system.utf_32%s
+D s-utf_32.adb		20211106193917 86f0ff4f system.utf_32%b
 G a e
 G c Z s b [get_category ada__wide_characters__unicode 79 13 none]
 G c Z s b [is_letter ada__wide_characters__unicode 93 13 none]

@@ -32,11 +32,11 @@ W system.semihosting%s	s-semiho.adb		s-semiho.ali
 U ada.text_io%s		a-textio.ads		89b0d893 NE OL PK
 W ada%s			ada.ads			ada.ali
 
-D ada.ads		20211106182209 76789da1 ada%s
-D a-textio.ads		20211106182209 ffc84532 ada.text_io%s
-D a-textio.adb		20211106182209 c9f9fcd2 ada.text_io%b
-D system.ads		20211106182209 8fcf39fb system%s
-D s-semiho.ads		20211106182209 bee239dc system.semihosting%s
+D ada.ads		20211106193917 76789da1 ada%s
+D a-textio.ads		20211106193917 ffc84532 ada.text_io%s
+D a-textio.adb		20211106193917 c9f9fcd2 ada.text_io%b
+D system.ads		20211106193917 8fcf39fb system%s
+D s-semiho.ads		20211106193917 bee239dc system.semihosting%s
 G a e
 G c Z s b [get ada__text_io 37 14 none]
 G c Z s b [put ada__text_io 40 14 none]

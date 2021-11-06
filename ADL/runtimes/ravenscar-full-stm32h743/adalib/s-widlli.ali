@@ -27,10 +27,10 @@ U system.wid_lli%s	s-widlli.ads		24e6726e NE OL PK
 W system%s		system.ads		system.ali
 W system.width_i%s
 
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-widlli.ads		20211106182210 b36976fb system.wid_lli%s
-D s-widthi.ads		20211106182210 cd5bebc0 system.width_i%s
-D s-widthi.adb		20211106182209 a18a370f system.width_i%b
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-widlli.ads		20211106193917 b36976fb system.wid_lli%s
+D s-widthi.ads		20211106193917 cd5bebc0 system.width_i%s
+D s-widthi.adb		20211106193917 a18a370f system.width_i%b
 G a e
 G c Z s s [width_long_long_integerR system__wid_lli__width_long_long_integerGP2493 38 13 none]
 G c Z s s [width_long_long_integer system__wid_lli 38 13 none]

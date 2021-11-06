@@ -28,11 +28,11 @@ W ada.calendar%s	a-calend.adb		a-calend.ali
 U ada.calendar.control%s  a-calcon.ads		54cbec66 NE OL PK
 W ada.calendar%s	a-calend.adb		a-calend.ali
 
-D ada.ads		20211106182209 76789da1 ada%s
-D a-calend.ads		20211106182209 65cc1cc3 ada.calendar%s
-D a-calcon.ads		20211106182209 3107f0a5 ada.calendar.control%s
-D a-calcon.adb		20211106182209 f4df7879 ada.calendar.control%b
-D system.ads		20211106182210 5ad4ef55 system%s
+D ada.ads		20211106193917 76789da1 ada%s
+D a-calend.ads		20211106193917 65cc1cc3 ada.calendar%s
+D a-calcon.ads		20211106193917 3107f0a5 ada.calendar.control%s
+D a-calcon.adb		20211106193917 f4df7879 ada.calendar.control%b
+D system.ads		20211106193917 5ad4ef55 system%s
 G a e
 G c Z s b [set_clock ada__calendar__control 40 14 none]
 G c Z s b [set_clock ada__calendar__control 48 14 none]

@@ -25,9 +25,9 @@ U machine_code%s	machcode.ads		0ae5e181 NE OL PU
 W system%s		system.ads		system.ali
 W system.machine_code%s	s-maccod.ads		s-maccod.ali
 
-D machcode.ads		20211106182209 678d4680 machine_code%s
-D system.ads		20211106182209 8fcf39fb system%s
-D s-maccod.ads		20211106182209 6d68a701 system.machine_code%s
+D machcode.ads		20211106193917 678d4680 machine_code%s
+D system.ads		20211106193917 8fcf39fb system%s
+D s-maccod.ads		20211106193917 6d68a701 system.machine_code%s
 G a e
 X 1 machcode.ads
 18K9*Machine_Code=18:37

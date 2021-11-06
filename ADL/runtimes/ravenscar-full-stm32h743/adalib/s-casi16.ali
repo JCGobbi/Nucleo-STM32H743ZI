@@ -33,13 +33,13 @@ W system.address_operations%s  s-addope.adb	s-addope.ali
 U system.compare_array_signed_16%s  s-casi16.ads  c7b18e5f NE OL PK
 W system%s		system.ads		system.ali
 
-D ada.ads		20211106182209 76789da1 ada%s
-D a-unccon.ads		20211106182209 0e9b276f ada.unchecked_conversion%s
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-addope.ads		20211106182210 130cbe33 system.address_operations%s
-D s-addope.adb		20211106182209 b595c660 system.address_operations%b
-D s-casi16.ads		20211106182210 9d65610a system.compare_array_signed_16%s
-D s-casi16.adb		20211106182209 498f32bc system.compare_array_signed_16%b
+D ada.ads		20211106193917 76789da1 ada%s
+D a-unccon.ads		20211106193917 0e9b276f ada.unchecked_conversion%s
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-addope.ads		20211106193917 130cbe33 system.address_operations%s
+D s-addope.adb		20211106193917 b595c660 system.address_operations%b
+D s-casi16.ads		20211106193917 9d65610a system.compare_array_signed_16%s
+D s-casi16.adb		20211106193917 498f32bc system.compare_array_signed_16%b
 G a e
 G c Z s b [compare_array_s16 system__compare_array_signed_16 41 13 none]
 G c Z b b [w system__compare_array_signed_16 53 13 none]

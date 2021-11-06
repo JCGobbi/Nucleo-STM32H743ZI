@@ -32,12 +32,12 @@ Z system.wch_stw%s	s-wchstw.adb		s-wchstw.ali
 U system.wwd_char%s	s-wwdcha.ads		dcf193b0 NE OL PU PK
 W system%s		system.ads		system.ali
 
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-imgcha.ads		20211106182209 9c3458e7 system.img_char%s
-D s-wchcon.ads		20211106182210 1b7d22d2 system.wch_con%s
-D s-wchstw.ads		20211106182210 2d112c01 system.wch_stw%s
-D s-wwdcha.ads		20211106182210 86257ce5 system.wwd_char%s
-D s-wwdcha.adb		20211106182209 a82d5a89 system.wwd_char%b
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-imgcha.ads		20211106193917 9c3458e7 system.img_char%s
+D s-wchcon.ads		20211106193917 1b7d22d2 system.wch_con%s
+D s-wchstw.ads		20211106193917 2d112c01 system.wch_stw%s
+D s-wwdcha.ads		20211106193917 86257ce5 system.wwd_char%s
+D s-wwdcha.adb		20211106193917 a82d5a89 system.wwd_char%b
 G a e
 G c Z s b [wide_width_character system__wwd_char 37 13 none]
 G c Z s b [wide_wide_width_character system__wwd_char 41 13 none]

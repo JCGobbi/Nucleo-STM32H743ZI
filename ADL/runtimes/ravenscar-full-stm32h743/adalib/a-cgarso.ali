@@ -30,13 +30,13 @@ W ada.containers.generic_constrained_array_sort%s
 U ada.containers.generic_array_sort%s  a-cgarso.ads  f0cc5f21 BN NE OL PU GE
 W ada.containers%s	a-contai.ads		a-contai.ali
 
-D ada.ads		20211106182209 76789da1 ada%s
-D a-contai.ads		20211106182210 61e5e089 ada.containers%s
-D a-cgarso.ads		20211106182210 9129bfa8 ada.containers.generic_array_sort%s
-D a-cgarso.adb		20211106182210 59f5315a ada.containers.generic_array_sort%b
-D a-cgcaso.ads		20211106182210 9f1e835c ada.containers.generic_constrained_array_sort%s
-D a-cgcaso.adb		20211106182210 21f0752d ada.containers.generic_constrained_array_sort%b
-D system.ads		20211106182210 5ad4ef55 system%s
+D ada.ads		20211106193917 76789da1 ada%s
+D a-contai.ads		20211106193917 61e5e089 ada.containers%s
+D a-cgarso.ads		20211106193917 9129bfa8 ada.containers.generic_array_sort%s
+D a-cgarso.adb		20211106193917 59f5315a ada.containers.generic_array_sort%b
+D a-cgcaso.ads		20211106193917 9f1e835c ada.containers.generic_constrained_array_sort%s
+D a-cgcaso.adb		20211106193917 21f0752d ada.containers.generic_constrained_array_sort%b
+D system.ads		20211106193917 5ad4ef55 system%s
 G a e
 G c Z s b [generic_array_sort ada__containers 23 26 none]
 X 1 ada.ads

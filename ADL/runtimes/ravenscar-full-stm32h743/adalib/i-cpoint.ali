@@ -40,15 +40,15 @@ W interfaces.c%s	i-c.adb			i-c.ali
 W system%s		system.ads		system.ali
 W system.parameters%s	s-parame.adb		s-parame.ali
 
-D ada.ads		20211106182209 76789da1 ada%s
-D a-unccon.ads		20211106182209 0e9b276f ada.unchecked_conversion%s
-D interfac.ads		20211106182209 edec285f interfaces%s
-D i-c.ads		20211106182210 d9beded9 interfaces.c%s
-D i-cpoint.ads		20211106182210 ee8a93ec interfaces.c.pointers%s
-D i-cpoint.adb		20211106182209 d5172521 interfaces.c.pointers%b
-D i-cstrin.ads		20211106182210 341d0ddf interfaces.c.strings%s
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-parame.ads		20211106182210 8e90778f system.parameters%s
+D ada.ads		20211106193917 76789da1 ada%s
+D a-unccon.ads		20211106193917 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20211106193917 edec285f interfaces%s
+D i-c.ads		20211106193917 d9beded9 interfaces.c%s
+D i-cpoint.ads		20211106193917 ee8a93ec interfaces.c.pointers%s
+D i-cpoint.adb		20211106193917 d5172521 interfaces.c.pointers%b
+D i-cstrin.ads		20211106193917 341d0ddf interfaces.c.strings%s
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-parame.ads		20211106193917 8e90778f system.parameters%s
 G a e
 G c Z s b [pointers interfaces__c 44 22 none]
 X 1 ada.ads

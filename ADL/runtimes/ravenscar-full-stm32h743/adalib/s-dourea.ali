@@ -33,11 +33,11 @@ N A97:16:s-dorepr.adb codepeer modified rep80
 U system.double_real%s	s-dourea.ads		d0da2000 BN NE OL PU PK GE
 W system%s		system.ads		system.ali
 
-D interfac.ads		20211106182209 edec285f interfaces%s
-D system.ads		20211106182210 5ad4ef55 system%s
-D s-dourea.ads		20211106182209 8a0ecf55 system.double_real%s
-D s-dourea.adb		20211106182209 6aeeb936 system.double_real%b
-D s-dorepr.adb		20211106182209 e195a66d system.double_real.product
+D interfac.ads		20211106193917 edec285f interfaces%s
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-dourea.ads		20211106193917 8a0ecf55 system.double_real%s
+D s-dourea.adb		20211106193917 6aeeb936 system.double_real%b
+D s-dorepr.adb		20211106193917 e195a66d system.double_real.product
 G a e
 G c Z s b [double_real system 42 16 none]
 X 1 interfac.ads
