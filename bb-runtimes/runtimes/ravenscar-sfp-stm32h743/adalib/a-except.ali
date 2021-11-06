@@ -1,0 +1,69 @@
+V "GNAT Lib v2021"
+A -nostdinc
+A -O2
+A -O1
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/Nucleo-STM32H743ZI/bb-runtimes/runtimes/ravenscar-sfp-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -fno-inline
+A -fno-toplevel-reorder
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_OBSOLESCENT_FEATURES
+
+U ada.exceptions%b	a-except.adb		226eaa4f NE OL PK
+W ada%s			ada.ads			ada.ali
+Z system%s		system.ads		system.ali
+
+U ada.exceptions%s	a-except.ads		a2e8ab75 BN NE OL PR PK
+W ada%s			ada.ads			ada.ali
+W system%s		system.ads		system.ali
+
+D ada.ads		20211106193917 76789da1 ada%s
+D a-except.ads		20211106193917 5b5f0f2f ada.exceptions%s
+D a-except.adb		20211106193917 7931a560 ada.exceptions%b
+D system.ads		20211106193917 8fcf39fb system%s
+G a e
+G c Z s b [raise_exception ada__exceptions 51 14 none]
+G c Z b b [last_chance_handler ada__exceptions 34 14 none]
+G c Z b b [call_last_chance_handler_with_message ada__exceptions 40 14 none]
+X 1 ada.ads
+16K9*Ada 20e8 2|42r9 71r5 3|32r14 99r5
+X 2 a-except.ads
+42K13*Exceptions 1|16k9 2|66E9 71l9 71e19 3|32b18 99l9 99t19
+46P9*Exception_Id 47r41 49r23 51r35 66c9 67r23 3|69r35
+49p4*Null_Id{46P9} 67c4
+51U14*Raise_Exception 51>31 51>49 52r22 69r26 3|69b14 97l8 97t23
+51p31 E{46P9} 3|69b31 70r28
+51a49 Message{string} 3|69b49 82r10 95r49
+X 3 a-except.adb
+34U14 Last_Chance_Handler 34>35 34>57 35b<c,__gnat_last_chance_handler>22
+. 36r22 62s7 86s10
+34m35 Msg{4|90M9}
+34i57 Line{integer}
+38a4 Empty_C_String{string} 86r31
+40U14 Call_Last_Chance_Handler_With_Message 40>53 41r22 45b14 63l8 63t45
+. 95s10
+40a53 Message{string} 45b53 51r10 55r12 55r21 55r38 58r26 58r45 59r21
+46a7 C_Message{string} 51r28 54m10 56m10 58m10 59m10 62m28 62r28
+X 4 system.ads
+60K9*System 2|40w6 66r36 3|34r41 4|174e11
+90M9*Address 2|66r43 3|34r48
+

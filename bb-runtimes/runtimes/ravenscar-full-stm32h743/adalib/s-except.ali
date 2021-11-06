@@ -1,0 +1,35 @@
+V "GNAT Lib v2021"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/Nucleo-STM32H743ZI/bb-runtimes/runtimes/ravenscar-full-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.exceptions%s	s-except.ads		041a70ce NE OL PR PK
+W system%s		system.ads		system.ali
+
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-except.ads		20211106193917 5ece9f9b system.exceptions%s
+G a e
+X 1 system.ads
+50K9*System 164e11 2|34r9 46r5
+X 2 s-except.ads
+34K16*Exceptions 1|50k9 2|41E4 46l12 46e22
+41X4 Foreign_Exception 42r25
+

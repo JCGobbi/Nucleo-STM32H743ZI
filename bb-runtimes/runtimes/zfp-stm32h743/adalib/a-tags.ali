@@ -1,0 +1,163 @@
+V "GNAT Lib v2021"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/Nucleo-STM32H743ZI/bb-runtimes/runtimes/zfp-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -march=armv7e-m+fp.dp
+P SS ZX
+
+RN
+RV NO_ACCESS_SUBPROGRAMS
+RV NO_EXCEPTIONS
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_CONVERSION
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_ATTRIBUTES
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_IMPLICIT_LOOPS
+RV NO_OBSOLESCENT_FEATURES
+
+U ada.tags%b		a-tags.adb		99eeae89 NE OL PK
+W ada%s			ada.ads			ada.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.unchecked_conversion%s
+W system%s		system.ads		system.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.storage_elements%s  s-stoele.adb	s-stoele.ali
+
+U ada.tags%s		a-tags.ads		31ff8580 NE OL PR PK
+W ada%s			ada.ads			ada.ali
+W system%s		system.ads		system.ali
+W system.storage_elements%s  s-stoele.adb	s-stoele.ali
+
+D ada.ads		20211106193917 76789da1 ada%s
+D a-except.ads		20211106193917 5b5f0f2f ada.exceptions%s
+D a-except.adb		20211106193917 7931a560 ada.exceptions%b
+D a-tags.ads		20211106193917 28a53e33 ada.tags%s
+D a-tags.adb		20211106193917 9213fdd1 ada.tags%b
+D a-unccon.ads		20211106193917 0e9b276f ada.unchecked_conversion%s
+D system.ads		20211106193917 42e16c16 system%s
+D s-parame.ads		20211106193917 fe66c50d system.parameters%s
+D s-secsta.ads		20211106193917 56a2861c system.secondary_stack%s
+D s-stoele.ads		20211106193917 2dc34a04 system.storage_elements%s
+D s-stoele.adb		20211106193917 ed88f8fb system.storage_elements%b
+G a e
+G c Z s b [expanded_name ada__tags 83 13 none]
+G c Z s b [external_tag ada__tags 85 13 none]
+G c Z s b [parent_tag ada__tags 87 13 none]
+G c Z s b [cw_membership ada__tags 257 13 none]
+G c Z s s [tag_tableIP ada__tags 132 9 none]
+G c Z s s [address_arrayIP ada__tags 135 9 none]
+G c Z s s [type_specific_dataIP ada__tags 158 9 none]
+G c Z s s [dispatch_table_wrapperIP ada__tags 199 9 none]
+G c Z s s [no_dispatch_table_wrapperIP ada__tags 222 9 none]
+G c Z b b [length ada__tags 44 13 none]
+G c Z b b [to_addr_ptr ada__tags 50 13 none]
+G c Z b b [to_address ada__tags 53 13 none]
+G c Z b b [to_type_specific_data_ptr ada__tags 56 13 none]
+X 1 ada.ads
+16K9*Ada 20e8 4|74r9 274r5 5|35r6 38r14 51r11 54r10 57r10 177r5
+X 4 a-tags.ads
+74K13*Tags 1|16k9 4|126E12 274l9 274e13 5|38b18 177l9 177t13
+78P9*Tag 79r41 81r22 83r32 85r31 87r29 87r41 132r50 142c9 143r31 147r22 152r31
+. 257r38 257r53 5|54r36 79r38 79r53 97r32 117r31 153r29 153r41
+81p4*No_Tag{78P9} 147c4 5|103r14 123r14 158r14 171r17
+83V13*Expanded_Name{string} 83>28 5|97b13 111l8 111t21
+83p28 T{78P9} 5|97b28 103r10 107r43
+85V13*External_Tag{string} 85>27 5|117b13 131l8 131t20
+85p27 T{78P9} 5|117b27 123r10 127r43
+87V13*Parent_Tag{78P9} 87>25 88r19 5|153b13 175l8 175t18
+87p25 T{78P9} 5|153b25 158r10 162r43
+90X4*Tag_Error 5|104r16 124r16 159r16
+126K12 SSE=126:31 155r41 210r23 227r36 228r29 233r37 234r30 239r36 240r29
+. 247r39 251r38
+128A12 Cstring{string}<integer> 129r35
+129P9 Cstring_Ptr(128A12) 130r31 173r23 174r23 5|44r27 98r17 118r17 137r27
+132A9 Tag_Table(78P9)<integer> 191r20
+134P9 Prim_Ptr 135r55
+135A9 Address_Array(134P9)<integer> 137r30 213r19 267r35
+137A12 Dispatch_Table{135A9}<integer> 142r27 145r37
+145P9 Interface_Tag(137A12)
+152P9 Tag_Ptr(78P9) 153r31
+155P9 Offset_To_Top_Ptr(10|54I9) 156r31
+158R9 Type_Specific_Data 158d29 194e14 196r46
+158i29*Idepth{natural} 191r36 5|88r49 88r66 170r14
+163i7*Access_Level{natural}
+172i7*Alignment{natural}
+173p7*Expanded_Name{129P9} 5|109r22
+174p7*External_Tag{129P9} 5|129r22
+183b7*Transportable{boolean}
+188b7*Needs_Finalization{boolean}
+191a7*Tags_Table{132A9} 5|90r40 173r21
+196P9 Type_Specific_Data_Ptr(158R9) 197r31 5|57r52 84r30 86r30 100r17 120r17
+. 155r17
+199R9 Dispatch_Table_Wrapper 199d33 217e14
+199i33*Num_Prims{natural} 213r39
+200m7*Predef_Prims{7|90M9}
+210i7*Offset_To_Top{10|54I9}
+211m7*TSD{7|90M9}
+213a7*Prims_Ptr{135A9}
+222R9 No_Dispatch_Table_Wrapper 225e14
+223m7*NDT_TSD{7|90M9}
+224i7*NDT_Prims_Ptr{natural}
+227i4 DT_Predef_Prims_Size{10|61I12} 254r35
+233i4 DT_Offset_To_Top_Size{10|61I12} 249r36 253r35
+239i4 DT_Typeinfo_Ptr_Size{10|61I12} 248r32 252r31 5|81r45 83r45 107r48 127r48
+. 162r48
+247i4 DT_Offset_To_Top_Offset{10|61I12}
+251i4 DT_Predef_Prims_Offset{10|61I12}
+257V13 CW_Membership{boolean} 257>28 257>43 5|79b13 91l8 91t21
+257p28 Obj_Tag{78P9} 5|79b28 81r34
+257p43 Typ_Tag{78P9} 5|79b43 83r34 90r59
+261i4 Max_Predef_Prims{positive} 267r55
+267A12 Predef_Prims_Table{135A9}<integer> 268r42
+268P9 Predef_Prims_Table_Ptr(267A12) 269r31
+271P9 Addr_Ptr(7|90M9) 272r31 5|51r53 80r30 82r30 99r17 119r17 154r17
+X 5 a-tags.adb
+44V13 Length{natural} 44>21 110s27 130s27 137b13 147l8 147t14
+44p21 Str{4|129P9} 137b21 142r13
+50V13 To_Addr_Ptr[6|20]{4|271P9} 81s9 83s9 107s18 127s18 162s18
+53V13 To_Address[6|20]{7|90M9} 81s22 83s22 107s31 127s31 162s31
+56V13 To_Type_Specific_Data_Ptr[6|20]{4|196P9} 85s9 87s9 108s18 128s18 163s18
+80p7 Obj_TSD_Ptr{4|271P9} 85r36
+82p7 Typ_TSD_Ptr{4|271P9} 87r36
+84p7 Obj_TSD{4|196P9} 88r41 90r32
+86p7 Typ_TSD{4|196P9} 88r58
+88i7 Pos{integer} 90r14 90r52
+98p7 Result{4|129P9} 109m7 110r14 110r35
+99p7 TSD_Ptr{4|271P9} 107m7 108r45
+100p7 TSD{4|196P9} 108m7 109r18
+118p7 Result{4|129P9} 129m7 130r14 130r35
+119p7 TSD_Ptr{4|271P9} 127m7 128r45
+120p7 TSD{4|196P9} 128m7 129r18
+138i7 Len{integer} 141m7 142r18 143m10 143r17 146r14
+154p7 TSD_Ptr{4|271P9} 162m7 163r45
+155p7 TSD{4|196P9} 163m7 170r10 173r17
+X 6 a-unccon.ads
+20v14*Unchecked_Conversion 5|35w10 51r15 54r14 57r14
+X 7 system.ads
+60K9*System 4|71w6 72r6 126r24 200r22 211r23 223r23 230r39 236r40 242r39
+. 245r13 271r28 5|36r6 36r35 51r37 54r41 57r36 7|172e11
+90M9*Address 4|200r29 211r30 223r30 271r35 5|51r44 54r48 57r43
+94N4*Storage_Unit 4|230r46 236r47 242r46
+X 10 s-stoele.ads
+42K16*Storage_Elements 4|72w13 126r31 245r20 5|36w13 36r42 10|116e28
+54I9*Storage_Offset<integer> 4|155r45 210r27 245r37
+61I12*Storage_Count{54I9} 4|227r40 228r33 233r41 234r34 239r40 240r33 247r43
+. 251r42
+85V14*"-"{7|90M9} 5|81s43 83s43 107s46 127s46 162s46
+

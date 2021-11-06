@@ -1,0 +1,38 @@
+V "GNAT Lib v2021"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/Nucleo-STM32H743ZI/bb-runtimes/runtimes/ravenscar-full-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_FLOATING_POINT
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.powten_llf%s	s-powllf.ads		c3d427cb NE OL PU PK
+W system%s		system.ads		system.ali
+
+D system.ads		20211106193917 5ad4ef55 system%s
+D s-powllf.ads		20211106193917 9900c89e system.powten_llf%s
+G a e
+X 1 system.ads
+50K9*System 164e11 2|34r9 103r5
+X 2 s-powllf.ads
+34K16*Powten_LLF 1|50k9 2|103l12 103e22
+37N4*Maxpow_Exact 43r25
+43N4*Maxpow
+46a4*Powten(long_long_float)
+
