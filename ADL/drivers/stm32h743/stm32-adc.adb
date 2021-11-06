@@ -77,13 +77,28 @@ package body STM32.ADC is
 
    procedure Enable (This : in out Analog_To_Digital_Converter) is
    begin
+      --  After reset, the ADCs are in deep power-down mode and boost mode off,
+      --  for operation with clock < 20 MHz. For normal operation the following
+      --  bits should be set. See RM0433 rev 7 sections 25.4.6 and 25.6.3.
+      This.CR.DEEPPWD := False; --  deep-sleep mode off
+      This.CR.ADVREGEN := True; --  turn on internal voltage regulator
+      --  Wait for LDO output voltage ready (only for devices revision V).
+      loop
+         exit when This.ISR.LDORDY = True;
+      end loop;
+
+      This.CR.BOOST := True; --  For ADC frequency > 20 MHz.
+
+      --  The software procedure to enable the ADC is described in RM0433 rev 7
+      --  Chapter 25.4.9 pg 937.
       if not This.CR.ADEN then
+         --  Clear the ADRDY bit
+         This.ISR.ADRDY := True;
          This.CR.ADEN := True;
 
          loop
             exit when This.ISR.ADRDY = True;
          end loop;
-
       end if;
    end Enable;
 
@@ -166,6 +181,26 @@ package body STM32.ADC is
          return Left_Aligned;
       end if;
    end Current_Alignment;
+
+   ---------------------------
+   -- Set_Differential_Mode --
+   ---------------------------
+
+   procedure Set_Differential_Mode
+     (This    : in out Analog_To_Digital_Converter;
+      Channel : Analog_Input_Channel;
+      Mode    : Differential_Mode)
+   is
+   begin
+      case Mode is
+         when Single_Ended =>
+            This.DIFSEL.DIFSEL :=
+              This.DIFSEL.DIFSEL and not (2 ** Integer (Channel) - 1);
+         when Differential =>
+            This.DIFSEL.DIFSEL :=
+              This.DIFSEL.DIFSEL or (2 ** Integer (Channel) - 1);
+      end case;
+   end Set_Differential_Mode;
 
    -----------------------------------
    -- Configure_Regular_Conversions --
@@ -366,11 +401,11 @@ package body STM32.ADC is
    ---------------------------------
 
    procedure Configure_Common_Properties
-     (This           : Analog_To_Digital_Converter;
+     (This           : in out Analog_To_Digital_Converter;
       Mode           : Multi_ADC_Mode_Selections;
       Prescaler      : ADC_Prescaler;
       Clock_Mode     : ADC_Clock_Mode;
-      Dual_Format    : Dual_ADC_Data_Format;
+      DMA_Mode       : Data_Management;
       Sampling_Delay : Sampling_Delay_Selections)
    is
    begin
@@ -380,15 +415,14 @@ package body STM32.ADC is
          ADC12_Common_Periph.CCR.DUAL := Mode'Enum_Rep;
          ADC12_Common_Periph.CCR.PRESC := Prescaler'Enum_Rep;
          ADC12_Common_Periph.CCR.CKMODE := Clock_Mode'Enum_Rep;
-         ADC12_Common_Periph.CCR.DAMDF := Dual_Format'Enum_Rep;
          ADC12_Common_Periph.CCR.DELAY_k := Sampling_Delay'Enum_Rep;
-      else
+      else --  ADC3
          ADC3_Common_Periph.CCR.DUAL := Mode'Enum_Rep;
          ADC3_Common_Periph.CCR.PRESC := Prescaler'Enum_Rep;
          ADC3_Common_Periph.CCR.CKMODE := Clock_Mode'Enum_Rep;
-         ADC3_Common_Periph.CCR.DAMDF := Dual_Format'Enum_Rep;
          ADC3_Common_Periph.CCR.DELAY_k := Sampling_Delay'Enum_Rep;
       end if;
+      This.CFGR.DMNGT := DMA_Mode'Enum_Rep;
    end Configure_Common_Properties;
 
    -------------------------------

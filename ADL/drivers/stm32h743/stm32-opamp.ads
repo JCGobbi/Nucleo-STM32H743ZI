@@ -201,7 +201,7 @@ private
       CSR   : STM32_SVD.OPAMP.OPAMP1_CSR_Register;
       OTR   : STM32_SVD.OPAMP.OPAMP1_OTR_Register;
       HSOTR : STM32_SVD.OPAMP.OPAMP1_HSOTR_Register;
-   end record with Volatile, Size => 7 * 32;
+   end record with Volatile, Size => 3 * 32;
 
    for Operational_Amplifier use record
       CSR   at 16#00# range  0 .. 31;

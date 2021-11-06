@@ -70,9 +70,8 @@ package body STM32.SPI is
 
    function As_Word_Pointer is new Ada.Unchecked_Conversion
      (Source => System.Address, Target => Word_Pointer);
-   --  So that we can treat the address of a UInt16 as a pointer to a two-UInt16
-   --  sequence representing a Word quantity and the address of a UInt8 as a
-   --  pointer to four-UInt8 sequence representing a Word quantity.
+   --  So that we can treat the address of a UInt8 as a pointer to a four-UInt8
+   --  sequence representing a Word quantity.
 
    ---------------
    -- Configure --

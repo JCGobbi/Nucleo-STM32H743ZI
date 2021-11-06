@@ -404,11 +404,12 @@ package body STM32.GPIO is
    is
       Index : constant GPIO_Pin_Index := GPIO_Pin'Pos (This.Pin);
    begin
-      if Index < 8 then
+      case Index is
+         when 0 .. 7 =>
          This.Periph.AFRL.Arr (Index) := UInt4 (AF);
-      else
+         when 8 .. 15 =>
          This.Periph.AFRH.Arr (Index) := UInt4 (AF);
-      end if;
+      end case;
    end Configure_Alternate_Function;
 
    ----------------------------------

@@ -174,6 +174,13 @@ package STM32.ADC is
    function Current_Alignment (This : Analog_To_Digital_Converter)
       return Data_Alignment;
 
+   type Differential_Mode is (Single_Ended, Differential);
+
+   procedure Set_Differential_Mode
+     (This    : in out Analog_To_Digital_Converter;
+      Channel : Analog_Input_Channel;
+      Mode    : Differential_Mode);
+
    type Channel_Sampling_Times is
      (Sample_1P5_Cycles,
       Sample_2P5_Cycles,
@@ -760,11 +767,11 @@ package STM32.ADC is
       Dual_Alternate_Trigger                                 => 2#01001#);
 
    procedure Configure_Common_Properties
-     (This           : Analog_To_Digital_Converter;
+     (This           : in out Analog_To_Digital_Converter;
       Mode           : Multi_ADC_Mode_Selections;
       Prescaler      : ADC_Prescaler;
       Clock_Mode     : ADC_Clock_Mode;
-      Dual_Format    : Dual_ADC_Data_Format;
+      DMA_Mode       : Data_Management;
       Sampling_Delay : Sampling_Delay_Selections);
    --  These properties are common to all the ADC units on the board.
 

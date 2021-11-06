@@ -226,9 +226,10 @@ package STM32.SPI is
    --  CRC and data direction, among others.
 
    type UInt8_Buffer is array (Natural range <>) of UInt8
-     with Alignment => 2;
-   --  The alignment is set to 2 because we treat component pairs as half_word
-   --  values when sending/receiving in 16-bit mode.
+     with Alignment => 4;
+   --  The alignment is set to 4 because we treat four components as word
+   --  values when sending/receiving in 32-bit mode, so the alignment of 4
+   --  ensures that the address is divisible by 4.
 
    --  Blocking
 
