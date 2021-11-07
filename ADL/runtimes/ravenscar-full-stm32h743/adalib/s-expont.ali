@@ -27,9 +27,9 @@ W system%s		system.ads		system.ali
 U system.expont%s	s-expont.ads		0f38530f BN NE OL GE
 W system%s		system.ads		system.ali
 
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-expont.ads		20211106193917 55ecbc5a system.expont%s
-D s-expont.adb		20211106193917 57597480 system.expont%b
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-expont.ads		20211107163029 55ecbc5a system.expont%s
+D s-expont.adb		20211107163029 57597480 system.expont%b
 G a e
 G c Z s b [expont system 38 17 none]
 X 1 system.ads

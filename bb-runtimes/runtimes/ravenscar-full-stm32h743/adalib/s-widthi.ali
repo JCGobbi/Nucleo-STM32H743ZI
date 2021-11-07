@@ -27,9 +27,9 @@ W system%s		system.ads		system.ali
 U system.width_i%s	s-widthi.ads		978f0495 BN NE OL GE
 W system%s		system.ads		system.ali
 
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-widthi.ads		20211106193917 cd5bebc0 system.width_i%s
-D s-widthi.adb		20211106193917 a18a370f system.width_i%b
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-widthi.ads		20211107163029 cd5bebc0 system.width_i%s
+D s-widthi.adb		20211107163029 a18a370f system.width_i%b
 G a e
 G c Z s b [width_i system 39 17 none]
 X 1 system.ads

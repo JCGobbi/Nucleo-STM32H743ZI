@@ -39362,8 +39362,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>VSWRST</name>
-              <description>VSwitch domain software
+              <name>BDRST</name>
+              <description>BDRST domain software
               reset</description>
               <bitOffset>16</bitOffset>
               <bitWidth>1</bitWidth>

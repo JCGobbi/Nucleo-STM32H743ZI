@@ -28,11 +28,11 @@ W ada.containers%s	a-contai.ads		a-contai.ali
 U ada.containers.generic_sort%s  a-cogeso.ads	9a607314 BN NE OL PU GE
 W ada.containers%s	a-contai.ads		a-contai.ali
 
-D ada.ads		20211106193917 76789da1 ada%s
-D a-contai.ads		20211106193917 61e5e089 ada.containers%s
-D a-cogeso.ads		20211106193917 fb85939d ada.containers.generic_sort%s
-D a-cogeso.adb		20211106193917 b9243803 ada.containers.generic_sort%b
-D system.ads		20211106193917 5ad4ef55 system%s
+D ada.ads		20211107163029 76789da1 ada%s
+D a-contai.ads		20211107163029 61e5e089 ada.containers%s
+D a-cogeso.ads		20211107163029 fb85939d ada.containers.generic_sort%s
+D a-cogeso.adb		20211107163029 b9243803 ada.containers.generic_sort%b
+D system.ads		20211107163030 5ad4ef55 system%s
 G a e
 G c Z s b [generic_sort ada__containers 39 26 none]
 X 1 ada.ads

@@ -27,9 +27,9 @@ W system%s		system.ads		system.ali
 U system.task_info%s	s-tasinf.ads		dace5254 EB NE OL PR PK
 W system%s		system.ads		system.ali
 
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-tasinf.ads		20211106193917 801abd01 system.task_info%s
-D s-tasinf.adb		20211106193917 60e65af9 system.task_info%b
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-tasinf.ads		20211107163030 801abd01 system.task_info%s
+D s-tasinf.adb		20211107163030 60e65af9 system.task_info%b
 G a e
 X 1 system.ads
 50K9*System 164e11 2|42r9 93r5 3|40r14 41r5

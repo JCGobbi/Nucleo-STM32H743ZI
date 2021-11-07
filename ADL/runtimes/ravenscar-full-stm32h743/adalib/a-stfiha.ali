@@ -28,17 +28,17 @@ W ada.strings%s		a-string.ads		a-string.ali
 W ada.strings.fixed%s	a-strfix.adb		a-strfix.ali
 W ada.strings.hash%s	a-strhas.adb		a-strhas.ali
 
-D ada.ads		20211106193917 76789da1 ada%s
-D a-charac.ads		20211106193917 2d3ec45b ada.characters%s
-D a-chlat1.ads		20211106193917 66457d31 ada.characters.latin_1%s
-D a-contai.ads		20211106193917 61e5e089 ada.containers%s
-D a-string.ads		20211106193917 90ac6797 ada.strings%s
-D a-strfix.ads		20211106193917 aeacf44c ada.strings.fixed%s
-D a-stfiha.ads		20211106193917 c5ce6b37 ada.strings.fixed.hash%s
-D a-strhas.ads		20211106193917 c71c2a52 ada.strings.hash%s
-D a-strmap.ads		20211106193917 5a88892a ada.strings.maps%s
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-unstyp.ads		20211106193917 2b077493 system.unsigned_types%s
+D ada.ads		20211107163029 76789da1 ada%s
+D a-charac.ads		20211107163029 2d3ec45b ada.characters%s
+D a-chlat1.ads		20211107163029 66457d31 ada.characters.latin_1%s
+D a-contai.ads		20211107163029 61e5e089 ada.containers%s
+D a-string.ads		20211107163029 90ac6797 ada.strings%s
+D a-strfix.ads		20211107163029 aeacf44c ada.strings.fixed%s
+D a-stfiha.ads		20211107163029 c5ce6b37 ada.strings.fixed.hash%s
+D a-strhas.ads		20211107163029 c71c2a52 ada.strings.hash%s
+D a-strmap.ads		20211107163029 5a88892a ada.strings.maps%s
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-unstyp.ads		20211107163029 2b077493 system.unsigned_types%s
 G a e
 X 1 ada.ads
 16K9*Ada 20e8 7|16r6 16r22 18r10 19r12 21r14

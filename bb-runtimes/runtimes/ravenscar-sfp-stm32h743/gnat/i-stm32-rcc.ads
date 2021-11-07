@@ -971,7 +971,7 @@ package Interfaces.STM32.RCC is
    subtype BDCR_LSECSSD_Field is Interfaces.STM32.Bit;
    subtype BDCR_RTCSEL_Field is Interfaces.STM32.UInt2;
    subtype BDCR_RTCEN_Field is Interfaces.STM32.Bit;
-   subtype BDCR_VSWRST_Field is Interfaces.STM32.Bit;
+   subtype BDCR_BDRST_Field is Interfaces.STM32.Bit;
 
    --  RCC Backup Domain Control Register
    type BDCR_Register is record
@@ -995,8 +995,8 @@ package Interfaces.STM32.RCC is
       Reserved_10_14 : Interfaces.STM32.UInt5 := 16#0#;
       --  RTC clock enable
       RTCEN          : BDCR_RTCEN_Field := 16#0#;
-      --  VSwitch domain software reset
-      VSWRST         : BDCR_VSWRST_Field := 16#0#;
+      --  BDRST domain software reset
+      BDRST          : BDCR_BDRST_Field := 16#0#;
       --  unspecified
       Reserved_17_31 : Interfaces.STM32.UInt15 := 16#0#;
    end record
@@ -1014,7 +1014,7 @@ package Interfaces.STM32.RCC is
       RTCSEL         at 0 range 8 .. 9;
       Reserved_10_14 at 0 range 10 .. 14;
       RTCEN          at 0 range 15 .. 15;
-      VSWRST         at 0 range 16 .. 16;
+      BDRST          at 0 range 16 .. 16;
       Reserved_17_31 at 0 range 17 .. 31;
    end record;
 

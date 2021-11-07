@@ -28,9 +28,9 @@ W system%s		system.ads		system.ali
 U system.mantissa%s	s-mantis.ads		703a8c00 NE OL PU PK
 W system%s		system.ads		system.ali
 
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-mantis.ads		20211106193917 2aee6355 system.mantissa%s
-D s-mantis.adb		20211106193917 210b0200 system.mantissa%b
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-mantis.ads		20211107163029 2aee6355 system.mantissa%s
+D s-mantis.adb		20211107163029 210b0200 system.mantissa%b
 G a e
 G c Z s b [mantissa_value system__mantissa 38 13 none]
 X 1 system.ads

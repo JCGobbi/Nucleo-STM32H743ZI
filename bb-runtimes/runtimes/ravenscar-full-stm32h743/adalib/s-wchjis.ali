@@ -28,9 +28,9 @@ W system%s		system.ads		system.ali
 U system.wch_jis%s	s-wchjis.ads		ce6e6e55 NE OL PU PK
 W system%s		system.ads		system.ali
 
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-wchjis.ads		20211106193917 94ba8100 system.wch_jis%s
-D s-wchjis.adb		20211106193917 785c7cb6 system.wch_jis%b
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-wchjis.ads		20211107163029 94ba8100 system.wch_jis%s
+D s-wchjis.adb		20211107163029 785c7cb6 system.wch_jis%b
 G a e
 G c Z s b [euc_to_jis system__wch_jis 40 13 none]
 G c Z s b [jis_to_euc system__wch_jis 45 14 none]

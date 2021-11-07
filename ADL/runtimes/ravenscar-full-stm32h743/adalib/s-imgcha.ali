@@ -29,9 +29,9 @@ W system%s		system.ads		system.ali
 U system.img_char%s	s-imgcha.ads		c6e0b7b2 NE OL PU PK
 W system%s		system.ads		system.ali
 
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-imgcha.ads		20211106193917 9c3458e7 system.img_char%s
-D s-imgcha.adb		20211106193917 0b55dae9 system.img_char%b
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-imgcha.ads		20211107163029 9c3458e7 system.img_char%s
+D s-imgcha.adb		20211107163029 0b55dae9 system.img_char%b
 G a e
 G c Z s b [image_character system__img_char 37 14 none]
 G c Z s b [image_character_05 system__img_char 45 14 none]

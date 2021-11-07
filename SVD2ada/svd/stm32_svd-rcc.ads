@@ -906,8 +906,8 @@ package STM32_SVD.RCC is
       Reserved_10_14 : HAL.UInt5 := 16#0#;
       --  RTC clock enable
       RTCEN          : Boolean := False;
-      --  VSwitch domain software reset
-      VSWRST         : Boolean := False;
+      --  BDRST domain software reset
+      BDRST          : Boolean := False;
       --  unspecified
       Reserved_17_31 : HAL.UInt15 := 16#0#;
    end record
@@ -925,7 +925,7 @@ package STM32_SVD.RCC is
       RTCSEL         at 0 range 8 .. 9;
       Reserved_10_14 at 0 range 10 .. 14;
       RTCEN          at 0 range 15 .. 15;
-      VSWRST         at 0 range 16 .. 16;
+      BDRST          at 0 range 16 .. 16;
       Reserved_17_31 at 0 range 17 .. 31;
    end record;
 

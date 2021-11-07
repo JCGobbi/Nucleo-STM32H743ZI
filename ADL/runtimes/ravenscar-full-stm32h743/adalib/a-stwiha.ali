@@ -32,14 +32,14 @@ W ada%s			ada.ads			ada.ali
 W ada.containers%s	a-contai.ads		a-contai.ali
 W ada.strings%s		a-string.ads		a-string.ali
 
-D ada.ads		20211106193917 76789da1 ada%s
-D a-contai.ads		20211106193917 61e5e089 ada.containers%s
-D a-string.ads		20211106193917 90ac6797 ada.strings%s
-D a-stwiha.ads		20211106193917 81da1e5a ada.strings.wide_hash%s
-D a-stwiha.adb		20211106193917 ccd84f41 ada.strings.wide_hash%b
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-strhas.ads		20211106193917 269cd894 system.string_hash%s
-D s-strhas.adb		20211106193917 2e038444 system.string_hash%b
+D ada.ads		20211107163029 76789da1 ada%s
+D a-contai.ads		20211107163029 61e5e089 ada.containers%s
+D a-string.ads		20211107163029 90ac6797 ada.strings%s
+D a-stwiha.ads		20211107163029 81da1e5a ada.strings.wide_hash%s
+D a-stwiha.adb		20211107163029 ccd84f41 ada.strings.wide_hash%b
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-strhas.ads		20211107163029 269cd894 system.string_hash%s
+D s-strhas.adb		20211107163029 2e038444 system.string_hash%b
 G a e
 G c Z s b [wide_hash ada__strings 18 22 none]
 X 1 ada.ads

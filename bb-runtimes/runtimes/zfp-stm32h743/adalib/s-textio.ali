@@ -28,10 +28,10 @@ W system.semihosting%s	s-semiho.adb		s-semiho.ali
 U system.text_io%s	s-textio.ads		60f6e3df NE OL PR PK
 W system%s		system.ads		system.ali
 
-D system.ads		20211106193917 42e16c16 system%s
-D s-semiho.ads		20211106193917 bee239dc system.semihosting%s
-D s-textio.ads		20211106193917 22178fc9 system.text_io%s
-D s-textio.adb		20211106193917 3df6c3a8 system.text_io%b
+D system.ads		20211107163029 42e16c16 system%s
+D s-semiho.ads		20211107163028 bee239dc system.semihosting%s
+D s-textio.ads		20211107163028 22178fc9 system.text_io%s
+D s-textio.adb		20211107163028 3df6c3a8 system.text_io%b
 G a e
 G c Z s b [initialize system__text_io 43 14 none]
 G c Z s b [is_tx_ready system__text_io 55 13 none]

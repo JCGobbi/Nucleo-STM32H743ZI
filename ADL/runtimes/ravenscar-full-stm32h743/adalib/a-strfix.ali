@@ -42,25 +42,25 @@ W ada%s			ada.ads			ada.ali
 W ada.strings%s		a-string.ads		a-string.ali
 W ada.strings.maps%s	a-strmap.adb		a-strmap.ali
 
-D ada.ads		20211106193917 76789da1 ada%s
-D a-charac.ads		20211106193917 2d3ec45b ada.characters%s
-D a-chlat1.ads		20211106193917 66457d31 ada.characters.latin_1%s
-D a-except.ads		20211106193917 946f3014 ada.exceptions%s
-D a-string.ads		20211106193917 90ac6797 ada.strings%s
-D a-strfix.ads		20211106193917 aeacf44c ada.strings.fixed%s
-D a-strfix.adb		20211106193917 407f43ec ada.strings.fixed%b
-D a-strmap.ads		20211106193917 5a88892a ada.strings.maps%s
-D a-strmap.adb		20211106193917 7e646b75 ada.strings.maps%b
-D a-strsea.ads		20211106193917 b9bc90ba ada.strings.search%s
-D a-unccon.ads		20211106193917 0e9b276f ada.unchecked_conversion%s
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-bitops.ads		20211106193917 0765e3a3 system.bit_ops%s
-D s-parame.ads		20211106193917 8e90778f system.parameters%s
-D s-secsta.ads		20211106193917 56a2861c system.secondary_stack%s
-D s-stalib.ads		20211106193917 472fbca8 system.standard_library%s
-D s-stoele.ads		20211106193917 2dc34a04 system.storage_elements%s
-D s-traent.ads		20211106193917 26a8d361 system.traceback_entries%s
-D s-unstyp.ads		20211106193917 2b077493 system.unsigned_types%s
+D ada.ads		20211107163029 76789da1 ada%s
+D a-charac.ads		20211107163029 2d3ec45b ada.characters%s
+D a-chlat1.ads		20211107163029 66457d31 ada.characters.latin_1%s
+D a-except.ads		20211107163029 946f3014 ada.exceptions%s
+D a-string.ads		20211107163029 90ac6797 ada.strings%s
+D a-strfix.ads		20211107163029 aeacf44c ada.strings.fixed%s
+D a-strfix.adb		20211107163029 407f43ec ada.strings.fixed%b
+D a-strmap.ads		20211107163029 5a88892a ada.strings.maps%s
+D a-strmap.adb		20211107163029 7e646b75 ada.strings.maps%b
+D a-strsea.ads		20211107163029 b9bc90ba ada.strings.search%s
+D a-unccon.ads		20211107163029 0e9b276f ada.unchecked_conversion%s
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-bitops.ads		20211107163029 0765e3a3 system.bit_ops%s
+D s-parame.ads		20211107163030 8e90778f system.parameters%s
+D s-secsta.ads		20211107163029 56a2861c system.secondary_stack%s
+D s-stalib.ads		20211107163029 472fbca8 system.standard_library%s
+D s-stoele.ads		20211107163029 2dc34a04 system.storage_elements%s
+D s-traent.ads		20211107163029 26a8d361 system.traceback_entries%s
+D s-unstyp.ads		20211107163029 2b077493 system.unsigned_types%s
 G a e
 G c Z s b [move ada__strings__fixed 50 14 none]
 G c Z s b [index ada__strings__fixed 104 13 none]

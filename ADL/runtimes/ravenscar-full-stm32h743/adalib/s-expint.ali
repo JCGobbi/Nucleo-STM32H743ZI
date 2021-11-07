@@ -25,10 +25,10 @@ U system.exp_int%s	s-expint.ads		65fdfa94 NE OL PK
 W system%s		system.ads		system.ali
 W system.expont%s
 
-D system.ads		20211106193917 5ad4ef55 system%s
-D s-expint.ads		20211106193917 6ac5a99b system.exp_int%s
-D s-expont.ads		20211106193917 55ecbc5a system.expont%s
-D s-expont.adb		20211106193917 57597480 system.expont%b
+D system.ads		20211107163030 5ad4ef55 system%s
+D s-expint.ads		20211107163029 6ac5a99b system.exp_int%s
+D s-expont.ads		20211107163029 55ecbc5a system.expont%s
+D s-expont.adb		20211107163029 57597480 system.expont%b
 G a e
 G c Z s s [exp_integerR system__exp_int__exp_integerGP2471 38 13 none]
 G c Z s s [exp_integer system__exp_int 38 13 none]
