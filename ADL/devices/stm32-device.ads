@@ -753,6 +753,8 @@ package STM32.Device is
 
    RTC : aliased RTC_Device;
 
+   procedure Enable_Clock (This : RTC_Device);
+
    type RTC_Clock_Source is (No_Clock, LSE, LSI, HSE)
      with Size => 2;
 
@@ -764,11 +766,15 @@ package STM32.Device is
       Source     : RTC_Clock_Source;
       HSE_Pre    : RTC_HSE_Prescaler_Range := RTC_HSE_Prescaler_Range'First)
      with Post => Source = Read_Clock_Source (This);
-   --  Set RTC Clock Mux source.
+   --  Set RTC Clock Mux source. These bits can be written only one time
+   --  (except in case of failure detection on LSE). These bits must be
+   --  written before LSECSSON is enabled. The BDRST bit can be used to
+   --  reset them, then it can be written one time again.
+   --  If HSE is selected as RTC clock: this clock is lost when the system
+   --  is in Stop mode or in case of a pin reset (NRST).
    --  These bits must be set correctly to ensure that the clock supplied to
    --  the RTC is lower than 1 MHz. The value HSE_Pre is valid when the
-   --  selected source is HSE. The Enable_CSS is for the LSE clock, that must
-   --  be enabled and ready before turning it on.
+   --  selected source is HSE.
 
    function Read_Clock_Source (This : RTC_Device) return RTC_Clock_Source;
    --  Return RTC Clock Mux source.

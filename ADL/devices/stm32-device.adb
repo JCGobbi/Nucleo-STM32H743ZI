@@ -1036,6 +1036,16 @@ package body STM32.Device is
       end if;
    end Get_Clock_Frequency;
 
+   ------------------
+   -- Enable_Clock --
+   ------------------
+
+   procedure Enable_Clock (This : RTC_Device) is
+      pragma Unreferenced (This);
+   begin
+      RCC_Periph.BDCR.RTCEN := True;
+   end Enable_Clock;
+
    ------------------------
    -- Write_Clock_Source --
    ------------------------
