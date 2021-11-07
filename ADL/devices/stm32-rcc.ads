@@ -43,6 +43,9 @@ package STM32.RCC is
    procedure APB4_Force_Reset with Inline;
    procedure APB4_Release_Reset with Inline;
 
+   procedure Backup_Domain_Reset;
+   --  Disable LSE clock and RTC and reset its configurations.
+
    ---------------------------------------------------------------------------
    --  Clock Configuration  --------------------------------------------------
    ---------------------------------------------------------------------------

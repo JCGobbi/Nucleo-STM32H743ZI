@@ -118,6 +118,12 @@ package body STM32.RCC is
       RCC_Periph.APB4RSTR := To_APB4RSTR_T (0);
    end APB4_Release_Reset;
 
+   procedure Backup_Domain_Reset is
+   begin
+      RCC_Periph.BDCR.BDRST := True;
+      RCC_Periph.BDCR.BDRST := False;
+   end Backup_Domain_Reset;
+
    ---------------------------------------------------------------------------
    --  Clock Configuration  --------------------------------------------------
    ---------------------------------------------------------------------------
