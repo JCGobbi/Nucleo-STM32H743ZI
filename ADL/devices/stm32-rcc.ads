@@ -275,6 +275,11 @@ package STM32.RCC is
       PER_SRC_HSE)
      with Size => 2;
 
+   for PER_Source use
+     (PER_SRC_HSI => 2#00#,
+      PER_SRC_CSI => 2#01#,
+      PER_SRC_HSE => 2#10#);
+
    procedure Configure_PER_Source_Mux (Source : PER_Source);
 
    ---------------

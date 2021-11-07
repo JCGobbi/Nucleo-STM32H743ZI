@@ -34,6 +34,8 @@ with System;          use System;
 with STM32_SVD.RCC;   use STM32_SVD.RCC;
 with STM32_SVD.CRC;   use STM32_SVD.CRC;
 
+with STM32.RCC;       use STM32.RCC;
+
 package body STM32.Device is
 
    HPRE_Presc_Table : constant array (UInt4) of UInt32 :=
@@ -278,789 +280,789 @@ package body STM32.Device is
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock
-   --    (This : aliased Digital_To_Analog_Converter)
-   --  is
-   --  begin
-   --     if This'Address = DAC_Base then
-   --        RCC_Periph.APB1LENR.DAC12EN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock
+     (This : aliased Digital_To_Analog_Converter)
+   is
+   begin
+      if This'Address = DAC_Base then
+         RCC_Periph.APB1LENR.DAC12EN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : aliased Digital_To_Analog_Converter)
-   --  is
-   --  begin
-   --     if This'Address = DAC_Base then
-   --        RCC_Periph.APB1LRSTR.DAC12RST := True;
-   --        RCC_Periph.APB1LRSTR.DAC12RST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : aliased Digital_To_Analog_Converter)
+   is
+   begin
+      if This'Address = DAC_Base then
+         RCC_Periph.APB1LRSTR.DAC12RST := True;
+         RCC_Periph.APB1LRSTR.DAC12RST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : SAI_Port)
-   --  is
-   --  begin
-   --     if This'Address = SAI1_Base then
-   --        RCC_Periph.APB2ENR.SAI1EN := True;
-   --     elsif This'Address = SAI2_Base then
-   --        RCC_Periph.APB2ENR.SAI2EN := True;
-   --     elsif This'Address = SAI3_Base then
-   --        RCC_Periph.APB2ENR.SAI3EN := True;
-   --     elsif This'Address = SAI4_Base then
-   --        RCC_Periph.APB4ENR.SAI4EN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : SAI_Port)
+   is
+   begin
+      if This'Address = SAI1_Base then
+         RCC_Periph.APB2ENR.SAI1EN := True;
+      elsif This'Address = SAI2_Base then
+         RCC_Periph.APB2ENR.SAI2EN := True;
+      elsif This'Address = SAI3_Base then
+         RCC_Periph.APB2ENR.SAI3EN := True;
+      elsif This'Address = SAI4_Base then
+         RCC_Periph.APB4ENR.SAI4EN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : SAI_Port)
-   --  is
-   --  begin
-   --     if This'Address = SAI1_Base then
-   --        RCC_Periph.APB2RSTR.SAI1RST := True;
-   --        RCC_Periph.APB2RSTR.SAI1RST := False;
-   --     elsif This'Address = SAI2_Base then
-   --        RCC_Periph.APB2RSTR.SAI2RST := True;
-   --        RCC_Periph.APB2RSTR.SAI2RST := False;
-   --     elsif This'Address = SAI3_Base then
-   --        RCC_Periph.APB2RSTR.SAI3RST := True;
-   --        RCC_Periph.APB2RSTR.SAI3RST := False;
-   --     elsif This'Address = SAI4_Base then
-   --        RCC_Periph.APB4RSTR.SAI4RST := True;
-   --        RCC_Periph.APB4RSTR.SAI4RST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : SAI_Port)
+   is
+   begin
+      if This'Address = SAI1_Base then
+         RCC_Periph.APB2RSTR.SAI1RST := True;
+         RCC_Periph.APB2RSTR.SAI1RST := False;
+      elsif This'Address = SAI2_Base then
+         RCC_Periph.APB2RSTR.SAI2RST := True;
+         RCC_Periph.APB2RSTR.SAI2RST := False;
+      elsif This'Address = SAI3_Base then
+         RCC_Periph.APB2RSTR.SAI3RST := True;
+         RCC_Periph.APB2RSTR.SAI3RST := False;
+      elsif This'Address = SAI4_Base then
+         RCC_Periph.APB4RSTR.SAI4RST := True;
+         RCC_Periph.APB4RSTR.SAI4RST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ------------------------
    -- Write_Clock_Source --
    ------------------------
 
-   --  procedure Write_Clock_Source (This   : SAI_Port;
-   --                                Source : SAI_Clock_Source)
-   --  is
-   --  begin
-   --     if This'Address = SAI1_Base then
-   --        RCC_Periph.D2CCIP1R.SAI1SEL := Source'Enum_Rep;
-   --     elsif This'Address = SAI2_Base or
-   --           This'Address = SAI3_Base
-   --     then
-   --        RCC_Periph.D2CCIP1R.SAI23SEL := Source'Enum_Rep;
-   --     elsif This'Address = SAI4_Base then
-   --        RCC_Periph.D3CCIPR.SAI4ASEL := Source'Enum_Rep;
-   --        RCC_Periph.D3CCIPR.SAI4BSEL := Source'Enum_Rep;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Write_Clock_Source;
+   procedure Write_Clock_Source (This   : SAI_Port;
+                                 Source : SAI_Clock_Source)
+   is
+   begin
+      if This'Address = SAI1_Base then
+         RCC_Periph.D2CCIP1R.SAI1SEL := Source'Enum_Rep;
+      elsif This'Address = SAI2_Base or
+            This'Address = SAI3_Base
+      then
+         RCC_Periph.D2CCIP1R.SAI23SEL := Source'Enum_Rep;
+      elsif This'Address = SAI4_Base then
+         RCC_Periph.D3CCIPR.SAI4ASEL := Source'Enum_Rep;
+         RCC_Periph.D3CCIPR.SAI4BSEL := Source'Enum_Rep;
+      else
+         raise Unknown_Device;
+      end if;
+   end Write_Clock_Source;
 
    ------------------------
    -- Read_Clock_Source --
    ------------------------
 
-   --  function Read_Clock_Source (This : SAI_Port) return SAI_Clock_Source
-   --  is
-   --  begin
-   --     if This'Address = SAI1_Base then
-   --        return SAI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SAI1SEL);
-   --     elsif This'Address = SAI2_Base or
-   --           This'Address = SAI3_Base
-   --     then
-   --        return SAI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SAI23SEL);
-   --     elsif This'Address = SAI4_Base then
-   --        return SAI_Clock_Source'Val (RCC_Periph.D3CCIPR.SAI4ASEL);
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Read_Clock_Source;
+   function Read_Clock_Source (This : SAI_Port) return SAI_Clock_Source
+   is
+   begin
+      if This'Address = SAI1_Base then
+         return SAI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SAI1SEL);
+      elsif This'Address = SAI2_Base or
+            This'Address = SAI3_Base
+      then
+         return SAI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SAI23SEL);
+      elsif This'Address = SAI4_Base then
+         return SAI_Clock_Source'Val (RCC_Periph.D3CCIPR.SAI4ASEL);
+      else
+         raise Unknown_Device;
+      end if;
+   end Read_Clock_Source;
 
    -------------------------
    -- Get_Clock_Frequency --
    -------------------------
 
-   --  function Get_Clock_Frequency (This : SAI_Port) return UInt32
-   --  is
-   --     Input_Selector : SAI_Clock_Source;
-   --     VCO_Input      : UInt32;
-   --  begin
-   --     if This'Address = SAI1_Base then
-   --        Input_Selector := SAI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SAI1SEL);
-   --     elsif This'Address = SAI2_Base or
-   --           This'Address = SAI3_Base
-   --     then
-   --        Input_Selector := SAI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SAI23SEL);
-   --     elsif This'Address = SAI4_Base then
-   --        Input_Selector := SAI_Clock_Source'Val (RCC_Periph.D3CCIPR.SAI4ASEL);
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --
-   --     case Input_Selector is
-   --        when PLL1Q =>
-   --           VCO_Input := System_Clock_Frequencies.PCLK1; --  PLL1Q;
-   --        when PLL2P =>
-   --           VCO_Input := System_Clock_Frequencies.PCLK1; --  PLL2P;
-   --        when PLL3P =>
-   --           VCO_Input := System_Clock_Frequencies.PCLK1; --  PLL3P;
-   --        when I2S_CKIN =>
-   --           VCO_Input := I2SCLK;
-   --        when PER =>
-   --           VCO_Input := System_Clock_Frequencies.PERCLK;
-   --     end case;
-   --
-   --     return VCO_Input;
-   --  end Get_Clock_Frequency;
+   function Get_Clock_Frequency (This : SAI_Port) return UInt32
+   is
+      Input_Selector : SAI_Clock_Source;
+      VCO_Input      : UInt32;
+   begin
+      if This'Address = SAI1_Base then
+         Input_Selector := SAI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SAI1SEL);
+      elsif This'Address = SAI2_Base or
+            This'Address = SAI3_Base
+      then
+         Input_Selector := SAI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SAI23SEL);
+      elsif This'Address = SAI4_Base then
+         Input_Selector := SAI_Clock_Source'Val (RCC_Periph.D3CCIPR.SAI4ASEL);
+      else
+         raise Unknown_Device;
+      end if;
+
+      case Input_Selector is
+         when PLL1Q =>
+            VCO_Input := System_Clock_Frequencies.PCLK1; --  PLL1Q;
+         when PLL2P =>
+            VCO_Input := System_Clock_Frequencies.PCLK1; --  PLL2P;
+         when PLL3P =>
+            VCO_Input := System_Clock_Frequencies.PCLK1; --  PLL3P;
+         when I2S_CKIN =>
+            VCO_Input := I2SCLK;
+         when PER =>
+            VCO_Input := System_Clock_Frequencies.PERCLK;
+      end case;
+
+      return VCO_Input;
+   end Get_Clock_Frequency;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : CRC_32) is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     RCC_Periph.AHB4ENR.CRCEN := True;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : CRC_32) is
+      pragma Unreferenced (This);
+   begin
+      RCC_Periph.AHB4ENR.CRCEN := True;
+   end Enable_Clock;
 
    -------------------
    -- Disable_Clock --
    -------------------
 
-   --  procedure Disable_Clock (This : CRC_32) is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     RCC_Periph.AHB4ENR.CRCEN := False;
-   --  end Disable_Clock;
+   procedure Disable_Clock (This : CRC_32) is
+      pragma Unreferenced (This);
+   begin
+      RCC_Periph.AHB4ENR.CRCEN := False;
+   end Disable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : CRC_32) is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     RCC_Periph.AHB4RSTR.CRCRST := True;
-   --     RCC_Periph.AHB4RSTR.CRCRST := False;
-   --  end Reset;
+   procedure Reset (This : CRC_32) is
+      pragma Unreferenced (This);
+   begin
+      RCC_Periph.AHB4RSTR.CRCRST := True;
+      RCC_Periph.AHB4RSTR.CRCRST := False;
+   end Reset;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : RNG_Generator) is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     RCC_Periph.AHB2ENR.RNGEN := True;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : RNG_Generator) is
+      pragma Unreferenced (This);
+   begin
+      RCC_Periph.AHB2ENR.RNGEN := True;
+   end Enable_Clock;
 
    -------------------
    -- Disable_Clock --
    -------------------
 
-   --  procedure Disable_Clock (This : RNG_Generator) is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     RCC_Periph.AHB2ENR.RNGEN := False;
-   --  end Disable_Clock;
+   procedure Disable_Clock (This : RNG_Generator) is
+      pragma Unreferenced (This);
+   begin
+      RCC_Periph.AHB2ENR.RNGEN := False;
+   end Disable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : RNG_Generator) is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     RCC_Periph.AHB2RSTR.RNGRST := True;
-   --     RCC_Periph.AHB2RSTR.RNGRST := False;
-   --  end Reset;
+   procedure Reset (This : RNG_Generator) is
+      pragma Unreferenced (This);
+   begin
+      RCC_Periph.AHB2RSTR.RNGRST := True;
+      RCC_Periph.AHB2RSTR.RNGRST := False;
+   end Reset;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : aliased DMA_Controller) is
-   --  begin
-   --     if This'Address = STM32_SVD.DMA1_Base then
-   --        RCC_Periph.AHB1ENR.DMA1EN := True;
-   --     elsif This'Address = STM32_SVD.DMA2_Base then
-   --        RCC_Periph.AHB1ENR.DMA2EN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : aliased DMA_Controller) is
+   begin
+      if This'Address = STM32_SVD.DMA1_Base then
+         RCC_Periph.AHB1ENR.DMA1EN := True;
+      elsif This'Address = STM32_SVD.DMA2_Base then
+         RCC_Periph.AHB1ENR.DMA2EN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : aliased DMA_Controller) is
-   --  begin
-   --     if This'Address = STM32_SVD.DMA1_Base then
-   --        RCC_Periph.AHB1RSTR.DMA1RST := True;
-   --        RCC_Periph.AHB1RSTR.DMA1RST := False;
-   --     elsif This'Address = STM32_SVD.DMA2_Base then
-   --        RCC_Periph.AHB1RSTR.DMA2RST := True;
-   --        RCC_Periph.AHB1RSTR.DMA2RST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : aliased DMA_Controller) is
+   begin
+      if This'Address = STM32_SVD.DMA1_Base then
+         RCC_Periph.AHB1RSTR.DMA1RST := True;
+         RCC_Periph.AHB1RSTR.DMA1RST := False;
+      elsif This'Address = STM32_SVD.DMA2_Base then
+         RCC_Periph.AHB1RSTR.DMA2RST := True;
+         RCC_Periph.AHB1RSTR.DMA2RST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : aliased USART) is
-   --  begin
-   --     if This.Periph.all'Address = USART1_Base then
-   --        RCC_Periph.APB2ENR.USART1EN := True;
-   --     elsif This.Periph.all'Address = USART2_Base then
-   --        RCC_Periph.APB1LENR.USART2EN := True;
-   --     elsif This.Periph.all'Address = USART3_Base then
-   --        RCC_Periph.APB1LENR.USART3EN := True;
-   --     elsif This.Periph.all'Address = UART4_Base then
-   --        RCC_Periph.APB1LENR.UART4EN := True;
-   --     elsif This.Periph.all'Address = UART5_Base then
-   --        RCC_Periph.APB1LENR.UART5EN := True;
-   --     elsif This.Periph.all'Address = USART6_Base then
-   --        RCC_Periph.APB2ENR.USART6EN := True;
-   --     elsif This.Periph.all'Address = UART7_Base then
-   --        RCC_Periph.APB1LENR.UART7EN := True;
-   --     elsif This.Periph.all'Address = UART8_Base then
-   --        RCC_Periph.APB1LENR.UART8EN := True;
-   --     elsif This.Periph.all'Address = LPUART1_Base then
-   --        RCC_Periph.APB4ENR.LPUART1EN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : aliased USART) is
+   begin
+      if This.Periph.all'Address = USART1_Base then
+         RCC_Periph.APB2ENR.USART1EN := True;
+      elsif This.Periph.all'Address = USART2_Base then
+         RCC_Periph.APB1LENR.USART2EN := True;
+      elsif This.Periph.all'Address = USART3_Base then
+         RCC_Periph.APB1LENR.USART3EN := True;
+      elsif This.Periph.all'Address = UART4_Base then
+         RCC_Periph.APB1LENR.UART4EN := True;
+      elsif This.Periph.all'Address = UART5_Base then
+         RCC_Periph.APB1LENR.UART5EN := True;
+      elsif This.Periph.all'Address = USART6_Base then
+         RCC_Periph.APB2ENR.USART6EN := True;
+      elsif This.Periph.all'Address = UART7_Base then
+         RCC_Periph.APB1LENR.UART7EN := True;
+      elsif This.Periph.all'Address = UART8_Base then
+         RCC_Periph.APB1LENR.UART8EN := True;
+      elsif This.Periph.all'Address = LPUART1_Base then
+         RCC_Periph.APB4ENR.LPUART1EN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : aliased USART) is
-   --  begin
-   --     if This.Periph.all'Address = USART1_Base then
-   --        RCC_Periph.APB2RSTR.USART1RST := True;
-   --        RCC_Periph.APB2RSTR.USART1RST := False;
-   --     elsif This.Periph.all'Address = USART2_Base then
-   --        RCC_Periph.APB1LRSTR.USART2RST := True;
-   --        RCC_Periph.APB1LRSTR.USART2RST := False;
-   --     elsif This.Periph.all'Address = USART3_Base then
-   --        RCC_Periph.APB1LRSTR.USART3RST := True;
-   --        RCC_Periph.APB1LRSTR.USART3RST := False;
-   --     elsif This.Periph.all'Address = UART4_Base then
-   --        RCC_Periph.APB1LRSTR.UART4RST := True;
-   --        RCC_Periph.APB1LRSTR.UART4RST := False;
-   --     elsif This.Periph.all'Address = UART5_Base then
-   --        RCC_Periph.APB1LRSTR.UART5RST := True;
-   --        RCC_Periph.APB1LRSTR.UART5RST := False;
-   --     elsif This.Periph.all'Address = USART6_Base then
-   --        RCC_Periph.APB2RSTR.USART6RST := True;
-   --        RCC_Periph.APB2RSTR.USART6RST := False;
-   --     elsif This.Periph.all'Address = UART7_Base then
-   --        RCC_Periph.APB1LRSTR.UART7RST := True;
-   --        RCC_Periph.APB1LRSTR.UART7RST := False;
-   --     elsif This.Periph.all'Address = UART8_Base then
-   --        RCC_Periph.APB1LRSTR.UART8RST := True;
-   --        RCC_Periph.APB1LRSTR.UART8RST := False;
-   --     elsif This.Periph.all'Address = LPUART1_Base then
-   --        RCC_Periph.APB4RSTR.LPUART1RST := True;
-   --        RCC_Periph.APB4RSTR.LPUART1RST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : aliased USART) is
+   begin
+      if This.Periph.all'Address = USART1_Base then
+         RCC_Periph.APB2RSTR.USART1RST := True;
+         RCC_Periph.APB2RSTR.USART1RST := False;
+      elsif This.Periph.all'Address = USART2_Base then
+         RCC_Periph.APB1LRSTR.USART2RST := True;
+         RCC_Periph.APB1LRSTR.USART2RST := False;
+      elsif This.Periph.all'Address = USART3_Base then
+         RCC_Periph.APB1LRSTR.USART3RST := True;
+         RCC_Periph.APB1LRSTR.USART3RST := False;
+      elsif This.Periph.all'Address = UART4_Base then
+         RCC_Periph.APB1LRSTR.UART4RST := True;
+         RCC_Periph.APB1LRSTR.UART4RST := False;
+      elsif This.Periph.all'Address = UART5_Base then
+         RCC_Periph.APB1LRSTR.UART5RST := True;
+         RCC_Periph.APB1LRSTR.UART5RST := False;
+      elsif This.Periph.all'Address = USART6_Base then
+         RCC_Periph.APB2RSTR.USART6RST := True;
+         RCC_Periph.APB2RSTR.USART6RST := False;
+      elsif This.Periph.all'Address = UART7_Base then
+         RCC_Periph.APB1LRSTR.UART7RST := True;
+         RCC_Periph.APB1LRSTR.UART7RST := False;
+      elsif This.Periph.all'Address = UART8_Base then
+         RCC_Periph.APB1LRSTR.UART8RST := True;
+         RCC_Periph.APB1LRSTR.UART8RST := False;
+      elsif This.Periph.all'Address = LPUART1_Base then
+         RCC_Periph.APB4RSTR.LPUART1RST := True;
+         RCC_Periph.APB4RSTR.LPUART1RST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ------------------------
    -- Write_Clock_Source --
    ------------------------
 
-   --  procedure Write_Clock_Source (This   : aliased USART;
-   --                                Source : USART_Clock_Source)
-   --  is
-   --  begin
-   --     if This'Address = USART1_Base or
-   --        This'Address = USART6_Base
-   --     then
-   --        RCC_Periph.D2CCIP2R.USART16SEL := Source'Enum_Rep;
-   --     elsif This'Address = USART2_Base or
-   --           This'Address = USART3_Base or
-   --           This'Address = UART4_Base or
-   --           This'Address = UART5_Base or
-   --           This'Address = UART7_Base or
-   --           This'Address = UART8_Base
-   --     then
-   --        RCC_Periph.D2CCIP2R.USART234578SEL := Source'Enum_Rep;
-   --     elsif This'Address = LPUART1_Base then
-   --        RCC_Periph.D3CCIPR.LPUART1SEL := Source'Enum_Rep;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Write_Clock_Source;
+   procedure Write_Clock_Source (This   : aliased USART;
+                                 Source : USART_Clock_Source)
+   is
+   begin
+      if This'Address = USART1_Base or
+         This'Address = USART6_Base
+      then
+         RCC_Periph.D2CCIP2R.USART16SEL := Source'Enum_Rep;
+      elsif This'Address = USART2_Base or
+            This'Address = USART3_Base or
+            This'Address = UART4_Base or
+            This'Address = UART5_Base or
+            This'Address = UART7_Base or
+            This'Address = UART8_Base
+      then
+         RCC_Periph.D2CCIP2R.USART234578SEL := Source'Enum_Rep;
+      elsif This'Address = LPUART1_Base then
+         RCC_Periph.D3CCIPR.LPUART1SEL := Source'Enum_Rep;
+      else
+         raise Unknown_Device;
+      end if;
+   end Write_Clock_Source;
 
    -----------------------
    -- Read_Clock_Source --
    -----------------------
 
-   --  function Read_Clock_Source (This : aliased USART)
-   --    return USART_Clock_Source
-   --  is
-   --  begin
-   --     if This'Address = USART1_Base or
-   --        This'Address = USART6_Base
-   --     then
-   --        return USART_Clock_Source'Val (RCC_Periph.D2CCIP2R.USART16SEL);
-   --     elsif This'Address = USART2_Base or
-   --           This'Address = USART3_Base or
-   --           This'Address = UART4_Base or
-   --           This'Address = UART5_Base or
-   --           This'Address = UART7_Base or
-   --           This'Address = UART8_Base
-   --     then
-   --        return USART_Clock_Source'Val (RCC_Periph.D2CCIP2R.USART234578SEL);
-   --     elsif This'Address = LPUART1_Base then
-   --        return USART_Clock_Source'Val (RCC_Periph.D3CCIPR.LPUART1SEL);
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Read_Clock_Source;
+   function Read_Clock_Source (This : aliased USART)
+     return USART_Clock_Source
+   is
+   begin
+      if This'Address = USART1_Base or
+         This'Address = USART6_Base
+      then
+         return USART_Clock_Source'Val (RCC_Periph.D2CCIP2R.USART16SEL);
+      elsif This'Address = USART2_Base or
+            This'Address = USART3_Base or
+            This'Address = UART4_Base or
+            This'Address = UART5_Base or
+            This'Address = UART7_Base or
+            This'Address = UART8_Base
+      then
+         return USART_Clock_Source'Val (RCC_Periph.D2CCIP2R.USART234578SEL);
+      elsif This'Address = LPUART1_Base then
+         return USART_Clock_Source'Val (RCC_Periph.D3CCIPR.LPUART1SEL);
+      else
+         raise Unknown_Device;
+      end if;
+   end Read_Clock_Source;
 
    -------------------------
    -- Get_Clock_Frequency --
    -------------------------
 
-   --  function Get_Clock_Frequency (This : USART) return UInt32
-   --  is
-   --     Input_Selector : USART_Clock_Source;
-   --     Clock_Input    : UInt32;
-   --  begin
-   --     if This'Address = USART1_Base or
-   --        This'Address = USART6_Base
-   --     then
-   --        Input_Selector := USART_Clock_Source'Val (RCC_Periph.D2CCIP2R.USART16SEL);
-   --     elsif This'Address = USART2_Base or
-   --           This'Address = USART3_Base or
-   --           This'Address = UART4_Base or
-   --           This'Address = UART5_Base or
-   --           This'Address = UART7_Base or
-   --           This'Address = UART8_Base
-   --     then
-   --        Input_Selector := USART_Clock_Source'Val (RCC_Periph.D2CCIP2R.USART234578SEL);
-   --     elsif This'Address = LPUART1_Base then
-   --        Input_Selector := USART_Clock_Source'Val (RCC_Periph.D3CCIPR.LPUART1SEL);
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --
-   --     case Input_Selector is
-   --        when Option_1 =>
-   --           if This'Address = USART1_Base or
-   --              This'Address = USART6_Base
-   --           then
-   --              Clock_Input := System_Clock_Frequencies.PCLK2;
-   --           elsif This'Address = USART2_Base or
-   --                 This'Address = USART3_Base or
-   --                 This'Address = UART4_Base or
-   --                 This'Address = UART5_Base or
-   --                 This'Address = UART7_Base or
-   --                 This'Address = UART8_Base
-   --           then
-   --              Clock_Input := System_Clock_Frequencies.PCLK1;
-   --           else --  LPUART1
-   --              Clock_Input := System_Clock_Frequencies.PCLK3;
-   --           end if;
-   --
-   --        when PLL2Q =>
-   --           Clock_Input := System_Clock_Frequencies.PCLK1;
-   --        when PLL3Q =>
-   --           Clock_Input := System_Clock_Frequencies.PCLK1;
-   --        when HSI =>
-   --           Clock_Input := HSI_VALUE;
-   --        when CSI =>
-   --           Clock_Input := CSI_VALUE;
-   --        when LSE =>
-   --           Clock_Input := LSE_VALUE;
-   --     end case;
-   --
-   --     return Clock_Input;
-   --  end Get_Clock_Frequency;
+   function Get_Clock_Frequency (This : USART) return UInt32
+   is
+      Input_Selector : USART_Clock_Source;
+      Clock_Input    : UInt32;
+   begin
+      if This'Address = USART1_Base or
+         This'Address = USART6_Base
+      then
+         Input_Selector := USART_Clock_Source'Val (RCC_Periph.D2CCIP2R.USART16SEL);
+      elsif This'Address = USART2_Base or
+            This'Address = USART3_Base or
+            This'Address = UART4_Base or
+            This'Address = UART5_Base or
+            This'Address = UART7_Base or
+            This'Address = UART8_Base
+      then
+         Input_Selector := USART_Clock_Source'Val (RCC_Periph.D2CCIP2R.USART234578SEL);
+      elsif This'Address = LPUART1_Base then
+         Input_Selector := USART_Clock_Source'Val (RCC_Periph.D3CCIPR.LPUART1SEL);
+      else
+         raise Unknown_Device;
+      end if;
+
+      case Input_Selector is
+         when Option_1 =>
+            if This'Address = USART1_Base or
+               This'Address = USART6_Base
+            then
+               Clock_Input := System_Clock_Frequencies.PCLK2;
+            elsif This'Address = USART2_Base or
+                  This'Address = USART3_Base or
+                  This'Address = UART4_Base or
+                  This'Address = UART5_Base or
+                  This'Address = UART7_Base or
+                  This'Address = UART8_Base
+            then
+               Clock_Input := System_Clock_Frequencies.PCLK1;
+            else --  LPUART1
+               Clock_Input := System_Clock_Frequencies.PCLK3;
+            end if;
+
+         when PLL2Q =>
+            Clock_Input := System_Clock_Frequencies.PCLK1;
+         when PLL3Q =>
+            Clock_Input := System_Clock_Frequencies.PCLK1;
+         when HSI =>
+            Clock_Input := HSI_VALUE;
+         when CSI =>
+            Clock_Input := CSI_VALUE;
+         when LSE =>
+            Clock_Input := LSE_VALUE;
+      end case;
+
+      return Clock_Input;
+   end Get_Clock_Frequency;
 
    ----------------
    -- As_Port_Id --
    ----------------
 
-   --  function As_Port_Id (Port : I2C_Port'Class) return I2C_Port_Id is
-   --  begin
-   --     if Port.Periph.all'Address = I2C1_Base then
-   --        return I2C_Id_1;
-   --     elsif Port.Periph.all'Address = I2C2_Base then
-   --        return I2C_Id_2;
-   --     elsif Port.Periph.all'Address = I2C3_Base then
-   --        return I2C_Id_3;
-   --     elsif Port.Periph.all'Address = I2C4_Base then
-   --        return I2C_Id_4;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end As_Port_Id;
+   function As_Port_Id (Port : I2C_Port'Class) return I2C_Port_Id is
+   begin
+      if Port.Periph.all'Address = I2C1_Base then
+         return I2C_Id_1;
+      elsif Port.Periph.all'Address = I2C2_Base then
+         return I2C_Id_2;
+      elsif Port.Periph.all'Address = I2C3_Base then
+         return I2C_Id_3;
+      elsif Port.Periph.all'Address = I2C4_Base then
+         return I2C_Id_4;
+      else
+         raise Unknown_Device;
+      end if;
+   end As_Port_Id;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : aliased I2C_Port'Class) is
-   --  begin
-   --     Enable_Clock (As_Port_Id (This));
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : aliased I2C_Port'Class) is
+   begin
+      Enable_Clock (As_Port_Id (This));
+   end Enable_Clock;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : I2C_Port_Id) is
-   --  begin
-   --     case This is
-   --        when I2C_Id_1 =>
-   --           RCC_Periph.APB1LENR.I2C1EN := True;
-   --        when I2C_Id_2 =>
-   --           RCC_Periph.APB1LENR.I2C2EN := True;
-   --        when I2C_Id_3 =>
-   --           RCC_Periph.APB1LENR.I2C3EN := True;
-   --        when I2C_Id_4 =>
-   --           RCC_Periph.APB4ENR.I2C4EN := True;
-   --     end case;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : I2C_Port_Id) is
+   begin
+      case This is
+         when I2C_Id_1 =>
+            RCC_Periph.APB1LENR.I2C1EN := True;
+         when I2C_Id_2 =>
+            RCC_Periph.APB1LENR.I2C2EN := True;
+         when I2C_Id_3 =>
+            RCC_Periph.APB1LENR.I2C3EN := True;
+         when I2C_Id_4 =>
+            RCC_Periph.APB4ENR.I2C4EN := True;
+      end case;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : I2C_Port'Class) is
-   --  begin
-   --     Reset (As_Port_Id (This));
-   --  end Reset;
-   --
-   --  -----------
-   --  -- Reset --
-   --  -----------
-   --
-   --  procedure Reset (This : I2C_Port_Id) is
-   --  begin
-   --     case This is
-   --        when I2C_Id_1 =>
-   --           RCC_Periph.APB1LRSTR.I2C1RST := True;
-   --           RCC_Periph.APB1LRSTR.I2C1RST := False;
-   --        when I2C_Id_2 =>
-   --           RCC_Periph.APB1LRSTR.I2C2RST := True;
-   --           RCC_Periph.APB1LRSTR.I2C2RST := False;
-   --        when I2C_Id_3 =>
-   --           RCC_Periph.APB1LRSTR.I2C3RST := True;
-   --           RCC_Periph.APB1LRSTR.I2C3RST := False;
-   --        when I2C_Id_4 =>
-   --           RCC_Periph.APB4RSTR.I2C4RST := True;
-   --           RCC_Periph.APB4RSTR.I2C4RST := False;
-   --     end case;
-   --  end Reset;
+   procedure Reset (This : I2C_Port'Class) is
+   begin
+      Reset (As_Port_Id (This));
+   end Reset;
+
+   -----------
+   -- Reset --
+   -----------
+
+   procedure Reset (This : I2C_Port_Id) is
+   begin
+      case This is
+         when I2C_Id_1 =>
+            RCC_Periph.APB1LRSTR.I2C1RST := True;
+            RCC_Periph.APB1LRSTR.I2C1RST := False;
+         when I2C_Id_2 =>
+            RCC_Periph.APB1LRSTR.I2C2RST := True;
+            RCC_Periph.APB1LRSTR.I2C2RST := False;
+         when I2C_Id_3 =>
+            RCC_Periph.APB1LRSTR.I2C3RST := True;
+            RCC_Periph.APB1LRSTR.I2C3RST := False;
+         when I2C_Id_4 =>
+            RCC_Periph.APB4RSTR.I2C4RST := True;
+            RCC_Periph.APB4RSTR.I2C4RST := False;
+      end case;
+   end Reset;
 
    ------------------------
    -- Write_Clock_Source --
    ------------------------
 
-   --  procedure Write_Clock_Source (This   : I2C_Port'Class;
-   --                                Source : I2C_Clock_Source)
-   --  is
-   --  begin
-   --     Write_Clock_Source (As_Port_Id (This), Source);
-   --  end Write_Clock_Source;
+   procedure Write_Clock_Source (This   : I2C_Port'Class;
+                                 Source : I2C_Clock_Source)
+   is
+   begin
+      Write_Clock_Source (As_Port_Id (This), Source);
+   end Write_Clock_Source;
 
    ------------------------
    -- Write_Clock_Source --
    ------------------------
 
-   --  procedure Write_Clock_Source (This   : I2C_Port_Id;
-   --                                Source : I2C_Clock_Source)
-   --  is
-   --  begin
-   --     case This is
-   --        when I2C_Id_1 | I2C_Id_2 | I2C_Id_3 =>
-   --           RCC_Periph.D2CCIP2R.I2C123SEL := Source'Enum_Rep;
-   --        when I2C_Id_4 =>
-   --           RCC_Periph.D3CCIPR.I2C4SEL := Source'Enum_Rep;
-   --     end case;
-   --  end Write_Clock_Source;
+   procedure Write_Clock_Source (This   : I2C_Port_Id;
+                                 Source : I2C_Clock_Source)
+   is
+   begin
+      case This is
+         when I2C_Id_1 | I2C_Id_2 | I2C_Id_3 =>
+            RCC_Periph.D2CCIP2R.I2C123SEL := Source'Enum_Rep;
+         when I2C_Id_4 =>
+            RCC_Periph.D3CCIPR.I2C4SEL := Source'Enum_Rep;
+      end case;
+   end Write_Clock_Source;
 
    -----------------------
    -- Read_Clock_Source --
    -----------------------
 
-   --  function Read_Clock_Source (This : I2C_Port'Class) return I2C_Clock_Source
-   --  is
-   --  begin
-   --     return Read_Clock_Source (As_Port_Id (This));
-   --  end Read_Clock_Source;
+   function Read_Clock_Source (This : I2C_Port'Class) return I2C_Clock_Source
+   is
+   begin
+      return Read_Clock_Source (As_Port_Id (This));
+   end Read_Clock_Source;
 
    ------------------------
    -- Read_Clock_Source --
    ------------------------
 
-   --  function Read_Clock_Source (This : I2C_Port_Id) return I2C_Clock_Source
-   --  is
-   --  begin
-   --     case This is
-   --        when  I2C_Id_1 | I2C_Id_2 | I2C_Id_3 =>
-   --           return I2C_Clock_Source'Val (RCC_Periph.D2CCIP2R.I2C123SEL);
-   --        when I2C_Id_4 =>
-   --           return I2C_Clock_Source'Val (RCC_Periph.D3CCIPR.I2C4SEL);
-   --     end case;
-   --  end Read_Clock_Source;
+   function Read_Clock_Source (This : I2C_Port_Id) return I2C_Clock_Source
+   is
+   begin
+      case This is
+         when  I2C_Id_1 | I2C_Id_2 | I2C_Id_3 =>
+            return I2C_Clock_Source'Val (RCC_Periph.D2CCIP2R.I2C123SEL);
+         when I2C_Id_4 =>
+            return I2C_Clock_Source'Val (RCC_Periph.D3CCIPR.I2C4SEL);
+      end case;
+   end Read_Clock_Source;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : SPI_Port'Class) is
-   --  begin
-   --     if This.Periph.all'Address = SPI1_Base then
-   --        RCC_Periph.APB2ENR.SPI1EN := True;
-   --     elsif This.Periph.all'Address = SPI2_Base then
-   --        RCC_Periph.APB1LENR.SPI2EN := True;
-   --     elsif This.Periph.all'Address = SPI3_Base then
-   --        RCC_Periph.APB1LENR.SPI3EN := True;
-   --     elsif This.Periph.all'Address = SPI4_Base then
-   --        RCC_Periph.APB2ENR.SPI4EN := True;
-   --     elsif This.Periph.all'Address = SPI5_Base then
-   --        RCC_Periph.APB2ENR.SPI5EN := True;
-   --     elsif This.Periph.all'Address = SPI6_Base then
-   --        RCC_Periph.APB4ENR.SPI6EN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : SPI_Port'Class) is
+   begin
+      if This.Periph.all'Address = SPI1_Base then
+         RCC_Periph.APB2ENR.SPI1EN := True;
+      elsif This.Periph.all'Address = SPI2_Base then
+         RCC_Periph.APB1LENR.SPI2EN := True;
+      elsif This.Periph.all'Address = SPI3_Base then
+         RCC_Periph.APB1LENR.SPI3EN := True;
+      elsif This.Periph.all'Address = SPI4_Base then
+         RCC_Periph.APB2ENR.SPI4EN := True;
+      elsif This.Periph.all'Address = SPI5_Base then
+         RCC_Periph.APB2ENR.SPI5EN := True;
+      elsif This.Periph.all'Address = SPI6_Base then
+         RCC_Periph.APB4ENR.SPI6EN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : SPI_Port'Class) is
-   --  begin
-   --     if This.Periph.all'Address = SPI1_Base then
-   --        RCC_Periph.APB2RSTR.SPI1RST := True;
-   --        RCC_Periph.APB2RSTR.SPI1RST := False;
-   --     elsif This.Periph.all'Address = SPI2_Base then
-   --        RCC_Periph.APB1LRSTR.SPI2RST := True;
-   --        RCC_Periph.APB1LRSTR.SPI2RST := False;
-   --     elsif This.Periph.all'Address = SPI3_Base then
-   --        RCC_Periph.APB1LRSTR.SPI3RST := True;
-   --        RCC_Periph.APB1LRSTR.SPI3RST := False;
-   --     elsif This.Periph.all'Address = SPI4_Base then
-   --        RCC_Periph.APB2RSTR.SPI4RST := True;
-   --        RCC_Periph.APB2RSTR.SPI4RST := False;
-   --     elsif This.Periph.all'Address = SPI5_Base then
-   --        RCC_Periph.APB2RSTR.SPI5RST := True;
-   --        RCC_Periph.APB2RSTR.SPI5RST := False;
-   --     elsif This.Periph.all'Address = SPI6_Base then
-   --        RCC_Periph.APB4RSTR.SPI6RST := True;
-   --        RCC_Periph.APB4RSTR.SPI6RST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : SPI_Port'Class) is
+   begin
+      if This.Periph.all'Address = SPI1_Base then
+         RCC_Periph.APB2RSTR.SPI1RST := True;
+         RCC_Periph.APB2RSTR.SPI1RST := False;
+      elsif This.Periph.all'Address = SPI2_Base then
+         RCC_Periph.APB1LRSTR.SPI2RST := True;
+         RCC_Periph.APB1LRSTR.SPI2RST := False;
+      elsif This.Periph.all'Address = SPI3_Base then
+         RCC_Periph.APB1LRSTR.SPI3RST := True;
+         RCC_Periph.APB1LRSTR.SPI3RST := False;
+      elsif This.Periph.all'Address = SPI4_Base then
+         RCC_Periph.APB2RSTR.SPI4RST := True;
+         RCC_Periph.APB2RSTR.SPI4RST := False;
+      elsif This.Periph.all'Address = SPI5_Base then
+         RCC_Periph.APB2RSTR.SPI5RST := True;
+         RCC_Periph.APB2RSTR.SPI5RST := False;
+      elsif This.Periph.all'Address = SPI6_Base then
+         RCC_Periph.APB4RSTR.SPI6RST := True;
+         RCC_Periph.APB4RSTR.SPI6RST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ------------------------
    -- Write_Clock_Source --
    ------------------------
 
-   --  procedure Write_Clock_Source (This   : SPI_Port'Class;
-   --                                Source : SPI_Clock_Source)
-   --  is
-   --  begin
-   --     if This.Periph.all'Address = SPI1_Base or
-   --        This.Periph.all'Address = SPI2_Base or
-   --        This.Periph.all'Address = SPI3_Base
-   --     then
-   --        RCC_Periph.D2CCIP1R.SPI123SEL := Source'Enum_Rep;
-   --     elsif This.Periph.all'Address = SPI4_Base or
-   --           This.Periph.all'Address = SPI5_Base
-   --     then
-   --        RCC_Periph.D2CCIP1R.SPI45SEL := Source'Enum_Rep;
-   --     elsif This.Periph.all'Address = SPI6_Base
-   --     then
-   --        RCC_Periph.D3CCIPR.SPI6SEL := Source'Enum_Rep;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Write_Clock_Source;
+   procedure Write_Clock_Source (This   : SPI_Port'Class;
+                                 Source : SPI_Clock_Source)
+   is
+   begin
+      if This.Periph.all'Address = SPI1_Base or
+         This.Periph.all'Address = SPI2_Base or
+         This.Periph.all'Address = SPI3_Base
+      then
+         RCC_Periph.D2CCIP1R.SPI123SEL := Source'Enum_Rep;
+      elsif This.Periph.all'Address = SPI4_Base or
+            This.Periph.all'Address = SPI5_Base
+      then
+         RCC_Periph.D2CCIP1R.SPI45SEL := Source'Enum_Rep;
+      elsif This.Periph.all'Address = SPI6_Base
+      then
+         RCC_Periph.D3CCIPR.SPI6SEL := Source'Enum_Rep;
+      else
+         raise Unknown_Device;
+      end if;
+   end Write_Clock_Source;
 
    ------------------------
    -- Read_Clock_Source --
    ------------------------
 
-   --  function Read_Clock_Source (This : SPI_Port'Class) return SPI_Clock_Source
-   --  is
-   --  begin
-   --     if This.Periph.all'Address = SPI1_Base or
-   --        This.Periph.all'Address = SPI2_Base or
-   --        This.Periph.all'Address = SPI3_Base
-   --     then
-   --        return SPI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SPI123SEL);
-   --     elsif This.Periph.all'Address = SPI4_Base or
-   --           This.Periph.all'Address = SPI5_Base
-   --     then
-   --        return SPI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SPI45SEL);
-   --     elsif This.Periph.all'Address = SPI6_Base
-   --     then
-   --        return SPI_Clock_Source'Val (RCC_Periph.D3CCIPR.SPI6SEL);
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Read_Clock_Source;
+   function Read_Clock_Source (This : SPI_Port'Class) return SPI_Clock_Source
+   is
+   begin
+      if This.Periph.all'Address = SPI1_Base or
+         This.Periph.all'Address = SPI2_Base or
+         This.Periph.all'Address = SPI3_Base
+      then
+         return SPI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SPI123SEL);
+      elsif This.Periph.all'Address = SPI4_Base or
+            This.Periph.all'Address = SPI5_Base
+      then
+         return SPI_Clock_Source'Val (RCC_Periph.D2CCIP1R.SPI45SEL);
+      elsif This.Periph.all'Address = SPI6_Base
+      then
+         return SPI_Clock_Source'Val (RCC_Periph.D3CCIPR.SPI6SEL);
+      else
+         raise Unknown_Device;
+      end if;
+   end Read_Clock_Source;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : I2S_Port) is
-   --  begin
-   --     if This.Periph.all'Address = SPI1_Base then
-   --        RCC_Periph.APB2ENR.SPI1EN := True;
-   --     elsif This.Periph.all'Address = SPI2_Base then
-   --        RCC_Periph.APB1LENR.SPI2EN := True;
-   --     elsif This.Periph.all'Address = SPI3_Base then
-   --        RCC_Periph.APB1LENR.SPI3EN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : I2S_Port) is
+   begin
+      if This.Periph.all'Address = SPI1_Base then
+         RCC_Periph.APB2ENR.SPI1EN := True;
+      elsif This.Periph.all'Address = SPI2_Base then
+         RCC_Periph.APB1LENR.SPI2EN := True;
+      elsif This.Periph.all'Address = SPI3_Base then
+         RCC_Periph.APB1LENR.SPI3EN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : I2S_Port) is
-   --  begin
-   --     if This.Periph.all'Address = SPI1_Base then
-   --        RCC_Periph.APB2RSTR.SPI1RST := True;
-   --        RCC_Periph.APB2RSTR.SPI1RST := False;
-   --     elsif This.Periph.all'Address = SPI2_Base then
-   --        RCC_Periph.APB1LRSTR.SPI2RST := True;
-   --        RCC_Periph.APB1LRSTR.SPI2RST := False;
-   --     elsif This.Periph.all'Address = SPI3_Base then
-   --        RCC_Periph.APB1LRSTR.SPI3RST := True;
-   --        RCC_Periph.APB1LRSTR.SPI3RST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : I2S_Port) is
+   begin
+      if This.Periph.all'Address = SPI1_Base then
+         RCC_Periph.APB2RSTR.SPI1RST := True;
+         RCC_Periph.APB2RSTR.SPI1RST := False;
+      elsif This.Periph.all'Address = SPI2_Base then
+         RCC_Periph.APB1LRSTR.SPI2RST := True;
+         RCC_Periph.APB1LRSTR.SPI2RST := False;
+      elsif This.Periph.all'Address = SPI3_Base then
+         RCC_Periph.APB1LRSTR.SPI3RST := True;
+         RCC_Periph.APB1LRSTR.SPI3RST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ------------------------
    -- Write_Clock_Source --
    ------------------------
 
-   --  procedure Write_Clock_Source (This   : I2S_Port'Class;
-   --                                Source : I2S_Clock_Source)
-   --  is
-   --  begin
-   --     if This.Periph.all'Address = SPI1_Base or
-   --        This.Periph.all'Address = SPI2_Base or
-   --        This.Periph.all'Address = SPI3_Base
-   --     then
-   --        RCC_Periph.D2CCIP1R.SPI123SEL := Source'Enum_Rep;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Write_Clock_Source;
+   procedure Write_Clock_Source (This   : I2S_Port'Class;
+                                 Source : I2S_Clock_Source)
+   is
+   begin
+      if This.Periph.all'Address = SPI1_Base or
+         This.Periph.all'Address = SPI2_Base or
+         This.Periph.all'Address = SPI3_Base
+      then
+         RCC_Periph.D2CCIP1R.SPI123SEL := Source'Enum_Rep;
+      else
+         raise Unknown_Device;
+      end if;
+   end Write_Clock_Source;
 
    ------------------------
    -- Read_Clock_Source --
    ------------------------
 
-   --  function Read_Clock_Source (This : I2S_Port'Class) return I2S_Clock_Source
-   --  is
-   --  begin
-   --     if This.Periph.all'Address = SPI1_Base or
-   --        This.Periph.all'Address = SPI2_Base or
-   --        This.Periph.all'Address = SPI3_Base
-   --     then
-   --        return I2S_Clock_Source'Val (RCC_Periph.D2CCIP1R.SPI123SEL);
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Read_Clock_Source;
+   function Read_Clock_Source (This : I2S_Port'Class) return I2S_Clock_Source
+   is
+   begin
+      if This.Periph.all'Address = SPI1_Base or
+         This.Periph.all'Address = SPI2_Base or
+         This.Periph.all'Address = SPI3_Base
+      then
+         return I2S_Clock_Source'Val (RCC_Periph.D2CCIP1R.SPI123SEL);
+      else
+         raise Unknown_Device;
+      end if;
+   end Read_Clock_Source;
 
    -------------------------
    -- Get_Clock_Frequency --
    -------------------------
 
-   --  function Get_Clock_Frequency (This : I2S_Port) return UInt32 is
-   --     Source : constant I2S_Clock_Source :=
-   --       I2S_Clock_Source'Val (RCC_Periph.D2CCIP1R.SPI123SEL);
-   --  begin
-   --     if This.Periph.all'Address = SPI1_Base or
-   --        This.Periph.all'Address = SPI2_Base or
-   --        This.Periph.all'Address = SPI3_Base
-   --     then
-   --        case Source is
-   --           when PLL1Q =>
-   --              return System_Clock_Frequencies.PCLK1;
-   --           when PLL2P =>
-   --              return System_Clock_Frequencies.PCLK1;
-   --           when PLL3P =>
-   --              return System_Clock_Frequencies.PCLK1;
-   --           when I2S_CKIN =>
-   --              return I2SCLK;
-   --           when PER =>
-   --              return System_Clock_Frequencies.PERCLK;
-   --        end case;
-   --
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Get_Clock_Frequency;
+   function Get_Clock_Frequency (This : I2S_Port) return UInt32 is
+      Source : constant I2S_Clock_Source :=
+        I2S_Clock_Source'Val (RCC_Periph.D2CCIP1R.SPI123SEL);
+   begin
+      if This.Periph.all'Address = SPI1_Base or
+         This.Periph.all'Address = SPI2_Base or
+         This.Periph.all'Address = SPI3_Base
+      then
+         case Source is
+            when PLL1Q =>
+               return System_Clock_Frequencies.PCLK1;
+            when PLL2P =>
+               return System_Clock_Frequencies.PCLK1;
+            when PLL3P =>
+               return System_Clock_Frequencies.PCLK1;
+            when I2S_CKIN =>
+               return I2SCLK;
+            when PER =>
+               return System_Clock_Frequencies.PERCLK;
+         end case;
+
+      else
+         raise Unknown_Device;
+      end if;
+   end Get_Clock_Frequency;
 
    ------------------------
    -- Write_Clock_Source --
    ------------------------
 
-   --  procedure Write_Clock_Source
-   --    (This    : RTC_Device;
-   --     Source  : RTC_Clock_Source;
-   --     HSE_Pre : RTC_HSE_Prescaler_Range := RTC_HSE_Prescaler_Range'First)
-   --  is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     RCC_Periph.BDCR.RTCSEL := Source'Enum_Rep;
-   --     if Source = HSE then
-   --        RCC_Periph.CFGR.RTCPRE := UInt6 (HSE_Pre);
-   --     end if;
-   --  end Write_Clock_Source;
+   procedure Write_Clock_Source
+     (This       : RTC_Device;
+      Source     : RTC_Clock_Source;
+      HSE_Pre    : RTC_HSE_Prescaler_Range := RTC_HSE_Prescaler_Range'First)
+   is
+      pragma Unreferenced (This);
+   begin
+      RCC_Periph.BDCR.RTCSEL := Source'Enum_Rep;
+      if Source = HSE then
+         RCC_Periph.CFGR.RTCPRE := UInt6 (HSE_Pre);
+      end if;
+   end Write_Clock_Source;
 
    ------------------------
    -- Read_Clock_Source --
    ------------------------
 
-   --  function Read_Clock_Source (This : RTC_Device) return RTC_Clock_Source
-   --  is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     return RTC_Clock_Source'Val (RCC_Periph.BDCR.RTCSEL);
-   --  end Read_Clock_Source;
+   function Read_Clock_Source (This : RTC_Device) return RTC_Clock_Source
+   is
+      pragma Unreferenced (This);
+   begin
+      return RTC_Clock_Source'Val (RCC_Periph.BDCR.RTCSEL);
+   end Read_Clock_Source;
 
    ------------------
    -- Enable_Clock --
@@ -1190,289 +1192,289 @@ package body STM32.Device is
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : LPTimer) is
-   --  begin
-   --     if This'Address = LPTIM1_Base then
-   --        RCC_Periph.APB1LENR.LPTIM1EN := True;
-   --     elsif This'Address = LPTIM2_Base then
-   --        RCC_Periph.APB4ENR.LPTIM2EN := True;
-   --     elsif This'Address = LPTIM3_Base then
-   --        RCC_Periph.APB4ENR.LPTIM3EN := True;
-   --     elsif This'Address = LPTIM4_Base then
-   --        RCC_Periph.APB4ENR.LPTIM4EN := True;
-   --     elsif This'Address = LPTIM5_Base then
-   --        RCC_Periph.APB4ENR.LPTIM5EN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : LPTimer) is
+   begin
+      if This'Address = LPTIM1_Base then
+         RCC_Periph.APB1LENR.LPTIM1EN := True;
+      elsif This'Address = LPTIM2_Base then
+         RCC_Periph.APB4ENR.LPTIM2EN := True;
+      elsif This'Address = LPTIM3_Base then
+         RCC_Periph.APB4ENR.LPTIM3EN := True;
+      elsif This'Address = LPTIM4_Base then
+         RCC_Periph.APB4ENR.LPTIM4EN := True;
+      elsif This'Address = LPTIM5_Base then
+         RCC_Periph.APB4ENR.LPTIM5EN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : LPTimer) is
-   --  begin
-   --     if This'Address = LPTIM1_Base then
-   --        RCC_Periph.APB1LRSTR.LPTIM1RST := True;
-   --        RCC_Periph.APB1LRSTR.LPTIM1RST := False;
-   --     elsif This'Address = LPTIM2_Base then
-   --        RCC_Periph.APB4RSTR.LPTIM2RST := True;
-   --        RCC_Periph.APB4RSTR.LPTIM2RST := False;
-   --     elsif This'Address = LPTIM3_Base then
-   --        RCC_Periph.APB4RSTR.LPTIM3RST := True;
-   --        RCC_Periph.APB4RSTR.LPTIM3RST := False;
-   --     elsif This'Address = LPTIM4_Base then
-   --        RCC_Periph.APB4RSTR.LPTIM4RST := True;
-   --        RCC_Periph.APB4RSTR.LPTIM4RST := False;
-   --     elsif This'Address = LPTIM5_Base then
-   --        RCC_Periph.APB4RSTR.LPTIM5RST := True;
-   --        RCC_Periph.APB4RSTR.LPTIM5RST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : LPTimer) is
+   begin
+      if This'Address = LPTIM1_Base then
+         RCC_Periph.APB1LRSTR.LPTIM1RST := True;
+         RCC_Periph.APB1LRSTR.LPTIM1RST := False;
+      elsif This'Address = LPTIM2_Base then
+         RCC_Periph.APB4RSTR.LPTIM2RST := True;
+         RCC_Periph.APB4RSTR.LPTIM2RST := False;
+      elsif This'Address = LPTIM3_Base then
+         RCC_Periph.APB4RSTR.LPTIM3RST := True;
+         RCC_Periph.APB4RSTR.LPTIM3RST := False;
+      elsif This'Address = LPTIM4_Base then
+         RCC_Periph.APB4RSTR.LPTIM4RST := True;
+         RCC_Periph.APB4RSTR.LPTIM4RST := False;
+      elsif This'Address = LPTIM5_Base then
+         RCC_Periph.APB4RSTR.LPTIM5RST := True;
+         RCC_Periph.APB4RSTR.LPTIM5RST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ------------------------
    -- Write_Clock_Source --
    ------------------------
 
-   --  procedure Write_Clock_Source (This   : LPTimer;
-   --                                Source : LPTimer_Clock_Source)
-   --  is
-   --  begin
-   --     if This'Address = LPTIM1_Base then
-   --        RCC_Periph.D2CCIP2R.LPTIM1SEL := Source'Enum_Rep;
-   --     elsif This'Address = LPTIM2_Base then
-   --        RCC_Periph.D3CCIPR.LPTIM2SEL := Source'Enum_Rep;
-   --     elsif This'Address = LPTIM3_Base or
-   --           This'Address = LPTIM4_Base or
-   --           This'Address = LPTIM5_Base
-   --     then
-   --        RCC_Periph.D3CCIPR.LPTIM345SEL := Source'Enum_Rep;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Write_Clock_Source;
+   procedure Write_Clock_Source (This   : LPTimer;
+                                 Source : LPTimer_Clock_Source)
+   is
+   begin
+      if This'Address = LPTIM1_Base then
+         RCC_Periph.D2CCIP2R.LPTIM1SEL := Source'Enum_Rep;
+      elsif This'Address = LPTIM2_Base then
+         RCC_Periph.D3CCIPR.LPTIM2SEL := Source'Enum_Rep;
+      elsif This'Address = LPTIM3_Base or
+            This'Address = LPTIM4_Base or
+            This'Address = LPTIM5_Base
+      then
+         RCC_Periph.D3CCIPR.LPTIM345SEL := Source'Enum_Rep;
+      else
+         raise Unknown_Device;
+      end if;
+   end Write_Clock_Source;
 
    -----------------------
    -- Read_Clock_Source --
    -----------------------
 
-   --  function Read_Clock_Source (This : LPTimer) return LPTimer_Clock_Source is
-   --  begin
-   --     if This'Address = LPTIM1_Base then
-   --        return LPTimer_Clock_Source'Val (RCC_Periph.D2CCIP2R.LPTIM1SEL);
-   --     elsif This'Address = LPTIM2_Base then
-   --        return LPTimer_Clock_Source'Val (RCC_Periph.D3CCIPR.LPTIM2SEL);
-   --     elsif This'Address = LPTIM3_Base or
-   --           This'Address = LPTIM4_Base or
-   --           This'Address = LPTIM5_Base
-   --     then
-   --        return LPTimer_Clock_Source'Val (RCC_Periph.D3CCIPR.LPTIM345SEL);
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Read_Clock_Source;
+   function Read_Clock_Source (This : LPTimer) return LPTimer_Clock_Source is
+   begin
+      if This'Address = LPTIM1_Base then
+         return LPTimer_Clock_Source'Val (RCC_Periph.D2CCIP2R.LPTIM1SEL);
+      elsif This'Address = LPTIM2_Base then
+         return LPTimer_Clock_Source'Val (RCC_Periph.D3CCIPR.LPTIM2SEL);
+      elsif This'Address = LPTIM3_Base or
+            This'Address = LPTIM4_Base or
+            This'Address = LPTIM5_Base
+      then
+         return LPTimer_Clock_Source'Val (RCC_Periph.D3CCIPR.LPTIM345SEL);
+      else
+         raise Unknown_Device;
+      end if;
+   end Read_Clock_Source;
 
    -------------------------
    -- Get_Clock_Frequency --
    -------------------------
 
-   --  function Get_Clock_Frequency (This : LPTimer) return UInt32 is
-   --  begin
-   --     if This'Address = LPTIM1_Base then
-   --        return System_Clock_Frequencies.PCLK1;
-   --     elsif This'Address = LPTIM2_Base or
-   --           This'Address = LPTIM3_Base or
-   --           This'Address = LPTIM4_Base or
-   --           This'Address = LPTIM5_Base
-   --     then
-   --        return System_Clock_Frequencies.PCLK4;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Get_Clock_Frequency;
+   function Get_Clock_Frequency (This : LPTimer) return UInt32 is
+   begin
+      if This'Address = LPTIM1_Base then
+         return System_Clock_Frequencies.PCLK1;
+      elsif This'Address = LPTIM2_Base or
+            This'Address = LPTIM3_Base or
+            This'Address = LPTIM4_Base or
+            This'Address = LPTIM5_Base
+      then
+         return System_Clock_Frequencies.PCLK4;
+      else
+         raise Unknown_Device;
+      end if;
+   end Get_Clock_Frequency;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : HRTimer_Master) is
-   --  begin
-   --     if This'Address = HRTIM_Master_Base then
-   --        RCC_Periph.APB2ENR.HRTIMEN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : HRTimer_Master) is
+   begin
+      if This'Address = HRTIM_Master_Base then
+         RCC_Periph.APB2ENR.HRTIMEN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock (This : HRTimer_Channel) is
-   --  begin
-   --     if This'Address = HRTIM_TIMA_Base or
-   --        This'Address = HRTIM_TIMB_Base or
-   --        This'Address = HRTIM_TIMC_Base or
-   --        This'Address = HRTIM_TIMD_Base or
-   --        This'Address = HRTIM_TIME_Base
-   --     then
-   --        RCC_Periph.APB2ENR.HRTIMEN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock (This : HRTimer_Channel) is
+   begin
+      if This'Address = HRTIM_TIMA_Base or
+         This'Address = HRTIM_TIMB_Base or
+         This'Address = HRTIM_TIMC_Base or
+         This'Address = HRTIM_TIMD_Base or
+         This'Address = HRTIM_TIME_Base
+      then
+         RCC_Periph.APB2ENR.HRTIMEN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : HRTimer_Master) is
-   --  begin
-   --     if This'Address = HRTIM_Master_Base then
-   --        RCC_Periph.APB2RSTR.HRTIMRST := True;
-   --        RCC_Periph.APB2RSTR.HRTIMRST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : HRTimer_Master) is
+   begin
+      if This'Address = HRTIM_Master_Base then
+         RCC_Periph.APB2RSTR.HRTIMRST := True;
+         RCC_Periph.APB2RSTR.HRTIMRST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : HRTimer_Channel) is
-   --  begin
-   --     if This'Address = HRTIM_TIMA_Base or
-   --        This'Address = HRTIM_TIMB_Base or
-   --        This'Address = HRTIM_TIMC_Base or
-   --        This'Address = HRTIM_TIMD_Base or
-   --        This'Address = HRTIM_TIME_Base
-   --     then
-   --        RCC_Periph.APB2RSTR.HRTIMRST := True;
-   --        RCC_Periph.APB2RSTR.HRTIMRST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : HRTimer_Channel) is
+   begin
+      if This'Address = HRTIM_TIMA_Base or
+         This'Address = HRTIM_TIMB_Base or
+         This'Address = HRTIM_TIMC_Base or
+         This'Address = HRTIM_TIMD_Base or
+         This'Address = HRTIM_TIME_Base
+      then
+         RCC_Periph.APB2RSTR.HRTIMRST := True;
+         RCC_Periph.APB2RSTR.HRTIMRST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ---------------------------
    -- Write_Clock_Frequency --
    ---------------------------
 
-   --  procedure Write_Clock_Source (This   : HRTimer_Master;
-   --                                Source : HRTimer_Clock_Source)
-   --  is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     RCC_Periph.CFGR.HRTIMSEL := Source = CPUCLK;
-   --  end Write_Clock_Source;
+   procedure Write_Clock_Source (This   : HRTimer_Master;
+                                 Source : HRTimer_Clock_Source)
+   is
+      pragma Unreferenced (This);
+   begin
+      RCC_Periph.CFGR.HRTIMSEL := Source = CPUCLK;
+   end Write_Clock_Source;
 
    -------------------------
    -- Get_Clock_Frequency --
    -------------------------
 
-   --  function Read_Clock_Source
-   --    (This : HRTimer_Master) return HRTimer_Clock_Source
-   --  is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     if RCC_Periph.CFGR.HRTIMSEL then
-   --        return CPUCLK;
-   --     else
-   --        return TIMCLK;
-   --     end if;
-   --  end Read_Clock_Source;
+   function Read_Clock_Source
+     (This : HRTimer_Master) return HRTimer_Clock_Source
+   is
+      pragma Unreferenced (This);
+   begin
+      if RCC_Periph.CFGR.HRTIMSEL then
+         return CPUCLK;
+      else
+         return TIMCLK;
+      end if;
+   end Read_Clock_Source;
 
    -------------------------
    -- Get_Clock_Frequency --
    -------------------------
 
-   --  function Get_Clock_Frequency (This : HRTimer_Master) return UInt32 is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     return System_Clock_Frequencies.TIMCLK3;
-   --  end Get_Clock_Frequency;
+   function Get_Clock_Frequency (This : HRTimer_Master) return UInt32 is
+      pragma Unreferenced (This);
+   begin
+      return System_Clock_Frequencies.TIMCLK3;
+   end Get_Clock_Frequency;
 
    -------------------------
    -- Get_Clock_Frequency --
    -------------------------
 
-   --  function Get_Clock_Frequency (This : HRTimer_Channel) return UInt32 is
-   --     pragma Unreferenced (This);
-   --  begin
-   --     return System_Clock_Frequencies.TIMCLK3;
-   --  end Get_Clock_Frequency;
+   function Get_Clock_Frequency (This : HRTimer_Channel) return UInt32 is
+      pragma Unreferenced (This);
+   begin
+      return System_Clock_Frequencies.TIMCLK3;
+   end Get_Clock_Frequency;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock
-   --    (This : aliased Comparator)
-   --  is
-   --  begin
-   --     if This'Address = Comp_1'Address or
-   --        This'Address = Comp_2'Address
-   --     then
-   --        RCC_Periph.APB4ENR.COMP12EN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock
+     (This : aliased Comparator)
+   is
+   begin
+      if This'Address = Comp_1'Address or
+         This'Address = Comp_2'Address
+      then
+         RCC_Periph.APB4ENR.COMP12EN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : aliased Comparator)
-   --  is
-   --  begin
-   --     if This'Address = Comp_1'Address or
-   --        This'Address = Comp_2'Address
-   --     then
-   --        RCC_Periph.APB4RSTR.COMP12RST := True;
-   --        RCC_Periph.APB4RSTR.COMP12RST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : aliased Comparator)
+   is
+   begin
+      if This'Address = Comp_1'Address or
+         This'Address = Comp_2'Address
+      then
+         RCC_Periph.APB4RSTR.COMP12RST := True;
+         RCC_Periph.APB4RSTR.COMP12RST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ------------------
    -- Enable_Clock --
    ------------------
 
-   --  procedure Enable_Clock
-   --    (This : aliased Operational_Amplifier)
-   --  is
-   --  begin
-   --     if This'Address = Opamp_1'Address or
-   --        This'Address = Opamp_2'Address
-   --     then
-   --        RCC_Periph.APB1HENR.OPAMPEN := True;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Enable_Clock;
+   procedure Enable_Clock
+     (This : aliased Operational_Amplifier)
+   is
+   begin
+      if This'Address = Opamp_1'Address or
+         This'Address = Opamp_2'Address
+      then
+         RCC_Periph.APB1HENR.OPAMPEN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
 
    -----------
    -- Reset --
    -----------
 
-   --  procedure Reset (This : aliased Operational_Amplifier)
-   --  is
-   --  begin
-   --     if This'Address = Opamp_1'Address or
-   --        This'Address = Opamp_2'Address
-   --     then
-   --        RCC_Periph.APB1HRSTR.OPAMPRST := True;
-   --        RCC_Periph.APB1HRSTR.OPAMPRST := False;
-   --     else
-   --        raise Unknown_Device;
-   --     end if;
-   --  end Reset;
+   procedure Reset (This : aliased Operational_Amplifier)
+   is
+   begin
+      if This'Address = Opamp_1'Address or
+         This'Address = Opamp_2'Address
+      then
+         RCC_Periph.APB1HRSTR.OPAMPRST := True;
+         RCC_Periph.APB1HRSTR.OPAMPRST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
 
    ------------------------------
    -- System_Clock_Frequencies --
@@ -1500,7 +1502,7 @@ package body STM32.Device is
             Result.SYSCLK := CSI_VALUE;
 
          --  PLL1 as source
-         when SYSCLK_SRC_PLL =>
+         when SYSCLK_SRC_PLL1 =>
             declare
                Pllm : constant UInt32 := UInt32 (RCC_Periph.PLLCKSELR.DIVM1);
                --  Get the correct value of Pll M divisor

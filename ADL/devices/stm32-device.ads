@@ -45,27 +45,27 @@
 --  with System;         use System; --  Enable for COMP and OPAMP
 
 with STM32_SVD;      use STM32_SVD;
---  with STM32_SVD.COMP; --  Enable for COMP
---  with STM32_SVD.OPAMP; --  Enable for OPAMP
---  with STM32_SVD.SAI; --  Enable for SAI
+with STM32_SVD.COMP; --  Enable for COMP
+with STM32_SVD.OPAMP; --  Enable for OPAMP
+with STM32_SVD.SAI; --  Enable for SAI
 
 with STM32.GPIO;     use STM32.GPIO;
 with STM32.ADC;      use STM32.ADC;
---  with STM32.DAC;      use STM32.DAC;
---  with STM32.CRC;      use STM32.CRC;
---  with STM32.RNG;      use STM32.RNG;
---  with STM32.DMA;      use STM32.DMA;
---  with STM32.USARTs;   use STM32.USARTs;
---  with STM32.SPI;      use STM32.SPI;
---  with STM32.SPI.DMA;  use STM32.SPI.DMA;
---  with STM32.I2C;      use STM32.I2C;
---  with STM32.I2S;      use STM32.I2S;
---  with STM32.RTC;      use STM32.RTC;
+with STM32.DAC;      use STM32.DAC;
+with STM32.CRC;      use STM32.CRC;
+with STM32.RNG;      use STM32.RNG;
+with STM32.DMA;      use STM32.DMA;
+with STM32.USARTs;   use STM32.USARTs;
+with STM32.SPI;      use STM32.SPI;
+with STM32.SPI.DMA;  use STM32.SPI.DMA;
+with STM32.I2C;      use STM32.I2C;
+with STM32.I2S;      use STM32.I2S;
+with STM32.RTC;      use STM32.RTC;
 with STM32.Timers;   use STM32.Timers;
---  with STM32.LPTimers; use STM32.LPTimers;
---  with STM32.HRTimers; use STM32.HRTimers;
---  with STM32.OPAMP;    use STM32.OPAMP;
---  with STM32.COMP;     use STM32.COMP;
+with STM32.LPTimers; use STM32.LPTimers;
+with STM32.HRTimers; use STM32.HRTimers;
+with STM32.OPAMP;    use STM32.OPAMP;
+with STM32.COMP;     use STM32.COMP;
 
 package STM32.Device is
    pragma Elaborate_Body;
@@ -467,311 +467,311 @@ package STM32.Device is
    -- DAC --
    ---------
 
-   --  DAC_1 : aliased Digital_To_Analog_Converter
-   --    with Import, Volatile, Address => DAC_Base;
-   --
-   --  DAC_1_OUT_1_IO : GPIO_Point renames PA4;
-   --  DAC_1_OUT_2_IO : GPIO_Point renames PA5;
-   --
-   --  procedure Enable_Clock
-   --    (This : aliased Digital_To_Analog_Converter)
-   --    with Inline;
-   --
-   --  procedure Reset
-   --    (This : aliased Digital_To_Analog_Converter)
-   --    with Inline;
+   DAC_1 : aliased Digital_To_Analog_Converter
+     with Import, Volatile, Address => DAC_Base;
+
+   DAC_1_OUT_1_IO : GPIO_Point renames PA4;
+   DAC_1_OUT_2_IO : GPIO_Point renames PA5;
+
+   procedure Enable_Clock
+     (This : aliased Digital_To_Analog_Converter)
+     with Inline;
+
+   procedure Reset
+     (This : aliased Digital_To_Analog_Converter)
+     with Inline;
 
    -----------
    -- Audio --
    -----------
 
-   --  subtype SAI_Port is STM32_SVD.SAI.SAI_Peripheral;
-   --
-   --  SAI_1 : SAI_Port renames STM32_SVD.SAI.SAI1_Periph;
-   --  SAI_2 : SAI_Port renames STM32_SVD.SAI.SAI2_Periph;
-   --  SAI_3 : SAI_Port renames STM32_SVD.SAI.SAI3_Periph;
-   --  SAI_4 : SAI_Port renames STM32_SVD.SAI.SAI4_Periph;
-   --
-   --  procedure Enable_Clock (This : SAI_Port);
-   --  procedure Reset (This : SAI_Port);
-   --
-   --  type SAI_Clock_Source is (PLL1Q, PLL2P, PLL3P, I2S_CKIN, PER)
-   --    with Size => 3;
-   --  --  SAI Clock Mux.
-   --
-   --  procedure Write_Clock_Source (This   : SAI_Port;
-   --                                Source : SAI_Clock_Source)
-   --    with Post => Source = Read_Clock_Source (This);
-   --  --  Set SAI Clock Mux source.
-   --
-   --  function Read_Clock_Source (This : SAI_Port) return SAI_Clock_Source;
-   --  --  Return SAI Clock Mux source.
-   --
-   --  function Get_Clock_Frequency (This : SAI_Port) return UInt32;
+   subtype SAI_Port is STM32_SVD.SAI.SAI_Peripheral;
+
+   SAI_1 : SAI_Port renames STM32_SVD.SAI.SAI1_Periph;
+   SAI_2 : SAI_Port renames STM32_SVD.SAI.SAI2_Periph;
+   SAI_3 : SAI_Port renames STM32_SVD.SAI.SAI3_Periph;
+   SAI_4 : SAI_Port renames STM32_SVD.SAI.SAI4_Periph;
+
+   procedure Enable_Clock (This : SAI_Port);
+   procedure Reset (This : SAI_Port);
+
+   type SAI_Clock_Source is (PLL1Q, PLL2P, PLL3P, I2S_CKIN, PER)
+     with Size => 3;
+   --  SAI Clock Mux.
+
+   procedure Write_Clock_Source (This   : SAI_Port;
+                                 Source : SAI_Clock_Source)
+     with Post => Source = Read_Clock_Source (This);
+   --  Set SAI Clock Mux source.
+
+   function Read_Clock_Source (This : SAI_Port) return SAI_Clock_Source;
+   --  Return SAI Clock Mux source.
+
+   function Get_Clock_Frequency (This : SAI_Port) return UInt32;
 
    ---------
    -- CRC --
    ---------
 
-   --  CRC_Unit : CRC_32 with Import, Volatile, Address => CRC_Base;
-   --
-   --  procedure Enable_Clock (This : CRC_32) with Inline;
-   --
-   --  procedure Disable_Clock (This : CRC_32) with Inline;
-   --
-   --  procedure Reset (This : CRC_32);
+   CRC_Unit : CRC_32 with Import, Volatile, Address => CRC_Base;
+
+   procedure Enable_Clock (This : CRC_32) with Inline;
+
+   procedure Disable_Clock (This : CRC_32) with Inline;
+
+   procedure Reset (This : CRC_32);
 
    ---------
    -- RNG --
    ---------
 
-   --  RNG_Unit : RNG_Generator
-   --    with Import, Volatile, Address => RNG_Base;
-   --
-   --  procedure Enable_Clock (This : RNG_Generator) with Inline;
-   --
-   --  procedure Disable_Clock (This : RNG_Generator) with Inline;
-   --
-   --  procedure Reset (This : RNG_Generator);
+   RNG_Unit : RNG_Generator
+     with Import, Volatile, Address => RNG_Base;
+
+   procedure Enable_Clock (This : RNG_Generator) with Inline;
+
+   procedure Disable_Clock (This : RNG_Generator) with Inline;
+
+   procedure Reset (This : RNG_Generator);
 
    ---------
    -- DMA --
    ---------
 
-   --  DMA_1 : aliased DMA_Controller
-   --    with Import, Volatile, Address => DMA1_Base;
-   --  DMA_2 : aliased DMA_Controller
-   --    with Import, Volatile, Address => DMA2_Base;
-   --
-   --  procedure Enable_Clock (This : aliased DMA_Controller);
-   --  procedure Reset (This : aliased DMA_Controller);
+   DMA_1 : aliased DMA_Controller
+     with Import, Volatile, Address => DMA1_Base;
+   DMA_2 : aliased DMA_Controller
+     with Import, Volatile, Address => DMA2_Base;
+
+   procedure Enable_Clock (This : aliased DMA_Controller);
+   procedure Reset (This : aliased DMA_Controller);
 
    -----------
    -- USART --
    -----------
 
-   --  Internal_USART_1 : aliased Internal_USART
-   --    with Import, Volatile, Address => USART1_Base;
-   --  Internal_USART_2 : aliased Internal_USART
-   --    with Import, Volatile, Address => USART2_Base;
-   --  Internal_USART_3 : aliased Internal_USART
-   --    with Import, Volatile, Address => USART3_Base;
-   --  Internal_UART_4 : aliased Internal_USART
-   --    with Import, Volatile, Address => UART4_Base;
-   --  Internal_UART_5 : aliased Internal_USART
-   --    with Import, Volatile, Address => UART5_Base;
-   --  Internal_USART_6 : aliased Internal_USART
-   --    with Import, Volatile, Address => USART6_Base;
-   --  Internal_UART_7 : aliased Internal_USART
-   --    with Import, Volatile, Address => UART7_Base;
-   --  Internal_UART_8 : aliased Internal_USART
-   --    with Import, Volatile, Address => UART8_Base;
-   --  Internal_LPUART_1 : aliased Internal_USART
-   --    with Import, Volatile, Address => LPUART1_Base;
-   --
-   --  USART_1  : aliased USART (Internal_USART_1'Access);
-   --  USART_2  : aliased USART (Internal_USART_2'Access);
-   --  USART_3  : aliased USART (Internal_USART_3'Access);
-   --  UART_4   : aliased USART (Internal_UART_4'Access);
-   --  UART_5   : aliased USART (Internal_UART_5'Access);
-   --  USART_6  : aliased USART (Internal_USART_6'Access);
-   --  UART_7   : aliased USART (Internal_UART_7'Access);
-   --  UART_8   : aliased USART (Internal_UART_8'Access);
-   --  LPUART_1 : aliased USART (Internal_LPUART_1'Access);
-   --
-   --  procedure Enable_Clock (This : aliased USART);
-   --
-   --  procedure Reset (This : aliased USART);
-   --
-   --  type USART_Clock_Source is
-   --    (Option_1, PLL2Q, PLL3Q, HSI, CSI, LSE)
-   --    with Size => 3;
-   --  --  USART Port  USART16    USART234578  LPUART1
-   --  --  Option_1    PCLK2      PCLK1        PCLK3
-   --
-   --  procedure Write_Clock_Source (This   : aliased USART;
-   --                                Source : USART_Clock_Source)
-   --    with Post => Source = Read_Clock_Source (This);
-   --
-   --  function Read_Clock_Source (This : aliased USART)
-   --    return USART_Clock_Source;
-   --
-   --  function Get_Clock_Frequency (This : USART) return UInt32
-   --    with Inline;
-   --  --  Returns USART clock frequency, in Hertz.
+   Internal_USART_1 : aliased Internal_USART
+     with Import, Volatile, Address => USART1_Base;
+   Internal_USART_2 : aliased Internal_USART
+     with Import, Volatile, Address => USART2_Base;
+   Internal_USART_3 : aliased Internal_USART
+     with Import, Volatile, Address => USART3_Base;
+   Internal_UART_4 : aliased Internal_USART
+     with Import, Volatile, Address => UART4_Base;
+   Internal_UART_5 : aliased Internal_USART
+     with Import, Volatile, Address => UART5_Base;
+   Internal_USART_6 : aliased Internal_USART
+     with Import, Volatile, Address => USART6_Base;
+   Internal_UART_7 : aliased Internal_USART
+     with Import, Volatile, Address => UART7_Base;
+   Internal_UART_8 : aliased Internal_USART
+     with Import, Volatile, Address => UART8_Base;
+   Internal_LPUART_1 : aliased Internal_USART
+     with Import, Volatile, Address => LPUART1_Base;
+
+   USART_1  : aliased USART (Internal_USART_1'Access);
+   USART_2  : aliased USART (Internal_USART_2'Access);
+   USART_3  : aliased USART (Internal_USART_3'Access);
+   UART_4   : aliased USART (Internal_UART_4'Access);
+   UART_5   : aliased USART (Internal_UART_5'Access);
+   USART_6  : aliased USART (Internal_USART_6'Access);
+   UART_7   : aliased USART (Internal_UART_7'Access);
+   UART_8   : aliased USART (Internal_UART_8'Access);
+   LPUART_1 : aliased USART (Internal_LPUART_1'Access);
+
+   procedure Enable_Clock (This : aliased USART);
+
+   procedure Reset (This : aliased USART);
+
+   type USART_Clock_Source is
+     (Option_1, PLL2Q, PLL3Q, HSI, CSI, LSE)
+     with Size => 3;
+   --  USART Port  USART16    USART234578  LPUART1
+   --  Option_1    PCLK2      PCLK1        PCLK3
+
+   procedure Write_Clock_Source (This   : aliased USART;
+                                 Source : USART_Clock_Source)
+     with Post => Source = Read_Clock_Source (This);
+
+   function Read_Clock_Source (This : aliased USART)
+     return USART_Clock_Source;
+
+   function Get_Clock_Frequency (This : USART) return UInt32
+     with Inline;
+   --  Returns USART clock frequency, in Hertz.
 
    ---------
    -- I2C --
    ---------
 
-   --  Internal_I2C_Port_1 : aliased Internal_I2C_Port
-   --    with Import, Volatile, Address => I2C1_Base;
-   --  Internal_I2C_Port_2 : aliased Internal_I2C_Port
-   --    with Import, Volatile, Address => I2C2_Base;
-   --  Internal_I2C_Port_3 : aliased Internal_I2C_Port
-   --    with Import, Volatile, Address => I2C3_Base;
-   --  Internal_I2C_Port_4 : aliased Internal_I2C_Port
-   --    with Import, Volatile, Address => I2C4_Base;
-   --
-   --  type I2C_Port_Id is (I2C_Id_1, I2C_Id_2, I2C_Id_3, I2C_Id_4);
-   --
-   --  I2C_1 : aliased I2C_Port (Internal_I2C_Port_1'Access);
-   --  I2C_2 : aliased I2C_Port (Internal_I2C_Port_2'Access);
-   --  I2C_3 : aliased I2C_Port (Internal_I2C_Port_3'Access);
-   --  I2C_4 : aliased I2C_Port (Internal_I2C_Port_4'Access);
-   --
-   --  --  I2C_1_DMA : aliased I2C_Port_DMA (Internal_I2C_Port_1'Access);
-   --  --  I2C_2_DMA : aliased I2C_Port_DMA (Internal_I2C_Port_2'Access);
-   --  --  I2C_3_DMA : aliased I2C_Port_DMA (Internal_I2C_Port_3'Access);
-   --  --  I2C_4_DMA : aliased I2C_Port_DMA (Internal_I2C_Port_4'Access);
-   --
-   --  function As_Port_Id (Port : I2C_Port'Class) return I2C_Port_Id with Inline;
-   --
-   --  procedure Enable_Clock (This : aliased I2C_Port'Class);
-   --  procedure Enable_Clock (This : I2C_Port_Id);
-   --
-   --  procedure Reset (This : I2C_Port'Class);
-   --  procedure Reset (This : I2C_Port_Id);
-   --
-   --  type I2C_Clock_Source is (Option_1, PLL3R, HSI, CSI);
-   --  --  I2C Clock Mux source.
-   --  --  I2C Port   I2C123  I2C4
-   --  --  Option_1   PCLK1   PCLK4
-   --
-   --  procedure Write_Clock_Source (This   : I2C_Port'Class;
-   --                                Source : I2C_Clock_Source)
-   --    with Post => Source = Read_Clock_Source (This);
-   --
-   --  procedure Write_Clock_Source (This   : I2C_Port_Id;
-   --                                Source : I2C_Clock_Source)
-   --    with Post => Source = Read_Clock_Source (This);
-   --  --  Set I2C Clock Mux source.
-   --
-   --  function Read_Clock_Source (This : I2C_Port'Class) return I2C_Clock_Source;
-   --
-   --  function Read_Clock_Source (This : I2C_Port_Id) return I2C_Clock_Source;
-   --  --  Return I2C Clock Mux source.
+   Internal_I2C_Port_1 : aliased Internal_I2C_Port
+     with Import, Volatile, Address => I2C1_Base;
+   Internal_I2C_Port_2 : aliased Internal_I2C_Port
+     with Import, Volatile, Address => I2C2_Base;
+   Internal_I2C_Port_3 : aliased Internal_I2C_Port
+     with Import, Volatile, Address => I2C3_Base;
+   Internal_I2C_Port_4 : aliased Internal_I2C_Port
+     with Import, Volatile, Address => I2C4_Base;
+
+   type I2C_Port_Id is (I2C_Id_1, I2C_Id_2, I2C_Id_3, I2C_Id_4);
+
+   I2C_1 : aliased I2C_Port (Internal_I2C_Port_1'Access);
+   I2C_2 : aliased I2C_Port (Internal_I2C_Port_2'Access);
+   I2C_3 : aliased I2C_Port (Internal_I2C_Port_3'Access);
+   I2C_4 : aliased I2C_Port (Internal_I2C_Port_4'Access);
+
+   --  I2C_1_DMA : aliased I2C_Port_DMA (Internal_I2C_Port_1'Access);
+   --  I2C_2_DMA : aliased I2C_Port_DMA (Internal_I2C_Port_2'Access);
+   --  I2C_3_DMA : aliased I2C_Port_DMA (Internal_I2C_Port_3'Access);
+   --  I2C_4_DMA : aliased I2C_Port_DMA (Internal_I2C_Port_4'Access);
+
+   function As_Port_Id (Port : I2C_Port'Class) return I2C_Port_Id with Inline;
+
+   procedure Enable_Clock (This : aliased I2C_Port'Class);
+   procedure Enable_Clock (This : I2C_Port_Id);
+
+   procedure Reset (This : I2C_Port'Class);
+   procedure Reset (This : I2C_Port_Id);
+
+   type I2C_Clock_Source is (Option_1, PLL3R, HSI, CSI);
+   --  I2C Clock Mux source.
+   --  I2C Port   I2C123  I2C4
+   --  Option_1   PCLK1   PCLK4
+
+   procedure Write_Clock_Source (This   : I2C_Port'Class;
+                                 Source : I2C_Clock_Source)
+     with Post => Source = Read_Clock_Source (This);
+
+   procedure Write_Clock_Source (This   : I2C_Port_Id;
+                                 Source : I2C_Clock_Source)
+     with Post => Source = Read_Clock_Source (This);
+   --  Set I2C Clock Mux source.
+
+   function Read_Clock_Source (This : I2C_Port'Class) return I2C_Clock_Source;
+
+   function Read_Clock_Source (This : I2C_Port_Id) return I2C_Clock_Source;
+   --  Return I2C Clock Mux source.
 
    ---------
    -- SPI --
    ---------
 
-   --  Internal_SPI_1 : aliased Internal_SPI_Port
-   --    with Import, Volatile, Address => SPI1_Base;
-   --  Internal_SPI_2 : aliased Internal_SPI_Port
-   --    with Import, Volatile, Address => SPI2_Base;
-   --  Internal_SPI_3 : aliased Internal_SPI_Port
-   --    with Import, Volatile, Address => SPI3_Base;
-   --  Internal_SPI_4 : aliased Internal_SPI_Port
-   --    with Import, Volatile, Address => SPI4_Base;
-   --  Internal_SPI_5 : aliased Internal_SPI_Port
-   --    with Import, Volatile, Address => SPI5_Base;
-   --  Internal_SPI_6 : aliased Internal_SPI_Port
-   --    with Import, Volatile, Address => SPI6_Base;
-   --
-   --  SPI_1 : aliased SPI_Port (Internal_SPI_1'Access);
-   --  SPI_2 : aliased SPI_Port (Internal_SPI_2'Access);
-   --  SPI_3 : aliased SPI_Port (Internal_SPI_3'Access);
-   --  SPI_4 : aliased SPI_Port (Internal_SPI_4'Access);
-   --  SPI_5 : aliased SPI_Port (Internal_SPI_5'Access);
-   --  SPI_6 : aliased SPI_Port (Internal_SPI_6'Access);
-   --
-   --  SPI_1_DMA : aliased SPI_Port_DMA (Internal_SPI_1'Access);
-   --  SPI_2_DMA : aliased SPI_Port_DMA (Internal_SPI_2'Access);
-   --  SPI_3_DMA : aliased SPI_Port_DMA (Internal_SPI_3'Access);
-   --  SPI_4_DMA : aliased SPI_Port_DMA (Internal_SPI_4'Access);
-   --  SPI_5_DMA : aliased SPI_Port_DMA (Internal_SPI_5'Access);
-   --  SPI_6_DMA : aliased SPI_Port_DMA (Internal_SPI_6'Access);
-   --
-   --  procedure Enable_Clock (This : SPI_Port'Class);
-   --  procedure Reset (This : SPI_Port'Class);
-   --
-   --  type SPI_Clock_Source is
-   --    (Option_1,
-   --     Option_2,
-   --     Option_3,
-   --     Option_4,
-   --     Option_5,
-   --     HSE)
-   --    with Size => 3;
-   --  --  SPI Port   SPI123    SPI45    SPI6     QSPI
-   --  --  Option_1   PLL1Q     PCLK2    PCLK4    HCLK3
-   --  --  Option_2   PLL2P     PLL2Q    PLL2Q    PLL1Q
-   --  --  Option_3   PLL3P     PLL3Q    PLL3Q    PLL2R
-   --  --  Option_4   I2S_CKIN  HSI      HSI      PER_CK
-   --  --  Option_5   PER       CSI      CSI
-   --
-   --  procedure Write_Clock_Source
-   --    (This   : SPI_Port'Class;
-   --     Source : SPI_Clock_Source)
-   --    with Post => Source = Read_Clock_Source (This);
-   --  --  Set SPI Clock Mux source.
-   --
-   --  function Read_Clock_Source (This : SPI_Port'Class) return SPI_Clock_Source;
-   --  --  Return SPI Clock Mux source.
+   Internal_SPI_1 : aliased Internal_SPI_Port
+     with Import, Volatile, Address => SPI1_Base;
+   Internal_SPI_2 : aliased Internal_SPI_Port
+     with Import, Volatile, Address => SPI2_Base;
+   Internal_SPI_3 : aliased Internal_SPI_Port
+     with Import, Volatile, Address => SPI3_Base;
+   Internal_SPI_4 : aliased Internal_SPI_Port
+     with Import, Volatile, Address => SPI4_Base;
+   Internal_SPI_5 : aliased Internal_SPI_Port
+     with Import, Volatile, Address => SPI5_Base;
+   Internal_SPI_6 : aliased Internal_SPI_Port
+     with Import, Volatile, Address => SPI6_Base;
+
+   SPI_1 : aliased SPI_Port (Internal_SPI_1'Access);
+   SPI_2 : aliased SPI_Port (Internal_SPI_2'Access);
+   SPI_3 : aliased SPI_Port (Internal_SPI_3'Access);
+   SPI_4 : aliased SPI_Port (Internal_SPI_4'Access);
+   SPI_5 : aliased SPI_Port (Internal_SPI_5'Access);
+   SPI_6 : aliased SPI_Port (Internal_SPI_6'Access);
+
+   SPI_1_DMA : aliased SPI_Port_DMA (Internal_SPI_1'Access);
+   SPI_2_DMA : aliased SPI_Port_DMA (Internal_SPI_2'Access);
+   SPI_3_DMA : aliased SPI_Port_DMA (Internal_SPI_3'Access);
+   SPI_4_DMA : aliased SPI_Port_DMA (Internal_SPI_4'Access);
+   SPI_5_DMA : aliased SPI_Port_DMA (Internal_SPI_5'Access);
+   SPI_6_DMA : aliased SPI_Port_DMA (Internal_SPI_6'Access);
+
+   procedure Enable_Clock (This : SPI_Port'Class);
+   procedure Reset (This : SPI_Port'Class);
+
+   type SPI_Clock_Source is
+     (Option_1,
+      Option_2,
+      Option_3,
+      Option_4,
+      Option_5,
+      HSE)
+     with Size => 3;
+   --  SPI Port   SPI123    SPI45    SPI6     QSPI
+   --  Option_1   PLL1Q     PCLK2    PCLK4    HCLK3
+   --  Option_2   PLL2P     PLL2Q    PLL2Q    PLL1Q
+   --  Option_3   PLL3P     PLL3Q    PLL3Q    PLL2R
+   --  Option_4   I2S_CKIN  HSI      HSI      PER_CK
+   --  Option_5   PER       CSI      CSI
+
+   procedure Write_Clock_Source
+     (This   : SPI_Port'Class;
+      Source : SPI_Clock_Source)
+     with Post => Source = Read_Clock_Source (This);
+   --  Set SPI Clock Mux source.
+
+   function Read_Clock_Source (This : SPI_Port'Class) return SPI_Clock_Source;
+   --  Return SPI Clock Mux source.
 
    ---------
    -- I2S --
    ---------
 
-   --  Internal_I2S_1     : aliased Internal_I2S_Port
-   --    with Import, Volatile, Address => SPI1_Base;
-   --  Internal_I2S_2     : aliased Internal_I2S_Port
-   --    with Import, Volatile, Address => SPI2_Base;
-   --  Internal_I2S_3     : aliased Internal_I2S_Port
-   --    with Import, Volatile, Address => SPI3_Base;
-   --
-   --  I2S_1 : aliased I2S_Port (Internal_I2S_1'Access, Extended => False);
-   --  I2S_2 : aliased I2S_Port (Internal_I2S_2'Access, Extended => False);
-   --  I2S_3 : aliased I2S_Port (Internal_I2S_3'Access, Extended => False);
-   --
-   --  procedure Enable_Clock (This : I2S_Port);
-   --  --  The I2S_1 to I2S_3 peripherals use the SPI interface hardware, that are
-   --  --  mapped to SPI1 to SPI3. SPI4 to SPI6 don't have the I2S mode.
-   --
-   --  procedure Reset (This : I2S_Port);
-   --  --  The I2S_1 to I2S_3 peripherals use the SPI interface hardware, that are
-   --  --  mapped to SPI1 to SPI3. SPI4 to SPI6 don't have the I2S mode.
-   --
-   --  type I2S_Clock_Source is (PLL1Q, PLL2P, PLL3P, I2S_CKIN, PER)
-   --    with Size => 3;
-   --
-   --  procedure Write_Clock_Source (This   : I2S_Port'Class;
-   --                                Source : I2S_Clock_Source)
-   --    with Post => Source = Read_Clock_Source (This);
-   --  --  Set I2S Clock Mux source (the same source for I2S1 .. I2S3).
-   --
-   --  function Read_Clock_Source (This : I2S_Port'Class) return I2S_Clock_Source;
-   --  --  Return I2S Clock Mux source.
-   --
-   --  function Get_Clock_Frequency (This : I2S_Port) return UInt32;
-   --  --  Return I2S frequency.
+   Internal_I2S_1     : aliased Internal_I2S_Port
+     with Import, Volatile, Address => SPI1_Base;
+   Internal_I2S_2     : aliased Internal_I2S_Port
+     with Import, Volatile, Address => SPI2_Base;
+   Internal_I2S_3     : aliased Internal_I2S_Port
+     with Import, Volatile, Address => SPI3_Base;
+
+   I2S_1 : aliased I2S_Port (Internal_I2S_1'Access, Extended => False);
+   I2S_2 : aliased I2S_Port (Internal_I2S_2'Access, Extended => False);
+   I2S_3 : aliased I2S_Port (Internal_I2S_3'Access, Extended => False);
+
+   procedure Enable_Clock (This : I2S_Port);
+   --  The I2S_1 to I2S_3 peripherals use the SPI interface hardware, that are
+   --  mapped to SPI1 to SPI3. SPI4 to SPI6 don't have the I2S mode.
+
+   procedure Reset (This : I2S_Port);
+   --  The I2S_1 to I2S_3 peripherals use the SPI interface hardware, that are
+   --  mapped to SPI1 to SPI3. SPI4 to SPI6 don't have the I2S mode.
+
+   type I2S_Clock_Source is (PLL1Q, PLL2P, PLL3P, I2S_CKIN, PER)
+     with Size => 3;
+
+   procedure Write_Clock_Source (This   : I2S_Port'Class;
+                                 Source : I2S_Clock_Source)
+     with Post => Source = Read_Clock_Source (This);
+   --  Set I2S Clock Mux source (the same source for I2S1 .. I2S3).
+
+   function Read_Clock_Source (This : I2S_Port'Class) return I2S_Clock_Source;
+   --  Return I2S Clock Mux source.
+
+   function Get_Clock_Frequency (This : I2S_Port) return UInt32;
+   --  Return I2S frequency.
 
    ---------
    -- RTC --
    ---------
 
-   --  RTC : aliased RTC_Device;
-   --
-   --  type RTC_Clock_Source is (No_Clock, LSE, LSI, HSE)
-   --    with Size => 2;
-   --
-   --  subtype RTC_HSE_Prescaler_Range   is Integer range 1 ..  63;
-   --  --  The value 1 is no clock.
-   --
-   --  procedure Write_Clock_Source
-   --    (This       : RTC_Device;
-   --     Source     : RTC_Clock_Source;
-   --     HSE_Pre    : RTC_HSE_Prescaler_Range := RTC_HSE_Prescaler_Range'First)
-   --    with Post => Source = Read_Clock_Source (This);
-   --  --  Set RTC Clock Mux source.
-   --  --  These bits must be set correctly to ensure that the clock supplied to
-   --  --  the RTC is lower than 1 MHz. The value HSE_Pre is valid when the
-   --  --  selected source is HSE. The Enable_CSS is for the LSE clock, that must
-   --  --  be enabled and ready before turning it on.
-   --
-   --  function Read_Clock_Source (This : RTC_Device) return RTC_Clock_Source;
-   --  --  Return RTC Clock Mux source.
+   RTC : aliased RTC_Device;
+
+   type RTC_Clock_Source is (No_Clock, LSE, LSI, HSE)
+     with Size => 2;
+
+   subtype RTC_HSE_Prescaler_Range   is Integer range 1 ..  63;
+   --  The value 1 is no clock.
+
+   procedure Write_Clock_Source
+     (This       : RTC_Device;
+      Source     : RTC_Clock_Source;
+      HSE_Pre    : RTC_HSE_Prescaler_Range := RTC_HSE_Prescaler_Range'First)
+     with Post => Source = Read_Clock_Source (This);
+   --  Set RTC Clock Mux source.
+   --  These bits must be set correctly to ensure that the clock supplied to
+   --  the RTC is lower than 1 MHz. The value HSE_Pre is valid when the
+   --  selected source is HSE. The Enable_CSS is for the LSE clock, that must
+   --  be enabled and ready before turning it on.
+
+   function Read_Clock_Source (This : RTC_Device) return RTC_Clock_Source;
+   --  Return RTC Clock Mux source.
 
    -----------
    -- Timer --
@@ -802,118 +802,118 @@ package STM32.Device is
    -- LPTimer --
    -------------
 
-   --  LPTimer_1 : aliased LPTimer
-   --    with Import, Volatile, Address => LPTIM1_Base;
-   --  LPTimer_2 : aliased LPTimer
-   --    with Import, Volatile, Address => LPTIM2_Base;
-   --  LPTimer_3 : aliased LPTimer
-   --    with Import, Volatile, Address => LPTIM3_Base;
-   --  LPTimer_4 : aliased LPTimer
-   --    with Import, Volatile, Address => LPTIM4_Base;
-   --  LPTimer_5 : aliased LPTimer
-   --    with Import, Volatile, Address => LPTIM5_Base;
-   --
-   --  procedure Enable_Clock (This : LPTimer);
-   --
-   --  procedure Reset (This : LPTimer);
-   --
-   --  type LPTimer_Clock_Source is (Option_1, PLL2P, PLL3R, LSE, LSI, PER);
-   --  --  Set LPTIM Clock Mux.
-   --  --  LPTIM Port  LPTIM1  LPTIM2  LPTIM345
-   --  --  Option_1    PCLK1   PCLK4   PCLK4
-   --
-   --  procedure Write_Clock_Source (This   : LPTimer;
-   --                                Source : LPTimer_Clock_Source)
-   --    with Post => Source = Read_Clock_Source (This);
-   --  --  Set clock to any internal LPTIM Clock Mux source or external through
-   --  --  Input1.
-   --
-   --  function Read_Clock_Source (This : LPTimer) return LPTimer_Clock_Source;
-   --  --  Return LPTIM1 Clock Mux source.
-   --
-   --  function Get_Clock_Frequency (This : LPTimer) return UInt32;
-   --  --  Return the timer input frequency in Hz.
+   LPTimer_1 : aliased LPTimer
+     with Import, Volatile, Address => LPTIM1_Base;
+   LPTimer_2 : aliased LPTimer
+     with Import, Volatile, Address => LPTIM2_Base;
+   LPTimer_3 : aliased LPTimer
+     with Import, Volatile, Address => LPTIM3_Base;
+   LPTimer_4 : aliased LPTimer
+     with Import, Volatile, Address => LPTIM4_Base;
+   LPTimer_5 : aliased LPTimer
+     with Import, Volatile, Address => LPTIM5_Base;
+
+   procedure Enable_Clock (This : LPTimer);
+
+   procedure Reset (This : LPTimer);
+
+   type LPTimer_Clock_Source is (Option_1, PLL2P, PLL3R, LSE, LSI, PER);
+   --  Set LPTIM Clock Mux.
+   --  LPTIM Port  LPTIM1  LPTIM2  LPTIM345
+   --  Option_1    PCLK1   PCLK4   PCLK4
+
+   procedure Write_Clock_Source (This   : LPTimer;
+                                 Source : LPTimer_Clock_Source)
+     with Post => Source = Read_Clock_Source (This);
+   --  Set clock to any internal LPTIM Clock Mux source or external through
+   --  Input1.
+
+   function Read_Clock_Source (This : LPTimer) return LPTimer_Clock_Source;
+   --  Return LPTIM1 Clock Mux source.
+
+   function Get_Clock_Frequency (This : LPTimer) return UInt32;
+   --  Return the timer input frequency in Hz.
 
    -------------
    -- HRTimer --
    -------------
 
-   --  HRTimer_M : aliased HRTimer_Master
-   --    with Import, Volatile, Address => HRTIM_Master_Base;
-   --
-   --  HRTimer_A : aliased HRTimer_Channel
-   --    with Import, Volatile, Address => HRTIM_TIMA_Base;
-   --  HRTimer_B : aliased HRTimer_Channel
-   --    with Import, Volatile, Address => HRTIM_TIMB_Base;
-   --  HRTimer_C : aliased HRTimer_Channel
-   --    with Import, Volatile, Address => HRTIM_TIMC_Base;
-   --  HRTimer_D : aliased HRTimer_Channel
-   --    with Import, Volatile, Address => HRTIM_TIMD_Base;
-   --  HRTimer_E : aliased HRTimer_Channel
-   --    with Import, Volatile, Address => HRTIM_TIME_Base;
-   --
-   --  procedure Enable_Clock (This : HRTimer_Master);
-   --
-   --  procedure Enable_Clock (This : HRTimer_Channel);
-   --
-   --  procedure Reset (This : HRTimer_Master);
-   --
-   --  procedure Reset (This : HRTimer_Channel);
-   --
-   --  type HRTimer_Clock_Source is (TIMCLK, CPUCLK);
-   --
-   --  procedure Write_Clock_Source (This   : HRTimer_Master;
-   --                                Source : HRTimer_Clock_Source)
-   --    with Post => Source = Read_Clock_Source (This);
-   --  --  Set clock to HRTIM source to CPU clock (HCLK1) or to APB1 Timer clock.
-   --
-   --  function Read_Clock_Source
-   --    (This : HRTimer_Master) return HRTimer_Clock_Source;
-   --  --  Return HRTIM clock source.
-   --
-   --  function Get_Clock_Frequency (This : HRTimer_Master) return UInt32;
-   --  --  Returns the timer input frequency in Hz.
-   --
-   --  function Get_Clock_Frequency (This : HRTimer_Channel) return UInt32;
-   --  --  Returns the timer input frequency in Hz.
+   HRTimer_M : aliased HRTimer_Master
+     with Import, Volatile, Address => HRTIM_Master_Base;
+
+   HRTimer_A : aliased HRTimer_Channel
+     with Import, Volatile, Address => HRTIM_TIMA_Base;
+   HRTimer_B : aliased HRTimer_Channel
+     with Import, Volatile, Address => HRTIM_TIMB_Base;
+   HRTimer_C : aliased HRTimer_Channel
+     with Import, Volatile, Address => HRTIM_TIMC_Base;
+   HRTimer_D : aliased HRTimer_Channel
+     with Import, Volatile, Address => HRTIM_TIMD_Base;
+   HRTimer_E : aliased HRTimer_Channel
+     with Import, Volatile, Address => HRTIM_TIME_Base;
+
+   procedure Enable_Clock (This : HRTimer_Master);
+
+   procedure Enable_Clock (This : HRTimer_Channel);
+
+   procedure Reset (This : HRTimer_Master);
+
+   procedure Reset (This : HRTimer_Channel);
+
+   type HRTimer_Clock_Source is (TIMCLK, CPUCLK);
+
+   procedure Write_Clock_Source (This   : HRTimer_Master;
+                                 Source : HRTimer_Clock_Source)
+     with Post => Source = Read_Clock_Source (This);
+   --  Set clock to HRTIM source to CPU clock (HCLK1) or to APB1 Timer clock.
+
+   function Read_Clock_Source
+     (This : HRTimer_Master) return HRTimer_Clock_Source;
+   --  Return HRTIM clock source.
+
+   function Get_Clock_Frequency (This : HRTimer_Master) return UInt32;
+   --  Returns the timer input frequency in Hz.
+
+   function Get_Clock_Frequency (This : HRTimer_Channel) return UInt32;
+   --  Returns the timer input frequency in Hz.
 
    ----------------
    -- Comparator --
    ----------------
 
-   --  Comp_1 : aliased Comparator
-   --    with Import, Volatile,
-   --    Address => STM32_SVD.COMP.COMP_Periph.CFGR1'Address;
-   --  Comp_2 : aliased Comparator
-   --    with Import, Volatile,
-   --    Address => STM32_SVD.COMP.COMP_Periph.CFGR2'Address;
-   --
-   --  procedure Enable_Clock
-   --    (This : aliased Comparator)
-   --    with Inline;
-   --
-   --  procedure Reset
-   --    (This : aliased Comparator)
-   --    with Inline;
+   Comp_1 : aliased Comparator
+     with Import, Volatile,
+     Address => STM32_SVD.COMP.COMP_Periph.CFGR1'Address;
+   Comp_2 : aliased Comparator
+     with Import, Volatile,
+     Address => STM32_SVD.COMP.COMP_Periph.CFGR2'Address;
+
+   procedure Enable_Clock
+     (This : aliased Comparator)
+     with Inline;
+
+   procedure Reset
+     (This : aliased Comparator)
+     with Inline;
 
    -----------
    -- OpAmp --
    -----------
 
-   --  Opamp_1 : aliased Operational_Amplifier
-   --    with Import, Volatile,
-   --    Address => STM32_SVD.OPAMP.OPAMP_Periph.OPAMP1_CSR'Address;
-   --  Opamp_2 : aliased Operational_Amplifier
-   --    with Import, Volatile,
-   --    Address => STM32_SVD.OPAMP.OPAMP_Periph.OPAMP2_CSR'Address;
-   --
-   --  procedure Enable_Clock
-   --    (This : aliased Operational_Amplifier)
-   --    with Inline;
-   --
-   --  procedure Reset
-   --    (This : aliased Operational_Amplifier)
-   --    with Inline;
+   Opamp_1 : aliased Operational_Amplifier
+     with Import, Volatile,
+     Address => STM32_SVD.OPAMP.OPAMP_Periph.OPAMP1_CSR'Address;
+   Opamp_2 : aliased Operational_Amplifier
+     with Import, Volatile,
+     Address => STM32_SVD.OPAMP.OPAMP_Periph.OPAMP2_CSR'Address;
+
+   procedure Enable_Clock
+     (This : aliased Operational_Amplifier)
+     with Inline;
+
+   procedure Reset
+     (This : aliased Operational_Amplifier)
+     with Inline;
 
    -----------------------------
    -- Reset and Clock Control --
@@ -933,45 +933,6 @@ package STM32.Device is
       TIMCLK2   : UInt32; --  APB2 timer clock for TIMs 1, 8, 15 .. 17
       TIMCLK3   : UInt32; --  APB1 timer clock for HRTIM1
    end record;
-
-   --  RCC constants
-
-   type PLL_Source is
-     (PLL_SRC_HSI,
-      PLL_SRC_CSI,
-      PLL_SRC_HSE)
-     with Size => 2;
-
-   for PLL_Source use
-     (PLL_SRC_HSI   => 2#00#,
-      PLL_SRC_CSI   => 2#01#,
-      PLL_SRC_HSE   => 2#10#);
-
-   type SYSCLK_Source is
-     (SYSCLK_SRC_HSI,
-      SYSCLK_SRC_CSI,
-      SYSCLK_SRC_HSE,
-      SYSCLK_SRC_PLL)
-     with Size => 3;
-
-   for SYSCLK_Source use
-     (SYSCLK_SRC_HSI => 2#000#,
-      SYSCLK_SRC_CSI => 2#001#,
-      SYSCLK_SRC_HSE => 2#010#,
-      SYSCLK_SRC_PLL => 2#011#);
-
-   type HSI_Divisor is
-     (HSI_DIV1,
-      HSI_DIV2,
-      HSI_DIV4,
-      HSI_DIV8)
-     with Size => 2;
-
-   type PER_Source is
-     (PER_SRC_HSI,
-      PER_SRC_CSI,
-      PER_SRC_HSE)
-     with Size => 2;
 
    function System_Clock_Frequencies return RCC_System_Clocks;
    --  Returns each RCC system clock frequency in Hz.
