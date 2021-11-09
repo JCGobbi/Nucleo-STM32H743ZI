@@ -454,9 +454,9 @@ package STM32.Device is
    type ADC_Clock_Source is (PLL2P, PLL3R, PER);
    --  Select ADC Clock Mux.
 
-   procedure Write_Clock_Source (This   : Analog_To_Digital_Converter;
-                                 Source : ADC_Clock_Source)
-     with Post => Source = Read_Clock_Source (This);
+   procedure Select_Clock_Source (This   : Analog_To_Digital_Converter;
+                                  Source : ADC_Clock_Source)
+     with Post => Read_Clock_Source (This) = Source;
    --  Set ADC123 Clock Mux Source.
 
    function Read_Clock_Source (This : Analog_To_Digital_Converter)
@@ -499,9 +499,9 @@ package STM32.Device is
      with Size => 3;
    --  SAI Clock Mux.
 
-   procedure Write_Clock_Source (This   : SAI_Port;
-                                 Source : SAI_Clock_Source)
-     with Post => Source = Read_Clock_Source (This);
+   procedure Select_Clock_Source (This   : SAI_Port;
+                                  Source : SAI_Clock_Source)
+     with Post => Read_Clock_Source (This) = Source;
    --  Set SAI Clock Mux source.
 
    function Read_Clock_Source (This : SAI_Port) return SAI_Clock_Source;
@@ -589,9 +589,9 @@ package STM32.Device is
    --  USART Port  USART16    USART234578  LPUART1
    --  Option_1    PCLK2      PCLK1        PCLK3
 
-   procedure Write_Clock_Source (This   : aliased USART;
-                                 Source : USART_Clock_Source)
-     with Post => Source = Read_Clock_Source (This);
+   procedure Select_Clock_Source (This   : aliased USART;
+                                  Source : USART_Clock_Source)
+     with Post => Read_Clock_Source (This) = Source;
 
    function Read_Clock_Source (This : aliased USART)
      return USART_Clock_Source;
@@ -638,13 +638,13 @@ package STM32.Device is
    --  I2C Port   I2C123  I2C4
    --  Option_1   PCLK1   PCLK4
 
-   procedure Write_Clock_Source (This   : I2C_Port'Class;
-                                 Source : I2C_Clock_Source)
-     with Post => Source = Read_Clock_Source (This);
+   procedure Select_Clock_Source (This   : I2C_Port'Class;
+                                  Source : I2C_Clock_Source)
+     with Post => Read_Clock_Source (This) = Source;
 
-   procedure Write_Clock_Source (This   : I2C_Port_Id;
-                                 Source : I2C_Clock_Source)
-     with Post => Source = Read_Clock_Source (This);
+   procedure Select_Clock_Source (This   : I2C_Port_Id;
+                                  Source : I2C_Clock_Source)
+     with Post => Read_Clock_Source (This) = Source;
    --  Set I2C Clock Mux source.
 
    function Read_Clock_Source (This : I2C_Port'Class) return I2C_Clock_Source;
@@ -701,10 +701,10 @@ package STM32.Device is
    --  Option_4   I2S_CKIN  HSI      HSI      PER_CK
    --  Option_5   PER       CSI      CSI
 
-   procedure Write_Clock_Source
+   procedure Select_Clock_Source
      (This   : SPI_Port'Class;
       Source : SPI_Clock_Source)
-     with Post => Source = Read_Clock_Source (This);
+     with Post => Read_Clock_Source (This) = Source;
    --  Set SPI Clock Mux source.
 
    function Read_Clock_Source (This : SPI_Port'Class) return SPI_Clock_Source;
@@ -736,9 +736,9 @@ package STM32.Device is
    type I2S_Clock_Source is (PLL1Q, PLL2P, PLL3P, I2S_CKIN, PER)
      with Size => 3;
 
-   procedure Write_Clock_Source (This   : I2S_Port'Class;
-                                 Source : I2S_Clock_Source)
-     with Post => Source = Read_Clock_Source (This);
+   procedure Select_Clock_Source (This   : I2S_Port'Class;
+                                  Source : I2S_Clock_Source)
+     with Post => Read_Clock_Source (This) = Source;
    --  Set I2S Clock Mux source (the same source for I2S1 .. I2S3).
 
    function Read_Clock_Source (This : I2S_Port'Class) return I2S_Clock_Source;
@@ -761,11 +761,11 @@ package STM32.Device is
    subtype RTC_HSE_Prescaler_Range   is Integer range 1 ..  63;
    --  The value 1 is no clock.
 
-   procedure Write_Clock_Source
+   procedure Select_Clock_Source
      (This       : RTC_Device;
       Source     : RTC_Clock_Source;
       HSE_Pre    : RTC_HSE_Prescaler_Range := RTC_HSE_Prescaler_Range'First)
-     with Post => Source = Read_Clock_Source (This);
+     with Post => Read_Clock_Source (This) = Source;
    --  Set RTC Clock Mux source. These bits can be written only one time
    --  (except in case of failure detection on LSE). These bits must be
    --  written before LSECSSON is enabled. The BDRST bit can be used to
@@ -828,9 +828,9 @@ package STM32.Device is
    --  LPTIM Port  LPTIM1  LPTIM2  LPTIM345
    --  Option_1    PCLK1   PCLK4   PCLK4
 
-   procedure Write_Clock_Source (This   : LPTimer;
-                                 Source : LPTimer_Clock_Source)
-     with Post => Source = Read_Clock_Source (This);
+   procedure Select_Clock_Source (This   : LPTimer;
+                                  Source : LPTimer_Clock_Source)
+     with Post => Read_Clock_Source (This) = Source;
    --  Set clock to any internal LPTIM Clock Mux source or external through
    --  Input1.
 
@@ -868,9 +868,9 @@ package STM32.Device is
 
    type HRTimer_Clock_Source is (TIMCLK, CPUCLK);
 
-   procedure Write_Clock_Source (This   : HRTimer_Master;
-                                 Source : HRTimer_Clock_Source)
-     with Post => Source = Read_Clock_Source (This);
+   procedure Select_Clock_Source (This   : HRTimer_Master;
+                                  Source : HRTimer_Clock_Source)
+     with Post => Read_Clock_Source (This) = Source;
    --  Set clock to HRTIM source to CPU clock (HCLK1) or to APB1 Timer clock.
 
    function Read_Clock_Source

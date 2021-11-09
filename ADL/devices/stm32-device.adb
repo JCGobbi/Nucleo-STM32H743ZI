@@ -240,23 +240,23 @@ package body STM32.Device is
          RCC_Periph.AHB4RSTR.ADC3RST := False;
    end Reset_All_ADC_Units;
 
-   ------------------------
-   -- Write_Clock_Source --
-   ------------------------
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
 
-   procedure Write_Clock_Source (This   : Analog_To_Digital_Converter;
-                                 Source : ADC_Clock_Source)
+   procedure Select_Clock_Source (This   : Analog_To_Digital_Converter;
+                                  Source : ADC_Clock_Source)
    is
    begin
       if This'Address = ADC1_Base or
-        This'Address = ADC2_Base or
-        This'Address = ADC3_Base
+         This'Address = ADC2_Base or
+         This'Address = ADC3_Base
       then
          RCC_Periph.D3CCIPR.ADCSEL := Source'Enum_Rep;
       else
          raise Unknown_Device;
       end if;
-   end Write_Clock_Source;
+   end Select_Clock_Source;
 
    -----------------------
    -- Read_Clock_Source --
@@ -350,12 +350,12 @@ package body STM32.Device is
       end if;
    end Reset;
 
-   ------------------------
-   -- Write_Clock_Source --
-   ------------------------
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
 
-   procedure Write_Clock_Source (This   : SAI_Port;
-                                 Source : SAI_Clock_Source)
+   procedure Select_Clock_Source (This   : SAI_Port;
+                                  Source : SAI_Clock_Source)
    is
    begin
       if This'Address = SAI1_Base then
@@ -370,7 +370,7 @@ package body STM32.Device is
       else
          raise Unknown_Device;
       end if;
-   end Write_Clock_Source;
+   end Select_Clock_Source;
 
    ------------------------
    -- Read_Clock_Source --
@@ -590,12 +590,12 @@ package body STM32.Device is
       end if;
    end Reset;
 
-   ------------------------
-   -- Write_Clock_Source --
-   ------------------------
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
 
-   procedure Write_Clock_Source (This   : aliased USART;
-                                 Source : USART_Clock_Source)
+   procedure Select_Clock_Source (This   : aliased USART;
+                                  Source : USART_Clock_Source)
    is
    begin
       if This'Address = USART1_Base or
@@ -615,7 +615,7 @@ package body STM32.Device is
       else
          raise Unknown_Device;
       end if;
-   end Write_Clock_Source;
+   end Select_Clock_Source;
 
    -----------------------
    -- Read_Clock_Source --
@@ -781,23 +781,23 @@ package body STM32.Device is
       end case;
    end Reset;
 
-   ------------------------
-   -- Write_Clock_Source --
-   ------------------------
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
 
-   procedure Write_Clock_Source (This   : I2C_Port'Class;
-                                 Source : I2C_Clock_Source)
+   procedure Select_Clock_Source (This   : I2C_Port'Class;
+                                  Source : I2C_Clock_Source)
    is
    begin
-      Write_Clock_Source (As_Port_Id (This), Source);
-   end Write_Clock_Source;
+      Select_Clock_Source (As_Port_Id (This), Source);
+   end Select_Clock_Source;
 
-   ------------------------
-   -- Write_Clock_Source --
-   ------------------------
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
 
-   procedure Write_Clock_Source (This   : I2C_Port_Id;
-                                 Source : I2C_Clock_Source)
+   procedure Select_Clock_Source (This   : I2C_Port_Id;
+                                  Source : I2C_Clock_Source)
    is
    begin
       case This is
@@ -806,7 +806,7 @@ package body STM32.Device is
          when I2C_Id_4 =>
             RCC_Periph.D3CCIPR.I2C4SEL := Source'Enum_Rep;
       end case;
-   end Write_Clock_Source;
+   end Select_Clock_Source;
 
    -----------------------
    -- Read_Clock_Source --
@@ -885,12 +885,12 @@ package body STM32.Device is
       end if;
    end Reset;
 
-   ------------------------
-   -- Write_Clock_Source --
-   ------------------------
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
 
-   procedure Write_Clock_Source (This   : SPI_Port'Class;
-                                 Source : SPI_Clock_Source)
+   procedure Select_Clock_Source (This   : SPI_Port'Class;
+                                  Source : SPI_Clock_Source)
    is
    begin
       if This.Periph.all'Address = SPI1_Base or
@@ -908,7 +908,7 @@ package body STM32.Device is
       else
          raise Unknown_Device;
       end if;
-   end Write_Clock_Source;
+   end Select_Clock_Source;
 
    ------------------------
    -- Read_Clock_Source --
@@ -971,12 +971,12 @@ package body STM32.Device is
       end if;
    end Reset;
 
-   ------------------------
-   -- Write_Clock_Source --
-   ------------------------
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
 
-   procedure Write_Clock_Source (This   : I2S_Port'Class;
-                                 Source : I2S_Clock_Source)
+   procedure Select_Clock_Source (This   : I2S_Port'Class;
+                                  Source : I2S_Clock_Source)
    is
    begin
       if This.Periph.all'Address = SPI1_Base or
@@ -987,11 +987,11 @@ package body STM32.Device is
       else
          raise Unknown_Device;
       end if;
-   end Write_Clock_Source;
+   end Select_Clock_Source;
 
-   ------------------------
+   -----------------------
    -- Read_Clock_Source --
-   ------------------------
+   -----------------------
 
    function Read_Clock_Source (This : I2S_Port'Class) return I2S_Clock_Source
    is
@@ -1046,11 +1046,11 @@ package body STM32.Device is
       RCC_Periph.BDCR.RTCEN := True;
    end Enable_Clock;
 
-   ------------------------
-   -- Write_Clock_Source --
-   ------------------------
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
 
-   procedure Write_Clock_Source
+   procedure Select_Clock_Source
      (This       : RTC_Device;
       Source     : RTC_Clock_Source;
       HSE_Pre    : RTC_HSE_Prescaler_Range := RTC_HSE_Prescaler_Range'First)
@@ -1061,7 +1061,7 @@ package body STM32.Device is
       if Source = HSE then
          RCC_Periph.CFGR.RTCPRE := UInt6 (HSE_Pre);
       end if;
-   end Write_Clock_Source;
+   end Select_Clock_Source;
 
    ------------------------
    -- Read_Clock_Source --
@@ -1245,12 +1245,12 @@ package body STM32.Device is
       end if;
    end Reset;
 
-   ------------------------
-   -- Write_Clock_Source --
-   ------------------------
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
 
-   procedure Write_Clock_Source (This   : LPTimer;
-                                 Source : LPTimer_Clock_Source)
+   procedure Select_Clock_Source (This   : LPTimer;
+                                  Source : LPTimer_Clock_Source)
    is
    begin
       if This'Address = LPTIM1_Base then
@@ -1265,7 +1265,7 @@ package body STM32.Device is
       else
          raise Unknown_Device;
       end if;
-   end Write_Clock_Source;
+   end Select_Clock_Source;
 
    -----------------------
    -- Read_Clock_Source --
@@ -1370,17 +1370,17 @@ package body STM32.Device is
       end if;
    end Reset;
 
-   ---------------------------
-   -- Write_Clock_Frequency --
-   ---------------------------
+   ----------------------------
+   -- Select_Clock_Frequency --
+   ----------------------------
 
-   procedure Write_Clock_Source (This   : HRTimer_Master;
-                                 Source : HRTimer_Clock_Source)
+   procedure Select_Clock_Source (This   : HRTimer_Master;
+                                  Source : HRTimer_Clock_Source)
    is
       pragma Unreferenced (This);
    begin
       RCC_Periph.CFGR.HRTIMSEL := Source = CPUCLK;
-   end Write_Clock_Source;
+   end Select_Clock_Source;
 
    -------------------------
    -- Get_Clock_Frequency --
@@ -1492,8 +1492,8 @@ package body STM32.Device is
 
    function System_Clock_Frequencies return RCC_System_Clocks
    is
-      Source : constant SYSCLK_Source :=
-        SYSCLK_Source'Val (RCC_Periph.CFGR.SWS);
+      Source : constant SYSCLK_Clock_Source :=
+        SYSCLK_Clock_Source'Val (RCC_Periph.CFGR.SWS);
       --  Get System_Clock_Mux selection
 
       Result : RCC_System_Clocks;
@@ -1522,8 +1522,8 @@ package body STM32.Device is
                Pllp : constant UInt32 :=
                  UInt32 (RCC_Periph.PLL1DIVR.DIVR1 + 1);
                --  Get the correct value of Pll R divisor
-               PLLSRC : constant PLL_Source :=
-                 PLL_Source'Val (RCC_Periph.PLLCKSELR.PLLSRC);
+               PLLSRC : constant PLL_Clock_Source :=
+                 PLL_Clock_Source'Val (RCC_Periph.PLLCKSELR.PLLSRC);
                --  Get PLL Source Mux
                PLLCLK : UInt32;
             begin
@@ -1603,8 +1603,8 @@ package body STM32.Device is
       end;
 
       declare
-         Source : constant PER_Source :=
-           PER_Source'Val (RCC_Periph.D1CCIPR.CKPERSEL);
+         Source : constant PER_Clock_Source :=
+           PER_Clock_Source'Val (RCC_Periph.D1CCIPR.CKPERSEL);
          --  Get PER_Clock_Mux selection
       begin
          case Source is

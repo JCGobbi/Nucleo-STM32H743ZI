@@ -35,7 +35,7 @@ package body Inverter_ADC is
       end loop;
 
       --  Select clock source for ADCs (PLL2 is already on).
-      Write_Clock_Source (Sensor_ADC.all, Source => PLL2P);
+      Select_Clock_Source (Sensor_ADC.all, Source => PLL2P);
 
       --  Initialize ADC mode
       Enable_Clock (Sensor_ADC.all);
