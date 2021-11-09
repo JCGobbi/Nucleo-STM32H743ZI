@@ -297,7 +297,7 @@ package body STM32.RCC is
    -- Configure_System_Clock_Mux --
    --------------------------------
 
-   procedure Configure_System_Clock_Mux (Source : SYSCLK_Source)
+   procedure Configure_System_Clock_Mux (Source : SYSCLK_Clock_Source)
    is
    begin
       RCC_Periph.CFGR.SW := Source'Enum_Rep;
@@ -352,7 +352,7 @@ package body STM32.RCC is
    -- Configure_PLL_Source_Mux --
    ------------------------------
 
-   procedure Configure_PLL_Source_Mux (Source : PLL_Source) is
+   procedure Configure_PLL_Source_Mux (Source : PLL_Clock_Source) is
    begin
          RCC_Periph.PLLCKSELR.PLLSRC := Source'Enum_Rep;
    end Configure_PLL_Source_Mux;
@@ -516,21 +516,21 @@ package body STM32.RCC is
    -- Configure_PER_Source_Mux --
    ------------------------------
 
-   procedure Configure_PER_Source_Mux (Source : PER_Source)
+   procedure Configure_PER_Source_Mux (Source : PER_Clock_Source)
    is
    begin
       RCC_Periph.D1CCIPR.CKPERSEL := Source'Enum_Rep;
    end Configure_PER_Source_Mux;
 
-   --------------------------
-   -- Configure_TIM_Source --
-   --------------------------
+   -------------------------------
+   -- Configure_TIM_Source_Mode --
+   -------------------------------
 
-   procedure Configure_TIM_Source (Source : TIM_Source)
+   procedure Configure_TIM_Source_Mode (Source : TIM_Source_Mode)
    is
    begin
       RCC_Periph.CFGR.TIMPRE := Source = Factor_4;
-   end Configure_TIM_Source;
+   end Configure_TIM_Source_Mode;
 
    --------------------------------
    -- Configure_MCO_Output_Clock --
@@ -538,7 +538,7 @@ package body STM32.RCC is
 
    procedure Configure_MCO_Output_Clock
      (MCO    : MCO_Range;
-      Source : MCO_Source;
+      Source : MCO_Clock_Source;
       Value  : MCO_Prescaler)
    is
    begin
