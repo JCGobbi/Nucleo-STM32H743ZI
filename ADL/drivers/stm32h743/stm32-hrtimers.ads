@@ -78,16 +78,16 @@ package STM32.HRTimers is
    type HRTimer_Prescaler is
      (Div_1,
       Div_2,
-      Div_4,
-      Div_8,
-      Div_16,
-      Div_32,
-      Div_64,
-      Div_128)
+      Div_4)
      with Size => 3;
 
+   for HRTimer_Prescaler use
+     (Div_1 => 2#101#,
+      Div_2 => 2#110#,
+      Div_4 => 2#111#);
+
    type HRTimer_Prescaler_Array is array (HRTimer_Prescaler) of UInt16;
-   HRTimer_Prescaler_Value : HRTimer_Prescaler_Array := (1, 2, 4, 8, 16, 32, 64, 128);
+   HRTimer_Prescaler_Value : HRTimer_Prescaler_Array := (1, 2, 4);
 
    procedure Configure_Prescaler
      (This        : in out HRTimer_Master;
