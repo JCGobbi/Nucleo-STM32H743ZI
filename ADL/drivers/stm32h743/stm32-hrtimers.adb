@@ -967,10 +967,9 @@ package body STM32.HRTimers is
 
       --  fHRCK is the high-resolution equivalent clock into HRTIM and all
       --  subsequent clocks are derived and synchronous with this source.
-      --  Considering the fHRTIM clock period division by 32, it is equivalent
-      --  to a frequency of fHRCK = 144 x 32 = 4.608 GHz. The HRtimer
-      --  resolutions is tHRCK = 1 / fHRCK = 217 ps.
-      fHRCK := Hardware_Frequency * 32;
+      --  Considering fHRCK = fHRTIM = 400 MHz, the HRtimer resolutions is
+      --  tHRCK = 1 / fHRTIM = 2.5 ns.
+      fHRCK := Hardware_Frequency;
 
       --  We use a numeric prescaler value to calculate the Hardware_Frequency
       --  division considering that the clock prescaler is a power of 2 of this
