@@ -15,7 +15,7 @@ project STM32H743 is
 
    --  Executable files to choose (remember to change the Runtime):
    --  test_led_pwm.adb, test_led_rt.adb, demo_inverter.adb, main.adb.
-   for Main use ("test_led_rt.adb");
+   for Main use ("test_led_pwm.adb");
 
    case RTS is
       when "ravenscar-sfp" =>
@@ -35,6 +35,12 @@ project STM32H743 is
       for Executable("main.adb") use "main";
       for Executable_Suffix use ".elf";
    end Builder;
+
+   package Linker is
+      for Default_Switches ("Ada") use
+         ("-Wl,--gc-sections",  --  Don't link unused code sections
+          "-Wl,--print-gc-sections");  --  List removed unused code sections
+   end Linker;
 
    package Ide is
       for Debugger_Command use "arm-eabi-gdb";
