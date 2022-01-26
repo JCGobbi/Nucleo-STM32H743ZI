@@ -38,8 +38,6 @@
 --                                                                          --
 --   COPYRIGHT(c) 2014 STMicroelectronics                                   --
 ------------------------------------------------------------------------------
-with STM32_SVD.RNG; use STM32_SVD.RNG;
-
 with STM32.Device;
 
 package body STM32.RNG.Polling is
