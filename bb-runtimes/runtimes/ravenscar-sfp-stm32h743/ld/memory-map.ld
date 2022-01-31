@@ -55,25 +55,23 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 
 MEMORY
 {
-FLASH (rx)        : ORIGIN = 0x08000000, LENGTH = 2048K /* Flash memory */
-RAMITCM (xrw)     : ORIGIN = 0x00000000, LENGTH = 64K /* ITCM */
-RAMDTCM (xrw)     : ORIGIN = 0x20000000, LENGTH = 128K /* DTCM */
-RAMAXI (xrw)      : ORIGIN = 0x24000000, LENGTH = 512K /*  AXI SRAM */
-RAM1 (xrw)        : ORIGIN = 0x30000000, LENGTH = 128K /* SRAM1 */
-RAM2 (xrw)        : ORIGIN = 0x30020000, LENGTH = 128K /* SRAM2 */
-RAM3 (xrw)        : ORIGIN = 0x30040000, LENGTH = 32K /* SRAM3 */
-RAM4 (xrw)        : ORIGIN = 0x38000000, LENGTH = 64K /* SRAM4 */
-RAMBKP (xrw)      : ORIGIN = 0x38800000, LENGTH = 4K /* Backup SRAM */
+FLASH (rx)     : ORIGIN = 0x08000000, LENGTH = 2048K /* Flash memory */
+ITCM (xrw)     : ORIGIN = 0x00000000, LENGTH = 64K /* ITCM */
+DTCM (xrw)     : ORIGIN = 0x20000000, LENGTH = 128K /* DTCM */
+SRAM_AXI (xrw) : ORIGIN = 0x24000000, LENGTH = 512K /*  AXI SRAM */
+SRAM123 (xrw)  : ORIGIN = 0x30000000, LENGTH = 288K /* SRAM 1,2 and 3 */
+SRAM4 (xrw)    : ORIGIN = 0x38000000, LENGTH = 64K /* SRAM4 */
+RAM_BKP (xrw)  : ORIGIN = 0x38800000, LENGTH = 4K /* Backup SRAM */
 }
 
 /* Do not place anything into the dtcm as it is used as Data cache by the CPU*/
 REGION_ALIAS("flash",   FLASH)
-REGION_ALIAS("itcm",    RAMITCM)
-REGION_ALIAS("dtcm",    RAMDTCM)
-REGION_ALIAS("sram_bs", RAMAXI)
-REGION_ALIAS("sram_da", RAMAXI)
-REGION_ALIAS("sram_tx", RAMAXI)
-REGION_ALIAS("sram_ro", RAMAXI)
-REGION_ALIAS("ccm_da",  RAMDTCM)
-REGION_ALIAS("sram_bkp", RAMBKP)
+REGION_ALIAS("itcm",    ITCM)
+REGION_ALIAS("dtcm",    DTCM)
+REGION_ALIAS("sram_bs", SRAM_AXI)
+REGION_ALIAS("sram_da", SRAM_AXI)
+REGION_ALIAS("sram_tx", SRAM_AXI)
+REGION_ALIAS("sram_ro", SRAM_AXI)
+REGION_ALIAS("ccm_da",  DTCM)
+REGION_ALIAS("sram_bkp", RAM_BKP)
 
