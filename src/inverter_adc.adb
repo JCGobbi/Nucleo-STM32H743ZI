@@ -4,8 +4,7 @@ with STM32.Timers;         use STM32.Timers;
 package body Inverter_ADC is
 
    function To_Voltage (Value : in UInt16) return Voltage
-   with
-      Inline;
+     with Inline;
 
    procedure Initialize_ADC_Timer;
    --  Initialize the timer to start ADCs convertions.
@@ -235,8 +234,7 @@ package body Inverter_ADC is
 
                --  Save the ADC values into a buffer
                Regular_Samples (Rank) := UInt16 (Conversion_Value (Sensor_ADC.all));
-               if Rank = ADC_Reading'Last
-               then
+               if Rank = ADC_Reading'Last then
                   Rank := ADC_Reading'First;
                else
                   Rank := ADC_Reading'Succ (Rank);
@@ -248,11 +246,11 @@ package body Inverter_ADC is
                --  Testing the 5 kHz output with 1 Hz LED blinking. Because
                --  there are three regular channel conversions, this frequency
                --  will be three times greater.
-               if Counter = 2_500 then
-                  Set_Toggle (Green_LED);
-                  Counter := 0;
-               end if;
-               Counter := Counter + 1;
+               --  if Counter = 2_500 then
+               --     Set_Toggle (Green_LED);
+               --     Counter := 0;
+               --  end if;
+               --  Counter := Counter + 1;
 
             end if;
          end if;

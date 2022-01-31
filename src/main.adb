@@ -1,4 +1,6 @@
 with Ada.Real_Time; use Ada.Real_Time;
+
+with STM_Board;     use STM_Board;
 with Startup;
 
 with Last_Chance_Handler; pragma Unreferenced (Last_Chance_Handler);
@@ -15,7 +17,7 @@ begin
 
    --  Enter steady state
    loop
-      --  Set_Toggle (Green_LED);
+      Set_Toggle (Green_LED);
       delay until Clock + Milliseconds (3000);  -- arbitrary
    end loop;
 
