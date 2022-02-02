@@ -43,15 +43,15 @@ package Inverter_PWM is
 
    PWM_Frequency_Hz : Frequency_Hz := 30_000.0; -- for 60 Hz
 
-   --  STM32H743 operates at 400 MHz with 240 MHz into Prescaler.
-   --  With 240 MHz and (20 - 1) for prescaler we have 12 MHz for counter
-   --  period, that have values of 480, 400 and 60 for 25, 30 and 200 KHz.
-   --  For 50 Hz we have 240 MHz / 25 kHz = 9600 ticks by each 25 kHz period,
-   --  so the minimum duty cycle is 100 / 9600 = 0.0104 %.
-   --  For 60 Hz we have 240 MHz / 30 kHz = 8000 ticks by each 30 kHz period,
+   --  STM32H743 operates at 400 MHz with 200 MHz into Prescaler.
+   --  With 200 MHz and (20 - 1) for prescaler we have 10 MHz for counter
+   --  period, that have values of 400, 333 and 50 for 25, 30 and 200 KHz.
+   --  For 50 Hz we have 200 MHz / 25 kHz = 8000 ticks by each 25 kHz period,
    --  so the minimum duty cycle is 100 / 8000 = 0.0125 %.
-   --  For 400 Hz we have 240 MHz / 200 kHz = 1200 ticks by each 200 kHz period,
-   --  so the minimum duty cycle is 100 / 1200 = 0.0833 %.
+   --  For 60 Hz we have 200 MHz / 30 kHz = 6667 ticks by each 30 kHz period,
+   --  so the minimum duty cycle is 100 / 6667 = 0.0150 %.
+   --  For 400 Hz we have 200 MHz / 200 kHz = 1000 ticks by each 200 kHz period,
+   --  so the minimum duty cycle is 100 / 1000 = 0.1000 %.
 
    subtype Deadtime_Range is Float range 0.0 .. 400.0e-9;
    --  Maximum deadtime permissible is 126 us.
