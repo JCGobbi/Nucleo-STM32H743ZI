@@ -1,5 +1,6 @@
-with STM32_SVD.COMP; use STM32_SVD.COMP;
+with System; use System;
 with STM32.Device;
+with Ada.Real_Time;
 
 package body STM32.COMP is
 
@@ -7,9 +8,13 @@ package body STM32.COMP is
    -- Enable --
    ------------
 
-   procedure Enable (This : in out Comparator) is
+   procedure Enable (This : in out Comparator)
+   is
+      use Ada.Real_Time;
    begin
       This.CFGR.EN := True;
+      --  Delay for COMP startup time.
+      delay until Clock + Microseconds (80);
    end Enable;
 
    -------------
@@ -30,51 +35,51 @@ package body STM32.COMP is
       return This.CFGR.EN;
    end Enabled;
 
-   ------------------------------
-   -- Set_Inverting_Input_Port --
-   ------------------------------
+   ----------------------
+   -- Set_I_Input_Port --
+   ----------------------
 
-   procedure Set_Inverting_Input_Port
+   procedure Set_I_Input_Port
      (This  : in out Comparator;
-      Input : Inverting_Input_Port) is
+      Input : I_Input_Port) is
    begin
       This.CFGR.INMSEL := Input'Enum_Rep;
-   end Set_Inverting_Input_Port;
+   end Set_I_Input_Port;
 
-   -------------------------------
-   -- Read_Inverting_Input_Port --
-   -------------------------------
+   ----------------------
+   -- Get_I_Input_Port --
+   ----------------------
 
-   function Read_Inverting_Input_Port
-     (This : Comparator) return Inverting_Input_Port is
+   function Get_I_Input_Port
+     (This : Comparator) return I_Input_Port is
    begin
-      return Inverting_Input_Port'Val (This.CFGR.INMSEL);
-   end Read_Inverting_Input_Port;
+      return I_Input_Port'Val (This.CFGR.INMSEL);
+   end Get_I_Input_Port;
 
-   ---------------------------------
-   -- Set_NonInverting_Input_Port --
-   ---------------------------------
+   -----------------------
+   -- Set_NI_Input_Port --
+   -----------------------
 
-   procedure Set_NonInverting_Input_Port
+   procedure Set_NI_Input_Port
      (This  : in out Comparator;
-      Input : NonInverting_Input_Port) is
+      Input : NI_Input_Port) is
    begin
       This.CFGR.INPSEL := Boolean'Val (Input'Enum_Rep);
-   end Set_NonInverting_Input_Port;
+   end Set_NI_Input_Port;
 
-   ----------------------------------
-   -- Read_NonInverting_Input_Port --
-   ----------------------------------
+   -----------------------
+   -- Get_NI_Input_Port --
+   -----------------------
 
-   function Read_NonInverting_Input_Port
-     (This : Comparator) return NonInverting_Input_Port is
+   function Get_NI_Input_Port
+     (This : Comparator) return NI_Input_Port is
    begin
       if This.CFGR.INPSEL then
          return Option_1;
       else
          return Option_2;
       end if;
-   end Read_NonInverting_Input_Port;
+   end Get_NI_Input_Port;
 
    -------------------------
    -- Set_Output_Polarity --
@@ -86,119 +91,130 @@ package body STM32.COMP is
       This.CFGR.POLARITY := Output = Inverted;
    end Set_Output_Polarity;
 
-   --------------------------
-   -- Read_Output_Polarity --
-   --------------------------
+   -------------------------
+   -- Get_Output_Polarity --
+   -------------------------
 
-   function Read_Output_Polarity (This : Comparator) return Output_Polarity is
+   function Get_Output_Polarity (This : Comparator) return Output_Polarity is
    begin
       if This.CFGR.POLARITY then
          return Inverted;
       else
          return Not_Inverted;
       end if;
-   end Read_Output_Polarity;
+   end Get_Output_Polarity;
 
    -------------------------------
    -- Set_Comparator_Hysteresis --
    -------------------------------
 
-   procedure Set_Comparator_Hysteresis (This  : in out Comparator;
-                                        Value : Comparator_Hysteresis) is
+   procedure Set_Comparator_Hysteresis
+     (This  : in out Comparator;
+      Value : Comparator_Hysteresis)
+   is
    begin
       This.CFGR.HYST := Value'Enum_Rep;
    end Set_Comparator_Hysteresis;
 
-   --------------------------------
-   -- Read_Comparator_Hysteresis --
-   --------------------------------
+   -------------------------------
+   -- Get_Comparator_Hysteresis --
+   -------------------------------
 
-   function Read_Comparator_Hysteresis (This : Comparator)
-                                        return Comparator_Hysteresis is
+   function Get_Comparator_Hysteresis
+     (This : Comparator)
+      return Comparator_Hysteresis
+   is
    begin
       return Comparator_Hysteresis'Val (This.CFGR.HYST);
-   end Read_Comparator_Hysteresis;
+   end Get_Comparator_Hysteresis;
 
    -------------------------
    -- Set_Output_Blanking --
    -------------------------
 
-   procedure Set_Output_Blanking (This   : in out Comparator;
-                                  Output : Output_Blanking) is
+   procedure Set_Output_Blanking
+     (This   : in out Comparator;
+      Output : Output_Blanking)
+   is
    begin
       This.CFGR.BLANKING := Output'Enum_Rep;
    end Set_Output_Blanking;
 
-   --------------------------
-   -- Read_Output_Blanking --
-   --------------------------
+   -------------------------
+   -- Get_Output_Blanking --
+   -------------------------
 
-   function Read_Output_Blanking (This : Comparator) return Output_Blanking is
+   function Get_Output_Blanking (This : Comparator) return Output_Blanking is
    begin
       return Output_Blanking'Val (This.CFGR.BLANKING);
-   end Read_Output_Blanking;
+   end Get_Output_Blanking;
 
    ---------------------------------
    -- Set_Vrefint_Scaler_Resistor --
    ---------------------------------
 
    procedure Set_Vrefint_Scaler_Resistor
-     (This   : in out Comparator;
-      Output : Boolean)
+     (This    : in out Comparator;
+      Enabled : Boolean)
    is
    begin
-      This.CFGR.BRGEN := Output;
+      This.CFGR.BRGEN := Enabled;
    end Set_Vrefint_Scaler_Resistor;
 
-   ----------------------------------
-   -- Read_Vrefint_Scaler_Resistor --
-   ----------------------------------
+   ---------------------------------
+   -- Get_Vrefint_Scaler_Resistor --
+   ---------------------------------
 
-   function Read_Vrefint_Scaler_Resistor (This  : Comparator) return Boolean is
+   function Get_Vrefint_Scaler_Resistor (This  : Comparator) return Boolean is
    begin
       return This.CFGR.BRGEN;
-   end Read_Vrefint_Scaler_Resistor;
+   end Get_Vrefint_Scaler_Resistor;
 
    ------------------------
    -- Set_Vrefint_Scaler --
    ------------------------
 
    procedure Set_Vrefint_Scaler
-     (This   : in out Comparator;
-      Output : Boolean)
+     (This    : in out Comparator;
+      Enabled : Boolean)
    is
+      use Ada.Real_Time;
    begin
-      This.CFGR.SCALEN := Output;
+      This.CFGR.SCALEN := Enabled;
+      --  Delay for COMP voltage scaler stabilization time.
+      delay until Clock + Microseconds (250);
    end Set_Vrefint_Scaler;
 
-   -------------------------
-   -- Read_Vrefint_Scaler --
-   -------------------------
+   ------------------------
+   -- Get_Vrefint_Scaler --
+   ------------------------
 
-   function Read_Vrefint_Scaler (This  : Comparator) return Boolean is
+   function Get_Vrefint_Scaler (This  : Comparator) return Boolean is
    begin
       return This.CFGR.SCALEN;
-   end Read_Vrefint_Scaler;
+   end Get_Vrefint_Scaler;
 
-   ----------------------------
-   -- Read_Comparator_Output --
-   ----------------------------
+   ---------------------------
+   -- Get_Comparator_Output --
+   ---------------------------
 
-   function Read_Comparator_Output
-     (This : Comparator) return Comparator_Output is
+   function Get_Comparator_Output
+     (This : Comparator) return Comparator_Output
+   is
       use STM32.Device;
+      use STM32_SVD.COMP;
    begin
-      if This = Comp_1 then
+      if This'Address = Comp_1'Address then
          if COMP_Periph.SR.C1VAL then
             return High;
          end if;
-      elsif This = Comp_2 then
+      elsif This'Address = Comp_2'Address then
          if COMP_Periph.SR.C2VAL then
             return High;
          end if;
       end if;
       return Low;
-   end Read_Comparator_Output;
+   end Get_Comparator_Output;
 
    ------------------------
    -- Set_AF_Port_Source --
@@ -209,11 +225,12 @@ package body STM32.COMP is
       Port : AF_Port_Source)
    is
       use STM32.Device;
+      use STM32_SVD.COMP;
    begin
-      if This = Comp_1 then
+      if This'Address = Comp_1'Address then
          COMP_Periph.OR_k.AFOP := COMP_Periph.OR_k.AFOP and
             not (2 ** Natural (Port'Enum_Rep));
-      elsif This = Comp_2 then
+      elsif This'Address = Comp_2'Address then
          COMP_Periph.OR_k.AFOP := COMP_Periph.OR_k.AFOP or
            (2 ** Natural (Port'Enum_Rep));
       end if;
@@ -231,6 +248,25 @@ package body STM32.COMP is
       This.CFGR.PWRMODE := Mode'Enum_Rep;
    end Set_Power_Mode;
 
+   --------------------------
+   -- Configure_Comparator --
+   --------------------------
+
+   procedure Configure_Comparator
+     (This  : in out Comparator;
+      Param : Init_Parameters)
+   is
+   begin
+      This.CFGR :=
+        (INMSEL   => Param.Input_Minus'Enum_Rep,
+         INPSEL   => Boolean'Val (Param.Input_Plus'Enum_Rep),
+         POLARITY => Param.Output_Pol = Inverted,
+         HYST     => Param.Hysteresis'Enum_Rep,
+         BLANKING => Param.Blanking_Source'Enum_Rep,
+         PWRMODE  => Param.Power_Mode'Enum_Rep,
+         others   => <>);
+   end Configure_Comparator;
+
    ------------
    -- Status --
    ------------
@@ -240,15 +276,16 @@ package body STM32.COMP is
       Flag : COMP_Status_Flag) return Boolean
    is
       use STM32.Device;
+      use STM32_SVD.COMP;
    begin
-      if This = Comp_1 then
+      if This'Address = Comp_1'Address then
          case Flag is
             when Comparator_Output_Value =>
                return COMP_Periph.SR.C1VAL;
             when Interrupt_Indicated =>
                return COMP_Periph.SR.C1IF;
          end case;
-      elsif This = Comp_2 then
+      elsif This'Address = Comp_2'Address then
          case Flag is
             when Comparator_Output_Value =>
                return COMP_Periph.SR.C2VAL;
@@ -292,10 +329,11 @@ package body STM32.COMP is
 
    procedure Clear_Interrupt_Pending (This : in out Comparator) is
       use STM32.Device;
+      use STM32_SVD.COMP;
    begin
-      if This = Comp_1 then
+      if This'Address = Comp_1'Address then
          COMP_Periph.ICFR.CC1IF := True;
-      elsif This = Comp_2 then
+      elsif This'Address = Comp_2'Address then
          COMP_Periph.ICFR.CC2IF := True;
       end if;
    end Clear_Interrupt_Pending;
@@ -309,13 +347,13 @@ package body STM32.COMP is
       This.CFGR.LOCK := True;
    end Set_Lock_Comparator;
 
-   --------------------------
-   -- Read_Lock_Comparator --
-   --------------------------
+   -------------------------
+   -- Get_Lock_Comparator --
+   -------------------------
 
-   function Read_Lock_Comparator (This : Comparator) return Boolean is
+   function Get_Lock_Comparator (This : Comparator) return Boolean is
    begin
       return This.CFGR.LOCK;
-   end Read_Lock_Comparator;
+   end Get_Lock_Comparator;
 
 end STM32.COMP;
