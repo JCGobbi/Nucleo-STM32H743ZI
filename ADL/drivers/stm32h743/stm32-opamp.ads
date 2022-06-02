@@ -21,11 +21,11 @@ package STM32.OPAMP is
    procedure Set_NI_Input_Mode
      (This  : in out Operational_Amplifier;
       Input : NI_Input_Mode)
-     with Post => Read_NI_Input_Mode (This) = Input;
+     with Post => Get_NI_Input_Mode (This) = Input;
    --  Select a calibration reference voltage on non-inverting input and
    --  disables external connections.
 
-   function Read_NI_Input_Mode
+   function Get_NI_Input_Mode
      (This : Operational_Amplifier) return NI_Input_Mode;
    --  Return the source connected to the non-inverting input of the
    --  operational amplifier.
@@ -41,11 +41,11 @@ package STM32.OPAMP is
    procedure Set_NI_Input_Port
      (This  : in out Operational_Amplifier;
       Input : NI_Input_Port)
-     with Post => Read_NI_Input_Port (This) = Input;
+     with Post => Get_NI_Input_Port (This) = Input;
    --  Select the source connected to the non-inverting input of the
    --  operational amplifier.
 
-   function Read_NI_Input_Port
+   function Get_NI_Input_Port
      (This : Operational_Amplifier) return NI_Input_Port;
    --  Return the source connected to the non-inverting input of the
    --  operational amplifier.
@@ -59,47 +59,14 @@ package STM32.OPAMP is
    procedure Set_I_Input_Port
      (This  : in out Operational_Amplifier;
       Input : I_Input_Port)
-     with Post => Read_I_Input_Port (This) = Input;
+     with Post => Get_I_Input_Port (This) = Input;
    --  Select the source connected to the inverting input of the
    --  operational amplifier.
 
-   function Read_I_Input_Port
+   function Get_I_Input_Port
      (This : Operational_Amplifier) return I_Input_Port;
    --  Return the source connected to the inverting input of the
    --  operational amplifier.
-
-   type Calibration_Mode_On is (Disabled, Enabled);
-   --  Enable/disable the calibration mode.
-
-   procedure Set_Calibration_Mode
-     (This  : in out Operational_Amplifier;
-      Input : Calibration_Mode_On)
-     with Post => Read_Calibration_Mode (This) = Input;
-   --  Select the calibration mode connecting VM and VP to the OPAMP
-   --  internal reference voltage.
-
-   function Read_Calibration_Mode
-     (This : Operational_Amplifier) return Calibration_Mode_On;
-   --  Return the calibration mode.
-
-   type Calibration_Value is
-     (VREFOPAMP_Is_3_3_VDDA, --  3.3%
-      VREFOPAMP_Is_10_VDDA, --  10%
-      VREFOPAMP_Is_50_VDDA, --  50%
-      VREFOPAMP_Is_90_VDDA --  90%
-      );
-   --  Offset calibration bus to generate the internal reference voltage.
-
-   procedure Set_Calibration_Value
-     (This  : in out Operational_Amplifier;
-      Input : Calibration_Value)
-     with Post => Read_Calibration_Value (This) = Input;
-   --  Select the offset calibration bus used to generate the internal
-   --  reference voltage when CALON = 1 or FORCE_VP = 1.
-
-   function Read_Calibration_Value
-     (This : Operational_Amplifier) return Calibration_Value;
-   --  Return the offset calibration bus voltage.
 
    type PGA_Mode_Gain is
      (NI_Gain_2,
@@ -124,25 +91,46 @@ package STM32.OPAMP is
    procedure Set_PGA_Mode_Gain
      (This  : in out Operational_Amplifier;
       Input : PGA_Mode_Gain)
-     with Post => Read_PGA_Mode_Gain (This) = Input;
+     with Post => Get_PGA_Mode_Gain (This) = Input;
    --  Select the gain in PGA mode.
 
-   function Read_PGA_Mode_Gain
+   function Get_PGA_Mode_Gain
      (This : Operational_Amplifier) return PGA_Mode_Gain;
    --  Return the gain in PGA mode.
 
-   type User_Trimming is (Disabled, Enabled);
-   --  Enable/disable user trimming.
+   type Speed_Mode is (Normal_Mode, HighSpeed_Mode);
+
+   procedure Set_Speed_Mode
+     (This  : in out Operational_Amplifier;
+      Input : Speed_Mode)
+     with Pre => not Enabled (This),
+       Post => Get_Speed_Mode (This) = Input;
+   --  OPAMP in normal or high-speed mode.
+
+   function Get_Speed_Mode
+     (This : Operational_Amplifier) return Speed_Mode;
+   --  Return the OPAMP speed mode.
+
+   type Init_Parameters is record
+      Input_Minus     : I_Input_Port;
+      Input_Plus      : NI_Input_Port;
+      PGA_Mode        : PGA_Mode_Gain;
+      Power_Mode      : Speed_Mode;
+   end record;
+
+   procedure Configure_Opamp
+     (This  : in out Operational_Amplifier;
+      Param : Init_Parameters);
 
    procedure Set_User_Trimming
-     (This  : in out Operational_Amplifier;
-      Input : User_Trimming)
-     with Post => Read_User_Trimming (This) = Input;
+     (This    : in out Operational_Amplifier;
+      Enabled : Boolean)
+     with Post => Get_User_Trimming (This) = Enabled;
    --  Allows to switch from ‘factory’ AOP offset trimmed values to ‘user’ AOP
    --  offset trimmed values.
 
-   function Read_User_Trimming
-     (This : Operational_Amplifier) return User_Trimming;
+   function Get_User_Trimming
+     (This : Operational_Amplifier) return Boolean;
    --  Return the state of user trimming.
 
    type Differential_Pair is (NMOS, PMOS);
@@ -151,13 +139,43 @@ package STM32.OPAMP is
      (This  : in out Operational_Amplifier;
       Pair  : Differential_Pair;
       Input : UInt5)
-     with Post => Read_Offset_Trimming (This, Pair) = Input;
+     with Post => Get_Offset_Trimming (This, Pair) = Input;
    --  Select the offset trimming value for NMOS or PMOS.
 
-   function Read_Offset_Trimming
+   function Get_Offset_Trimming
      (This : Operational_Amplifier;
       Pair : Differential_Pair) return UInt5;
    --  Return the offset trimming value for NMOS or PMOS.
+
+   procedure Set_Calibration_Mode
+     (This    : in out Operational_Amplifier;
+      Enabled : Boolean)
+     with Post => Get_Calibration_Mode (This) = Enabled;
+   --  Select the calibration mode connecting VM and VP to the OPAMP
+   --  internal reference voltage.
+
+   function Get_Calibration_Mode
+     (This : Operational_Amplifier) return Boolean;
+   --  Return the calibration mode.
+
+   type Calibration_Value is
+     (VREFOPAMP_Is_3_3_VDDA, --  3.3%
+      VREFOPAMP_Is_10_VDDA, --  10%
+      VREFOPAMP_Is_50_VDDA, --  50%
+      VREFOPAMP_Is_90_VDDA --  90%
+      );
+   --  Offset calibration bus to generate the internal reference voltage.
+
+   procedure Set_Calibration_Value
+     (This  : in out Operational_Amplifier;
+      Input : Calibration_Value)
+     with Post => Get_Calibration_Value (This) = Input;
+   --  Select the offset calibration bus used to generate the internal
+   --  reference voltage when CALON = 1 or FORCE_VP = 1.
+
+   function Get_Calibration_Value
+     (This : Operational_Amplifier) return Calibration_Value;
+   --  Return the offset calibration bus voltage.
 
    procedure Calibrate (This : in out Operational_Amplifier);
    --  Calibrate the NMOS and PMOS differential pair. This routine
@@ -171,24 +189,11 @@ package STM32.OPAMP is
      (Is_Output,
       Is_Not_Output);
 
-   type Speed_Mode is (Normal_Mode, HighSpeed_Mode);
-
-   procedure Set_Speed_Mode
-     (This  : in out Operational_Amplifier;
-      Input : Speed_Mode)
-     with Pre => not Enabled (This),
-       Post => Read_Speed_Mode (This) = Input;
-   --  OPAMP in normal or high-speed mode.
-
-   function Read_Speed_Mode
-     (This : Operational_Amplifier) return Speed_Mode;
-   --  Return the OPAMP speed mode.
-
    type Output_Status_Flag is
      (NI_Lesser_Then_I,
       NI_Greater_Then_I);
 
-   function Read_Output_Status_Flag
+   function Get_Output_Status_Flag
      (This : Operational_Amplifier) return Output_Status_Flag;
    --  Return the output status flag when the OPAMP is used as comparator
    --  during calibration.
