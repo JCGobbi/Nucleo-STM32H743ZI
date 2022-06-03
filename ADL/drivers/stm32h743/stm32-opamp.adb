@@ -51,11 +51,7 @@ package body STM32.OPAMP is
    function Get_NI_Input_Mode
      (This : Operational_Amplifier) return NI_Input_Mode is
    begin
-      if This.CSR.FORCE_VP = True then
-         return Calibration_Mode;
-      else
-         return Normal_Mode;
-      end if;
+      return NI_Input_Mode'Val (Boolean'Pos (This.CSR.FORCE_VP));
    end Get_NI_Input_Mode;
 
    -----------------------
@@ -318,6 +314,8 @@ package body STM32.OPAMP is
          end loop;
       end loop;
 
+      Set_User_Trimming (This, Enabled => False);
+      Set_Calibration_Mode (This, Enabled => False);
    end Calibrate;
 
    -----------------------------

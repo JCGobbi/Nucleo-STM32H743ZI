@@ -74,11 +74,7 @@ package body STM32.COMP is
    function Get_NI_Input_Port
      (This : Comparator) return NI_Input_Port is
    begin
-      if This.CFGR.INPSEL then
-         return Option_1;
-      else
-         return Option_2;
-      end if;
+      return NI_Input_Port'Val (Boolean'Pos (This.CFGR.INPSEL));
    end Get_NI_Input_Port;
 
    -------------------------
@@ -97,11 +93,7 @@ package body STM32.COMP is
 
    function Get_Output_Polarity (This : Comparator) return Output_Polarity is
    begin
-      if This.CFGR.POLARITY then
-         return Inverted;
-      else
-         return Not_Inverted;
-      end if;
+      return Output_Polarity'Val (Boolean'Pos (This.CFGR.POLARITY));
    end Get_Output_Polarity;
 
    -------------------------------
