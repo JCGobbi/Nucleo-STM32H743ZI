@@ -45440,7 +45440,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
           </fields>
         </register>
-		 <register>
+	<register>
           <name>PWRCR</name>
           <displayName>PWRCR</displayName>
           <description>SYSCFG power control register</description>
@@ -94281,33 +94281,18 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       </interrupt>
     </peripheral>
     <peripheral>
-      <name>FDCAN1</name>
-      <description>FDCAN1</description>
+      <name>FDCAN</name>
+      <description>FDCAN</description>
       <groupName>FDCAN</groupName>
-      <baseAddress>0x4000A000</baseAddress>
+      <baseAddress>0x4000AC00</baseAddress>
       <addressBlock>
         <offset>0x0</offset>
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>FDCAN1_IT0</name>
-        <description>FDCAN1 Interrupt 0</description>
-        <value>19</value>
-      </interrupt>
-      <interrupt>
-        <name>FDCAN1_IT1</name>
-        <description>FDCAN1 Interrupt 1</description>
-        <value>21</value>
-      </interrupt>
-      <interrupt>
-        <name>FDCAN_CAL</name>
-        <description>CAN2TX interrupts</description>
-        <value>63</value>
-      </interrupt>
       <registers>
         <register>
-          <name>FDCAN_CREL</name>
+          <name>CREL</name>
           <displayName>FDCAN_CREL</displayName>
           <description>FDCAN Core Release Register</description>
           <addressOffset>0x0</addressOffset>
@@ -94354,7 +94339,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_ENDN</name>
+          <name>ENDN</name>
           <displayName>FDCAN_ENDN</displayName>
           <description>FDCAN Core Release Register</description>
           <addressOffset>0x4</addressOffset>
@@ -94371,7 +94356,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_DBTP</name>
+          <name>DBTP</name>
           <displayName>FDCAN_DBTP</displayName>
           <description>FDCAN Data Bit Timing and Prescaler
           Register</description>
@@ -94416,7 +94401,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TEST</name>
+          <name>TEST</name>
           <displayName>FDCAN_TEST</displayName>
           <description>FDCAN Test Register</description>
           <addressOffset>0x10</addressOffset>
@@ -94445,7 +94430,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_RWD</name>
+          <name>RWD</name>
           <displayName>FDCAN_RWD</displayName>
           <description>FDCAN RAM Watchdog Register</description>
           <addressOffset>0x14</addressOffset>
@@ -94468,7 +94453,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_CCCR</name>
+          <name>CCCR</name>
           <displayName>FDCAN_CCCR</displayName>
           <description>FDCAN CC Control Register</description>
           <addressOffset>0x18</addressOffset>
@@ -94534,7 +94519,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>BSE</name>
+              <name>BRSE</name>
               <description>FDCAN Bit Rate Switching</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
@@ -94568,7 +94553,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_NBTP</name>
+          <name>NBTP</name>
           <displayName>FDCAN_NBTP</displayName>
           <description>FDCAN Nominal Bit Timing and Prescaler
           Register</description>
@@ -94598,7 +94583,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>8</bitWidth>
             </field>
             <field>
-              <name>TSEG2</name>
+              <name>NTSEG2</name>
               <description>Nominal Time segment after sample
               point</description>
               <bitOffset>0</bitOffset>
@@ -94607,7 +94592,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TSCC</name>
+          <name>TSCC</name>
           <displayName>FDCAN_TSCC</displayName>
           <description>FDCAN Timestamp Counter Configuration
           Register</description>
@@ -94632,7 +94617,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TSCV</name>
+          <name>TSCV</name>
           <displayName>FDCAN_TSCV</displayName>
           <description>FDCAN Timestamp Counter Value
           Register</description>
@@ -94650,7 +94635,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TOCC</name>
+          <name>TOCC</name>
           <displayName>FDCAN_TOCC</displayName>
           <description>FDCAN Timeout Counter Configuration
           Register</description>
@@ -94680,7 +94665,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TOCV</name>
+          <name>TOCV</name>
           <displayName>FDCAN_TOCV</displayName>
           <description>FDCAN Timeout Counter Value
           Register</description>
@@ -94698,7 +94683,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_ECR</name>
+          <name>ECR</name>
           <displayName>FDCAN_ECR</displayName>
           <description>FDCAN Error Counter Register</description>
           <addressOffset>0x40</addressOffset>
@@ -94733,7 +94718,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_PSR</name>
+          <name>PSR</name>
           <displayName>FDCAN_PSR</displayName>
           <description>FDCAN Protocol Status Register</description>
           <addressOffset>0x44</addressOffset>
@@ -94813,7 +94798,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TDCR</name>
+          <name>TDCR</name>
           <displayName>FDCAN_TDCR</displayName>
           <description>FDCAN Transmitter Delay Compensation
           Register</description>
@@ -94839,7 +94824,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_IR</name>
+          <name>IR</name>
           <displayName>FDCAN_IR</displayName>
           <description>FDCAN Interrupt Register</description>
           <addressOffset>0x50</addressOffset>
@@ -95025,7 +95010,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_IE</name>
+          <name>IE</name>
           <displayName>FDCAN_IE</displayName>
           <description>FDCAN Interrupt Enable
           Register</description>
@@ -95238,7 +95223,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_ILS</name>
+          <name>ILS</name>
           <displayName>FDCAN_ILS</displayName>
           <description>FDCAN Interrupt Line Select
           Register</description>
@@ -95325,7 +95310,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>TEFL</name>
+              <name>TFEL</name>
               <description>Tx FIFO Empty Interrupt
               Line</description>
               <bitOffset>11</bitOffset>
@@ -95458,7 +95443,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_ILE</name>
+          <name>ILE</name>
           <displayName>FDCAN_ILE</displayName>
           <description>FDCAN Interrupt Line Enable
           Register</description>
@@ -95482,7 +95467,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_GFC</name>
+          <name>GFC</name>
           <displayName>FDCAN_GFC</displayName>
           <description>FDCAN Global Filter Configuration
           Register</description>
@@ -95522,7 +95507,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_SIDFC</name>
+          <name>SIDFC</name>
           <displayName>FDCAN_SIDFC</displayName>
           <description>FDCAN Standard ID Filter Configuration
           Register</description>
@@ -95547,7 +95532,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_XIDFC</name>
+          <name>XIDFC</name>
           <displayName>FDCAN_XIDFC</displayName>
           <description>FDCAN Extended ID Filter Configuration
           Register</description>
@@ -95572,7 +95557,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_XIDAM</name>
+          <name>XIDAM</name>
           <displayName>FDCAN_XIDAM</displayName>
           <description>FDCAN Extended ID and Mask
           Register</description>
@@ -95590,7 +95575,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_HPMS</name>
+          <name>HPMS</name>
           <displayName>FDCAN_HPMS</displayName>
           <description>FDCAN High Priority Message Status
           Register</description>
@@ -95626,7 +95611,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_NDAT1</name>
+          <name>NDAT1</name>
           <displayName>FDCAN_NDAT1</displayName>
           <description>FDCAN New Data 1 Register</description>
           <addressOffset>0x98</addressOffset>
@@ -95829,7 +95814,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_NDAT2</name>
+          <name>NDAT2</name>
           <displayName>FDCAN_NDAT2</displayName>
           <description>FDCAN New Data 2 Register</description>
           <addressOffset>0x9C</addressOffset>
@@ -96032,7 +96017,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_RXF0C</name>
+          <name>RXF0C</name>
           <displayName>FDCAN_RXF0C</displayName>
           <description>FDCAN Rx FIFO 0 Configuration
           Register</description>
@@ -96051,18 +96036,24 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>F0S</name>
               <description>Rx FIFO 0 Size</description>
               <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
+              <bitWidth>7</bitWidth>
             </field>
             <field>
               <name>F0WM</name>
               <description>FIFO 0 Watermark</description>
               <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>F0OM</name>
+              <description>FIFO 0 operation mode</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
             </field>
           </fields>
         </register>
         <register>
-          <name>FDCAN_RXF0S</name>
+          <name>RXF0S</name>
           <displayName>FDCAN_RXF0S</displayName>
           <description>FDCAN Rx FIFO 0 Status
           Register</description>
@@ -96104,7 +96095,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_RXF0A</name>
+          <name>RXF0A</name>
           <displayName>FDCAN_RXF0A</displayName>
           <description>CAN Rx FIFO 0 Acknowledge
           Register</description>
@@ -96123,7 +96114,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_RXBC</name>
+          <name>RXBC</name>
           <displayName>FDCAN_RXBC</displayName>
           <description>FDCAN Rx Buffer Configuration
           Register</description>
@@ -96141,7 +96132,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_RXF1C</name>
+          <name>RXF1C</name>
           <displayName>FDCAN_RXF1C</displayName>
           <description>FDCAN Rx FIFO 1 Configuration
           Register</description>
@@ -96168,10 +96159,16 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitOffset>24</bitOffset>
               <bitWidth>7</bitWidth>
             </field>
+            <field>
+              <name>F1OM</name>
+              <description>FIFO 1 operation mode</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
           </fields>
         </register>
         <register>
-          <name>FDCAN_RXF1S</name>
+          <name>RXF1S</name>
           <displayName>FDCAN_RXF1S</displayName>
           <description>FDCAN Rx FIFO 1 Status
           Register</description>
@@ -96219,7 +96216,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_RXF1A</name>
+          <name>RXF1A</name>
           <displayName>FDCAN_RXF1A</displayName>
           <description>FDCAN Rx FIFO 1 Acknowledge
           Register</description>
@@ -96238,7 +96235,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_RXESC</name>
+          <name>RXESC</name>
           <displayName>FDCAN_RXESC</displayName>
           <description>FDCAN Rx Buffer Element Size Configuration
           Register</description>
@@ -96268,7 +96265,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXBC</name>
+          <name>TXBC</name>
           <displayName>FDCAN_TXBC</displayName>
           <description>FDCAN Tx Buffer Configuration
           Register</description>
@@ -96305,7 +96302,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXFQS</name>
+          <name>TXFQS</name>
           <displayName>FDCAN_TXFQS</displayName>
           <description>FDCAN Tx FIFO/Queue Status
           Register</description>
@@ -96341,7 +96338,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXESC</name>
+          <name>TXESC</name>
           <displayName>FDCAN_TXESC</displayName>
           <description>FDCAN Tx Buffer Element Size Configuration
           Register</description>
@@ -96359,7 +96356,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXBRP</name>
+          <name>TXBRP</name>
           <displayName>FDCAN_TXBRP</displayName>
           <description>FDCAN Tx Buffer Request Pending
           Register</description>
@@ -96378,7 +96375,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXBAR</name>
+          <name>TXBAR</name>
           <displayName>FDCAN_TXBAR</displayName>
           <description>FDCAN Tx Buffer Add Request
           Register</description>
@@ -96396,7 +96393,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXBCR</name>
+          <name>TXBCR</name>
           <displayName>FDCAN_TXBCR</displayName>
           <description>FDCAN Tx Buffer Cancellation Request
           Register</description>
@@ -96414,7 +96411,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXBTO</name>
+          <name>TXBTO</name>
           <displayName>FDCAN_TXBTO</displayName>
           <description>FDCAN Tx Buffer Transmission Occurred
           Register</description>
@@ -96432,7 +96429,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXBCF</name>
+          <name>TXBCF</name>
           <displayName>FDCAN_TXBCF</displayName>
           <description>FDCAN Tx Buffer Cancellation Finished
           Register</description>
@@ -96450,7 +96447,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXBTIE</name>
+          <name>TXBTIE</name>
           <displayName>FDCAN_TXBTIE</displayName>
           <description>FDCAN Tx Buffer Transmission Interrupt
           Enable Register</description>
@@ -96469,7 +96466,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXBCIE</name>
+          <name>TXBCIE</name>
           <displayName>FDCAN_TXBCIE</displayName>
           <description>FDCAN Tx Buffer Cancellation Finished
           Interrupt Enable Register</description>
@@ -96488,7 +96485,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXEFC</name>
+          <name>TXEFC</name>
           <displayName>FDCAN_TXEFC</displayName>
           <description>FDCAN Tx Event FIFO Configuration
           Register</description>
@@ -96518,7 +96515,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXEFS</name>
+          <name>TXEFS</name>
           <displayName>FDCAN_TXEFS</displayName>
           <description>FDCAN Tx Event FIFO Status
           Register</description>
@@ -96555,7 +96552,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TXEFA</name>
+          <name>TXEFA</name>
           <displayName>FDCAN_TXEFA</displayName>
           <description>FDCAN Tx Event FIFO Acknowledge
           Register</description>
@@ -96574,7 +96571,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTTMC</name>
+          <name>TTTMC</name>
           <displayName>FDCAN_TTTMC</displayName>
           <description>FDCAN TT Trigger Memory Configuration
           Register</description>
@@ -96599,7 +96596,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTRMC</name>
+          <name>TTRMC</name>
           <displayName>FDCAN_TTRMC</displayName>
           <description>FDCAN TT Reference Message Configuration
           Register</description>
@@ -96630,7 +96627,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTOCF</name>
+          <name>TTOCF</name>
           <displayName>FDCAN_TTOCF</displayName>
           <description>FDCAN TT Operation Configuration
           Register</description>
@@ -96706,7 +96703,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTMLM</name>
+          <name>TTMLM</name>
           <displayName>FDCAN_TTMLM</displayName>
           <description>FDCAN TT Matrix Limits
           Register</description>
@@ -96744,7 +96741,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TURCF</name>
+          <name>TURCF</name>
           <displayName>FDCAN_TURCF</displayName>
           <description>FDCAN TUR Configuration
           Register</description>
@@ -96775,7 +96772,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTOCN</name>
+          <name>TTOCN</name>
           <displayName>FDCAN_TTOCN</displayName>
           <description>FDCAN TT Operation Control
           Register</description>
@@ -96870,8 +96867,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>CAN_TTGTP</name>
-          <displayName>CAN_TTGTP</displayName>
+          <name>TTGTP</name>
+          <displayName>FDCAN_TTGTP</displayName>
           <description>FDCAN TT Global Time Preset
           Register</description>
           <addressOffset>0x118</addressOffset>
@@ -96894,7 +96891,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTTMK</name>
+          <name>TTTMK</name>
           <displayName>FDCAN_TTTMK</displayName>
           <description>FDCAN TT Time Mark Register</description>
           <addressOffset>0x11C</addressOffset>
@@ -96924,7 +96921,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTIR</name>
+          <name>TTIR</name>
           <displayName>FDCAN_TTIR</displayName>
           <description>FDCAN TT Interrupt Register</description>
           <addressOffset>0x120</addressOffset>
@@ -97053,7 +97050,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTIE</name>
+          <name>TTIE</name>
           <displayName>FDCAN_TTIE</displayName>
           <description>FDCAN TT Interrupt Enable
           Register</description>
@@ -97198,7 +97195,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTILS</name>
+          <name>TTILS</name>
           <displayName>FDCAN_TTILS</displayName>
           <description>FDCAN TT Interrupt Line Select
           Register</description>
@@ -97343,7 +97340,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTOST</name>
+          <name>TTOST</name>
           <displayName>FDCAN_TTOST</displayName>
           <description>FDCAN TT Operation Status
           Register</description>
@@ -97442,7 +97439,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TURNA</name>
+          <name>TURNA</name>
           <displayName>FDCAN_TURNA</displayName>
           <description>FDCAN TUR Numerator Actual
           Register</description>
@@ -97460,7 +97457,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTLGT</name>
+          <name>TTLGT</name>
           <displayName>FDCAN_TTLGT</displayName>
           <description>FDCAN TT Local and Global Time
           Register</description>
@@ -97484,7 +97481,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTCTC</name>
+          <name>TTCTC</name>
           <displayName>FDCAN_TTCTC</displayName>
           <description>FDCAN TT Cycle Time and Count
           Register</description>
@@ -97508,7 +97505,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTCPT</name>
+          <name>TTCPT</name>
           <displayName>FDCAN_TTCPT</displayName>
           <description>FDCAN TT Capture Time Register</description>
           <addressOffset>0x13C</addressOffset>
@@ -97531,7 +97528,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTCSM</name>
+          <name>TTCSM</name>
           <displayName>FDCAN_TTCSM</displayName>
           <description>FDCAN TT Cycle Sync Mark
           Register</description>
@@ -97549,7 +97546,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>FDCAN_TTTS</name>
+          <name>TTTS</name>
           <displayName>FDCAN_TTTS</displayName>
           <description>FDCAN TT Trigger Select
           Register</description>
@@ -97576,7 +97573,26 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         </register>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="FDCAN1">
+    <peripheral derivedFrom="FDCAN">
+      <name>FDCAN1</name>
+      <baseAddress>0x4000A000</baseAddress>
+      <interrupt>
+        <name>FDCAN1_IT0</name>
+        <description>FDCAN1 Interrupt 0</description>
+        <value>19</value>
+      </interrupt>
+      <interrupt>
+        <name>FDCAN1_IT1</name>
+        <description>FDCAN1 Interrupt 1</description>
+        <value>21</value>
+      </interrupt>
+      <interrupt>
+        <name>FDCAN_CAL</name>
+        <description>CAN2TX interrupts</description>
+        <value>63</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="FDCAN">
       <name>FDCAN2</name>
       <baseAddress>0x4000A400</baseAddress>
       <interrupt>

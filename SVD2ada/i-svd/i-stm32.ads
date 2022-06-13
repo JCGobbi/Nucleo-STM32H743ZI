@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2021, AdaCore
+--  Copyright (C) 2022, AdaCore
 --
 
 pragma Style_Checks (Off);
@@ -187,6 +187,7 @@ package Interfaces.STM32 is
    UART8_Base : constant System.Address := System'To_Address (16#40007C00#);
    TIM1_Base : constant System.Address := System'To_Address (16#40010000#);
    TIM8_Base : constant System.Address := System'To_Address (16#40010400#);
+   FDCAN_Base : constant System.Address := System'To_Address (16#4000AC00#);
    FDCAN1_Base : constant System.Address := System'To_Address (16#4000A000#);
    FDCAN2_Base : constant System.Address := System'To_Address (16#4000A400#);
    CAN_CCU_Base : constant System.Address := System'To_Address (16#4000A800#);

@@ -164,32 +164,25 @@ package STM32_SVD.FDCAN is
       Reserved_2_31 at 0 range 2 .. 31;
    end record;
 
-   subtype FDCAN_CREL_DAY_Field is HAL.UInt8;
-   subtype FDCAN_CREL_MON_Field is HAL.UInt8;
-   subtype FDCAN_CREL_YEAR_Field is HAL.UInt4;
-   subtype FDCAN_CREL_SUBSTEP_Field is HAL.UInt4;
-   subtype FDCAN_CREL_STEP_Field is HAL.UInt4;
-   subtype FDCAN_CREL_REL_Field is HAL.UInt4;
-
    --  FDCAN Core Release Register
-   type FDCAN_CREL_Register is record
+   type CREL_Register_1 is record
       --  Read-only. Timestamp Day
-      DAY     : FDCAN_CREL_DAY_Field;
+      DAY     : CREL_DAY_Field;
       --  Read-only. Timestamp Month
-      MON     : FDCAN_CREL_MON_Field;
+      MON     : CREL_MON_Field;
       --  Read-only. Timestamp Year
-      YEAR    : FDCAN_CREL_YEAR_Field;
+      YEAR    : CREL_YEAR_Field;
       --  Read-only. Sub-step of Core release
-      SUBSTEP : FDCAN_CREL_SUBSTEP_Field;
+      SUBSTEP : CREL_SUBSTEP_Field;
       --  Read-only. Step of Core release
-      STEP    : FDCAN_CREL_STEP_Field;
+      STEP    : CREL_STEP_Field;
       --  Read-only. Core release
-      REL     : FDCAN_CREL_REL_Field;
+      REL     : CREL_REL_Field;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_CREL_Register use record
+   for CREL_Register_1 use record
       DAY     at 0 range 0 .. 7;
       MON     at 0 range 8 .. 15;
       YEAR    at 0 range 16 .. 19;
@@ -198,23 +191,23 @@ package STM32_SVD.FDCAN is
       REL     at 0 range 28 .. 31;
    end record;
 
-   subtype FDCAN_DBTP_DSJW_Field is HAL.UInt4;
-   subtype FDCAN_DBTP_DTSEG2_Field is HAL.UInt4;
-   subtype FDCAN_DBTP_DTSEG1_Field is HAL.UInt5;
-   subtype FDCAN_DBTP_DBRP_Field is HAL.UInt5;
+   subtype DBTP_DSJW_Field is HAL.UInt4;
+   subtype DBTP_DTSEG2_Field is HAL.UInt4;
+   subtype DBTP_DTSEG1_Field is HAL.UInt5;
+   subtype DBTP_DBRP_Field is HAL.UInt5;
 
    --  FDCAN Data Bit Timing and Prescaler Register
-   type FDCAN_DBTP_Register is record
+   type DBTP_Register is record
       --  Read-only. Synchronization Jump Width
-      DSJW           : FDCAN_DBTP_DSJW_Field;
+      DSJW           : DBTP_DSJW_Field;
       --  Read-only. Data time segment after sample point
-      DTSEG2         : FDCAN_DBTP_DTSEG2_Field;
+      DTSEG2         : DBTP_DTSEG2_Field;
       --  Read-only. Data time segment after sample point
-      DTSEG1         : FDCAN_DBTP_DTSEG1_Field;
+      DTSEG1         : DBTP_DTSEG1_Field;
       --  unspecified
       Reserved_13_15 : HAL.UInt3;
       --  Read-only. Data BIt Rate Prescaler
-      DBRP           : FDCAN_DBTP_DBRP_Field;
+      DBRP           : DBTP_DBRP_Field;
       --  unspecified
       Reserved_21_22 : HAL.UInt2;
       --  Read-only. Transceiver Delay Compensation
@@ -225,7 +218,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_DBTP_Register use record
+   for DBTP_Register use record
       DSJW           at 0 range 0 .. 3;
       DTSEG2         at 0 range 4 .. 7;
       DTSEG1         at 0 range 8 .. 12;
@@ -236,16 +229,16 @@ package STM32_SVD.FDCAN is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype FDCAN_TEST_TX_Field is HAL.UInt2;
+   subtype TEST_TX_Field is HAL.UInt2;
 
    --  FDCAN Test Register
-   type FDCAN_TEST_Register is record
+   type TEST_Register is record
       --  unspecified
       Reserved_0_3  : HAL.UInt4;
       --  Read-only. Loop Back mode
       LBCK          : Boolean;
       --  Read-only. Loop Back mode
-      TX            : FDCAN_TEST_TX_Field;
+      TX            : TEST_TX_Field;
       --  Read-only. Control of Transmit Pin
       RX            : Boolean;
       --  unspecified
@@ -254,7 +247,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TEST_Register use record
+   for TEST_Register use record
       Reserved_0_3  at 0 range 0 .. 3;
       LBCK          at 0 range 4 .. 4;
       TX            at 0 range 5 .. 6;
@@ -262,29 +255,29 @@ package STM32_SVD.FDCAN is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
-   subtype FDCAN_RWD_WDC_Field is HAL.UInt8;
-   subtype FDCAN_RWD_WDV_Field is HAL.UInt8;
+   subtype RWD_WDC_Field is HAL.UInt8;
+   subtype RWD_WDV_Field is HAL.UInt8;
 
    --  FDCAN RAM Watchdog Register
-   type FDCAN_RWD_Register is record
+   type RWD_Register is record
       --  Read-only. Watchdog configuration
-      WDC            : FDCAN_RWD_WDC_Field;
+      WDC            : RWD_WDC_Field;
       --  Read-only. Watchdog value
-      WDV            : FDCAN_RWD_WDV_Field;
+      WDV            : RWD_WDV_Field;
       --  unspecified
       Reserved_16_31 : HAL.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_RWD_Register use record
+   for RWD_Register use record
       WDC            at 0 range 0 .. 7;
       WDV            at 0 range 8 .. 15;
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
    --  FDCAN CC Control Register
-   type FDCAN_CCCR_Register is record
+   type CCCR_Register is record
       --  Initialization
       INIT           : Boolean := False;
       --  Configuration Change Enable
@@ -304,7 +297,7 @@ package STM32_SVD.FDCAN is
       --  FD Operation Enable
       FDOE           : Boolean := False;
       --  FDCAN Bit Rate Switching
-      BSE            : Boolean := False;
+      BRSE           : Boolean := False;
       --  unspecified
       Reserved_10_11 : HAL.UInt2 := 16#0#;
       --  Protocol Exception Handling Disable
@@ -321,7 +314,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_CCCR_Register use record
+   for CCCR_Register use record
       INIT           at 0 range 0 .. 0;
       CCE            at 0 range 1 .. 1;
       ASM            at 0 range 2 .. 2;
@@ -331,7 +324,7 @@ package STM32_SVD.FDCAN is
       DAR            at 0 range 6 .. 6;
       TEST           at 0 range 7 .. 7;
       FDOE           at 0 range 8 .. 8;
-      BSE            at 0 range 9 .. 9;
+      BRSE           at 0 range 9 .. 9;
       Reserved_10_11 at 0 range 10 .. 11;
       PXHD           at 0 range 12 .. 12;
       EFBI           at 0 range 13 .. 13;
@@ -340,138 +333,138 @@ package STM32_SVD.FDCAN is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype FDCAN_NBTP_TSEG2_Field is HAL.UInt7;
-   subtype FDCAN_NBTP_NTSEG1_Field is HAL.UInt8;
-   subtype FDCAN_NBTP_NBRP_Field is HAL.UInt9;
-   subtype FDCAN_NBTP_NSJW_Field is HAL.UInt7;
+   subtype NBTP_NTSEG2_Field is HAL.UInt7;
+   subtype NBTP_NTSEG1_Field is HAL.UInt8;
+   subtype NBTP_NBRP_Field is HAL.UInt9;
+   subtype NBTP_NSJW_Field is HAL.UInt7;
 
    --  FDCAN Nominal Bit Timing and Prescaler Register
-   type FDCAN_NBTP_Register is record
+   type NBTP_Register is record
       --  Nominal Time segment after sample point
-      TSEG2        : FDCAN_NBTP_TSEG2_Field := 16#0#;
+      NTSEG2       : NBTP_NTSEG2_Field := 16#0#;
       --  unspecified
       Reserved_7_7 : HAL.Bit := 16#0#;
       --  Nominal Time segment before sample point
-      NTSEG1       : FDCAN_NBTP_NTSEG1_Field := 16#0#;
+      NTSEG1       : NBTP_NTSEG1_Field := 16#0#;
       --  Bit Rate Prescaler
-      NBRP         : FDCAN_NBTP_NBRP_Field := 16#0#;
+      NBRP         : NBTP_NBRP_Field := 16#0#;
       --  NSJW: Nominal (Re)Synchronization Jump Width
-      NSJW         : FDCAN_NBTP_NSJW_Field := 16#0#;
+      NSJW         : NBTP_NSJW_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_NBTP_Register use record
-      TSEG2        at 0 range 0 .. 6;
+   for NBTP_Register use record
+      NTSEG2       at 0 range 0 .. 6;
       Reserved_7_7 at 0 range 7 .. 7;
       NTSEG1       at 0 range 8 .. 15;
       NBRP         at 0 range 16 .. 24;
       NSJW         at 0 range 25 .. 31;
    end record;
 
-   subtype FDCAN_TSCC_TSS_Field is HAL.UInt2;
-   subtype FDCAN_TSCC_TCP_Field is HAL.UInt4;
+   subtype TSCC_TSS_Field is HAL.UInt2;
+   subtype TSCC_TCP_Field is HAL.UInt4;
 
    --  FDCAN Timestamp Counter Configuration Register
-   type FDCAN_TSCC_Register is record
+   type TSCC_Register is record
       --  Timestamp Select
-      TSS            : FDCAN_TSCC_TSS_Field := 16#0#;
+      TSS            : TSCC_TSS_Field := 16#0#;
       --  unspecified
       Reserved_2_15  : HAL.UInt14 := 16#0#;
       --  Timestamp Counter Prescaler
-      TCP            : FDCAN_TSCC_TCP_Field := 16#0#;
+      TCP            : TSCC_TCP_Field := 16#0#;
       --  unspecified
       Reserved_20_31 : HAL.UInt12 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TSCC_Register use record
+   for TSCC_Register use record
       TSS            at 0 range 0 .. 1;
       Reserved_2_15  at 0 range 2 .. 15;
       TCP            at 0 range 16 .. 19;
       Reserved_20_31 at 0 range 20 .. 31;
    end record;
 
-   subtype FDCAN_TSCV_TSC_Field is HAL.UInt16;
+   subtype TSCV_TSC_Field is HAL.UInt16;
 
    --  FDCAN Timestamp Counter Value Register
-   type FDCAN_TSCV_Register is record
+   type TSCV_Register is record
       --  Timestamp Counter
-      TSC            : FDCAN_TSCV_TSC_Field := 16#0#;
+      TSC            : TSCV_TSC_Field := 16#0#;
       --  unspecified
       Reserved_16_31 : HAL.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TSCV_Register use record
+   for TSCV_Register use record
       TSC            at 0 range 0 .. 15;
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype FDCAN_TOCC_TOS_Field is HAL.UInt2;
-   subtype FDCAN_TOCC_TOP_Field is HAL.UInt16;
+   subtype TOCC_TOS_Field is HAL.UInt2;
+   subtype TOCC_TOP_Field is HAL.UInt16;
 
    --  FDCAN Timeout Counter Configuration Register
-   type FDCAN_TOCC_Register is record
+   type TOCC_Register is record
       --  Enable Timeout Counter
       ETOC          : Boolean := False;
       --  Timeout Select
-      TOS           : FDCAN_TOCC_TOS_Field := 16#0#;
+      TOS           : TOCC_TOS_Field := 16#0#;
       --  unspecified
       Reserved_3_15 : HAL.UInt13 := 16#0#;
       --  Timeout Period
-      TOP           : FDCAN_TOCC_TOP_Field := 16#0#;
+      TOP           : TOCC_TOP_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TOCC_Register use record
+   for TOCC_Register use record
       ETOC          at 0 range 0 .. 0;
       TOS           at 0 range 1 .. 2;
       Reserved_3_15 at 0 range 3 .. 15;
       TOP           at 0 range 16 .. 31;
    end record;
 
-   subtype FDCAN_TOCV_TOC_Field is HAL.UInt16;
+   subtype TOCV_TOC_Field is HAL.UInt16;
 
    --  FDCAN Timeout Counter Value Register
-   type FDCAN_TOCV_Register is record
+   type TOCV_Register is record
       --  Timeout Counter
-      TOC            : FDCAN_TOCV_TOC_Field := 16#0#;
+      TOC            : TOCV_TOC_Field := 16#0#;
       --  unspecified
       Reserved_16_31 : HAL.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TOCV_Register use record
+   for TOCV_Register use record
       TOC            at 0 range 0 .. 15;
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype FDCAN_ECR_TEC_Field is HAL.UInt8;
-   subtype FDCAN_ECR_TREC_Field is HAL.UInt7;
-   subtype FDCAN_ECR_CEL_Field is HAL.UInt8;
+   subtype ECR_TEC_Field is HAL.UInt8;
+   subtype ECR_TREC_Field is HAL.UInt7;
+   subtype ECR_CEL_Field is HAL.UInt8;
 
    --  FDCAN Error Counter Register
-   type FDCAN_ECR_Register is record
+   type ECR_Register is record
       --  Transmit Error Counter
-      TEC            : FDCAN_ECR_TEC_Field := 16#0#;
+      TEC            : ECR_TEC_Field := 16#0#;
       --  Receive Error Counter
-      TREC           : FDCAN_ECR_TREC_Field := 16#0#;
+      TREC           : ECR_TREC_Field := 16#0#;
       --  Receive Error Passive
       RP             : Boolean := False;
       --  AN Error Logging
-      CEL            : FDCAN_ECR_CEL_Field := 16#0#;
+      CEL            : ECR_CEL_Field := 16#0#;
       --  unspecified
       Reserved_24_31 : HAL.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_ECR_Register use record
+   for ECR_Register use record
       TEC            at 0 range 0 .. 7;
       TREC           at 0 range 8 .. 14;
       RP             at 0 range 15 .. 15;
@@ -479,17 +472,17 @@ package STM32_SVD.FDCAN is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype FDCAN_PSR_LEC_Field is HAL.UInt3;
-   subtype FDCAN_PSR_ACT_Field is HAL.UInt2;
-   subtype FDCAN_PSR_DLEC_Field is HAL.UInt3;
-   subtype FDCAN_PSR_TDCV_Field is HAL.UInt7;
+   subtype PSR_LEC_Field is HAL.UInt3;
+   subtype PSR_ACT_Field is HAL.UInt2;
+   subtype PSR_DLEC_Field is HAL.UInt3;
+   subtype PSR_TDCV_Field is HAL.UInt7;
 
    --  FDCAN Protocol Status Register
-   type FDCAN_PSR_Register is record
+   type PSR_Register is record
       --  Last Error Code
-      LEC            : FDCAN_PSR_LEC_Field := 16#0#;
+      LEC            : PSR_LEC_Field := 16#0#;
       --  Activity
-      ACT            : FDCAN_PSR_ACT_Field := 16#0#;
+      ACT            : PSR_ACT_Field := 16#0#;
       --  Error Passive
       EP             : Boolean := False;
       --  Warning Status
@@ -497,7 +490,7 @@ package STM32_SVD.FDCAN is
       --  Bus_Off Status
       BO             : Boolean := False;
       --  Data Last Error Code
-      DLEC           : FDCAN_PSR_DLEC_Field := 16#0#;
+      DLEC           : PSR_DLEC_Field := 16#0#;
       --  ESI flag of last received FDCAN Message
       RESI           : Boolean := False;
       --  BRS flag of last received FDCAN Message
@@ -509,14 +502,14 @@ package STM32_SVD.FDCAN is
       --  unspecified
       Reserved_15_15 : HAL.Bit := 16#0#;
       --  Transmitter Delay Compensation Value
-      TDCV           : FDCAN_PSR_TDCV_Field := 16#0#;
+      TDCV           : PSR_TDCV_Field := 16#0#;
       --  unspecified
       Reserved_23_31 : HAL.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_PSR_Register use record
+   for PSR_Register use record
       LEC            at 0 range 0 .. 2;
       ACT            at 0 range 3 .. 4;
       EP             at 0 range 5 .. 5;
@@ -532,24 +525,24 @@ package STM32_SVD.FDCAN is
       Reserved_23_31 at 0 range 23 .. 31;
    end record;
 
-   subtype FDCAN_TDCR_TDCF_Field is HAL.UInt7;
-   subtype FDCAN_TDCR_TDCO_Field is HAL.UInt7;
+   subtype TDCR_TDCF_Field is HAL.UInt7;
+   subtype TDCR_TDCO_Field is HAL.UInt7;
 
    --  FDCAN Transmitter Delay Compensation Register
-   type FDCAN_TDCR_Register is record
+   type TDCR_Register is record
       --  Read-only. Transmitter Delay Compensation Filter Window Length
-      TDCF           : FDCAN_TDCR_TDCF_Field;
+      TDCF           : TDCR_TDCF_Field;
       --  unspecified
       Reserved_7_7   : HAL.Bit;
       --  Read-only. Transmitter Delay Compensation Offset
-      TDCO           : FDCAN_TDCR_TDCO_Field;
+      TDCO           : TDCR_TDCO_Field;
       --  unspecified
       Reserved_15_31 : HAL.UInt17;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TDCR_Register use record
+   for TDCR_Register use record
       TDCF           at 0 range 0 .. 6;
       Reserved_7_7   at 0 range 7 .. 7;
       TDCO           at 0 range 8 .. 14;
@@ -557,7 +550,7 @@ package STM32_SVD.FDCAN is
    end record;
 
    --  FDCAN Interrupt Register
-   type FDCAN_IR_Register is record
+   type IR_Register_1 is record
       --  Read-only. Rx FIFO 0 New Message
       RF0N           : Boolean;
       --  Read-only. Rx FIFO 0 Full
@@ -623,7 +616,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_IR_Register use record
+   for IR_Register_1 use record
       RF0N           at 0 range 0 .. 0;
       RF0W           at 0 range 1 .. 1;
       RF0F           at 0 range 2 .. 2;
@@ -657,7 +650,7 @@ package STM32_SVD.FDCAN is
    end record;
 
    --  FDCAN Interrupt Enable Register
-   type FDCAN_IE_Register is record
+   type IE_Register_1 is record
       --  Read-only. Rx FIFO 0 New Message Enable
       RF0NE          : Boolean;
       --  Read-only. Rx FIFO 0 Full Enable
@@ -724,7 +717,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_IE_Register use record
+   for IE_Register_1 use record
       RF0NE          at 0 range 0 .. 0;
       RF0WE          at 0 range 1 .. 1;
       RF0FE          at 0 range 2 .. 2;
@@ -759,7 +752,7 @@ package STM32_SVD.FDCAN is
    end record;
 
    --  FDCAN Interrupt Line Select Register
-   type FDCAN_ILS_Register is record
+   type ILS_Register is record
       --  Read-only. Rx FIFO 0 New Message Interrupt Line
       RF0NL          : Boolean;
       --  Read-only. Rx FIFO 0 Watermark Reached Interrupt Line
@@ -783,7 +776,7 @@ package STM32_SVD.FDCAN is
       --  Read-only. Transmission Cancellation Finished Interrupt Line
       TCFL           : Boolean;
       --  Read-only. Tx FIFO Empty Interrupt Line
-      TEFL           : Boolean;
+      TFEL           : Boolean;
       --  Read-only. Tx Event FIFO New Entry Interrupt Line
       TEFNL          : Boolean;
       --  Read-only. Tx Event FIFO Watermark Reached Interrupt Line
@@ -826,7 +819,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_ILS_Register use record
+   for ILS_Register use record
       RF0NL          at 0 range 0 .. 0;
       RF0WL          at 0 range 1 .. 1;
       RF0FL          at 0 range 2 .. 2;
@@ -838,7 +831,7 @@ package STM32_SVD.FDCAN is
       HPML           at 0 range 8 .. 8;
       TCL            at 0 range 9 .. 9;
       TCFL           at 0 range 10 .. 10;
-      TEFL           at 0 range 11 .. 11;
+      TFEL           at 0 range 11 .. 11;
       TEFNL          at 0 range 12 .. 12;
       TEFWL          at 0 range 13 .. 13;
       TEFFL          at 0 range 14 .. 14;
@@ -860,12 +853,12 @@ package STM32_SVD.FDCAN is
       Reserved_30_31 at 0 range 30 .. 31;
    end record;
 
-   --  FDCAN_ILE_EINT array
-   type FDCAN_ILE_EINT_Field_Array is array (0 .. 1) of Boolean
+   --  ILE_EINT array
+   type ILE_EINT_Field_Array is array (0 .. 1) of Boolean
      with Component_Size => 1, Size => 2;
 
-   --  Type definition for FDCAN_ILE_EINT
-   type FDCAN_ILE_EINT_Field
+   --  Type definition for ILE_EINT
+   type ILE_EINT_Field
      (As_Array : Boolean := False)
    is record
       case As_Array is
@@ -874,52 +867,51 @@ package STM32_SVD.FDCAN is
             Val : HAL.UInt2;
          when True =>
             --  EINT as an array
-            Arr : FDCAN_ILE_EINT_Field_Array;
+            Arr : ILE_EINT_Field_Array;
       end case;
    end record
      with Unchecked_Union, Size => 2;
 
-   for FDCAN_ILE_EINT_Field use record
+   for ILE_EINT_Field use record
       Val at 0 range 0 .. 1;
       Arr at 0 range 0 .. 1;
    end record;
 
    --  FDCAN Interrupt Line Enable Register
-   type FDCAN_ILE_Register is record
+   type ILE_Register is record
       --  Enable Interrupt Line 0
-      EINT          : FDCAN_ILE_EINT_Field :=
-                       (As_Array => False, Val => 16#0#);
+      EINT          : ILE_EINT_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
       Reserved_2_31 : HAL.UInt30 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_ILE_Register use record
+   for ILE_Register use record
       EINT          at 0 range 0 .. 1;
       Reserved_2_31 at 0 range 2 .. 31;
    end record;
 
-   subtype FDCAN_GFC_ANFE_Field is HAL.UInt2;
-   subtype FDCAN_GFC_ANFS_Field is HAL.UInt2;
+   subtype GFC_ANFE_Field is HAL.UInt2;
+   subtype GFC_ANFS_Field is HAL.UInt2;
 
    --  FDCAN Global Filter Configuration Register
-   type FDCAN_GFC_Register is record
+   type GFC_Register is record
       --  Reject Remote Frames Extended
       RRFE          : Boolean := False;
       --  Reject Remote Frames Standard
       RRFS          : Boolean := False;
       --  Accept Non-matching Frames Extended
-      ANFE          : FDCAN_GFC_ANFE_Field := 16#0#;
+      ANFE          : GFC_ANFE_Field := 16#0#;
       --  Accept Non-matching Frames Standard
-      ANFS          : FDCAN_GFC_ANFS_Field := 16#0#;
+      ANFS          : GFC_ANFS_Field := 16#0#;
       --  unspecified
       Reserved_6_31 : HAL.UInt26 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_GFC_Register use record
+   for GFC_Register use record
       RRFE          at 0 range 0 .. 0;
       RRFS          at 0 range 1 .. 1;
       ANFE          at 0 range 2 .. 3;
@@ -927,83 +919,83 @@ package STM32_SVD.FDCAN is
       Reserved_6_31 at 0 range 6 .. 31;
    end record;
 
-   subtype FDCAN_SIDFC_FLSSA_Field is HAL.UInt14;
-   subtype FDCAN_SIDFC_LSS_Field is HAL.UInt8;
+   subtype SIDFC_FLSSA_Field is HAL.UInt14;
+   subtype SIDFC_LSS_Field is HAL.UInt8;
 
    --  FDCAN Standard ID Filter Configuration Register
-   type FDCAN_SIDFC_Register is record
+   type SIDFC_Register is record
       --  unspecified
       Reserved_0_1   : HAL.UInt2 := 16#0#;
       --  Filter List Standard Start Address
-      FLSSA          : FDCAN_SIDFC_FLSSA_Field := 16#0#;
+      FLSSA          : SIDFC_FLSSA_Field := 16#0#;
       --  List Size Standard
-      LSS            : FDCAN_SIDFC_LSS_Field := 16#0#;
+      LSS            : SIDFC_LSS_Field := 16#0#;
       --  unspecified
       Reserved_24_31 : HAL.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_SIDFC_Register use record
+   for SIDFC_Register use record
       Reserved_0_1   at 0 range 0 .. 1;
       FLSSA          at 0 range 2 .. 15;
       LSS            at 0 range 16 .. 23;
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype FDCAN_XIDFC_FLESA_Field is HAL.UInt14;
-   subtype FDCAN_XIDFC_LSE_Field is HAL.UInt8;
+   subtype XIDFC_FLESA_Field is HAL.UInt14;
+   subtype XIDFC_LSE_Field is HAL.UInt8;
 
    --  FDCAN Extended ID Filter Configuration Register
-   type FDCAN_XIDFC_Register is record
+   type XIDFC_Register is record
       --  unspecified
       Reserved_0_1   : HAL.UInt2 := 16#0#;
       --  Filter List Standard Start Address
-      FLESA          : FDCAN_XIDFC_FLESA_Field := 16#0#;
+      FLESA          : XIDFC_FLESA_Field := 16#0#;
       --  List Size Extended
-      LSE            : FDCAN_XIDFC_LSE_Field := 16#0#;
+      LSE            : XIDFC_LSE_Field := 16#0#;
       --  unspecified
       Reserved_24_31 : HAL.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_XIDFC_Register use record
+   for XIDFC_Register use record
       Reserved_0_1   at 0 range 0 .. 1;
       FLESA          at 0 range 2 .. 15;
       LSE            at 0 range 16 .. 23;
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype FDCAN_XIDAM_EIDM_Field is HAL.UInt29;
+   subtype XIDAM_EIDM_Field is HAL.UInt29;
 
    --  FDCAN Extended ID and Mask Register
-   type FDCAN_XIDAM_Register is record
+   type XIDAM_Register is record
       --  Extended ID Mask
-      EIDM           : FDCAN_XIDAM_EIDM_Field := 16#0#;
+      EIDM           : XIDAM_EIDM_Field := 16#0#;
       --  unspecified
       Reserved_29_31 : HAL.UInt3 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_XIDAM_Register use record
+   for XIDAM_Register use record
       EIDM           at 0 range 0 .. 28;
       Reserved_29_31 at 0 range 29 .. 31;
    end record;
 
-   subtype FDCAN_HPMS_BIDX_Field is HAL.UInt6;
-   subtype FDCAN_HPMS_MSI_Field is HAL.UInt2;
-   subtype FDCAN_HPMS_FIDX_Field is HAL.UInt7;
+   subtype HPMS_BIDX_Field is HAL.UInt6;
+   subtype HPMS_MSI_Field is HAL.UInt2;
+   subtype HPMS_FIDX_Field is HAL.UInt7;
 
    --  FDCAN High Priority Message Status Register
-   type FDCAN_HPMS_Register is record
+   type HPMS_Register is record
       --  Read-only. Buffer Index
-      BIDX           : FDCAN_HPMS_BIDX_Field;
+      BIDX           : HPMS_BIDX_Field;
       --  Read-only. Message Storage Indicator
-      MSI            : FDCAN_HPMS_MSI_Field;
+      MSI            : HPMS_MSI_Field;
       --  Read-only. Filter Index
-      FIDX           : FDCAN_HPMS_FIDX_Field;
+      FIDX           : HPMS_FIDX_Field;
       --  Read-only. Filter List
       FLST           : Boolean;
       --  unspecified
@@ -1012,7 +1004,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_HPMS_Register use record
+   for HPMS_Register use record
       BIDX           at 0 range 0 .. 5;
       MSI            at 0 range 6 .. 7;
       FIDX           at 0 range 8 .. 14;
@@ -1020,12 +1012,12 @@ package STM32_SVD.FDCAN is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   --  FDCAN_NDAT1_ND array
-   type FDCAN_NDAT1_ND_Field_Array is array (0 .. 31) of Boolean
+   --  NDAT1_ND array
+   type NDAT1_ND_Field_Array is array (0 .. 31) of Boolean
      with Component_Size => 1, Size => 32;
 
    --  FDCAN New Data 1 Register
-   type FDCAN_NDAT1_Register
+   type NDAT1_Register
      (As_Array : Boolean := False)
    is record
       case As_Array is
@@ -1034,23 +1026,23 @@ package STM32_SVD.FDCAN is
             Val : HAL.UInt32;
          when True =>
             --  ND as an array
-            Arr : FDCAN_NDAT1_ND_Field_Array;
+            Arr : NDAT1_ND_Field_Array;
       end case;
    end record
      with Unchecked_Union, Size => 32, Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_NDAT1_Register use record
+   for NDAT1_Register use record
       Val at 0 range 0 .. 31;
       Arr at 0 range 0 .. 31;
    end record;
 
-   --  FDCAN_NDAT2_ND array
-   type FDCAN_NDAT2_ND_Field_Array is array (32 .. 63) of Boolean
+   --  NDAT2_ND array
+   type NDAT2_ND_Field_Array is array (32 .. 63) of Boolean
      with Component_Size => 1, Size => 32;
 
    --  FDCAN New Data 2 Register
-   type FDCAN_NDAT2_Register
+   type NDAT2_Register
      (As_Array : Boolean := False)
    is record
       case As_Array is
@@ -1059,58 +1051,64 @@ package STM32_SVD.FDCAN is
             Val : HAL.UInt32;
          when True =>
             --  ND as an array
-            Arr : FDCAN_NDAT2_ND_Field_Array;
+            Arr : NDAT2_ND_Field_Array;
       end case;
    end record
      with Unchecked_Union, Size => 32, Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_NDAT2_Register use record
+   for NDAT2_Register use record
       Val at 0 range 0 .. 31;
       Arr at 0 range 0 .. 31;
    end record;
 
-   subtype FDCAN_RXF0C_F0SA_Field is HAL.UInt14;
-   subtype FDCAN_RXF0C_F0S_Field is HAL.UInt8;
-   subtype FDCAN_RXF0C_F0WM_Field is HAL.UInt8;
+   subtype RXF0C_F0SA_Field is HAL.UInt14;
+   subtype RXF0C_F0S_Field is HAL.UInt7;
+   subtype RXF0C_F0WM_Field is HAL.UInt7;
 
    --  FDCAN Rx FIFO 0 Configuration Register
-   type FDCAN_RXF0C_Register is record
+   type RXF0C_Register is record
       --  unspecified
-      Reserved_0_1 : HAL.UInt2 := 16#0#;
+      Reserved_0_1   : HAL.UInt2 := 16#0#;
       --  Rx FIFO 0 Start Address
-      F0SA         : FDCAN_RXF0C_F0SA_Field := 16#0#;
+      F0SA           : RXF0C_F0SA_Field := 16#0#;
       --  Rx FIFO 0 Size
-      F0S          : FDCAN_RXF0C_F0S_Field := 16#0#;
+      F0S            : RXF0C_F0S_Field := 16#0#;
+      --  unspecified
+      Reserved_23_23 : HAL.Bit := 16#0#;
       --  FIFO 0 Watermark
-      F0WM         : FDCAN_RXF0C_F0WM_Field := 16#0#;
+      F0WM           : RXF0C_F0WM_Field := 16#0#;
+      --  FIFO 0 operation mode
+      F0OM           : Boolean := False;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_RXF0C_Register use record
-      Reserved_0_1 at 0 range 0 .. 1;
-      F0SA         at 0 range 2 .. 15;
-      F0S          at 0 range 16 .. 23;
-      F0WM         at 0 range 24 .. 31;
+   for RXF0C_Register use record
+      Reserved_0_1   at 0 range 0 .. 1;
+      F0SA           at 0 range 2 .. 15;
+      F0S            at 0 range 16 .. 22;
+      Reserved_23_23 at 0 range 23 .. 23;
+      F0WM           at 0 range 24 .. 30;
+      F0OM           at 0 range 31 .. 31;
    end record;
 
-   subtype FDCAN_RXF0S_F0FL_Field is HAL.UInt7;
-   subtype FDCAN_RXF0S_F0G_Field is HAL.UInt6;
-   subtype FDCAN_RXF0S_F0P_Field is HAL.UInt6;
+   subtype RXF0S_F0FL_Field is HAL.UInt7;
+   subtype RXF0S_F0G_Field is HAL.UInt6;
+   subtype RXF0S_F0P_Field is HAL.UInt6;
 
    --  FDCAN Rx FIFO 0 Status Register
-   type FDCAN_RXF0S_Register is record
+   type RXF0S_Register is record
       --  Rx FIFO 0 Fill Level
-      F0FL           : FDCAN_RXF0S_F0FL_Field := 16#0#;
+      F0FL           : RXF0S_F0FL_Field := 16#0#;
       --  unspecified
       Reserved_7_7   : HAL.Bit := 16#0#;
       --  Rx FIFO 0 Get Index
-      F0G            : FDCAN_RXF0S_F0G_Field := 16#0#;
+      F0G            : RXF0S_F0G_Field := 16#0#;
       --  unspecified
       Reserved_14_15 : HAL.UInt2 := 16#0#;
       --  Rx FIFO 0 Put Index
-      F0P            : FDCAN_RXF0S_F0P_Field := 16#0#;
+      F0P            : RXF0S_F0P_Field := 16#0#;
       --  unspecified
       Reserved_22_23 : HAL.UInt2 := 16#0#;
       --  Rx FIFO 0 Full
@@ -1123,7 +1121,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_RXF0S_Register use record
+   for RXF0S_Register use record
       F0FL           at 0 range 0 .. 6;
       Reserved_7_7   at 0 range 7 .. 7;
       F0G            at 0 range 8 .. 13;
@@ -1135,91 +1133,91 @@ package STM32_SVD.FDCAN is
       Reserved_26_31 at 0 range 26 .. 31;
    end record;
 
-   subtype FDCAN_RXF0A_FA01_Field is HAL.UInt6;
+   subtype RXF0A_FA01_Field is HAL.UInt6;
 
    --  CAN Rx FIFO 0 Acknowledge Register
-   type FDCAN_RXF0A_Register is record
+   type RXF0A_Register is record
       --  Rx FIFO 0 Acknowledge Index
-      FA01          : FDCAN_RXF0A_FA01_Field := 16#0#;
+      FA01          : RXF0A_FA01_Field := 16#0#;
       --  unspecified
       Reserved_6_31 : HAL.UInt26 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_RXF0A_Register use record
+   for RXF0A_Register use record
       FA01          at 0 range 0 .. 5;
       Reserved_6_31 at 0 range 6 .. 31;
    end record;
 
-   subtype FDCAN_RXBC_RBSA_Field is HAL.UInt14;
+   subtype RXBC_RBSA_Field is HAL.UInt14;
 
    --  FDCAN Rx Buffer Configuration Register
-   type FDCAN_RXBC_Register is record
+   type RXBC_Register is record
       --  unspecified
       Reserved_0_1   : HAL.UInt2 := 16#0#;
       --  Rx Buffer Start Address
-      RBSA           : FDCAN_RXBC_RBSA_Field := 16#0#;
+      RBSA           : RXBC_RBSA_Field := 16#0#;
       --  unspecified
       Reserved_16_31 : HAL.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_RXBC_Register use record
+   for RXBC_Register use record
       Reserved_0_1   at 0 range 0 .. 1;
       RBSA           at 0 range 2 .. 15;
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype FDCAN_RXF1C_F1SA_Field is HAL.UInt14;
-   subtype FDCAN_RXF1C_F1S_Field is HAL.UInt7;
-   subtype FDCAN_RXF1C_F1WM_Field is HAL.UInt7;
+   subtype RXF1C_F1SA_Field is HAL.UInt14;
+   subtype RXF1C_F1S_Field is HAL.UInt7;
+   subtype RXF1C_F1WM_Field is HAL.UInt7;
 
    --  FDCAN Rx FIFO 1 Configuration Register
-   type FDCAN_RXF1C_Register is record
+   type RXF1C_Register is record
       --  unspecified
       Reserved_0_1   : HAL.UInt2 := 16#0#;
       --  Rx FIFO 1 Start Address
-      F1SA           : FDCAN_RXF1C_F1SA_Field := 16#0#;
+      F1SA           : RXF1C_F1SA_Field := 16#0#;
       --  Rx FIFO 1 Size
-      F1S            : FDCAN_RXF1C_F1S_Field := 16#0#;
+      F1S            : RXF1C_F1S_Field := 16#0#;
       --  unspecified
       Reserved_23_23 : HAL.Bit := 16#0#;
       --  Rx FIFO 1 Watermark
-      F1WM           : FDCAN_RXF1C_F1WM_Field := 16#0#;
-      --  unspecified
-      Reserved_31_31 : HAL.Bit := 16#0#;
+      F1WM           : RXF1C_F1WM_Field := 16#0#;
+      --  FIFO 1 operation mode
+      F1OM           : Boolean := False;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_RXF1C_Register use record
+   for RXF1C_Register use record
       Reserved_0_1   at 0 range 0 .. 1;
       F1SA           at 0 range 2 .. 15;
       F1S            at 0 range 16 .. 22;
       Reserved_23_23 at 0 range 23 .. 23;
       F1WM           at 0 range 24 .. 30;
-      Reserved_31_31 at 0 range 31 .. 31;
+      F1OM           at 0 range 31 .. 31;
    end record;
 
-   subtype FDCAN_RXF1S_F1FL_Field is HAL.UInt7;
-   subtype FDCAN_RXF1S_F1GI_Field is HAL.UInt7;
-   subtype FDCAN_RXF1S_F1PI_Field is HAL.UInt7;
-   subtype FDCAN_RXF1S_DMS_Field is HAL.UInt2;
+   subtype RXF1S_F1FL_Field is HAL.UInt7;
+   subtype RXF1S_F1GI_Field is HAL.UInt7;
+   subtype RXF1S_F1PI_Field is HAL.UInt7;
+   subtype RXF1S_DMS_Field is HAL.UInt2;
 
    --  FDCAN Rx FIFO 1 Status Register
-   type FDCAN_RXF1S_Register is record
+   type RXF1S_Register is record
       --  Rx FIFO 1 Fill Level
-      F1FL           : FDCAN_RXF1S_F1FL_Field := 16#0#;
+      F1FL           : RXF1S_F1FL_Field := 16#0#;
       --  unspecified
       Reserved_7_7   : HAL.Bit := 16#0#;
       --  Rx FIFO 1 Get Index
-      F1GI           : FDCAN_RXF1S_F1GI_Field := 16#0#;
+      F1GI           : RXF1S_F1GI_Field := 16#0#;
       --  unspecified
       Reserved_15_15 : HAL.Bit := 16#0#;
       --  Rx FIFO 1 Put Index
-      F1PI           : FDCAN_RXF1S_F1PI_Field := 16#0#;
+      F1PI           : RXF1S_F1PI_Field := 16#0#;
       --  unspecified
       Reserved_23_23 : HAL.Bit := 16#0#;
       --  Rx FIFO 1 Full
@@ -1229,12 +1227,12 @@ package STM32_SVD.FDCAN is
       --  unspecified
       Reserved_26_29 : HAL.UInt4 := 16#0#;
       --  Debug Message Status
-      DMS            : FDCAN_RXF1S_DMS_Field := 16#0#;
+      DMS            : RXF1S_DMS_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_RXF1S_Register use record
+   for RXF1S_Register use record
       F1FL           at 0 range 0 .. 6;
       Reserved_7_7   at 0 range 7 .. 7;
       F1GI           at 0 range 8 .. 14;
@@ -1247,46 +1245,46 @@ package STM32_SVD.FDCAN is
       DMS            at 0 range 30 .. 31;
    end record;
 
-   subtype FDCAN_RXF1A_F1AI_Field is HAL.UInt6;
+   subtype RXF1A_F1AI_Field is HAL.UInt6;
 
    --  FDCAN Rx FIFO 1 Acknowledge Register
-   type FDCAN_RXF1A_Register is record
+   type RXF1A_Register is record
       --  Rx FIFO 1 Acknowledge Index
-      F1AI          : FDCAN_RXF1A_F1AI_Field := 16#0#;
+      F1AI          : RXF1A_F1AI_Field := 16#0#;
       --  unspecified
       Reserved_6_31 : HAL.UInt26 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_RXF1A_Register use record
+   for RXF1A_Register use record
       F1AI          at 0 range 0 .. 5;
       Reserved_6_31 at 0 range 6 .. 31;
    end record;
 
-   subtype FDCAN_RXESC_F0DS_Field is HAL.UInt3;
-   subtype FDCAN_RXESC_F1DS_Field is HAL.UInt3;
-   subtype FDCAN_RXESC_RBDS_Field is HAL.UInt3;
+   subtype RXESC_F0DS_Field is HAL.UInt3;
+   subtype RXESC_F1DS_Field is HAL.UInt3;
+   subtype RXESC_RBDS_Field is HAL.UInt3;
 
    --  FDCAN Rx Buffer Element Size Configuration Register
-   type FDCAN_RXESC_Register is record
+   type RXESC_Register is record
       --  Rx FIFO 1 Data Field Size:
-      F0DS           : FDCAN_RXESC_F0DS_Field := 16#0#;
+      F0DS           : RXESC_F0DS_Field := 16#0#;
       --  unspecified
       Reserved_3_3   : HAL.Bit := 16#0#;
       --  Rx FIFO 0 Data Field Size:
-      F1DS           : FDCAN_RXESC_F1DS_Field := 16#0#;
+      F1DS           : RXESC_F1DS_Field := 16#0#;
       --  unspecified
       Reserved_7_7   : HAL.Bit := 16#0#;
       --  Rx Buffer Data Field Size:
-      RBDS           : FDCAN_RXESC_RBDS_Field := 16#0#;
+      RBDS           : RXESC_RBDS_Field := 16#0#;
       --  unspecified
       Reserved_11_31 : HAL.UInt21 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_RXESC_Register use record
+   for RXESC_Register use record
       F0DS           at 0 range 0 .. 2;
       Reserved_3_3   at 0 range 3 .. 3;
       F1DS           at 0 range 4 .. 6;
@@ -1295,22 +1293,22 @@ package STM32_SVD.FDCAN is
       Reserved_11_31 at 0 range 11 .. 31;
    end record;
 
-   subtype FDCAN_TXBC_TBSA_Field is HAL.UInt14;
-   subtype FDCAN_TXBC_NDTB_Field is HAL.UInt6;
-   subtype FDCAN_TXBC_TFQS_Field is HAL.UInt6;
+   subtype TXBC_TBSA_Field is HAL.UInt14;
+   subtype TXBC_NDTB_Field is HAL.UInt6;
+   subtype TXBC_TFQS_Field is HAL.UInt6;
 
    --  FDCAN Tx Buffer Configuration Register
-   type FDCAN_TXBC_Register is record
+   type TXBC_Register is record
       --  unspecified
       Reserved_0_1   : HAL.UInt2 := 16#0#;
       --  Tx Buffers Start Address
-      TBSA           : FDCAN_TXBC_TBSA_Field := 16#0#;
+      TBSA           : TXBC_TBSA_Field := 16#0#;
       --  Number of Dedicated Transmit Buffers
-      NDTB           : FDCAN_TXBC_NDTB_Field := 16#0#;
+      NDTB           : TXBC_NDTB_Field := 16#0#;
       --  unspecified
       Reserved_22_23 : HAL.UInt2 := 16#0#;
       --  Transmit FIFO/Queue Size
-      TFQS           : FDCAN_TXBC_TFQS_Field := 16#0#;
+      TFQS           : TXBC_TFQS_Field := 16#0#;
       --  Tx FIFO/Queue Mode
       TFQM           : Boolean := False;
       --  unspecified
@@ -1319,7 +1317,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TXBC_Register use record
+   for TXBC_Register use record
       Reserved_0_1   at 0 range 0 .. 1;
       TBSA           at 0 range 2 .. 15;
       NDTB           at 0 range 16 .. 21;
@@ -1329,22 +1327,22 @@ package STM32_SVD.FDCAN is
       Reserved_31_31 at 0 range 31 .. 31;
    end record;
 
-   subtype FDCAN_TXFQS_TFFL_Field is HAL.UInt6;
-   subtype FDCAN_TXFQS_TFGI_Field is HAL.UInt5;
-   subtype FDCAN_TXFQS_TFQPI_Field is HAL.UInt5;
+   subtype TXFQS_TFFL_Field is HAL.UInt6;
+   subtype TXFQS_TFGI_Field is HAL.UInt5;
+   subtype TXFQS_TFQPI_Field is HAL.UInt5;
 
    --  FDCAN Tx FIFO/Queue Status Register
-   type FDCAN_TXFQS_Register is record
+   type TXFQS_Register is record
       --  Read-only. Tx FIFO Free Level
-      TFFL           : FDCAN_TXFQS_TFFL_Field;
+      TFFL           : TXFQS_TFFL_Field;
       --  unspecified
       Reserved_6_7   : HAL.UInt2;
       --  Read-only. TFGI
-      TFGI           : FDCAN_TXFQS_TFGI_Field;
+      TFGI           : TXFQS_TFGI_Field;
       --  unspecified
       Reserved_13_15 : HAL.UInt3;
       --  Read-only. Tx FIFO/Queue Put Index
-      TFQPI          : FDCAN_TXFQS_TFQPI_Field;
+      TFQPI          : TXFQS_TFQPI_Field;
       --  Read-only. Tx FIFO/Queue Full
       TFQF           : Boolean;
       --  unspecified
@@ -1353,7 +1351,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TXFQS_Register use record
+   for TXFQS_Register use record
       TFFL           at 0 range 0 .. 5;
       Reserved_6_7   at 0 range 6 .. 7;
       TFGI           at 0 range 8 .. 12;
@@ -1363,46 +1361,46 @@ package STM32_SVD.FDCAN is
       Reserved_22_31 at 0 range 22 .. 31;
    end record;
 
-   subtype FDCAN_TXESC_TBDS_Field is HAL.UInt3;
+   subtype TXESC_TBDS_Field is HAL.UInt3;
 
    --  FDCAN Tx Buffer Element Size Configuration Register
-   type FDCAN_TXESC_Register is record
+   type TXESC_Register is record
       --  Tx Buffer Data Field Size:
-      TBDS          : FDCAN_TXESC_TBDS_Field := 16#0#;
+      TBDS          : TXESC_TBDS_Field := 16#0#;
       --  unspecified
       Reserved_3_31 : HAL.UInt29 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TXESC_Register use record
+   for TXESC_Register use record
       TBDS          at 0 range 0 .. 2;
       Reserved_3_31 at 0 range 3 .. 31;
    end record;
 
-   subtype FDCAN_TXEFC_EFSA_Field is HAL.UInt14;
-   subtype FDCAN_TXEFC_EFS_Field is HAL.UInt6;
-   subtype FDCAN_TXEFC_EFWM_Field is HAL.UInt6;
+   subtype TXEFC_EFSA_Field is HAL.UInt14;
+   subtype TXEFC_EFS_Field is HAL.UInt6;
+   subtype TXEFC_EFWM_Field is HAL.UInt6;
 
    --  FDCAN Tx Event FIFO Configuration Register
-   type FDCAN_TXEFC_Register is record
+   type TXEFC_Register is record
       --  unspecified
       Reserved_0_1   : HAL.UInt2 := 16#0#;
       --  Event FIFO Start Address
-      EFSA           : FDCAN_TXEFC_EFSA_Field := 16#0#;
+      EFSA           : TXEFC_EFSA_Field := 16#0#;
       --  Event FIFO Size
-      EFS            : FDCAN_TXEFC_EFS_Field := 16#0#;
+      EFS            : TXEFC_EFS_Field := 16#0#;
       --  unspecified
       Reserved_22_23 : HAL.UInt2 := 16#0#;
       --  Event FIFO Watermark
-      EFWM           : FDCAN_TXEFC_EFWM_Field := 16#0#;
+      EFWM           : TXEFC_EFWM_Field := 16#0#;
       --  unspecified
       Reserved_30_31 : HAL.UInt2 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TXEFC_Register use record
+   for TXEFC_Register use record
       Reserved_0_1   at 0 range 0 .. 1;
       EFSA           at 0 range 2 .. 15;
       EFS            at 0 range 16 .. 21;
@@ -1411,17 +1409,17 @@ package STM32_SVD.FDCAN is
       Reserved_30_31 at 0 range 30 .. 31;
    end record;
 
-   subtype FDCAN_TXEFS_EFFL_Field is HAL.UInt6;
-   subtype FDCAN_TXEFS_EFGI_Field is HAL.UInt5;
+   subtype TXEFS_EFFL_Field is HAL.UInt6;
+   subtype TXEFS_EFGI_Field is HAL.UInt5;
 
    --  FDCAN Tx Event FIFO Status Register
-   type FDCAN_TXEFS_Register is record
+   type TXEFS_Register is record
       --  Event FIFO Fill Level
-      EFFL           : FDCAN_TXEFS_EFFL_Field := 16#0#;
+      EFFL           : TXEFS_EFFL_Field := 16#0#;
       --  unspecified
       Reserved_6_7   : HAL.UInt2 := 16#0#;
       --  Event FIFO Get Index.
-      EFGI           : FDCAN_TXEFS_EFGI_Field := 16#0#;
+      EFGI           : TXEFS_EFGI_Field := 16#0#;
       --  unspecified
       Reserved_13_23 : HAL.UInt11 := 16#0#;
       --  Event FIFO Full.
@@ -1434,7 +1432,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TXEFS_Register use record
+   for TXEFS_Register use record
       EFFL           at 0 range 0 .. 5;
       Reserved_6_7   at 0 range 6 .. 7;
       EFGI           at 0 range 8 .. 12;
@@ -1444,53 +1442,53 @@ package STM32_SVD.FDCAN is
       Reserved_26_31 at 0 range 26 .. 31;
    end record;
 
-   subtype FDCAN_TXEFA_EFAI_Field is HAL.UInt5;
+   subtype TXEFA_EFAI_Field is HAL.UInt5;
 
    --  FDCAN Tx Event FIFO Acknowledge Register
-   type FDCAN_TXEFA_Register is record
+   type TXEFA_Register is record
       --  Event FIFO Acknowledge Index
-      EFAI          : FDCAN_TXEFA_EFAI_Field := 16#0#;
+      EFAI          : TXEFA_EFAI_Field := 16#0#;
       --  unspecified
       Reserved_5_31 : HAL.UInt27 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TXEFA_Register use record
+   for TXEFA_Register use record
       EFAI          at 0 range 0 .. 4;
       Reserved_5_31 at 0 range 5 .. 31;
    end record;
 
-   subtype FDCAN_TTTMC_TMSA_Field is HAL.UInt14;
-   subtype FDCAN_TTTMC_TME_Field is HAL.UInt7;
+   subtype TTTMC_TMSA_Field is HAL.UInt14;
+   subtype TTTMC_TME_Field is HAL.UInt7;
 
    --  FDCAN TT Trigger Memory Configuration Register
-   type FDCAN_TTTMC_Register is record
+   type TTTMC_Register is record
       --  unspecified
       Reserved_0_1   : HAL.UInt2 := 16#0#;
       --  Trigger Memory Start Address
-      TMSA           : FDCAN_TTTMC_TMSA_Field := 16#0#;
+      TMSA           : TTTMC_TMSA_Field := 16#0#;
       --  Trigger Memory Elements
-      TME            : FDCAN_TTTMC_TME_Field := 16#0#;
+      TME            : TTTMC_TME_Field := 16#0#;
       --  unspecified
       Reserved_23_31 : HAL.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTTMC_Register use record
+   for TTTMC_Register use record
       Reserved_0_1   at 0 range 0 .. 1;
       TMSA           at 0 range 2 .. 15;
       TME            at 0 range 16 .. 22;
       Reserved_23_31 at 0 range 23 .. 31;
    end record;
 
-   subtype FDCAN_TTRMC_RID_Field is HAL.UInt29;
+   subtype TTRMC_RID_Field is HAL.UInt29;
 
    --  FDCAN TT Reference Message Configuration Register
-   type FDCAN_TTRMC_Register is record
+   type TTRMC_Register is record
       --  Reference Identifier.
-      RID            : FDCAN_TTRMC_RID_Field := 16#0#;
+      RID            : TTRMC_RID_Field := 16#0#;
       --  unspecified
       Reserved_29_29 : HAL.Bit := 16#0#;
       --  Extended Identifier
@@ -1501,22 +1499,22 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTRMC_Register use record
+   for TTRMC_Register use record
       RID            at 0 range 0 .. 28;
       Reserved_29_29 at 0 range 29 .. 29;
       XTD            at 0 range 30 .. 30;
       RMPS           at 0 range 31 .. 31;
    end record;
 
-   subtype FDCAN_TTOCF_OM_Field is HAL.UInt2;
-   subtype FDCAN_TTOCF_LDSDL_Field is HAL.UInt3;
-   subtype FDCAN_TTOCF_IRTO_Field is HAL.UInt7;
-   subtype FDCAN_TTOCF_AWL_Field is HAL.UInt8;
+   subtype TTOCF_OM_Field is HAL.UInt2;
+   subtype TTOCF_LDSDL_Field is HAL.UInt3;
+   subtype TTOCF_IRTO_Field is HAL.UInt7;
+   subtype TTOCF_AWL_Field is HAL.UInt8;
 
    --  FDCAN TT Operation Configuration Register
-   type FDCAN_TTOCF_Register is record
+   type TTOCF_Register is record
       --  Operation Mode
-      OM             : FDCAN_TTOCF_OM_Field := 16#0#;
+      OM             : TTOCF_OM_Field := 16#0#;
       --  unspecified
       Reserved_2_2   : HAL.Bit := 16#0#;
       --  Gap Enable
@@ -1524,13 +1522,13 @@ package STM32_SVD.FDCAN is
       --  Time Master
       TM             : Boolean := False;
       --  LD of Synchronization Deviation Limit
-      LDSDL          : FDCAN_TTOCF_LDSDL_Field := 16#0#;
+      LDSDL          : TTOCF_LDSDL_Field := 16#0#;
       --  Initial Reference Trigger Offset
-      IRTO           : FDCAN_TTOCF_IRTO_Field := 16#0#;
+      IRTO           : TTOCF_IRTO_Field := 16#0#;
       --  Enable External Clock Synchronization
       EECS           : Boolean := False;
       --  Application Watchdog Limit
-      AWL            : FDCAN_TTOCF_AWL_Field := 16#0#;
+      AWL            : TTOCF_AWL_Field := 16#0#;
       --  Enable Global Time Filtering
       EGTF           : Boolean := False;
       --  Enable Clock Calibration
@@ -1543,7 +1541,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTOCF_Register use record
+   for TTOCF_Register use record
       OM             at 0 range 0 .. 1;
       Reserved_2_2   at 0 range 2 .. 2;
       GEN            at 0 range 3 .. 3;
@@ -1558,30 +1556,30 @@ package STM32_SVD.FDCAN is
       Reserved_27_31 at 0 range 27 .. 31;
    end record;
 
-   subtype FDCAN_TTMLM_CCM_Field is HAL.UInt6;
-   subtype FDCAN_TTMLM_CSS_Field is HAL.UInt2;
-   subtype FDCAN_TTMLM_TXEW_Field is HAL.UInt4;
-   subtype FDCAN_TTMLM_ENTT_Field is HAL.UInt12;
+   subtype TTMLM_CCM_Field is HAL.UInt6;
+   subtype TTMLM_CSS_Field is HAL.UInt2;
+   subtype TTMLM_TXEW_Field is HAL.UInt4;
+   subtype TTMLM_ENTT_Field is HAL.UInt12;
 
    --  FDCAN TT Matrix Limits Register
-   type FDCAN_TTMLM_Register is record
+   type TTMLM_Register is record
       --  Cycle Count Max
-      CCM            : FDCAN_TTMLM_CCM_Field := 16#0#;
+      CCM            : TTMLM_CCM_Field := 16#0#;
       --  Cycle Start Synchronization
-      CSS            : FDCAN_TTMLM_CSS_Field := 16#0#;
+      CSS            : TTMLM_CSS_Field := 16#0#;
       --  Tx Enable Window
-      TXEW           : FDCAN_TTMLM_TXEW_Field := 16#0#;
+      TXEW           : TTMLM_TXEW_Field := 16#0#;
       --  unspecified
       Reserved_12_15 : HAL.UInt4 := 16#0#;
       --  Expected Number of Tx Triggers
-      ENTT           : FDCAN_TTMLM_ENTT_Field := 16#0#;
+      ENTT           : TTMLM_ENTT_Field := 16#0#;
       --  unspecified
       Reserved_28_31 : HAL.UInt4 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTMLM_Register use record
+   for TTMLM_Register use record
       CCM            at 0 range 0 .. 5;
       CSS            at 0 range 6 .. 7;
       TXEW           at 0 range 8 .. 11;
@@ -1590,15 +1588,15 @@ package STM32_SVD.FDCAN is
       Reserved_28_31 at 0 range 28 .. 31;
    end record;
 
-   subtype FDCAN_TURCF_NCL_Field is HAL.UInt16;
-   subtype FDCAN_TURCF_DC_Field is HAL.UInt14;
+   subtype TURCF_NCL_Field is HAL.UInt16;
+   subtype TURCF_DC_Field is HAL.UInt14;
 
    --  FDCAN TUR Configuration Register
-   type FDCAN_TURCF_Register is record
+   type TURCF_Register is record
       --  Numerator Configuration Low.
-      NCL            : FDCAN_TURCF_NCL_Field := 16#0#;
+      NCL            : TURCF_NCL_Field := 16#0#;
       --  Denominator Configuration.
-      DC             : FDCAN_TURCF_DC_Field := 16#0#;
+      DC             : TURCF_DC_Field := 16#0#;
       --  unspecified
       Reserved_30_30 : HAL.Bit := 16#0#;
       --  Enable Local Time
@@ -1607,18 +1605,18 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TURCF_Register use record
+   for TURCF_Register use record
       NCL            at 0 range 0 .. 15;
       DC             at 0 range 16 .. 29;
       Reserved_30_30 at 0 range 30 .. 30;
       ELT            at 0 range 31 .. 31;
    end record;
 
-   subtype FDCAN_TTOCN_SWS_Field is HAL.UInt2;
-   subtype FDCAN_TTOCN_TMC_Field is HAL.UInt2;
+   subtype TTOCN_SWS_Field is HAL.UInt2;
+   subtype TTOCN_TMC_Field is HAL.UInt2;
 
    --  FDCAN TT Operation Control Register
-   type FDCAN_TTOCN_Register is record
+   type TTOCN_Register is record
       --  Set Global time
       SGT            : Boolean := False;
       --  External Clock Synchronization
@@ -1626,11 +1624,11 @@ package STM32_SVD.FDCAN is
       --  Stop Watch Polarity
       SWP            : Boolean := False;
       --  Stop Watch Source.
-      SWS            : FDCAN_TTOCN_SWS_Field := 16#0#;
+      SWS            : TTOCN_SWS_Field := 16#0#;
       --  Register Time Mark Interrupt Pulse Enable
       RTIE           : Boolean := False;
       --  Register Time Mark Compare
-      TMC            : FDCAN_TTOCN_TMC_Field := 16#0#;
+      TMC            : TTOCN_TMC_Field := 16#0#;
       --  Trigger Time Mark Interrupt Pulse Enable
       TTIE           : Boolean := False;
       --  Gap Control Select
@@ -1653,7 +1651,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTOCN_Register use record
+   for TTOCN_Register use record
       SGT            at 0 range 0 .. 0;
       ECS            at 0 range 1 .. 1;
       SWP            at 0 range 2 .. 2;
@@ -1671,33 +1669,33 @@ package STM32_SVD.FDCAN is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype CAN_TTGTP_NCL_Field is HAL.UInt16;
-   subtype CAN_TTGTP_CTP_Field is HAL.UInt16;
+   subtype TTGTP_NCL_Field is HAL.UInt16;
+   subtype TTGTP_CTP_Field is HAL.UInt16;
 
    --  FDCAN TT Global Time Preset Register
-   type CAN_TTGTP_Register is record
+   type TTGTP_Register is record
       --  Time Preset
-      NCL : CAN_TTGTP_NCL_Field := 16#0#;
+      NCL : TTGTP_NCL_Field := 16#0#;
       --  Cycle Time Target Phase
-      CTP : CAN_TTGTP_CTP_Field := 16#0#;
+      CTP : TTGTP_CTP_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for CAN_TTGTP_Register use record
+   for TTGTP_Register use record
       NCL at 0 range 0 .. 15;
       CTP at 0 range 16 .. 31;
    end record;
 
-   subtype FDCAN_TTTMK_TM_Field is HAL.UInt16;
-   subtype FDCAN_TTTMK_TICC_Field is HAL.UInt7;
+   subtype TTTMK_TM_Field is HAL.UInt16;
+   subtype TTTMK_TICC_Field is HAL.UInt7;
 
    --  FDCAN TT Time Mark Register
-   type FDCAN_TTTMK_Register is record
+   type TTTMK_Register is record
       --  Time Mark
-      TM             : FDCAN_TTTMK_TM_Field := 16#0#;
+      TM             : TTTMK_TM_Field := 16#0#;
       --  Time Mark Cycle Code
-      TICC           : FDCAN_TTTMK_TICC_Field := 16#0#;
+      TICC           : TTTMK_TICC_Field := 16#0#;
       --  unspecified
       Reserved_23_30 : HAL.UInt8 := 16#0#;
       --  TT Time Mark Register Locked
@@ -1706,19 +1704,19 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTTMK_Register use record
+   for TTTMK_Register use record
       TM             at 0 range 0 .. 15;
       TICC           at 0 range 16 .. 22;
       Reserved_23_30 at 0 range 23 .. 30;
       LCKM           at 0 range 31 .. 31;
    end record;
 
-   --  FDCAN_TTIR_SE array
-   type FDCAN_TTIR_SE_Field_Array is array (1 .. 2) of Boolean
+   --  TTIR_SE array
+   type TTIR_SE_Field_Array is array (1 .. 2) of Boolean
      with Component_Size => 1, Size => 2;
 
-   --  Type definition for FDCAN_TTIR_SE
-   type FDCAN_TTIR_SE_Field
+   --  Type definition for TTIR_SE
+   type TTIR_SE_Field
      (As_Array : Boolean := False)
    is record
       case As_Array is
@@ -1727,18 +1725,18 @@ package STM32_SVD.FDCAN is
             Val : HAL.UInt2;
          when True =>
             --  SE as an array
-            Arr : FDCAN_TTIR_SE_Field_Array;
+            Arr : TTIR_SE_Field_Array;
       end case;
    end record
      with Unchecked_Union, Size => 2;
 
-   for FDCAN_TTIR_SE_Field use record
+   for TTIR_SE_Field use record
       Val at 0 range 0 .. 1;
       Arr at 0 range 0 .. 1;
    end record;
 
    --  FDCAN TT Interrupt Register
-   type FDCAN_TTIR_Register is record
+   type TTIR_Register is record
       --  Start of Basic Cycle
       SBC            : Boolean := False;
       --  Start of Matrix Cycle
@@ -1764,8 +1762,7 @@ package STM32_SVD.FDCAN is
       --  Tx Count Overflow
       TXO            : Boolean := False;
       --  Scheduling Error 1
-      SE             : FDCAN_TTIR_SE_Field :=
-                        (As_Array => False, Val => 16#0#);
+      SE             : TTIR_SE_Field := (As_Array => False, Val => 16#0#);
       --  Error Level Changed.
       ELC            : Boolean := False;
       --  Initialization Watch Trigger
@@ -1782,7 +1779,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTIR_Register use record
+   for TTIR_Register use record
       SBC            at 0 range 0 .. 0;
       SMC            at 0 range 1 .. 1;
       CSM            at 0 range 2 .. 2;
@@ -1805,7 +1802,7 @@ package STM32_SVD.FDCAN is
    end record;
 
    --  FDCAN TT Interrupt Enable Register
-   type FDCAN_TTIE_Register is record
+   type TTIE_Register is record
       --  Start of Basic Cycle Interrupt Enable
       SBCE           : Boolean := False;
       --  Start of Matrix Cycle Interrupt Enable
@@ -1850,7 +1847,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTIE_Register use record
+   for TTIE_Register use record
       SBCE           at 0 range 0 .. 0;
       SMCE           at 0 range 1 .. 1;
       CSME           at 0 range 2 .. 2;
@@ -1874,7 +1871,7 @@ package STM32_SVD.FDCAN is
    end record;
 
    --  FDCAN TT Interrupt Line Select Register
-   type FDCAN_TTILS_Register is record
+   type TTILS_Register is record
       --  Start of Basic Cycle Interrupt Line
       SBCL           : Boolean := False;
       --  Start of Matrix Cycle Interrupt Line
@@ -1919,7 +1916,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTILS_Register use record
+   for TTILS_Register use record
       SBCL           at 0 range 0 .. 0;
       SMCL           at 0 range 1 .. 1;
       CSML           at 0 range 2 .. 2;
@@ -1942,26 +1939,26 @@ package STM32_SVD.FDCAN is
       Reserved_19_31 at 0 range 19 .. 31;
    end record;
 
-   subtype FDCAN_TTOST_EL_Field is HAL.UInt2;
-   subtype FDCAN_TTOST_MS_Field is HAL.UInt2;
-   subtype FDCAN_TTOST_SYS_Field is HAL.UInt2;
-   subtype FDCAN_TTOST_RTO_Field is HAL.UInt8;
-   subtype FDCAN_TTOST_TMP_Field is HAL.UInt3;
+   subtype TTOST_EL_Field is HAL.UInt2;
+   subtype TTOST_MS_Field is HAL.UInt2;
+   subtype TTOST_SYS_Field is HAL.UInt2;
+   subtype TTOST_RTO_Field is HAL.UInt8;
+   subtype TTOST_TMP_Field is HAL.UInt3;
 
    --  FDCAN TT Operation Status Register
-   type FDCAN_TTOST_Register is record
+   type TTOST_Register is record
       --  Error Level
-      EL             : FDCAN_TTOST_EL_Field := 16#0#;
+      EL             : TTOST_EL_Field := 16#0#;
       --  Master State.
-      MS             : FDCAN_TTOST_MS_Field := 16#0#;
+      MS             : TTOST_MS_Field := 16#0#;
       --  Synchronization State
-      SYS            : FDCAN_TTOST_SYS_Field := 16#0#;
+      SYS            : TTOST_SYS_Field := 16#0#;
       --  Quality of Global Time Phase
       GTP            : Boolean := False;
       --  Quality of Clock Speed
       QCS            : Boolean := False;
       --  Reference Trigger Offset
-      RTO            : FDCAN_TTOST_RTO_Field := 16#0#;
+      RTO            : TTOST_RTO_Field := 16#0#;
       --  unspecified
       Reserved_16_21 : HAL.UInt6 := 16#0#;
       --  Wait for Global Time Discontinuity
@@ -1969,7 +1966,7 @@ package STM32_SVD.FDCAN is
       --  Gap Finished Indicator.
       GFI            : Boolean := False;
       --  Time Master Priority
-      TMP            : FDCAN_TTOST_TMP_Field := 16#0#;
+      TMP            : TTOST_TMP_Field := 16#0#;
       --  Gap Started Indicator.
       GSI            : Boolean := False;
       --  Wait for Event
@@ -1984,7 +1981,7 @@ package STM32_SVD.FDCAN is
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTOST_Register use record
+   for TTOST_Register use record
       EL             at 0 range 0 .. 1;
       MS             at 0 range 2 .. 3;
       SYS            at 0 range 4 .. 5;
@@ -2002,118 +1999,118 @@ package STM32_SVD.FDCAN is
       SPL            at 0 range 31 .. 31;
    end record;
 
-   subtype FDCAN_TURNA_NAV_Field is HAL.UInt18;
+   subtype TURNA_NAV_Field is HAL.UInt18;
 
    --  FDCAN TUR Numerator Actual Register
-   type FDCAN_TURNA_Register is record
+   type TURNA_Register is record
       --  Read-only. Numerator Actual Value
-      NAV            : FDCAN_TURNA_NAV_Field;
+      NAV            : TURNA_NAV_Field;
       --  unspecified
       Reserved_18_31 : HAL.UInt14;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TURNA_Register use record
+   for TURNA_Register use record
       NAV            at 0 range 0 .. 17;
       Reserved_18_31 at 0 range 18 .. 31;
    end record;
 
-   subtype FDCAN_TTLGT_LT_Field is HAL.UInt16;
-   subtype FDCAN_TTLGT_GT_Field is HAL.UInt16;
+   subtype TTLGT_LT_Field is HAL.UInt16;
+   subtype TTLGT_GT_Field is HAL.UInt16;
 
    --  FDCAN TT Local and Global Time Register
-   type FDCAN_TTLGT_Register is record
+   type TTLGT_Register is record
       --  Read-only. Local Time
-      LT : FDCAN_TTLGT_LT_Field;
+      LT : TTLGT_LT_Field;
       --  Read-only. Global Time
-      GT : FDCAN_TTLGT_GT_Field;
+      GT : TTLGT_GT_Field;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTLGT_Register use record
+   for TTLGT_Register use record
       LT at 0 range 0 .. 15;
       GT at 0 range 16 .. 31;
    end record;
 
-   subtype FDCAN_TTCTC_CT_Field is HAL.UInt16;
-   subtype FDCAN_TTCTC_CC_Field is HAL.UInt6;
+   subtype TTCTC_CT_Field is HAL.UInt16;
+   subtype TTCTC_CC_Field is HAL.UInt6;
 
    --  FDCAN TT Cycle Time and Count Register
-   type FDCAN_TTCTC_Register is record
+   type TTCTC_Register is record
       --  Read-only. Cycle Time
-      CT             : FDCAN_TTCTC_CT_Field;
+      CT             : TTCTC_CT_Field;
       --  Read-only. Cycle Count
-      CC             : FDCAN_TTCTC_CC_Field;
+      CC             : TTCTC_CC_Field;
       --  unspecified
       Reserved_22_31 : HAL.UInt10;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTCTC_Register use record
+   for TTCTC_Register use record
       CT             at 0 range 0 .. 15;
       CC             at 0 range 16 .. 21;
       Reserved_22_31 at 0 range 22 .. 31;
    end record;
 
-   subtype FDCAN_TTCPT_CT_Field is HAL.UInt6;
-   subtype FDCAN_TTCPT_SWV_Field is HAL.UInt16;
+   subtype TTCPT_CT_Field is HAL.UInt6;
+   subtype TTCPT_SWV_Field is HAL.UInt16;
 
    --  FDCAN TT Capture Time Register
-   type FDCAN_TTCPT_Register is record
+   type TTCPT_Register is record
       --  Read-only. Cycle Count Value
-      CT            : FDCAN_TTCPT_CT_Field;
+      CT            : TTCPT_CT_Field;
       --  unspecified
       Reserved_6_15 : HAL.UInt10;
       --  Read-only. Stop Watch Value
-      SWV           : FDCAN_TTCPT_SWV_Field;
+      SWV           : TTCPT_SWV_Field;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTCPT_Register use record
+   for TTCPT_Register use record
       CT            at 0 range 0 .. 5;
       Reserved_6_15 at 0 range 6 .. 15;
       SWV           at 0 range 16 .. 31;
    end record;
 
-   subtype FDCAN_TTCSM_CSM_Field is HAL.UInt16;
+   subtype TTCSM_CSM_Field is HAL.UInt16;
 
    --  FDCAN TT Cycle Sync Mark Register
-   type FDCAN_TTCSM_Register is record
+   type TTCSM_Register is record
       --  Read-only. Cycle Sync Mark
-      CSM            : FDCAN_TTCSM_CSM_Field;
+      CSM            : TTCSM_CSM_Field;
       --  unspecified
       Reserved_16_31 : HAL.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTCSM_Register use record
+   for TTCSM_Register use record
       CSM            at 0 range 0 .. 15;
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype FDCAN_TTTS_SWTDEL_Field is HAL.UInt2;
-   subtype FDCAN_TTTS_EVTSEL_Field is HAL.UInt2;
+   subtype TTTS_SWTDEL_Field is HAL.UInt2;
+   subtype TTTS_EVTSEL_Field is HAL.UInt2;
 
    --  FDCAN TT Trigger Select Register
-   type FDCAN_TTTS_Register is record
+   type TTTS_Register is record
       --  Stop watch trigger input selection
-      SWTDEL        : FDCAN_TTTS_SWTDEL_Field := 16#0#;
+      SWTDEL        : TTTS_SWTDEL_Field := 16#0#;
       --  unspecified
       Reserved_2_3  : HAL.UInt2 := 16#0#;
       --  Event trigger input selection
-      EVTSEL        : FDCAN_TTTS_EVTSEL_Field := 16#0#;
+      EVTSEL        : TTTS_EVTSEL_Field := 16#0#;
       --  unspecified
       Reserved_6_31 : HAL.UInt26 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
 
-   for FDCAN_TTTS_Register use record
+   for TTTS_Register use record
       SWTDEL        at 0 range 0 .. 1;
       Reserved_2_3  at 0 range 2 .. 3;
       EVTSEL        at 0 range 4 .. 5;
@@ -2154,211 +2151,215 @@ package STM32_SVD.FDCAN is
    CAN_CCU_Periph : aliased CAN_CCU_Peripheral
      with Import, Address => CAN_CCU_Base;
 
-   --  FDCAN1
+   --  FDCAN
    type FDCAN_Peripheral is record
       --  FDCAN Core Release Register
-      FDCAN_CREL   : aliased FDCAN_CREL_Register;
+      CREL   : aliased CREL_Register_1;
       --  FDCAN Core Release Register
-      FDCAN_ENDN   : aliased HAL.UInt32;
+      ENDN   : aliased HAL.UInt32;
       --  FDCAN Data Bit Timing and Prescaler Register
-      FDCAN_DBTP   : aliased FDCAN_DBTP_Register;
+      DBTP   : aliased DBTP_Register;
       --  FDCAN Test Register
-      FDCAN_TEST   : aliased FDCAN_TEST_Register;
+      TEST   : aliased TEST_Register;
       --  FDCAN RAM Watchdog Register
-      FDCAN_RWD    : aliased FDCAN_RWD_Register;
+      RWD    : aliased RWD_Register;
       --  FDCAN CC Control Register
-      FDCAN_CCCR   : aliased FDCAN_CCCR_Register;
+      CCCR   : aliased CCCR_Register;
       --  FDCAN Nominal Bit Timing and Prescaler Register
-      FDCAN_NBTP   : aliased FDCAN_NBTP_Register;
+      NBTP   : aliased NBTP_Register;
       --  FDCAN Timestamp Counter Configuration Register
-      FDCAN_TSCC   : aliased FDCAN_TSCC_Register;
+      TSCC   : aliased TSCC_Register;
       --  FDCAN Timestamp Counter Value Register
-      FDCAN_TSCV   : aliased FDCAN_TSCV_Register;
+      TSCV   : aliased TSCV_Register;
       --  FDCAN Timeout Counter Configuration Register
-      FDCAN_TOCC   : aliased FDCAN_TOCC_Register;
+      TOCC   : aliased TOCC_Register;
       --  FDCAN Timeout Counter Value Register
-      FDCAN_TOCV   : aliased FDCAN_TOCV_Register;
+      TOCV   : aliased TOCV_Register;
       --  FDCAN Error Counter Register
-      FDCAN_ECR    : aliased FDCAN_ECR_Register;
+      ECR    : aliased ECR_Register;
       --  FDCAN Protocol Status Register
-      FDCAN_PSR    : aliased FDCAN_PSR_Register;
+      PSR    : aliased PSR_Register;
       --  FDCAN Transmitter Delay Compensation Register
-      FDCAN_TDCR   : aliased FDCAN_TDCR_Register;
+      TDCR   : aliased TDCR_Register;
       --  FDCAN Interrupt Register
-      FDCAN_IR     : aliased FDCAN_IR_Register;
+      IR     : aliased IR_Register_1;
       --  FDCAN Interrupt Enable Register
-      FDCAN_IE     : aliased FDCAN_IE_Register;
+      IE     : aliased IE_Register_1;
       --  FDCAN Interrupt Line Select Register
-      FDCAN_ILS    : aliased FDCAN_ILS_Register;
+      ILS    : aliased ILS_Register;
       --  FDCAN Interrupt Line Enable Register
-      FDCAN_ILE    : aliased FDCAN_ILE_Register;
+      ILE    : aliased ILE_Register;
       --  FDCAN Global Filter Configuration Register
-      FDCAN_GFC    : aliased FDCAN_GFC_Register;
+      GFC    : aliased GFC_Register;
       --  FDCAN Standard ID Filter Configuration Register
-      FDCAN_SIDFC  : aliased FDCAN_SIDFC_Register;
+      SIDFC  : aliased SIDFC_Register;
       --  FDCAN Extended ID Filter Configuration Register
-      FDCAN_XIDFC  : aliased FDCAN_XIDFC_Register;
+      XIDFC  : aliased XIDFC_Register;
       --  FDCAN Extended ID and Mask Register
-      FDCAN_XIDAM  : aliased FDCAN_XIDAM_Register;
+      XIDAM  : aliased XIDAM_Register;
       --  FDCAN High Priority Message Status Register
-      FDCAN_HPMS   : aliased FDCAN_HPMS_Register;
+      HPMS   : aliased HPMS_Register;
       --  FDCAN New Data 1 Register
-      FDCAN_NDAT1  : aliased FDCAN_NDAT1_Register;
+      NDAT1  : aliased NDAT1_Register;
       --  FDCAN New Data 2 Register
-      FDCAN_NDAT2  : aliased FDCAN_NDAT2_Register;
+      NDAT2  : aliased NDAT2_Register;
       --  FDCAN Rx FIFO 0 Configuration Register
-      FDCAN_RXF0C  : aliased FDCAN_RXF0C_Register;
+      RXF0C  : aliased RXF0C_Register;
       --  FDCAN Rx FIFO 0 Status Register
-      FDCAN_RXF0S  : aliased FDCAN_RXF0S_Register;
+      RXF0S  : aliased RXF0S_Register;
       --  CAN Rx FIFO 0 Acknowledge Register
-      FDCAN_RXF0A  : aliased FDCAN_RXF0A_Register;
+      RXF0A  : aliased RXF0A_Register;
       --  FDCAN Rx Buffer Configuration Register
-      FDCAN_RXBC   : aliased FDCAN_RXBC_Register;
+      RXBC   : aliased RXBC_Register;
       --  FDCAN Rx FIFO 1 Configuration Register
-      FDCAN_RXF1C  : aliased FDCAN_RXF1C_Register;
+      RXF1C  : aliased RXF1C_Register;
       --  FDCAN Rx FIFO 1 Status Register
-      FDCAN_RXF1S  : aliased FDCAN_RXF1S_Register;
+      RXF1S  : aliased RXF1S_Register;
       --  FDCAN Rx FIFO 1 Acknowledge Register
-      FDCAN_RXF1A  : aliased FDCAN_RXF1A_Register;
+      RXF1A  : aliased RXF1A_Register;
       --  FDCAN Rx Buffer Element Size Configuration Register
-      FDCAN_RXESC  : aliased FDCAN_RXESC_Register;
+      RXESC  : aliased RXESC_Register;
       --  FDCAN Tx Buffer Configuration Register
-      FDCAN_TXBC   : aliased FDCAN_TXBC_Register;
+      TXBC   : aliased TXBC_Register;
       --  FDCAN Tx FIFO/Queue Status Register
-      FDCAN_TXFQS  : aliased FDCAN_TXFQS_Register;
+      TXFQS  : aliased TXFQS_Register;
       --  FDCAN Tx Buffer Element Size Configuration Register
-      FDCAN_TXESC  : aliased FDCAN_TXESC_Register;
+      TXESC  : aliased TXESC_Register;
       --  FDCAN Tx Buffer Request Pending Register
-      FDCAN_TXBRP  : aliased HAL.UInt32;
+      TXBRP  : aliased HAL.UInt32;
       --  FDCAN Tx Buffer Add Request Register
-      FDCAN_TXBAR  : aliased HAL.UInt32;
+      TXBAR  : aliased HAL.UInt32;
       --  FDCAN Tx Buffer Cancellation Request Register
-      FDCAN_TXBCR  : aliased HAL.UInt32;
+      TXBCR  : aliased HAL.UInt32;
       --  FDCAN Tx Buffer Transmission Occurred Register
-      FDCAN_TXBTO  : aliased HAL.UInt32;
+      TXBTO  : aliased HAL.UInt32;
       --  FDCAN Tx Buffer Cancellation Finished Register
-      FDCAN_TXBCF  : aliased HAL.UInt32;
+      TXBCF  : aliased HAL.UInt32;
       --  FDCAN Tx Buffer Transmission Interrupt Enable Register
-      FDCAN_TXBTIE : aliased HAL.UInt32;
+      TXBTIE : aliased HAL.UInt32;
       --  FDCAN Tx Buffer Cancellation Finished Interrupt Enable Register
-      FDCAN_TXBCIE : aliased HAL.UInt32;
+      TXBCIE : aliased HAL.UInt32;
       --  FDCAN Tx Event FIFO Configuration Register
-      FDCAN_TXEFC  : aliased FDCAN_TXEFC_Register;
+      TXEFC  : aliased TXEFC_Register;
       --  FDCAN Tx Event FIFO Status Register
-      FDCAN_TXEFS  : aliased FDCAN_TXEFS_Register;
+      TXEFS  : aliased TXEFS_Register;
       --  FDCAN Tx Event FIFO Acknowledge Register
-      FDCAN_TXEFA  : aliased FDCAN_TXEFA_Register;
+      TXEFA  : aliased TXEFA_Register;
       --  FDCAN TT Trigger Memory Configuration Register
-      FDCAN_TTTMC  : aliased FDCAN_TTTMC_Register;
+      TTTMC  : aliased TTTMC_Register;
       --  FDCAN TT Reference Message Configuration Register
-      FDCAN_TTRMC  : aliased FDCAN_TTRMC_Register;
+      TTRMC  : aliased TTRMC_Register;
       --  FDCAN TT Operation Configuration Register
-      FDCAN_TTOCF  : aliased FDCAN_TTOCF_Register;
+      TTOCF  : aliased TTOCF_Register;
       --  FDCAN TT Matrix Limits Register
-      FDCAN_TTMLM  : aliased FDCAN_TTMLM_Register;
+      TTMLM  : aliased TTMLM_Register;
       --  FDCAN TUR Configuration Register
-      FDCAN_TURCF  : aliased FDCAN_TURCF_Register;
+      TURCF  : aliased TURCF_Register;
       --  FDCAN TT Operation Control Register
-      FDCAN_TTOCN  : aliased FDCAN_TTOCN_Register;
+      TTOCN  : aliased TTOCN_Register;
       --  FDCAN TT Global Time Preset Register
-      CAN_TTGTP    : aliased CAN_TTGTP_Register;
+      TTGTP  : aliased TTGTP_Register;
       --  FDCAN TT Time Mark Register
-      FDCAN_TTTMK  : aliased FDCAN_TTTMK_Register;
+      TTTMK  : aliased TTTMK_Register;
       --  FDCAN TT Interrupt Register
-      FDCAN_TTIR   : aliased FDCAN_TTIR_Register;
+      TTIR   : aliased TTIR_Register;
       --  FDCAN TT Interrupt Enable Register
-      FDCAN_TTIE   : aliased FDCAN_TTIE_Register;
+      TTIE   : aliased TTIE_Register;
       --  FDCAN TT Interrupt Line Select Register
-      FDCAN_TTILS  : aliased FDCAN_TTILS_Register;
+      TTILS  : aliased TTILS_Register;
       --  FDCAN TT Operation Status Register
-      FDCAN_TTOST  : aliased FDCAN_TTOST_Register;
+      TTOST  : aliased TTOST_Register;
       --  FDCAN TUR Numerator Actual Register
-      FDCAN_TURNA  : aliased FDCAN_TURNA_Register;
+      TURNA  : aliased TURNA_Register;
       --  FDCAN TT Local and Global Time Register
-      FDCAN_TTLGT  : aliased FDCAN_TTLGT_Register;
+      TTLGT  : aliased TTLGT_Register;
       --  FDCAN TT Cycle Time and Count Register
-      FDCAN_TTCTC  : aliased FDCAN_TTCTC_Register;
+      TTCTC  : aliased TTCTC_Register;
       --  FDCAN TT Capture Time Register
-      FDCAN_TTCPT  : aliased FDCAN_TTCPT_Register;
+      TTCPT  : aliased TTCPT_Register;
       --  FDCAN TT Cycle Sync Mark Register
-      FDCAN_TTCSM  : aliased FDCAN_TTCSM_Register;
+      TTCSM  : aliased TTCSM_Register;
       --  FDCAN TT Trigger Select Register
-      FDCAN_TTTS   : aliased FDCAN_TTTS_Register;
+      TTTS   : aliased TTTS_Register;
    end record
      with Volatile;
 
    for FDCAN_Peripheral use record
-      FDCAN_CREL   at 16#0# range 0 .. 31;
-      FDCAN_ENDN   at 16#4# range 0 .. 31;
-      FDCAN_DBTP   at 16#C# range 0 .. 31;
-      FDCAN_TEST   at 16#10# range 0 .. 31;
-      FDCAN_RWD    at 16#14# range 0 .. 31;
-      FDCAN_CCCR   at 16#18# range 0 .. 31;
-      FDCAN_NBTP   at 16#1C# range 0 .. 31;
-      FDCAN_TSCC   at 16#20# range 0 .. 31;
-      FDCAN_TSCV   at 16#24# range 0 .. 31;
-      FDCAN_TOCC   at 16#28# range 0 .. 31;
-      FDCAN_TOCV   at 16#2C# range 0 .. 31;
-      FDCAN_ECR    at 16#40# range 0 .. 31;
-      FDCAN_PSR    at 16#44# range 0 .. 31;
-      FDCAN_TDCR   at 16#48# range 0 .. 31;
-      FDCAN_IR     at 16#50# range 0 .. 31;
-      FDCAN_IE     at 16#54# range 0 .. 31;
-      FDCAN_ILS    at 16#58# range 0 .. 31;
-      FDCAN_ILE    at 16#5C# range 0 .. 31;
-      FDCAN_GFC    at 16#80# range 0 .. 31;
-      FDCAN_SIDFC  at 16#84# range 0 .. 31;
-      FDCAN_XIDFC  at 16#88# range 0 .. 31;
-      FDCAN_XIDAM  at 16#90# range 0 .. 31;
-      FDCAN_HPMS   at 16#94# range 0 .. 31;
-      FDCAN_NDAT1  at 16#98# range 0 .. 31;
-      FDCAN_NDAT2  at 16#9C# range 0 .. 31;
-      FDCAN_RXF0C  at 16#A0# range 0 .. 31;
-      FDCAN_RXF0S  at 16#A4# range 0 .. 31;
-      FDCAN_RXF0A  at 16#A8# range 0 .. 31;
-      FDCAN_RXBC   at 16#AC# range 0 .. 31;
-      FDCAN_RXF1C  at 16#B0# range 0 .. 31;
-      FDCAN_RXF1S  at 16#B4# range 0 .. 31;
-      FDCAN_RXF1A  at 16#B8# range 0 .. 31;
-      FDCAN_RXESC  at 16#BC# range 0 .. 31;
-      FDCAN_TXBC   at 16#C0# range 0 .. 31;
-      FDCAN_TXFQS  at 16#C4# range 0 .. 31;
-      FDCAN_TXESC  at 16#C8# range 0 .. 31;
-      FDCAN_TXBRP  at 16#CC# range 0 .. 31;
-      FDCAN_TXBAR  at 16#D0# range 0 .. 31;
-      FDCAN_TXBCR  at 16#D4# range 0 .. 31;
-      FDCAN_TXBTO  at 16#D8# range 0 .. 31;
-      FDCAN_TXBCF  at 16#DC# range 0 .. 31;
-      FDCAN_TXBTIE at 16#E0# range 0 .. 31;
-      FDCAN_TXBCIE at 16#E4# range 0 .. 31;
-      FDCAN_TXEFC  at 16#F0# range 0 .. 31;
-      FDCAN_TXEFS  at 16#F4# range 0 .. 31;
-      FDCAN_TXEFA  at 16#F8# range 0 .. 31;
-      FDCAN_TTTMC  at 16#100# range 0 .. 31;
-      FDCAN_TTRMC  at 16#104# range 0 .. 31;
-      FDCAN_TTOCF  at 16#108# range 0 .. 31;
-      FDCAN_TTMLM  at 16#10C# range 0 .. 31;
-      FDCAN_TURCF  at 16#110# range 0 .. 31;
-      FDCAN_TTOCN  at 16#114# range 0 .. 31;
-      CAN_TTGTP    at 16#118# range 0 .. 31;
-      FDCAN_TTTMK  at 16#11C# range 0 .. 31;
-      FDCAN_TTIR   at 16#120# range 0 .. 31;
-      FDCAN_TTIE   at 16#124# range 0 .. 31;
-      FDCAN_TTILS  at 16#128# range 0 .. 31;
-      FDCAN_TTOST  at 16#12C# range 0 .. 31;
-      FDCAN_TURNA  at 16#130# range 0 .. 31;
-      FDCAN_TTLGT  at 16#134# range 0 .. 31;
-      FDCAN_TTCTC  at 16#138# range 0 .. 31;
-      FDCAN_TTCPT  at 16#13C# range 0 .. 31;
-      FDCAN_TTCSM  at 16#140# range 0 .. 31;
-      FDCAN_TTTS   at 16#300# range 0 .. 31;
+      CREL   at 16#0# range 0 .. 31;
+      ENDN   at 16#4# range 0 .. 31;
+      DBTP   at 16#C# range 0 .. 31;
+      TEST   at 16#10# range 0 .. 31;
+      RWD    at 16#14# range 0 .. 31;
+      CCCR   at 16#18# range 0 .. 31;
+      NBTP   at 16#1C# range 0 .. 31;
+      TSCC   at 16#20# range 0 .. 31;
+      TSCV   at 16#24# range 0 .. 31;
+      TOCC   at 16#28# range 0 .. 31;
+      TOCV   at 16#2C# range 0 .. 31;
+      ECR    at 16#40# range 0 .. 31;
+      PSR    at 16#44# range 0 .. 31;
+      TDCR   at 16#48# range 0 .. 31;
+      IR     at 16#50# range 0 .. 31;
+      IE     at 16#54# range 0 .. 31;
+      ILS    at 16#58# range 0 .. 31;
+      ILE    at 16#5C# range 0 .. 31;
+      GFC    at 16#80# range 0 .. 31;
+      SIDFC  at 16#84# range 0 .. 31;
+      XIDFC  at 16#88# range 0 .. 31;
+      XIDAM  at 16#90# range 0 .. 31;
+      HPMS   at 16#94# range 0 .. 31;
+      NDAT1  at 16#98# range 0 .. 31;
+      NDAT2  at 16#9C# range 0 .. 31;
+      RXF0C  at 16#A0# range 0 .. 31;
+      RXF0S  at 16#A4# range 0 .. 31;
+      RXF0A  at 16#A8# range 0 .. 31;
+      RXBC   at 16#AC# range 0 .. 31;
+      RXF1C  at 16#B0# range 0 .. 31;
+      RXF1S  at 16#B4# range 0 .. 31;
+      RXF1A  at 16#B8# range 0 .. 31;
+      RXESC  at 16#BC# range 0 .. 31;
+      TXBC   at 16#C0# range 0 .. 31;
+      TXFQS  at 16#C4# range 0 .. 31;
+      TXESC  at 16#C8# range 0 .. 31;
+      TXBRP  at 16#CC# range 0 .. 31;
+      TXBAR  at 16#D0# range 0 .. 31;
+      TXBCR  at 16#D4# range 0 .. 31;
+      TXBTO  at 16#D8# range 0 .. 31;
+      TXBCF  at 16#DC# range 0 .. 31;
+      TXBTIE at 16#E0# range 0 .. 31;
+      TXBCIE at 16#E4# range 0 .. 31;
+      TXEFC  at 16#F0# range 0 .. 31;
+      TXEFS  at 16#F4# range 0 .. 31;
+      TXEFA  at 16#F8# range 0 .. 31;
+      TTTMC  at 16#100# range 0 .. 31;
+      TTRMC  at 16#104# range 0 .. 31;
+      TTOCF  at 16#108# range 0 .. 31;
+      TTMLM  at 16#10C# range 0 .. 31;
+      TURCF  at 16#110# range 0 .. 31;
+      TTOCN  at 16#114# range 0 .. 31;
+      TTGTP  at 16#118# range 0 .. 31;
+      TTTMK  at 16#11C# range 0 .. 31;
+      TTIR   at 16#120# range 0 .. 31;
+      TTIE   at 16#124# range 0 .. 31;
+      TTILS  at 16#128# range 0 .. 31;
+      TTOST  at 16#12C# range 0 .. 31;
+      TURNA  at 16#130# range 0 .. 31;
+      TTLGT  at 16#134# range 0 .. 31;
+      TTCTC  at 16#138# range 0 .. 31;
+      TTCPT  at 16#13C# range 0 .. 31;
+      TTCSM  at 16#140# range 0 .. 31;
+      TTTS   at 16#300# range 0 .. 31;
    end record;
 
-   --  FDCAN1
+   --  FDCAN
+   FDCAN_Periph : aliased FDCAN_Peripheral
+     with Import, Address => FDCAN_Base;
+
+   --  FDCAN
    FDCAN1_Periph : aliased FDCAN_Peripheral
      with Import, Address => FDCAN1_Base;
 
-   --  FDCAN1
+   --  FDCAN
    FDCAN2_Periph : aliased FDCAN_Peripheral
      with Import, Address => FDCAN2_Base;
 
