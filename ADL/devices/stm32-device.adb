@@ -704,6 +704,72 @@ package body STM32.Device is
       return Clock_Input;
    end Get_Clock_Frequency;
 
+   ------------------
+   -- Enable_Clock --
+   ------------------
+
+   procedure Enable_Clock (This : aliased CAN_Controller)
+   is
+   begin
+      if This'Address = FDCAN1_Base or
+         This'Address = FDCAN2_Base
+      then
+         RCC_Periph.APB1HENR.FDCANEN := True;
+      else
+         raise Unknown_Device;
+      end if;
+   end Enable_Clock;
+
+   -----------
+   -- Reset --
+   -----------
+
+   procedure Reset (This : aliased CAN_Controller) is
+   begin
+      if This'Address = FDCAN1_Base or
+         This'Address = FDCAN2_Base
+      then
+         RCC_Periph.APB1HRSTR.FDCANRST := True;
+         RCC_Periph.APB1HRSTR.FDCANRST := False;
+      else
+         raise Unknown_Device;
+      end if;
+   end Reset;
+
+   -------------------------
+   -- Select_Clock_Source --
+   -------------------------
+
+   procedure Select_Clock_Source (This   : aliased CAN_Controller;
+                                  Source : CAN_Clock_Source)
+   is
+   begin
+      if This'Address = FDCAN1_Base or
+         This'Address = FDCAN2_Base
+      then
+         RCC_Periph.D2CCIP1R.FDCANSEL := Source'Enum_Rep;
+      else
+         raise Unknown_Device;
+      end if;
+   end Select_Clock_Source;
+
+   -----------------------
+   -- Read_Clock_Source --
+   -----------------------
+
+   function Read_Clock_Source (This : aliased CAN_Controller)
+     return CAN_Clock_Source
+   is
+   begin
+      if This'Address = FDCAN1_Base or
+         This'Address = FDCAN2_Base
+      then
+         return CAN_Clock_Source'Val (RCC_Periph.D2CCIP1R.FDCANSEL);
+      else
+         raise Unknown_Device;
+      end if;
+   end Read_Clock_Source;
+
    ----------------
    -- As_Port_Id --
    ----------------
@@ -1498,7 +1564,65 @@ package body STM32.Device is
 
       Result : RCC_System_Clocks;
 
+      PLLSRC : constant PLL_Clock_Source :=
+        PLL_Clock_Source'Val (RCC_Periph.PLLCKSELR.PLLSRC);
+      --  Get PLL Source Mux
+      PLL_Clock_In : UInt32;
+      --  PLL input clock frequency
+      Pll1m : constant UInt32 := UInt32 (RCC_Periph.PLLCKSELR.DIVM1);
+      --  Get the value of Pll M divisor
+      Pll1n : constant UInt32 := UInt32 (RCC_Periph.PLL1DIVR.DIVN1 + 1);
+      --  Get the value of Pll N multiplier
+      Pll1p : constant UInt32 := UInt32 (RCC_Periph.PLL1DIVR.DIVP1 + 1);
+      --  Get the value of Pll P divisor
+      Pll1q : constant UInt32 := UInt32 (RCC_Periph.PLL1DIVR.DIVQ1 + 1);
+      --  Get the value of Pll Q multiplier
+      Pll1r : constant UInt32 := UInt32 (RCC_Periph.PLL1DIVR.DIVR1 + 1);
+      --  Get the value of Pll R divisor
+
+      Pll2m : constant UInt32 := UInt32 (RCC_Periph.PLLCKSELR.DIVM2);
+      --  Get the value of Pll M divisor
+      Pll2n : constant UInt32 := UInt32 (RCC_Periph.PLL2DIVR.DIVN2 + 1);
+      --  Get the value of Pll N multiplier
+      Pll2p : constant UInt32 := UInt32 (RCC_Periph.PLL2DIVR.DIVP2 + 1);
+      --  Get the value of Pll P divisor
+      Pll2q : constant UInt32 := UInt32 (RCC_Periph.PLL2DIVR.DIVQ2 + 1);
+      --  Get the value of Pll Q multiplier
+      Pll2r : constant UInt32 := UInt32 (RCC_Periph.PLL2DIVR.DIVR2 + 1);
+      --  Get the value of Pll R divisor
+
+      Pll3m : constant UInt32 := UInt32 (RCC_Periph.PLLCKSELR.DIVM3);
+      --  Get the value of Pll M divisor
+      Pll3n : constant UInt32 := UInt32 (RCC_Periph.PLL3DIVR.DIVN3 + 1);
+      --  Get the value of Pll N multiplier
+      Pll3p : constant UInt32 := UInt32 (RCC_Periph.PLL3DIVR.DIVP3 + 1);
+      --  Get the value of Pll P divisor
+      Pll3q : constant UInt32 := UInt32 (RCC_Periph.PLL3DIVR.DIVQ3 + 1);
+      --  Get the value of Pll Q multiplier
+      Pll3r : constant UInt32 := UInt32 (RCC_Periph.PLL3DIVR.DIVR3 + 1);
+      --  Get the value of Pll R divisor
    begin
+      --  PLL Source Mux
+      case PLLSRC is
+         when PLL_SRC_HSE => --  HSE as PLL source
+            PLL_Clock_In := HSE_VALUE;
+         when PLL_SRC_HSI => --  HSI as PLL source
+            PLL_Clock_In := HSI_VALUE;
+         when PLL_SRC_CSI => --  CSI as PLL source
+            PLL_Clock_In := CSI_VALUE;
+      end case;
+
+      --  PLL clock output frequencies
+      --  PLL1P is PLLCLK that is used for SYSCLK, see below.
+      Result.PLL1Q := ((PLL_Clock_In / Pll1m) * Pll1n) / Pll1q;
+      Result.PLL1R := ((PLL_Clock_In / Pll1m) * Pll1n) / Pll1r;
+      Result.PLL2P := ((PLL_Clock_In / Pll2m) * Pll2n) / Pll2p;
+      Result.PLL2Q := ((PLL_Clock_In / Pll2m) * Pll2n) / Pll2q;
+      Result.PLL2R := ((PLL_Clock_In / Pll2m) * Pll2n) / Pll2r;
+      Result.PLL3P := ((PLL_Clock_In / Pll3m) * Pll3n) / Pll3p;
+      Result.PLL3Q := ((PLL_Clock_In / Pll3m) * Pll3n) / Pll3q;
+      Result.PLL3R := ((PLL_Clock_In / Pll3m) * Pll3n) / Pll3r;
+
       --  System clock Mux
       case Source is
          --  HSE as source
@@ -1510,33 +1634,10 @@ package body STM32.Device is
          --  CSI as source
          when SYSCLK_SRC_CSI =>
             Result.SYSCLK := CSI_VALUE;
-
-         --  PLL1 as source
+         --  PLL1P as source = PLLCLK
          when SYSCLK_SRC_PLL1 =>
-            declare
-               Pllm : constant UInt32 := UInt32 (RCC_Periph.PLLCKSELR.DIVM1);
-               --  Get the correct value of Pll M divisor
-               Plln : constant UInt32 :=
-                 UInt32 (RCC_Periph.PLL1DIVR.DIVN1 + 1);
-               --  Get the correct value of Pll N multiplier
-               Pllp : constant UInt32 :=
-                 UInt32 (RCC_Periph.PLL1DIVR.DIVR1 + 1);
-               --  Get the correct value of Pll R divisor
-               PLLSRC : constant PLL_Clock_Source :=
-                 PLL_Clock_Source'Val (RCC_Periph.PLLCKSELR.PLLSRC);
-               --  Get PLL Source Mux
-               PLLCLK : UInt32;
-            begin
-               case PLLSRC is
-                  when PLL_SRC_HSE => --  HSE as source
-                     PLLCLK := ((HSE_VALUE / Pllm) * Plln) / Pllp;
-                  when PLL_SRC_HSI => --  HSI as source
-                     PLLCLK := ((HSI_VALUE / Pllm) * Plln) / Pllp;
-                  when PLL_SRC_CSI => --  CSI as source
-                     PLLCLK := ((CSI_VALUE / Pllm) * Plln) / Pllp;
-               end case;
-               Result.SYSCLK := PLLCLK;
-            end;
+            --  PLL1P output to System Clock Mux (PLLCLK) that defines SYSCLK.
+            Result.SYSCLK := ((PLL_Clock_In / Pll1m) * Pll1n) / Pll1p;
       end case;
 
       declare

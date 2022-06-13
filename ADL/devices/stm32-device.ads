@@ -66,6 +66,7 @@ with STM32.LPTimers; use STM32.LPTimers;
 with STM32.HRTimers; use STM32.HRTimers;
 with STM32.OPAMP;    use STM32.OPAMP;
 with STM32.COMP;     use STM32.COMP;
+with STM32.CAN;      use STM32.CAN;
 
 package STM32.Device is
    pragma Elaborate_Body;
@@ -601,6 +602,27 @@ package STM32.Device is
    --  Returns USART clock frequency, in Hertz.
 
    ---------
+   -- CAN --
+   ---------
+
+   CAN_1 : aliased CAN_Controller with Volatile, Import, Address => FDCAN1_Base;
+   CAN_2 : aliased CAN_Controller with Volatile, Import, Address => FDCAN2_Base;
+
+   procedure Enable_Clock (This : aliased CAN_Controller);
+   --  There is only one clock for the three CANs.
+   procedure Reset (This : aliased CAN_Controller);
+   --  There is only one reset for the three CANs.
+
+   type CAN_Clock_Source is (HSE, PLL1Q, PLL2Q)
+     with Size => 2;
+
+   procedure Select_Clock_Source (This   : aliased CAN_Controller;
+                                  Source : CAN_Clock_Source);
+
+   function Read_Clock_Source (This : aliased CAN_Controller)
+     return CAN_Clock_Source;
+
+   ---------
    -- I2C --
    ---------
 
@@ -927,7 +949,7 @@ package STM32.Device is
 
    --  See RM0433 rev. 7 pg. 334 chapter 8.5, and pg. 335 for clock tree
    type RCC_System_Clocks is record
-      SYSCLK    : UInt32;
+      SYSCLK    : UInt32; --  PLL1P, PLLCLK
       HCLK1     : UInt32; --  CPU clock
       HCLK2     : UInt32; --  AHBs peripheral clocks
       PCLK1     : UInt32; --  APB1 peripheral clock (D2PPRE1)
@@ -938,6 +960,14 @@ package STM32.Device is
       TIMCLK1   : UInt32; --  APB1 timer clock for TIMs 2 .. 7, 12 .. 14
       TIMCLK2   : UInt32; --  APB2 timer clock for TIMs 1, 8, 15 .. 17
       TIMCLK3   : UInt32; --  APB1 timer clock for HRTIM1
+      PLL1Q     : UInt32;
+      PLL1R     : UInt32;
+      PLL2P     : UInt32;
+      PLL2Q     : UInt32;
+      PLL2R     : UInt32;
+      PLL3P     : UInt32;
+      PLL3Q     : UInt32;
+      PLL3R     : UInt32;
    end record;
 
    function System_Clock_Frequencies return RCC_System_Clocks;
