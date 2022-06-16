@@ -622,6 +622,10 @@ package STM32.Device is
    function Read_Clock_Source (This : aliased CAN_Controller)
      return CAN_Clock_Source;
 
+   function Get_Clock_Frequency (This : aliased CAN_Controller)
+     return UInt32;
+   --  Returns FDCAN clock frequency, in Hertz.
+
    ---------
    -- I2C --
    ---------

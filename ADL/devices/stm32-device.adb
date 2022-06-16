@@ -770,6 +770,32 @@ package body STM32.Device is
       end if;
    end Read_Clock_Source;
 
+   -------------------------
+   -- Get_Clock_Frequency --
+   -------------------------
+
+   function Get_Clock_Frequency (This : aliased CAN_Controller)
+                                 return UInt32
+   is
+      Source : constant CAN_Clock_Source :=
+        CAN_Clock_Source'Val (RCC_Periph.D2CCIP1R.FDCANSEL);
+   begin
+      if This'Address = FDCAN1_Base or
+        This'Address = FDCAN2_Base
+      then
+         case Source is
+            when HSE =>
+               return HSE_VALUE;
+            when PLL1Q =>
+               return System_Clock_Frequencies.PLL1Q;
+            when PLL2Q =>
+               return System_Clock_Frequencies.PLL2Q;
+         end case;
+      else
+         raise Unknown_Device;
+      end if;
+   end Get_Clock_Frequency;
+
    ----------------
    -- As_Port_Id --
    ----------------
