@@ -1,8 +1,6 @@
 with STM32.Device;         use STM32.Device;
 with STM32.Timers;         use STM32.Timers;
 
-with Inverter_PWM;
-
 package body Inverter_ADC is
 
    procedure Initialize_ADC_Timer;
@@ -115,7 +113,7 @@ package body Inverter_ADC is
    function Get_Sample (Reading : in ADC_Reading) return Voltage is
    begin
       --  Convert the UInt16 ADC value to Voltage (Float).
-      return Voltage (Float (Regular_Samples (Reading)) * ADC_V_Per_Lsb);
+      return Voltage (Float (Sensor_Handler.Get_Regular_Samples (Reading)) * ADC_V_Per_Lsb);
    end Get_Sample;
 
    ------------------
@@ -200,6 +198,14 @@ package body Inverter_ADC is
 
    protected body Sensor_Handler is
 
+      -------------------------
+      -- Get_Regular_Samples --
+      -------------------------
+      function Get_Regular_Samples return Regular_Samples_Array is
+      begin
+         return Regular_Samples;
+      end Get_Regular_Samples;
+
       ------------------------
       -- Sensor_ADC_Handler --
       ------------------------
@@ -226,7 +232,8 @@ package body Inverter_ADC is
                end if;
 
                --  Calculate the new Sine_Gain based on battery voltage
-               Sine_Gain := Battery_Gain;
+               --  Get_Sine_Gain (Battery_Gain);
+               --  Actually is disabled because there is no signal at the ADC.
 
                --  Testing the 5 kHz output with 1 Hz LED blinking. Because
                --  there are three regular channel conversions, this frequency

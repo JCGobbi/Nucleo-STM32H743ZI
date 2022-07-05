@@ -124,13 +124,22 @@ package body Inverter_PWM is
          Value   => Pulse);
    end Set_Duty_Cycle;
 
+   -------------------
+   -- Set_Sine_Gain --
+   -------------------
+
+   procedure Set_Sine_Gain (Value : Gain_Range) is
+   begin
+      PWM_Handler.Update_Sine_Gain (Value);
+   end Set_Sine_Gain;
+
    --------------------
    -- Set_Duty_Cycle --
    --------------------
 
    procedure Set_Duty_Cycle (This      : PWM_Phase;
                              Amplitude : Table_Amplitude;
-                             Gain      : Inverter_ADC.Gain_Range)
+                             Gain      : Gain_Range)
    is
       Pulse : UInt16;
    begin
@@ -189,6 +198,15 @@ package body Inverter_PWM is
 
    protected body PWM_Handler is
 
+      ----------------------
+      -- Update_Sine_Gain --
+      ----------------------
+
+      procedure Update_Sine_Gain (Value : Gain_Range) is
+      begin
+         Sine_Gain := Value;
+      end Update_Sine_Gain;
+
       ---------------------
       -- PWM_ISR_Handler --
       ---------------------
@@ -202,19 +220,19 @@ package body Inverter_PWM is
                if (Semi_Senoid = False) then --  First half cycle
                   Set_Duty_Cycle (This      => A,
                                   Amplitude => Sine_Table (Sine_Step),
-                                  Gain      => Inverter_ADC.Sine_Gain);
+                                  Gain      => Sine_Gain);
                   --  Not necessary because the last value of B amplitude was 0
                   --  Set_Duty_Cycle (This      => B,
                   --                  Amplitude => Table_Amplitude'Last, --  Value 0
-                  --                  Gain      => Inverter_ADC.Gain_Range'First); --  Value 0
+                  --                  Gain      => Gain_Range'First); --  Value 0
                else --  Second half cycle
                   Set_Duty_Cycle (This      => B,
                                   Amplitude => Sine_Table (Sine_Step),
-                                  Gain      => Inverter_ADC.Sine_Gain);
+                                  Gain      => Sine_Gain);
                   --  Not necessary because the last value of A amplitude was 0
                   --  Set_Duty_Cycle (This      => A,
                   --                  Amplitude => Table_Amplitude'Last, --  Value 0
-                  --                  Gain      => Inverter_ADC.Gain_Range'First); --  Value 0
+                  --                  Gain      => Gain_Range'First); --  Value 0
                end if;
 
                if (Sine_Step + 1) > Sine_Step_Range'Last then
