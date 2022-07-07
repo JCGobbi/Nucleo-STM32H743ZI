@@ -45,7 +45,7 @@
 pragma Restrictions (No_Elaboration_Code);
 
 with System;    use System;
-with STM32_SVD;
+with STM32_SVD.TIM;
 
 package STM32.Timers is
 
@@ -889,6 +889,25 @@ package STM32.Timers is
       Off_State_Selection_Idle_Mode : Bit)
      with Pre => Advanced_Timer (This);
 
+   type Timer_Break_Nr is (Break_1, Break_2);
+
+   type Timer_Break_Source is
+     (BKIN_Ext_AF_Input,
+      Comp_1_Output,
+      Comp_2_Output);
+
+   procedure Set_Timer_Break_Source
+     (This     : in out Timer;
+      Break_Nr : Timer_Break_Nr;
+      Source   : Timer_Break_Source;
+      Enabled  : Boolean;
+      Polarity : Timer_Break_Polarity)
+     with Pre => Complementary_Outputs_Supported (This);
+   --  Polarity depends on the BKP and BK2P break polarity, so if the polarity
+   --  here is LOW, it doesn't invert BKP or BK2P, if it is HIGH, it inverts the
+   --  input polarity of BKP or BK2P. Only sources BKIN_Ext_AF_Input to
+   --  Comp_4_Output may change polarity.
+
    procedure Configure_Deadtime (This : in out Timer; Time : Float)
      with Pre => Complementary_Outputs_Supported (This);
    --  Configure the DTG bit-field for timer register BDTR such that
@@ -1001,13 +1020,15 @@ package STM32.Timers is
    procedure Disable_Master_Slave_Mode (This : in out Timer)
      with Pre => Slave_Mode_Supported (This);
 
-   type Timer_External_Trigger_Polarity is (NonInverted, Inverted);
+   type Timer_External_Trigger_Polarity is (NonInverted, Inverted)
+     with Size => 1;
 
    type Timer_External_Trigger_Prescaler is
      (Off,
       Div_2,
       Div_4,
-      Div_8);
+      Div_8)
+     with Size => 2;
 
    type Timer_External_Trigger_Filter is
      (No_Filter,
@@ -1025,13 +1046,41 @@ package STM32.Timers is
       FDTS16_N8,
       FDTS32_N5,
       FDTS32_N6,
-      FDTS32_N8);
+      FDTS32_N8)
+     with Size => 4;
 
    procedure Configure_External_Trigger
      (This      : in out Timer;
       Polarity  : Timer_External_Trigger_Polarity;
       Prescaler : Timer_External_Trigger_Prescaler;
       Filter    : Timer_External_Trigger_Filter)
+     with Pre => External_Trigger_Supported (This);
+
+   type Timer_External_Trigger_Source is
+     (Option_1,
+      Comp1_Output,
+      Option_3,
+      Option_4,
+      Option_5,
+      Option_6,
+      Option_7,
+      Option_8,
+      Option_9)
+     with Size => 4;
+   --  Option Timer1     Timer2    Timer3    Timer4    Timer5    Timer8
+   --  1      TIM1_ETR   TIM2_ETR  TIM3_ETR  TIM4_ETR  TIM5_ETR  TIM8_ETR
+   --  2      Comp1_Out  Comp1_Out Comp1_Out           SAI2 FS_A
+   --  3      Comp2_Out  Comp2_Out                     SAI2 FS_B
+   --  4      adc1_awd1  LSE                                     adc2_awd1
+   --  5      adc1_awd2  SAI1 FS_A                               adc2_awd2
+   --  6      adc1_awd3  SAI1 FS_B                               adc2_awd3
+   --  7      adc3_awd1                                          adc3_awd1
+   --  8      adc3_awd2                                          adc3_awd2
+   --  9      adc3_awd3                                          adc3_awd3
+
+   procedure Set_External_Trigger_Source
+     (This     : in out Timer;
+      Source   : Timer_External_Trigger_Source)
      with Pre => External_Trigger_Supported (This);
 
    ----------------------------------------------------------------------------
@@ -1253,7 +1302,7 @@ package STM32.Timers is
       This'Address = STM32_SVD.TIM8_Base or
       This'Address = STM32_SVD.TIM15_Base);
 
-   --  Timers 1 .. 5, 8, 12, 15
+   --  Timers 1 .. 5, 8
    function External_Trigger_Supported (This : Timer) return Boolean
    is
      (This'Address = STM32_SVD.TIM1_Base or
@@ -1261,8 +1310,7 @@ package STM32.Timers is
       This'Address = STM32_SVD.TIM3_Base or
       This'Address = STM32_SVD.TIM4_Base or
       This'Address = STM32_SVD.TIM5_Base or
-      This'Address = STM32_SVD.TIM8_Base or
-      This'Address = STM32_SVD.TIM15_Base);
+      This'Address = STM32_SVD.TIM8_Base);
 
    --  Timers 1 .. 8, 12 .. 17, 20
    function Remapping_Capability_Supported (This : Timer) return Boolean
@@ -1733,8 +1781,8 @@ private
       DTR2               : UInt32;
       ECR                : UInt32;
       TISEL              : UInt32;
-      AF1                : UInt32;
-      AF2                : UInt32;
+      AF1                : STM32_SVD.TIM.AF1_Register;
+      AF2                : STM32_SVD.TIM.AF2_Register;
       DCR                : TIMx_DCR;
       DMAR               : UInt32;
    end record with Volatile, Size => 249 * 32;

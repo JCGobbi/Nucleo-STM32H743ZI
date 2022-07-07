@@ -1571,6 +1571,46 @@ package body STM32.Timers is
       This.BDTR.Off_State_Selection_Idle_Mode := Off_State_Selection_Idle_Mode;
    end Configure_Break;
 
+   ----------------------------
+   -- Set_Timer_Break_Source --
+   ----------------------------
+
+   procedure Set_Timer_Break_Source
+     (This     : in out Timer;
+      Break_Nr : Timer_Break_Nr;
+      Source   : Timer_Break_Source;
+      Enabled  : Boolean;
+      Polarity : Timer_Break_Polarity)
+   is
+   begin
+      case Break_Nr is
+         when Break_1 =>
+            case Source is
+               when BKIN_Ext_AF_Input =>
+                  This.AF1.BKINE := Enabled;
+                  This.AF1.BKINP := Polarity = High;
+               when Comp_1_Output =>
+                  This.AF1.BKCMP1E := Enabled;
+                  This.AF1.BKCMP1P := Polarity = High;
+               when Comp_2_Output =>
+                  This.AF1.BKCMP2E := Enabled;
+                  This.AF1.BKCMP2P := Polarity = High;
+            end case;
+         when Break_2 =>
+            case Source is
+               when BKIN_Ext_AF_Input =>
+                  This.AF2.BK2INE := Enabled;
+                  This.AF2.BK2INP := Polarity = High;
+               when Comp_1_Output =>
+                  This.AF2.BK2CMP1E := Enabled;
+                  This.AF2.BK2CMP1P := Polarity = High;
+               when Comp_2_Output =>
+                  This.AF2.BK2CMP2E := Enabled;
+                  This.AF2.BK2CMP2P := Polarity = High;
+            end case;
+      end case;
+   end Set_Timer_Break_Source;
+
    ------------------------
    -- Configure_Deadtime --
    ------------------------
@@ -1729,6 +1769,18 @@ package body STM32.Timers is
       This.SMCR.External_Trigger_Prescaler := Prescaler;
       This.SMCR.External_Trigger_Filter := Filter;
    end Configure_External_Trigger;
+
+   ---------------------------------
+   -- Set_External_Trigger_Source --
+   ---------------------------------
+
+   procedure Set_External_Trigger_Source
+     (This     : in out Timer;
+      Source   : Timer_External_Trigger_Source)
+   is
+   begin
+      This.AF1.ETRSEL := Source'Enum_Rep;
+   end Set_External_Trigger_Source;
 
    ----------------------------------------------------------------------------
 
