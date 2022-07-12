@@ -102,8 +102,9 @@ package Inverter_PWM is
    subtype Gain_Range is Float range 0.0 .. 1.0;
    --  For correcting battery voltage and AC output variation.
 
-   procedure Set_Sine_Gain (Value : Gain_Range);
-   --  Securelly sets the value of the sine wave gain.
+   procedure Set_Sine_Gain (Value : Gain_Range)
+     with Inline;
+   --  Sets the value of the sine wave gain.
 
    procedure Set_Duty_Cycle
       (This      : PWM_Phase;
@@ -128,6 +129,20 @@ package Inverter_PWM is
 
    function Is_Initialized return Boolean;
    --  Returns True if the board specifics are initialized.
+
+   protected PWM_Handler is
+      pragma Interrupt_Priority (PWM_ISR_Priority);
+   private
+
+      Counter : Integer := 0;
+      --  For testing the output.
+
+      Semi_Senoid : Boolean := False;
+      --  Defines False = 1'st half sinusoid, True = 2'nd half sinusoid.
+
+      procedure PWM_ISR_Handler with
+        Attach_Handler => PWM_Interrupt;
+   end PWM_Handler;
 
 private
 
@@ -202,24 +217,7 @@ private
                             Pin_L   => PWM_B_L_Pin,
                             Pin_AF  => PWM_B_GPIO_AF));
 
-   protected PWM_Handler is
-      pragma Interrupt_Priority (PWM_ISR_Priority);
-
-      procedure Update_Sine_Gain (Value : Gain_Range);
-   private
-
-      Counter : Integer := 0;
-      --  For testing the output.
-
-      Sine_Gain : Gain_Range := 0.0;
-      --  Defines the gain of the sinusoid according to the battery voltage.
-
-      Semi_Senoid : Boolean := False;
-      --  Defines False = 1'st half sinusoid, True = 2'nd half sinusoid.
-
-      procedure PWM_ISR_Handler with
-        Attach_Handler => PWM_Interrupt;
-
-   end PWM_Handler;
+   Sine_Gain : Gain_Range := 0.0;
+   --  Defines the gain of the sinusoid according to the battery voltage.
 
 end Inverter_PWM;
