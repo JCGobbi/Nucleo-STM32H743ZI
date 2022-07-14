@@ -41,9 +41,12 @@ package body Inverter_ADC is
         (Sensor_ADC.all,
          Mode           => Independent,
          Prescaler      => Div_2,
-         Clock_Mode     => Asynchronous,
+         Clock_Mode     => Synchronous_Div_2,
          DMA_Mode       => Regular_Data_In_DR,
          Sampling_Delay => Sampling_Delay_5_Cycles);  -- arbitrary
+
+      --  Enable the used ADCs to configure conversions.
+      Enable (Sensor_ADC.all);
 
       Configure_Unit
         (Sensor_ADC.all,
@@ -60,12 +63,13 @@ package body Inverter_ADC is
       --  Either rising or falling edge should work. Note that the Event must
       --  match the timer used!
 
+      --  Each conversion generates an interrupt signalling conversion complete.
       Enable_Interrupts (Sensor_ADC.all,
                          Source => Regular_Channel_Conversion_Complete);
-      --  Each conversion generates an interrupt signalling conversion complete.
 
-      --  Finally, enable the used ADCs
-      Enable (Sensor_ADC.all);
+      --  ADSTART need to be set (RM0433 pg. 945 chapter 25.4.19) for hardware
+      --  trigger operation.
+      Start_Conversion (Sensor_ADC.all);
 
       --  Start the timer that trigger ADC conversions
       Initialize_ADC_Timer;
@@ -227,13 +231,12 @@ package body Inverter_ADC is
                Regular_Samples (Rank) := UInt16 (Conversion_Value (Sensor_ADC.all));
                if Rank = ADC_Reading'Last then
                   Rank := ADC_Reading'First;
+                  --  Calculate the new Sine_Gain based on battery voltage
+                  --  Get_Sine_Gain (Battery_Gain);
+                  --  Actually it is disabled because there is no signal at the ADC.
                else
                   Rank := ADC_Reading'Succ (Rank);
                end if;
-
-               --  Calculate the new Sine_Gain based on battery voltage
-               --  Get_Sine_Gain (Battery_Gain);
-               --  Actually is disabled because there is no signal at the ADC.
 
                --  Testing the 5 kHz output with 1 Hz LED blinking. Because
                --  there are three regular channel conversions, this frequency
