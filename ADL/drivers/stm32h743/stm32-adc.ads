@@ -580,10 +580,10 @@ package STM32.ADC is
    type Analog_Input_Channels is
      array (Analog_Input_Channel range <>) of Analog_Input_Channel;
 
-   procedure Watchdog_Enable_Channels
+   procedure Watchdog_Enable_Channel
      (This     : in out Analog_To_Digital_Converter;
       Watchdog : Analog_Window_Watchdog;
-      Channels : Analog_Input_Channels;
+      Channel  : Analog_Input_Channel;
       Low      : Watchdog_Threshold;
       High     : Watchdog_Threshold)
      with
@@ -593,11 +593,17 @@ package STM32.ADC is
    --  selected by AWDxCH must be also selected into the ADC regular or injected
    --  sequence registers SQRi or JSQRi registers. The watchdog is disabled when
    --  none channel is selected.
+   --  The watchdog threshold can be up to 26 bits (16-bit resolution with
+   --  oversampling, OSVR[9:0]=1024). When converting data with a resolution of
+   --  less than 16 bits (according to bits RES[2:0]), the LSBs of the programmed
+   --  thresholds must be kept cleared, the internal comparison being performed
+   --  on the full 16-bit converted data (left aligned to the half-word boundary).
+   --  See RM0433 rev 7, chapter 25.4.30, table 215 for 16- to 8-bit resolutions.
 
-   procedure Watchdog_Disable_Channels
+   procedure Watchdog_Disable_Channel
      (This     : in out Analog_To_Digital_Converter;
       Watchdog : Analog_Window_Watchdog;
-      Channels : Analog_Input_Channels)
+      Channel  : Analog_Input_Channel)
      with
        Pre  => not Conversion_Started (This);
 

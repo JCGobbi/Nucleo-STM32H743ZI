@@ -807,13 +807,13 @@ package body STM32.ADC is
       (This.CFGR.AWD1EN or This.CFGR.JAWD1EN);
    --  Per the RM0433 rev 7 Table 214, section 25.4.30,
 
-   ------------------------------
-   -- Watchdog_Enable_Channels --
-   ------------------------------
-   procedure Watchdog_Enable_Channels
+   -----------------------------
+   -- Watchdog_Enable_Channel --
+   -----------------------------
+   procedure Watchdog_Enable_Channel
      (This     : in out Analog_To_Digital_Converter;
       Watchdog : Analog_Window_Watchdog;
-      Channels : Analog_Input_Channels;
+      Channel  : Analog_Input_Channel;
       Low      : Watchdog_Threshold;
       High     : Watchdog_Threshold)
    is
@@ -822,38 +822,30 @@ package body STM32.ADC is
          when Watchdog_2 =>
             This.HTR2.HTR2 := High;
             This.LTR2.LTR2 := Low;
-            for Channel of Channels loop
-               This.AWD2CR.AWD2CH := This.AWD2CR.AWD2CH or (2 ** Natural (Channel));
-            end loop;
+            This.AWD2CR.AWD2CH := This.AWD2CR.AWD2CH or (2 ** Natural (Channel));
          when Watchdog_3 =>
             This.HTR3.HTR3 := High;
             This.LTR3.LTR3 := Low;
-            for Channel of Channels loop
-               This.AWD3CR.AWD3CH := This.AWD3CR.AWD3CH or (2 ** Natural (Channel));
-            end loop;
+            This.AWD3CR.AWD3CH := This.AWD3CR.AWD3CH or (2 ** Natural (Channel));
       end case;
-   end Watchdog_Enable_Channels;
+   end Watchdog_Enable_Channel;
 
-   -------------------------------
-   -- Watchdog_Disable_Channels --
-   -------------------------------
-   procedure Watchdog_Disable_Channels
+   ------------------------------
+   -- Watchdog_Disable_Channel --
+   ------------------------------
+   procedure Watchdog_Disable_Channel
      (This     : in out Analog_To_Digital_Converter;
       Watchdog : Analog_Window_Watchdog;
-      Channels : Analog_Input_Channels)
+      Channel  : Analog_Input_Channel)
    is
    begin
       case Watchdog is
          when Watchdog_2 =>
-            for Channel of Channels loop
-               This.AWD2CR.AWD2CH := This.AWD2CR.AWD2CH and not (2 ** Natural (Channel));
-            end loop;
+            This.AWD2CR.AWD2CH := This.AWD2CR.AWD2CH and not (2 ** Natural (Channel));
          when Watchdog_3 =>
-            for Channel of Channels loop
-               This.AWD3CR.AWD3CH := This.AWD3CR.AWD3CH and not (2 ** Natural (Channel));
-            end loop;
+            This.AWD3CR.AWD3CH := This.AWD3CR.AWD3CH and not (2 ** Natural (Channel));
       end case;
-   end Watchdog_Disable_Channels;
+   end Watchdog_Disable_Channel;
 
    ----------------------
    -- Watchdog_Disable --
