@@ -12,7 +12,7 @@ package STM32.COMP is
 
    function Enabled (This : Comparator) return Boolean;
 
-   type I_Input_Port is
+   type Inverting_Input_Port is
      (One_Quarter_Vrefint,
       One_Half_Vrefint,
       Three_Quarter_Vrefint,
@@ -30,19 +30,19 @@ package STM32.COMP is
    --  See RM0433 rev 7 chapter 24.3.2 pg 1094 Table 233: COMP input/output
    --  internal signals and Table 234: COMP input/output pins.
 
-   procedure Set_I_Input_Port
+   procedure Set_Inverting_Input_Port
      (This  : in out Comparator;
-      Input : I_Input_Port)
-     with Post => Get_I_Input_Port (This) = Input;
+      Input : Inverting_Input_Port)
+     with Post => Get_Inverting_Input_Port (This) = Input;
    --  Select the source connected to the inverting input of the comparator.
    --  See RM0433 rev 7 chapter 24.3.2 pg 1094 Table 233: COMP input/output
    --  internal signals and Table 234: COMP input/output pins.
 
-   function Get_I_Input_Port
-     (This : Comparator) return I_Input_Port;
+   function Get_Inverting_Input_Port
+     (This : Comparator) return Inverting_Input_Port;
    --  Return the source connected to the inverting input of the comparator.
 
-   type NI_Input_Port is
+   type NonInverting_Input_Port is
      (Option_1,
       Option_2);
    --  These bits allows to select the source connected to the non-inverting
@@ -53,16 +53,16 @@ package STM32.COMP is
    --  See RM0433 rev 7 chapter 24.3.2 pg 1094 Table 233: COMP input/output
    --  internal signals and Table 234: COMP input/output pins.
 
-   procedure Set_NI_Input_Port
+   procedure Set_NonInverting_Input_Port
      (This  : in out Comparator;
-      Input : NI_Input_Port)
-     with Post => Get_NI_Input_Port (This) = Input;
+      Input : NonInverting_Input_Port)
+     with Post => Get_NonInverting_Input_Port (This) = Input;
    --  Select the source connected to the non-inverting input of the comparator.
    --  See RM0433 rev 7 chapter 24.3.2 pg 1094 Table 233: COMP input/output
    --  internal signals and Table 234: COMP input/output pins.
 
-   function Get_NI_Input_Port
-     (This : Comparator) return NI_Input_Port;
+   function Get_NonInverting_Input_Port
+     (This : Comparator) return NonInverting_Input_Port;
    --  Return the source connected to the non-inverting input of the comparator.
 
    type Output_Polarity is
@@ -171,8 +171,8 @@ package STM32.COMP is
       Mode : COMP_Power_Mode);
 
    type Init_Parameters is record
-      Input_Minus     : I_Input_Port;
-      Input_Plus      : NI_Input_Port;
+      Input_Minus     : Inverting_Input_Port;
+      Input_Plus      : NonInverting_Input_Port;
       Output_Pol      : Output_Polarity;
       Hysteresis      : Comparator_Hysteresis;
       Blanking_Source : Output_Blanking;

@@ -35,47 +35,47 @@ package body STM32.COMP is
       return This.CFGR.EN;
    end Enabled;
 
-   ----------------------
-   -- Set_I_Input_Port --
-   ----------------------
+   ------------------------------
+   -- Set_Inverting_Input_Port --
+   ------------------------------
 
-   procedure Set_I_Input_Port
+   procedure Set_Inverting_Input_Port
      (This  : in out Comparator;
-      Input : I_Input_Port) is
+      Input : Inverting_Input_Port) is
    begin
       This.CFGR.INMSEL := Input'Enum_Rep;
-   end Set_I_Input_Port;
+   end Set_Inverting_Input_Port;
 
-   ----------------------
-   -- Get_I_Input_Port --
-   ----------------------
+   ------------------------------
+   -- Get_Inverting_Input_Port --
+   ------------------------------
 
-   function Get_I_Input_Port
-     (This : Comparator) return I_Input_Port is
+   function Get_Inverting_Input_Port
+     (This : Comparator) return Inverting_Input_Port is
    begin
-      return I_Input_Port'Val (This.CFGR.INMSEL);
-   end Get_I_Input_Port;
+      return Inverting_Input_Port'Val (This.CFGR.INMSEL);
+   end Get_Inverting_Input_Port;
 
-   -----------------------
-   -- Set_NI_Input_Port --
-   -----------------------
+   ---------------------------------
+   -- Set_NonInverting_Input_Port --
+   ---------------------------------
 
-   procedure Set_NI_Input_Port
+   procedure Set_NonInverting_Input_Port
      (This  : in out Comparator;
-      Input : NI_Input_Port) is
+      Input : NonInverting_Input_Port) is
    begin
       This.CFGR.INPSEL := Boolean'Val (Input'Enum_Rep);
-   end Set_NI_Input_Port;
+   end Set_NonInverting_Input_Port;
 
-   -----------------------
-   -- Get_NI_Input_Port --
-   -----------------------
+   ---------------------------------
+   -- Get_NonInverting_Input_Port --
+   ---------------------------------
 
-   function Get_NI_Input_Port
-     (This : Comparator) return NI_Input_Port is
+   function Get_NonInverting_Input_Port
+     (This : Comparator) return NonInverting_Input_Port is
    begin
-      return NI_Input_Port'Val (Boolean'Pos (This.CFGR.INPSEL));
-   end Get_NI_Input_Port;
+      return NonInverting_Input_Port'Val (Boolean'Pos (This.CFGR.INPSEL));
+   end Get_NonInverting_Input_Port;
 
    -------------------------
    -- Set_Output_Polarity --
