@@ -83,24 +83,6 @@ package Inverter_ADC is
 
    function Is_Initialized return Boolean;
 
-   protected Sensor_Handler is
-      pragma Interrupt_Priority (Sensor_ISR_Priority);
-
-      function Get_Regular_Samples return Regular_Samples_Array;
-   private
-
-      Rank : ADC_Reading := ADC_Reading'First;
-
-      Regular_Samples : Regular_Samples_Array := (others => 0)
-        with Volatile;
-
-      Counter : Integer := 0;
-      --  For testing the output.
-
-      procedure Sensor_ADC_Handler with
-        Attach_Handler => Sensor_Interrupt;
-   end Sensor_Handler;
-
 private
 
    Initialized : Boolean := False;
@@ -123,5 +105,22 @@ private
        (V_Output)  => (GPIO_Entry   => ADC_Output_V_Pin,
                        ADC_Entry    => ADC_Output_V_Point,
                        Channel_Rank => 3));
+
+   protected Sensor_Handler is
+      pragma Interrupt_Priority (Sensor_ISR_Priority);
+
+      function Get_Regular_Samples return Regular_Samples_Array;
+   private
+      Rank : ADC_Reading := ADC_Reading'First;
+
+      Regular_Samples : Regular_Samples_Array := (others => 0)
+        with Volatile;
+
+      Counter : Integer := 0;
+      --  For testing the output.
+
+      procedure Sensor_ADC_Handler with
+        Attach_Handler => Sensor_Interrupt;
+   end Sensor_Handler;
 
 end Inverter_ADC;

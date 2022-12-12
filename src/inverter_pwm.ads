@@ -127,20 +127,6 @@ package Inverter_PWM is
    function Is_Initialized return Boolean;
    --  Returns True if the board specifics are initialized.
 
-   protected PWM_Handler is
-      pragma Interrupt_Priority (PWM_ISR_Priority);
-   private
-
-      Counter : Integer := 0;
-      --  For testing the output.
-
-      Semi_Senoid : Boolean := False;
-      --  Defines False = 1'st half sinusoid, True = 2'nd half sinusoid.
-
-      procedure PWM_ISR_Handler with
-        Attach_Handler => PWM_Interrupt;
-   end PWM_Handler;
-
 private
 
    Initialized : Boolean := False;
@@ -216,5 +202,19 @@ private
 
    Sine_Gain : Gain_Range := 0.0;
    --  Defines the gain of the sinusoid according to the battery voltage.
+
+   protected PWM_Handler is
+      pragma Interrupt_Priority (PWM_ISR_Priority);
+
+   private
+      Counter : Integer := 0;
+      --  For testing the output.
+
+      Semi_Senoid : Boolean := False;
+      --  Defines False = 1'st half sinusoid, True = 2'nd half sinusoid.
+
+      procedure PWM_ISR_Handler with
+        Attach_Handler => PWM_Interrupt;
+   end PWM_Handler;
 
 end Inverter_PWM;
