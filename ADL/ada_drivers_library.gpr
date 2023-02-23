@@ -9,7 +9,7 @@ library project Ada_Drivers_Library is
 
    --  Target architecture and runtime
    Target := Project'Target;
-   for Runtime ("Ada") use Project'Runtime ("Ada");
+   --  for Runtime ("Ada") use Project'Runtime ("Ada");
 
    --  Run-time system
    type RTS_Type is ("ravenscar-sfp", "ravenscar-full");
