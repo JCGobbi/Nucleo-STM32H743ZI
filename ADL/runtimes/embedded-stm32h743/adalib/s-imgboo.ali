@@ -1,0 +1,52 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.img_bool%b	s-imgboo.adb		a49c2b36 NE OL PK
+W system%s		system.ads		system.ali
+
+U system.img_bool%s	s-imgboo.ads		21cae2b4 NE OL PR PK
+W system%s		system.ads		system.ali
+W system.val_bool%s	s-valboo.adb		s-valboo.ali
+
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-casuti.ads		20230315001224 cf13d755 system.case_util%s
+D s-imgboo.ads		20230315001224 1e4d84c3 system.img_bool%s
+D s-imgboo.adb		20230315001224 bad1aff5 system.img_bool%b
+D s-valboo.ads		20230315001224 65538922 system.val_bool%s
+D s-valuti.ads		20230315001224 4d0d41f3 system.val_util%s
+G a e
+G c Z s b [image_boolean system__img_bool 51 14 none]
+X 1 system.ads
+50K9*System 164e11 3|45r6 47r9 59r17 60r17 65r5 4|40r14 64r5
+X 3 s-imgboo.ads
+47K16*Img_Bool 1|50k9 3|65l12 65e20 4|40b21 64l12 64t20
+51U14*Image_Boolean 52>7 53=7 54<7 4|48b14 62l8 62t21
+52b7 V{boolean} 57r21 58r18 60r62 4|49b7 55r10
+53a7 S{string} 56r14 57r28 57r47 59r57 60r48 4|50b7 53r22 56m10 59m10
+54i7 P{natural} 58r25 58r36 59r65 60r56 4|51b7 57m10 60m10
+X 5 s-valboo.ads
+45K16*Val_Bool 3|45w13 59r24 60r24 5|90e20
+81V13*Value_Boolean{boolean} 3|60s33
+

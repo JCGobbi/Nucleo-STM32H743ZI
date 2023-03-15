@@ -1,0 +1,71 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/light-tasking-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_RECURSION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.value_i%b	s-valuei.adb		ab41f4ea NE OL PK GE
+W system%s		system.ads		system.ali
+W system.val_util%s	s-valuti.adb		s-valuti.ali
+
+U system.value_i%s	s-valuei.ads		fa5a0263 BN NE OL PR PK GE
+W system%s		system.ads		system.ali
+
+D system.ads		20230315001224 8fcf39fb system%s
+D s-casuti.ads		20230315001224 cf13d755 system.case_util%s
+D s-valuti.ads		20230315001224 4d0d41f3 system.val_util%s
+D s-valuei.ads		20230315001224 75953b98 system.value_i%s
+D s-valuei.adb		20230315001224 93d98e81 system.value_i%b
+G a e
+G c Z s b [value_i system 47 16 none]
+X 1 system.ads
+60K9*System 174e11 4|47r9 86r5 5|32r6 32r27 34r14 117r5
+X 3 s-valuti.ads
+49K16*Val_Util 407e20 5|32w13 32r34
+54U14*Bad_Value 5|60s10 71s13
+113U14*Scan_Sign 5|56s7
+338U14*Scan_Trailing_Blanks 5|111s13
+X 4 s-valuei.ads
+37I9 Int 54r17 80r49 5|44r17 67r22 68r42 69r20 77r19 82r17 90r49 107r17
+39M9 Uns 45r22 5|46r14 67r17 68r35
+41U19 Scan_Raw_Unsigned 42>12 43^12 44>12 45<12 5|63s7
+42a12 Str{string}
+43p12 Ptr(integer)
+44i12 Max{integer}
+45*12 Res{39M9}
+47k16*Value_I 1|60k9 4|37z9 39z9 41z19 86l12 86e19 5|34b21 117l12 117t19
+50U14*Scan_Integer 51>7 52^7 53>7 54<7 5|40b14 84l8 84t20 110s13
+51a7 Str{string} 5|41b7 56r18 58r10 60r21 63r26 71r24
+52p7 Ptr(integer) 5|42b7 56r23 58r15 59r10 63r31
+53i7 Max{integer} 5|43b7 56r28 63r36
+54*7 Res{37I9} 5|44b7 69m13 77m10 82m10
+80V13*Value_Integer{37I9} 80>28 5|90b13 100s20 115l8 115t21
+80a28 Str{string} 5|90b28 96r10 98r40 100r39 108r36 110r27 110r42 111r35
+X 5 s-valuei.adb
+46*7 Uval{4|39M9} 63m41 67r10 68r28 77r24 82r22
+49b7 Minus{boolean} 56m33 68r13 76r13
+52i7 Start{positive} 56m40 59r21
+98A21 NT{string}<integer> 100r35
+107*13 V{4|37I9} 110m52 112r20
+108i13 P{integer} 110m32 110r32 111r40
+

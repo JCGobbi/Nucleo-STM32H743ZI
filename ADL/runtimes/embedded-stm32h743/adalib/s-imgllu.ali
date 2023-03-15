@@ -1,0 +1,60 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.img_llu%s	s-imgllu.ads		12871a5a NE OL PU PK
+W system%s		system.ads		system.ali
+W system.image_u%s
+W system.unsigned_types%s  s-unstyp.ads		s-unstyp.ali
+
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-imageu.ads		20230315001224 525c30c6 system.image_u%s
+D s-imageu.adb		20230315001224 2d0619dc system.image_u%b
+D s-imgllu.ads		20230315001224 e025ba90 system.img_llu%s
+D s-unstyp.ads		20230315001224 fa2a7f59 system.unsigned_types%s
+G a e
+G c Z s s [image_unsigned system__img_llu__impl 43 14 44_4]
+G c Z s s [set_image_unsigned system__img_llu__impl 52 14 44_4]
+X 1 system.ads
+50K9*System 164e11 4|36r6 37r6 39r9 58r5
+X 2 s-imageu.ads
+40k16*Image_U 62e19 4|36w13 44r24
+43U14*Image_Unsigned 4|50r19[44]
+52U14*Set_Image_Unsigned 4|56r19[44]
+X 4 s-imgllu.ads
+39K16*Img_LLU 1|50k9 4|58l12 58e19
+42M12*Long_Long_Unsigned{5|46M9} 44r33 47r11 53r11
+44K12*Impl[2|40] 50r14 56r14
+46U14*Image_Long_Long_Unsigned=50:19
+47m7 V{5|46M9}
+48a7 S{string}
+49i7 P{natural}
+52U14*Set_Image_Long_Long_Unsigned=56:19
+53m7 V{5|46M9}
+54a7 S{string}
+55i7 P{natural}
+X 5 s-unstyp.ads
+38K16*Unsigned_Types 4|37w13 42r34 5|249e26
+46M9*Long_Long_Unsigned 4|42r49
+

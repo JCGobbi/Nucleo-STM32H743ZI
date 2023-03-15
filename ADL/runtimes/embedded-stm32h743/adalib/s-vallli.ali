@@ -1,0 +1,79 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_LONG_LONG_INTEGERS
+RV NO_RECURSION
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.val_lli%s	s-vallli.ads		97ef5e61 NE OL PR PK
+W system%s		system.ads		system.ali
+W system.unsigned_types%s  s-unstyp.ads		s-unstyp.ali
+W system.val_llu%s	s-valllu.ads		s-valllu.ali
+Z system.val_util%s	s-valuti.adb		s-valuti.ali
+W system.value_i%s
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-except.ads		20230315001224 2a7d8d70 ada.exceptions%s
+D a-unccon.ads		20230315001224 0e9b276f ada.unchecked_conversion%s
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-casuti.ads		20230315001224 cf13d755 system.case_util%s
+D s-parame.ads		20230315001224 8e90778f system.parameters%s
+D s-stalib.ads		20230315001224 1c9580f6 system.standard_library%s
+D s-traent.ads		20230315001224 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20230315001224 fa2a7f59 system.unsigned_types%s
+D s-vallli.ads		20230315001224 88ead33b system.val_lli%s
+D s-valllu.ads		20230315001224 ca6e26ce system.val_llu%s
+D s-valuti.ads		20230315001224 4d0d41f3 system.val_util%s
+D s-valuei.ads		20230315001224 75953b98 system.value_i%s
+D s-valuei.adb		20230315001224 93d98e81 system.value_i%b
+D s-valueu.ads		20230315001224 eb2f4477 system.value_u%s
+D s-valueu.adb		20230315001224 040f5707 system.value_u%b
+G a e
+G c Z s s [scan_integer system__val_lli__impl 50 14 44_4]
+G c Z s s [value_integer system__val_lli__impl 80 13 44_4]
+X 4 system.ads
+50K9*System 164e11 10|35r6 36r6 37r6 39r9 59r5
+X 9 s-unstyp.ads
+38K16*Unsigned_Types 249e26 10|35w13 42r34
+46M9*Long_Long_Unsigned 10|42r49
+X 10 s-vallli.ads
+39K16*Val_LLI 4|50k9 10|59l12 59e19
+42M12*Long_Long_Unsigned{9|46M9} 46r15
+44K12*Impl[13|47] 54r14 57r14
+49U14*Scan_Long_Long_Integer=54:19
+50a7 Str{string}
+51p7 Ptr(integer)
+52i7 Max{integer}
+53i7 Res{long_long_integer}
+56V13*Value_Long_Long_Integer=57:19{long_long_integer}
+56a38 Str{string}
+X 11 s-valllu.ads
+50K16*Val_LLU 10|36w13 47r15 11|75e19
+57U14*Scan_Raw_Long_Long_Unsigned=62:19 10|47r23
+X 13 s-valuei.ads
+47k16*Value_I 10|37w13 45r6 13|86e19
+50U14*Scan_Integer 10|54r19[44]
+80V13*Value_Integer{long_long_integer} 10|57r19[44]
+

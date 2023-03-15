@@ -1,0 +1,39 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/light-tasking-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U ada.numerics.aux%s	a-numaux.ads		34b97913 NE OL PU PK
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-numeri.ads		20230315001224 84bea7a3 ada.numerics%s
+D a-numaux.ads		20230315001224 b007deb0 ada.numerics.aux%s
+D system.ads		20230315001224 8fcf39fb system%s
+G a e
+X 1 ada.ads
+16K9*Ada 20e8 3|35r9 37r5
+X 2 a-numeri.ads
+16K13*Numerics 1|16k9 2|35e17 3|35r13 37r9
+X 3 a-numaux.ads
+35K22*Aux 2|16k13 3|37l18 37e21
+

@@ -1,0 +1,52 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.traceback_entries%b  s-traent.adb	5f6b6486 NE OL PK
+W system%s		system.ads		system.ali
+
+U system.traceback_entries%s  s-traent.ads	92c850d9 BN NE OL PR PK
+W system%s		system.ads		system.ali
+
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-traent.ads		20230315001224 c81cbf8c system.traceback_entries%s
+D s-traent.adb		20230315001224 9777db0a system.traceback_entries%b
+G a e
+G c Z s b [pc_for system__traceback_entries 52 13 none]
+G c Z s b [tb_entry_for system__traceback_entries 57 13 none]
+G c Z s s [tracebacks_arrayIP system__traceback_entries 50 9 none]
+X 1 system.ads
+50K9*System 164e11 2|41r9 44r31 47r48 52r56 57r32 61r5 3|32r14 38r56 47r32
+. 52r5
+80M9*Address 2|44r38 52r63 57r39 3|38r63 47r39
+82m4*Null_Address{80M9} 2|47r55
+X 2 s-traent.ads
+41K16*Traceback_Entries 1|50k9 2|61l12 61e29 3|32b21 52l12 52t29
+44M12*Traceback_Entry{1|80M9} 47r29 50r58 52r32 57r55 3|38r32 47r55
+47m4*Null_TB_Entry{44M12}
+50A9*Tracebacks_Array(44M12)<integer>
+52V13*PC_For{1|80M9} 52>21 53r19 3|38b13 41l8 41t14
+52m21 TB_Entry{44M12} 3|38b21 40r14
+57V13*TB_Entry_For{44M12} 57>27 58r19 3|47b13 50l8 50t20
+57m27 PC{1|80M9} 3|47b27 49r14
+

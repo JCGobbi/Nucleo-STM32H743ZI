@@ -1,0 +1,89 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB SS ZX
+
+RN
+RV NO_SECONDARY_STACK
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U ada.strings.hash_case_insensitive%b  a-shcain.adb  433da570 NE OL PU SU
+W ada%s			ada.ads			ada.ali
+W ada.characters%s	a-charac.ads		a-charac.ali
+W ada.characters.handling%s  a-chahan.adb	a-chahan.ali
+W ada.strings%s		a-string.ads		a-string.ali
+W system%s		system.ads		system.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.string_hash%s	s-strhas.adb		s-strhas.ali
+
+U ada.strings.hash_case_insensitive%s  a-shcain.ads  f9e6d5c1 NE OL PU SU
+W ada%s			ada.ads			ada.ali
+W ada.containers%s	a-contai.ads		a-contai.ali
+W ada.strings%s		a-string.ads		a-string.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-charac.ads		20230315001224 2d3ec45b ada.characters%s
+D a-chahan.ads		20230315001224 bbd5c0b9 ada.characters.handling%s
+D a-chahan.adb		20230315001224 96cadc18 ada.characters.handling%b
+D a-chlat1.ads		20230315001224 e0d72e76 ada.characters.latin_1%s
+D a-contai.ads		20230315001224 61e5e089 ada.containers%s
+D a-except.ads		20230315001224 2a7d8d70 ada.exceptions%s
+D a-string.ads		20230315001224 90ac6797 ada.strings%s
+D a-shcain.ads		20230315001224 08af52df ada.strings.hash_case_insensitive%s
+D a-shcain.adb		20230315001224 d6dbef82 ada.strings.hash_case_insensitive%b
+D a-strmap.ads		20230315001224 233229cd ada.strings.maps%s
+D a-strmap.adb		20230315001224 47169003 ada.strings.maps%b
+D a-stmaco.ads		20230315001224 4b1f2a0b ada.strings.maps.constants%s
+D a-unccon.ads		20230315001224 0e9b276f ada.unchecked_conversion%s
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-bitops.ads		20230315001224 cdf3ac3c system.bit_ops%s
+D s-parame.ads		20230315001224 8e90778f system.parameters%s
+D s-secsta.ads		20230315001224 56a2861c system.secondary_stack%s
+D s-stalib.ads		20230315001224 1c9580f6 system.standard_library%s
+D s-stoele.ads		20230315001224 6d8e1ff4 system.storage_elements%s
+D s-strhas.ads		20230315001224 269cd894 system.string_hash%s
+D s-strhas.adb		20230315001224 398666ac system.string_hash%b
+D s-traent.ads		20230315001224 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20230315001224 fa2a7f59 system.unsigned_types%s
+G a e
+G c Z s b [hash_case_insensitive ada__strings 32 22 none]
+X 1 ada.ads
+16K9*Ada 20e8 9|30r6 32r10 34r14 10|30r6 30r35 33r10 36r8 41r5
+X 2 a-charac.ads
+16K13*Characters 18e19 10|30r10 30r39
+X 3 a-chahan.ads
+43K24*Handling 453e28 10|30w21 30r50
+273V13*To_Lower{string} 10|40s17
+X 6 a-contai.ads
+16K13*Containers 28e19 9|30w10 33r25 10|34r25 36r12
+19M9*Hash_Type 9|33r36 10|34r36 38r26
+X 8 a-string.ads
+16K13*Strings 35e16 9|32r14 34r18 10|33r14 41r9
+X 9 a-shcain.ads
+32V22*Hash_Case_Insensitive{6|19M9} 8|16k13 9|33>4 34r26 10|33b22 41l17 41t38
+33a4 Key{string} 10|34b4 40r27
+X 10 a-shcain.adb
+37V13 Hash[21|60]{6|19M9} 40s11 22|42b13
+X 15 system.ads
+50K9*System 10|31r6 37r25 15|164e11
+X 21 s-strhas.ads
+45K16*String_Hash 10|31w13 37r32 21|64e23
+60v13*Hash 10|37r44
+

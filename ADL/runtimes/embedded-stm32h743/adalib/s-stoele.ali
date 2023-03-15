@@ -1,0 +1,97 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_EXCEPTIONS
+RV NO_LONG_LONG_INTEGERS
+RV NO_UNCHECKED_CONVERSION
+RV NO_IMPLEMENTATION_ATTRIBUTES
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.storage_elements%b  s-stoele.adb	ec4fa52d NE OL PK
+W ada%s			ada.ads			ada.ali
+W ada.unchecked_conversion%s
+Z system%s		system.ads		system.ali
+
+U system.storage_elements%s  s-stoele.ads	375af0a1 BN NE OL PU PK
+W system%s		system.ads		system.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-unccon.ads		20230315001224 0e9b276f ada.unchecked_conversion%s
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-stoele.ads		20230315001224 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20230315001224 8f5a9db6 system.storage_elements%b
+G a e
+G c Z s b [Oadd system__storage_elements 73 13 none]
+G c Z s b [Oadd system__storage_elements 78 13 none]
+G c Z s b [Osubtract system__storage_elements 83 13 none]
+G c Z s b [Osubtract system__storage_elements 88 13 none]
+G c Z s b [Omod system__storage_elements 93 13 none]
+G c Z s b [to_address system__storage_elements 104 13 none]
+G c Z s b [to_integer system__storage_elements 109 13 none]
+G c Z s s [storage_arrayIP system__storage_elements 67 9 none]
+G c Z b b [to_address system__storage_elements 43 13 none]
+G c Z b b [to_offset system__storage_elements 45 13 none]
+X 1 ada.ads
+16K9*Ada 20e8 5|32r6 44r10 46r10
+X 2 a-unccon.ads
+20v14*Unchecked_Conversion 5|32w10 44r14 46r14
+X 3 system.ads
+50K9*System 164e11 4|40r9 114r5 5|34r14 129r5
+80M9*Address 4|73r25 73r65 78r49 78r65 83r25 83r65 88r32 94r15 104r57 109r33
+. 5|44r52 46r36 57r57 59r14 66r33 77r25 77r65 83r49 83r65 93r25 93r65 99r32
+. 110r15
+84N4*Storage_Unit 4|61r37 62r33 69r41
+86N4*Memory_Size 4|102r32
+X 4 s-stoele.ads
+40K16*Storage_Elements 3|50k9 4|114l12 114e28 5|34b21 79r14 85r14 95r14 101r25
+. 129l12 129t28
+52I9*Storage_Offset<integer> 59r29 59r55 68r13 73r42 78r25 83r42 88r48 95r15
+. 95r39 5|44r36 46r45 77r42 83r25 93r42 99r48 111r15 111r38 115r17
+59I12*Storage_Count{52I9}
+61M9*Storage_Element 62r8 64r31 68r49
+67A9*Storage_Array(61M9)<52I9> 69r8
+73V14*"+"{3|80M9} 73>18 73>34 5|77b14 81l9 81t11
+73m18 Left{3|80M9} 5|77b18 80r22
+73i34 Right{52I9} 5|77b34 80r54
+78V14*"+"{3|80M9} 78>18 78>41 5|83b14 87l9 87t11
+78i18 Left{52I9} 5|83b18 86r34
+78m41 Right{3|80M9} 5|83b41 86r55
+83V14*"-"{3|80M9} 83>18 83>34 5|93b14 97l9 97t11
+83m18 Left{3|80M9} 5|93b18 96r22
+83i34 Right{52I9} 5|93b34 96r54
+88V14*"-"{52I9} 88>18 88>24 5|99b14 103l9 103t11
+88m18 Left{3|80M9} 5|99b18 102r39
+88m24 Right{3|80M9} 5|99b24 102r59
+93V14*"mod"{52I9} 94>7 95>7 5|109b14 127l9 127t13
+94m7 Left{3|80M9} 5|110b7 116r25
+95i7 Right{52I9} 5|111b7 114r10 116r52
+102M9*Integer_Address 104r33 109r49 5|57r33 66r49 68r14 116r35
+104V13*To_Address{3|80M9} 104>25 105r34 106r26 107r26 5|57b13 60l8 60t18
+. 79s31 85s31 95s31 101s42
+104m25 Value{102M9} 5|57b25 59r23
+109V13*To_Integer{102M9} 109>25 110r34 111r26 112r26 5|66b13 69l8 69t18 80s10
+. 80s30 86s10 86s43 96s10 96s30 102s27 102s47 116s13
+109m25 Value{3|80M9} 5|66b25 68r31
+X 5 s-stoele.adb
+43V13 To_Address[2|20]{3|80M9} 80s42 86s22 96s42
+45V13 To_Offset[2|20]{4|52I9} 101s14
+

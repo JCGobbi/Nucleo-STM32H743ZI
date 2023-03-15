@@ -98,7 +98,23 @@ SECTIONS
   .eh_frame         : { KEEP (*(.eh_frame)) } > REGION_CODE
   .gcc_except_table : { *(.gcc_except_table .gcc_except_table.*) } > REGION_CODE
 
-  . = ALIGN(0x10);
+  . = ALIGN(0x1000);
+
+  __region_data_start = .;
+
+  .mmu_ram_table_2 : ALIGN(0x1000)
+  {
+      __mmu_ram_table_2_start = .;
+      . = . + 2 * 0x1000;
+      __mmu_ram_table_2_end = .;
+  } > REGION_DATA
+
+  .mmu_ram_table_3 : ALIGN(0x1000)
+  {
+      __mmu_ram_table_3_start = .;
+      . = . + 1024 * 0x1000;
+      __mmu_ram_table_3_end = .;
+  } > REGION_DATA
 
   __data_load = .;
   .data : AT (__data_load)
@@ -126,29 +142,40 @@ SECTIONS
    __bss_end = .;
 
    /* Separate env stack per CPU and EL levels= */
+   . = ALIGN(0x1000);
+
+   . = . + 0x1000;
    __stack_start = .;
 
    __cpu0_stack_start = .;
    . += DEFINED (__stack_size) ? __stack_size : _DEFAULT_STACK_SIZE;
-   . = ALIGN(0x10);
+   . = ALIGN(0x1000);
    __cpu0_stack_end = .;
+
+   . = . + 0x1000;
 
    __cpu1_stack_start = .;
    . += DEFINED (__stack_size) ? __stack_size : _DEFAULT_STACK_SIZE;
-   . = ALIGN(0x10);
+   . = ALIGN(0x1000);
    __cpu1_stack_end = .;
+
+   . = . + 0x1000;
 
    __cpu2_stack_start = .;
    . += DEFINED (__stack_size) ? __stack_size : _DEFAULT_STACK_SIZE;
-   . = ALIGN(0x10);
+   . = ALIGN(0x1000);
    __cpu2_stack_end = .;
+
+   . = . + 0x1000;
 
    __cpu3_stack_start = .;
    . += DEFINED (__stack_size) ? __stack_size : _DEFAULT_STACK_SIZE;
-   . = ALIGN(0x10);
+   . = ALIGN(0x1000);
    __cpu3_stack_end = .;
 
    __stack_end = .;
+
+   . = . + 0x1000;
 
    /* Interrupt stacks: defined in s-bbinte.adb.  */
    __interrupt_stack_start = .;
@@ -166,26 +193,47 @@ SECTIONS
   /* DWARF debug sections.
      Symbols in the DWARF debugging sections are relative to the beginning
      of the section so we begin them at 0.  */
-  /* DWARF 1 */
+
+  /* DWARF 1.  */
   .debug          0 : { *(.debug) }
   .line           0 : { *(.line) }
-  /* GNU DWARF 1 extensions */
+
+  /* GNU DWARF 1 extensions.  */
   .debug_srcinfo  0 : { *(.debug_srcinfo) }
   .debug_sfnames  0 : { *(.debug_sfnames) }
-  /* DWARF 1.1 and DWARF 2 */
+
+  /* DWARF 1.1 and DWARF 2.  */
   .debug_aranges  0 : { *(.debug_aranges) }
   .debug_pubnames 0 : { *(.debug_pubnames) }
-  /* DWARF 2 */
+
+  /* DWARF 2.  */
   .debug_info     0 : { *(.debug_info .gnu.linkonce.wi.*) }
   .debug_abbrev   0 : { *(.debug_abbrev) }
-  .debug_line     0 : { *(.debug_line) }
+  .debug_line     0 : { *(.debug_line .debug_line.* .debug_line_end) }
   .debug_frame    0 : { *(.debug_frame) }
   .debug_str      0 : { *(.debug_str) }
   .debug_loc      0 : { *(.debug_loc) }
   .debug_macinfo  0 : { *(.debug_macinfo) }
-  /* DWARF 3 */
+
+  /* SGI/MIPS DWARF 2 extensions.  */
+  .debug_weaknames 0 : { *(.debug_weaknames) }
+  .debug_funcnames 0 : { *(.debug_funcnames) }
+  .debug_typenames 0 : { *(.debug_typenames) }
+  .debug_varnames  0 : { *(.debug_varnames) }
+
+  /* DWARF 3.  */
   .debug_pubtypes 0 : { *(.debug_pubtypes) }
   .debug_ranges   0 : { *(.debug_ranges) }
+
+  /* DWARF 5.  */
+  .debug_addr     0 : { *(.debug_addr) }
+  .debug_line_str 0 : { *(.debug_line_str) }
+  .debug_loclists 0 : { *(.debug_loclists) }
+  .debug_macro    0 : { *(.debug_macro) }
+  .debug_names    0 : { *(.debug_names) }
+  .debug_rnglists 0 : { *(.debug_rnglists) }
+  .debug_str_offsets 0 : { *(.debug_str_offsets) }
+  .debug_sup      0 : { *(.debug_sup) }
 
   .ARM.attributes 0 : { KEEP (*(.ARM.attributes)) KEEP (*(.gnu.attributes)) }
   .note.gnu.arm.ident 0 : { KEEP (*(.note.gnu.arm.ident)) }

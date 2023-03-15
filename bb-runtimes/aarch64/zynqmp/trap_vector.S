@@ -46,8 +46,8 @@
 .org 0
 .section .vectors, "a"
 
-/* Below symbols are defined in Ada by the ravenscar runtime. They can be
- * overriden only in case the ZFP runtime is used
+/* Below symbols are defined in Ada by the tasking runtime. They can be
+ * overriden only in case the non-tasking runtime is used
  */
 .weak   interrupt_stack_table
 .weak   __gnat_context_switch_needed

@@ -77,9 +77,6 @@ _stm32_start_common:
         beq      init_cache
         ldr     r2, =#0x451
         cmp     r1, r2      /* Compare to STM32F76xxx/77xxx Dev ID */
-        beq      init_cache
-        ldr     r2, =#0x450
-        cmp     r1, r2      /* Compare to STM32H742/743/750/753 Dev ID */
         bne     end         /* Do not initialize cache on STM32F4 */
 
 init_cache:

@@ -37,14 +37,14 @@ class LeonTarget(DFBBTarget):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-xi-sparc.ads',
-            'ravenscar-sfp': 'system-xi-sparc-ravenscar.ads',
-            'ravenscar-full': 'system-xi-sparc-full.ads'
+            'light': 'system-xi-sparc.ads',
+            'light-tasking': 'system-xi-sparc-ravenscar.ads',
+            'embedded': 'system-xi-sparc-full.ads'
         }
 
     def amend_rts(self, rts_profile, conf):
         super(LeonTarget, self).amend_rts(rts_profile, conf)
-        if rts_profile == 'ravenscar-full':
+        if rts_profile == 'embedded':
             # Use leon-zcx.specs to link with -lc.
             conf.config_files.update(
                 {'link-zcx.spec': readfile('sparc/leon/leon-zcx.specs')})
@@ -52,7 +52,7 @@ class LeonTarget(DFBBTarget):
     def dump_runtime_xml(self, rts_name, rts):
         cnt = super(LeonTarget, self).dump_runtime_xml(rts_name, rts)
         cnt = cnt.replace(' "-nolibc",', '')
-        if rts_name == 'ravenscar-full':
+        if rts_name == 'embedded':
             cnt = cnt.replace(
                 '"-nostartfiles",',
                 '"--specs=${RUNTIME_DIR(ada)}/link-zcx.spec",')
@@ -104,8 +104,8 @@ class Leon3(LeonTarget):
     def system_ads(self):
         ret = super(Leon3, self).system_ads
         if self.smp:
-            # zfp runtime makes no sense in the context of SMP variant
-            del(ret['zfp'])
+            # The Light runtime makes no sense in the context of SMP variant
+            del(ret['light'])
         return ret
 
     @property

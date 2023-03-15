@@ -1,0 +1,131 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_DISPATCHING_CALLS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_ELABORATION_CODE
+
+U system.pool_global%b	s-pooglo.adb		7c78c3c5 NE OL PK
+W system%s		system.ads		system.ali
+W system.memory%s	s-memory.adb		s-memory.ali
+W system.storage_pools%s  s-stopoo.adb		s-stopoo.ali
+
+U system.pool_global%s	s-pooglo.ads		4fd05058 EB EE OL PF PK
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+Z ada.tags%s		a-tags.adb		a-tags.ali
+W system%s		system.ads		system.ali
+Z system.put_images%s	s-putima.adb		s-putima.ali
+W system.storage_elements%s  s-stoele.adb	s-stoele.ali
+W system.storage_pools%s  s-stopoo.adb		s-stopoo.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-except.ads		20230315001224 2a7d8d70 ada.exceptions%s
+D a-finali.ads		20230315001224 bf4f806b ada.finalization%s
+D a-stream.ads		20230315001224 119b8fb3 ada.streams%s
+D a-string.ads		20230315001224 90ac6797 ada.strings%s
+D a-sttebu.ads		20230315001224 18209c64 ada.strings.text_buffers%s
+D a-stuten.ads		20230315001224 33c54060 ada.strings.utf_encoding%s
+D a-tags.ads		20230315001224 9eaa38c6 ada.tags%s
+D a-unccon.ads		20230315001224 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20230315001224 edec285f interfaces%s
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-finroo.ads		20230315001224 4ff27390 system.finalization_root%s
+D s-memory.ads		20230315001224 5b8432d0 system.memory%s
+D s-parame.ads		20230315001224 8e90778f system.parameters%s
+D s-pooglo.ads		20230315001224 91708d21 system.pool_global%s
+D s-pooglo.adb		20230315001224 5f7651ec system.pool_global%b
+D s-putima.ads		20230315001224 4e095881 system.put_images%s
+D s-stalib.ads		20230315001224 1c9580f6 system.standard_library%s
+D s-stoele.ads		20230315001224 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20230315001224 8f5a9db6 system.storage_elements%b
+D s-stopoo.ads		20230315001224 e9fa2dd8 system.storage_pools%s
+D s-traent.ads		20230315001224 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20230315001224 fa2a7f59 system.unsigned_types%s
+D unchconv.ads		20230315001224 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z s b [storage_size system__pool_global 55 24 none]
+G c Z s b [allocate system__pool_global 59 25 none]
+G c Z s b [deallocate system__pool_global 65 25 none]
+G c Z s s [unbounded_no_reclaim_poolDF system__pool_global 52 9 none]
+G c Z s s [unbounded_no_reclaim_poolIP system__pool_global 52 9 none]
+X 3 a-finali.ads
+53U14*Initialize<12|44p14>
+54U14*Finalize<12|43p14>
+X 11 system.ads
+50K9*System 164e11 15|35r6 36r6 38r9 53r6 57r14 61r26 62r22 63r22 67r22 68r22
+. 69r22 78r5 16|32r6 32r32 33r6 35r14 37r24 45r26 53r25 54r25 85r29 89r34
+. 107r22 111r11 125r29 128r41 156r5
+80M9*Address 15|61r33 67r29 16|45r33 53r32 54r32 85r36 89r41 107r29 125r36
+. 128r48
+82m4*Null_Address{80M9} 16|67r22
+84N4*Storage_Unit 16|89r56 128r63
+94V14*"="{boolean} 16|67r20
+X 12 s-finroo.ads
+42U14*Adjust
+X 13 s-memory.ads
+43K16*Memory 105e18 16|33w13 61r20 61r34 130r13 134r10
+46M9*size_t 16|61r41
+51V13*Alloc{11|80M9} 101i<c,__gnat_malloc>22 16|61s27
+66U14*Free 102i<c,__gnat_free>22 16|130s20 134s17
+74V13*Realloc{11|80M9} 103i<c,__gnat_realloc>22
+X 15 s-pooglo.ads
+38K16*Pool_Global 11|50k9 15|78l12 78e23 16|35b21 156l12 156t23
+52R9*Unbounded_No_Reclaim_Pool<21|42R9> 3|53P14 54P14 12|42p14 15|53e61 55P24
+. 56r14 59P25 60r29 65P25 66r29 76r33 16|44r29 106r29 143r15
+55V24*Storage_Size{19|59I12}<21|60p13> 56>7 16|142b24 154l8 154t20
+56r7 Pool{52R9} 16|143b7 146r29
+59U25*Allocate<21|46p14> 60=7 61<7 62>7 63>7 16|43b25 99l8 99t16
+60r7 Pool{52R9} 16|44b7 50r29
+61m7 Address{11|80M9} 16|45b7 94m10 97m10
+62i7 Storage_Size{19|59I12} 16|46b7 52r42
+63i7 Alignment{19|59I12} 16|47b7 57r10 58r41 74r10 79r55 80r62
+65U25*Deallocate<21|53p14> 66=7 67>7 68>7 69>7 16|105b25 136l8 136t18
+66r7 Pool{52R9} 16|106b7 112r29
+67m7 Address{11|80M9} 16|107b7 128r15 134r23
+68i7 Storage_Size{19|59I12} 16|108b7 113r29
+69i7 Alignment{19|59I12} 16|109b7 120r10
+76r4*Global_Pool_Object{52R9}
+X 16 s-pooglo.adb
+37K12 SSE=37:31 46r22 47r22 49r11 108r22 109r22 144r15 153r14
+52i7 Aligned_Size{19|59I12} 58m10 58r26 61r49
+53m7 Aligned_Address{11|80M9} 78m10 88r16 94r21
+54m7 Allocated{11|80M9} 61m7 67r10 79r25 80r30 91r30 97r21
+85m13 Saved_Address{11|80M9} 86m33 86r33 87m17 87r17 91m13
+125m13 Saved_Address{11|80M9} 126m33 126r33 127m17 127r17 130r26
+X 19 s-stoele.ads
+40K16*Storage_Elements 15|36w13 57r21 62r29 63r29 68r29 69r29 16|37r31 111r18
+. 19|114e28
+52I9*Storage_Offset<integer> 16|89r18 128r25
+59I12*Storage_Count{52I9} 15|57r38 62r46 63r46 68r46 69r46 16|46r26 47r26
+. 52r25 108r26 109r26 144r19 153r18
+83V14*"-"{11|80M9} 16|89s16 128s23
+102M9*Integer_Address 16|79r38 80r45
+104V13*To_Address{11|80M9} 16|78s29
+109V13*To_Integer{102M9} 16|79s13 80s18
+X 21 s-stopoo.ads
+39K16*Storage_Pools 15|35w13 53r13 16|32w13 32r39 21|100e25
+42H9*Root_Storage_Pool<3|50R9> 15|53r27 21|67e62
+

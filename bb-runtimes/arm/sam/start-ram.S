@@ -31,7 +31,7 @@
 	.thumb
 
 	/* This is the initial vector table and also the one that is used by
-	   the zfp runtime. Ravenscar runtimes install its own table (using
+	   the light runtime. The tasking runtimes install their own table (using
 	   VTOR register) defined in handler.S.  */
 	.section .vectors,"a"
 	.globl	__vectors0
@@ -98,7 +98,7 @@ _start_ram:
 	mov	sp,r0
 
 	/* Enable FPU and cache when appropriate */
-    bl _sam_start_common
+	bl _sam_start_common
 
 	/* Clear .bss */
 	movw	r0,#:lower16:__bss_start

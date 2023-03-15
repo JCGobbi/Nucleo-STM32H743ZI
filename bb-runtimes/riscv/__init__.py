@@ -25,11 +25,11 @@ class RiscV64(DFBBTarget):
 
     @property
     def system_ads(self):
-        return {'zfp': 'system-xi-riscv.ads'}
+        return {'light': 'system-xi-riscv.ads'}
 
     def dump_runtime_xml(self, rts_name, rts):
         cnt = super(RiscV64, self).dump_runtime_xml(rts_name, rts)
-        if rts_name == 'ravenscar-full':
+        if rts_name == 'embedded':
             cnt = cnt.replace(
                 '"-nostartfiles"',
                 '"--specs=${RUNTIME_DIR(ada)}/link-zcx.spec"')
@@ -37,7 +37,7 @@ class RiscV64(DFBBTarget):
 
     def amend_rts(self, rts_profile, conf):
         super(DFBBTarget, self).amend_rts(rts_profile, conf)
-        if rts_profile == 'ravenscar-full':
+        if rts_profile == 'embedded':
             conf.config_files.update(
                 {'link-zcx.spec': readfile('riscv/link-zcx.spec')})
 
@@ -68,10 +68,10 @@ class Spike(RiscV64):
             'src/s-textio__riscv-htif.adb')
 
 
-class Unleashed(RiscV64):
+class PolarFireSOC(RiscV64):
     @property
     def name(self):
-        return 'unleashed'
+        return 'polarfiresoc'
 
     @property
     def compiler_switches(self):
@@ -80,9 +80,9 @@ class Unleashed(RiscV64):
 
     @property
     def system_ads(self):
-        return {'zfp':            'system-xi-riscv.ads',
-                'ravenscar-sfp':  'system-xi-riscv-sifive-sfp.ads',
-                'ravenscar-full': 'system-xi-riscv-sifive-full.ads'}
+        return {'light':          'system-xi-riscv.ads',
+                'light-tasking':  'system-xi-riscv-sifive-sfp.ads',
+                'embedded':       'system-xi-riscv-sifive-full.ads'}
 
     @property
     def has_single_precision_fpu(self):
@@ -97,7 +97,7 @@ class Unleashed(RiscV64):
         return ('RAM', )
 
     def dump_runtime_xml(self, rts_name, rts):
-        cnt = super(Unleashed, self).dump_runtime_xml(rts_name, rts)
+        cnt = super(PolarFireSOC, self).dump_runtime_xml(rts_name, rts)
         return cnt.replace(
             '"common-RAM.ld"',
             '"common-RAM.ld",\n'
@@ -109,50 +109,13 @@ class Unleashed(RiscV64):
             '               "-u", "__gnat_gdb_cpu_first_id"')
 
     def __init__(self):
-        super(Unleashed, self).__init__()
+        super(PolarFireSOC, self).__init__()
 
-        self.add_linker_script('riscv/sifive/unleashed/memory-map.ld')
-        self.add_linker_script('riscv/sifive/unleashed/common-RAM.ld',
+        self.add_linker_script('riscv/microchip/polarfiresoc/memory-map.ld')
+        self.add_linker_script('riscv/microchip/polarfiresoc/common-RAM.ld',
                                loader='RAM')
         self.add_gnat_sources(
-            'riscv/sifive/unleashed/start-ram.S',
-            'riscv/sifive/fe310/svd/i-fe310.ads',
-            'riscv/sifive/fe310/svd/i-fe310-uart.ads',
-            'riscv/sifive/fe310/svd/i-fe310-gpio.ads',
-            'riscv/sifive/fe310/svd/i-fe310-plic.ads',
-            'riscv/sifive/fe310/s-macres.adb',
-            'riscv/sifive/unleashed/s-textio.adb',
-            'riscv/src/riscv_def.h')
-        self.add_gnarl_sources(
-            'riscv/sifive/fu540/svd/a-intnam.ads',
-            'src/s-bbpara__riscv.ads',
-            'src/s-bbbopa__unleashed.ads',
-            'src/s-bbbosu__riscv.adb',
-            'src/s-bbsuti__riscv_clint.adb',
-            'src/s-bbsumu__generic.adb',
-            'src/s-bbcppr__new.ads',
-            'src/s-bbcppr__riscv.adb',
-            'src/s-bbcpsp__riscv.ads',
-            'src/s-bbcpsp__riscv.adb',
-            'riscv/src/context_switch.S',
-            'riscv/src/trap_handler.S',
-            'riscv/src/s-bbripl.ads',
-            'riscv/sifive/fe310/s-bbripl.adb')
-
-
-class PolarFireSOC(Unleashed):
-    @property
-    def name(self):
-        return 'polarfiresoc'
-
-    def __init__(self):
-        super(Unleashed, self).__init__()
-
-        self.add_linker_script('riscv/sifive/unleashed/memory-map.ld')
-        self.add_linker_script('riscv/sifive/unleashed/common-RAM.ld',
-                               loader='RAM')
-        self.add_gnat_sources(
-            'riscv/sifive/unleashed/start-ram.S',
+            'riscv/microchip/polarfiresoc/start-ram.S',
             'riscv/sifive/fe310/svd/i-fe310.ads',
             'riscv/sifive/fe310/svd/i-fe310-plic.ads',
             'riscv/sifive/fe310/s-macres.adb',
@@ -182,7 +145,10 @@ class RiscV32(DFBBTarget):
 
     @property
     def target(self):
-        return 'riscv32-elf'
+        # For GNAT FSF builds we only have a riscv64-elf compiler that is
+        # capable of building for RV32 and RV64. This is the expected practice
+        # in the RISC-V community.
+        return 'riscv64-elf'
 
     @property
     def has_timer_64(self):
@@ -193,6 +159,14 @@ class HiFive1(RiscV32):
     @property
     def name(self):
         return 'hifive1'
+
+    @property
+    def has_single_precision_fpu(self):
+        return False
+
+    @property
+    def has_double_precision_fpu(self):
+        return False
 
     @property
     def compiler_switches(self):
@@ -209,9 +183,9 @@ class HiFive1(RiscV32):
 
     @property
     def system_ads(self):
-        # Only ZFP for for this target, the ravenscar run-times are not stable
-        # for the moment.
-        return {'zfp': 'system-xi-riscv.ads'}
+        # Only the Light runtime for this target, the tasking and embedded
+        # run-times are not stable for the moment.
+        return {'light': 'system-xi-riscv.ads'}
 
     def __init__(self):
         super(HiFive1, self).__init__()
@@ -246,7 +220,7 @@ class HiFive1(RiscV32):
 
 class RV32BASE(RiscV32):
     """
-    Generic ZFP run-time meant to be used with the startup generator (crt0 and
+    Generic Light run-time meant to be used with the startup generator (crt0 and
     ld script).
     """
 
@@ -277,8 +251,8 @@ class RV32BASE(RiscV32):
 
     @property
     def system_ads(self):
-        # Only ZFP for for this generic target
-        return {'zfp': 'system-xi-riscv.ads'}
+        # Only the Light runtime for for this generic target
+        return {'light': 'system-xi-riscv.ads'}
 
     def __init__(self):
         super(RV32BASE, self).__init__()
@@ -326,7 +300,7 @@ class RV32IMAFDC(RV32BASE):
 
 class RV64BASE(RiscV64):
     """
-    Generic ZFP run-time meant to be used with the startup generator (crt0 and
+    Generic Light run-time meant to be used with the startup generator (crt0 and
     ld script).
     """
 
@@ -353,8 +327,8 @@ class RV64BASE(RiscV64):
 
     @property
     def system_ads(self):
-        # Only ZFP for for this generic target
-        return {'zfp': 'system-xi-riscv.ads'}
+        # Only the Light runtime for for this generic target
+        return {'light': 'system-xi-riscv.ads'}
 
     def __init__(self):
         super(RV64BASE, self).__init__()

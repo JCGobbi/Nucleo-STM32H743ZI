@@ -7,9 +7,8 @@ library project Ada_Drivers_Library is
    type Build_Checks_Type is ("Disabled", "Enabled");
    Build_Checks : Build_Checks_Type := external ("ADL_BUILD_CHECKS", "Enabled");
 
-   --  Target architecture and runtime
+   --  Target architecture
    Target := Project'Target;
-   --  for Runtime ("Ada") use Project'Runtime ("Ada");
 
    --  Run-time system
    type RTS_Type is ("ravenscar-sfp", "ravenscar-full");
@@ -270,9 +269,9 @@ library project Ada_Drivers_Library is
    Has_ZFP_Runtime                := "False";              -- From board definition
    Has_Ravenscar_SFP_Runtime      := "True";              -- From board definition
    Has_Ravenscar_Full_Runtime     := "True";              -- From board definition
-   Runtime_Profile                := "sfp";               -- From user input
+   Runtime_Profile                := "light-tasking";     -- From user input
    Runtime_Name_Suffix            := "stm32h743";         -- From board definition
-   Runtime_Name                   := "ravenscar-sfp-stm32h743";     -- From user input
+   Runtime_Name                   := "light-tasking-stm32h743";     -- From user input
    Use_Startup_Gen                := "True";              -- From user input
    Has_Custom_Memory_Area_1       := "False";             -- From user input
    Boot_Memory                    := "flash";             -- From user input

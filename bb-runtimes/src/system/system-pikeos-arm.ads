@@ -7,7 +7,7 @@
 --                                 S p e c                                  --
 --                          (PikeOS ARM Version)                            --
 --                                                                          --
---          Copyright (C) 2016-2020, Free Software Foundation, Inc.         --
+--          Copyright (C) 2016-2021, Free Software Foundation, Inc.         --
 --                                                                          --
 -- This specification is derived from the Ada Reference Manual for use with --
 -- GNAT. The copyright notice above, and the license provisions that follow --
@@ -34,7 +34,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
---  This is a ZFP version of this package for ARM PikeOS targets
+--  This is a Light version of this package for ARM PikeOS targets
 
 pragma Restrictions (No_Exception_Propagation);
 --  Only local exception handling is supported in this profile
@@ -53,11 +53,6 @@ pragma Restrictions (No_Finalization);
 
 pragma Restrictions (No_Tasking);
 --  Tasking is not supported in this run time
-
-pragma Discard_Names;
---  Disable explicitly the generation of names associated with entities in
---  order to reduce the amount of storage used. These names are not used anyway
---  (attributes such as 'Image and 'Value are not supported in this run time).
 
 package System is
    pragma Pure;

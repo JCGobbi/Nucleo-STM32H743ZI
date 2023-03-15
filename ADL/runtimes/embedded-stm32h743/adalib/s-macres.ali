@@ -1,0 +1,59 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -fno-inline
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.machine_reset%b  s-macres.adb		ab6e03f4 NE OL PK
+W interfaces%s		interfac.ads		interfac.ali
+W system%s		system.ads		system.ali
+W system.machine_code%s	s-maccod.ads		s-maccod.ali
+
+U system.machine_reset%s  s-macres.ads		b986072f NE OL PK
+W system%s		system.ads		system.ali
+
+D interfac.ads		20230315001224 edec285f interfaces%s
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-maccod.ads		20230315001224 6d68a701 system.machine_code%s
+D s-macres.ads		20230315001224 e352e87a system.machine_reset%s
+D s-macres.adb		20230315001224 c8b864d0 system.machine_reset%b
+G a e
+G c Z s b [stop system__machine_reset 39 14 none]
+X 1 interfac.ads
+38K9*Interfaces 231e15 5|32w6 64r15
+79M9*Unsigned_32 5|64r26
+X 2 system.ads
+50K9*System 164e11 4|36r9 42r5 5|33r6 33r31 35r14 105r5
+X 3 s-maccod.ads
+36K16*Machine_Code 131e24 5|33w13 33r38
+83U14*Asm 5|73s7 80s7
+87a6 Clobber{string} 5|73r41
+88b6 Volatile{boolean} 5|73r23 80r23
+X 4 s-macres.ads
+36K16*Machine_Reset 2|50k9 4|42l12 42e25 5|35b21 105l12 105t25
+39U14*Stop 40r22 5|100b14 103l8 103t12
+X 5 s-macres.adb
+37U14 Os_Exit 37>23 38r22 39r24 53s7 60b14 94l8 94t15 102s7
+37i23 Status{integer} 60b23 61r28
+42U14 Os_Abort 43r22 44r24 51b14 54l8 54t16
+64m7 AIRCR{1|79M9} 84m7
+

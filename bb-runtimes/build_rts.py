@@ -17,7 +17,7 @@ from pikeos import AArch64PikeOS5, ArmPikeOS, ArmPikeOS42, ArmPikeOS5, \
 
 # Cortex-M runtimes
 from arm.cortexm import Stm32, Stm32l, Sam, SmartFusion2, LM3S, Microbit, \
-     NRF52840, NRF52832, MicrosemiM1, Stm32F0, \
+     NRF52840, NRF52832, MicrosemiM1, Stm32F0, RP2040Target, \
      CortexM0, CortexM0P, CortexM1, CortexM3, CortexM4, CortexM4F, \
      CortexM7F, CortexM7DF, CortexM23, CortexM33F, CortexM33DF
 
@@ -34,7 +34,7 @@ from sparc import Leon2, Leon3, Leon4
 from powerpc import MPC5200, MPC8641, MPC8349e, Virtex5, P2020, P5566, P5634
 
 # riscv
-from riscv import Spike, Unleashed, PolarFireSOC, HiFive1, \
+from riscv import Spike, PolarFireSOC, HiFive1, \
      RV32I, RV32IM, RV32IAC, RV32IMAC, RV32IMAFC, RV32IMAFDC, \
      RV64IM, RV64IMC, RV64IMAC, RV64IMAFC, RV64IMFC, RV64IMAFDC
 
@@ -46,6 +46,14 @@ from x86_64 import X8664Generic
 
 # native
 from native import X86Native, X8664Native
+
+# vx7r2cert
+from vx7r2cert import AArch64Vx7r2Cert, ArmVx7r2Cert, \
+                      PPCVx7r2Cert, PPC64Vx7r2Cert, \
+                      X86Vx7r2Cert, X86_64Vx7r2Cert, \
+                      AArch64Vx7r2Cert_RTP, ArmVx7r2Cert_RTP, \
+                      PPCVx7r2Cert_RTP, PPC64Vx7r2Cert_RTP, \
+                      X86Vx7r2Cert_RTP, X86_64Vx7r2Cert_RTP
 
 import argparse
 import os
@@ -81,6 +89,8 @@ def build_configs(target):
         t = Rpi2()
     elif target == 'rpi2mc':
         t = Rpi2Mc()
+    elif target in RP2040Target.supported_targets:
+        t = RP2040Target(target)
     elif target.startswith('sam'):
         t = Sam(target)
     elif target.startswith('smartfusion2'):
@@ -174,8 +184,6 @@ def build_configs(target):
         t = Spike()
     elif target == 'hifive1':
         t = HiFive1()
-    elif target == 'unleashed':
-        t = Unleashed()
     elif target == 'polarfiresoc':
         t = PolarFireSOC()
     elif target == "rv32i":
@@ -210,6 +218,31 @@ def build_configs(target):
         t = X86Native()
     elif target in ('x86_64-linux', 'x86_64-windows', 'x86_64-windows64'):
         t = X8664Native()
+    # vx7r2cert
+    elif target == "aarch64-vx7r2cert":
+        t = AArch64Vx7r2Cert()
+    elif target == "arm-vx7r2cert":
+        t = ArmVx7r2Cert()
+    elif target == "ppc-vx7r2cert":
+        t = PPCVx7r2Cert()
+    elif target == "ppc64-vx7r2cert":
+        t = PPC64Vx7r2Cert()
+    elif target == "x86-vx7r2cert":
+        t = X86Vx7r2Cert()
+    elif target == "x86_64-vx7r2cert":
+        t = X86_64Vx7r2Cert()
+    elif target == "aarch64-vx7r2cert-rtp":
+        t = AArch64Vx7r2Cert_RTP()
+    elif target == "arm-vx7r2cert-rtp":
+        t = ArmVx7r2Cert_RTP()
+    elif target == "ppc-vx7r2cert-rtp":
+        t = PPCVx7r2Cert_RTP()
+    elif target == "ppc64-vx7r2cert-rtp":
+        t = PPC64Vx7r2Cert_RTP()
+    elif target == "x86-vx7r2cert-rtp":
+        t = X86Vx7r2Cert_RTP()
+    elif target == "x86_64-vx7r2cert-rtp":
+        t = X86_64Vx7r2Cert_RTP()
     else:
         print('Error: undefined target %s' % target)
         sys.exit(2)
@@ -257,6 +290,9 @@ def main():
         Installer.overwrite = True
 
     boards = []
+
+    if len(args.target) == 1 and args.target[0].endswith("vx7r2cert"):
+        args.target.append(args.target[0] + "-rtp")
 
     for arg in args.target:
         board = build_configs(arg)

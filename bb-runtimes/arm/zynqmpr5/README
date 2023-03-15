@@ -4,9 +4,9 @@ Xilinx ZynqMP Cortex-R5 runtime
 Runtimes Supported
 ------------------
 
-* ZFP
-* Ravenscar-SFP
-* Ravenscar-Full
+* Light
+* Light-Tasking
+* Embedded
 
 Targets Supported
 -----------------

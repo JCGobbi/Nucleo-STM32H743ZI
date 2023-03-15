@@ -101,14 +101,14 @@ class PPC6XXTarget(DFBBTarget):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-xi-ppc.ads',
-            'ravenscar-sfp': 'system-xi-ppc-sfp.ads',
-            'ravenscar-full': 'system-xi-ppc-full.ads'
+            'light': 'system-xi-ppc.ads',
+            'light-tasking': 'system-xi-ppc-sfp.ads',
+            'embedded': 'system-xi-ppc-full.ads'
         }
 
     def dump_runtime_xml(self, rts_name, rts):
         cnt = super(PPC6XXTarget, self).dump_runtime_xml(rts_name, rts)
-        if rts_name == 'ravenscar-full':
+        if rts_name == 'embedded':
             cnt = cnt.replace(
                 '"-nostartfiles"',
                 ('"-u", "_Unwind_Find_FDE", "-Wl,--eh-frame-hdr",\n'
@@ -121,7 +121,7 @@ class PPC6XXTarget(DFBBTarget):
         # the frame to be properly built and thus prevents gdb from unwinding
         # the runtime (see R220-013).
         conf.build_flags['common_flags'] += ['-fno-shrink-wrap-separate']
-        if rts_profile == 'ravenscar-full':
+        if rts_profile == 'embedded':
             conf.config_files.update(
                 {'link-zcx.spec': readfile('powerpc/prep/link-zcx.spec')})
 
@@ -161,8 +161,9 @@ class MPC5200(PPC6XXTarget):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-xi-ppc.ads',
-            'ravenscar-sfp': 'system-xi-ppc-mpc5200-sfp.ads',
+            'light': 'system-xi-ppc.ads',
+            'light-tasking': 'system-xi-ppc-mpc5200-sfp.ads',
+            'embedded': 'system-xi-ppc-mpc5200-full.ads',
         }
 
     def __init__(self):
@@ -280,14 +281,14 @@ class PPCBookETarget(DFBBTarget):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-xi-ppc.ads',
-            'ravenscar-sfp': 'system-xi-ppc-sfp.ads',
-            'ravenscar-full': 'system-xi-ppc-full.ads'
+            'light': 'system-xi-ppc.ads',
+            'light-tasking': 'system-xi-ppc-sfp.ads',
+            'embedded': 'system-xi-ppc-full.ads'
         }
 
     def dump_runtime_xml(self, rts_name, rts):
         cnt = super(PPCBookETarget, self).dump_runtime_xml(rts_name, rts)
-        if rts_name == 'ravenscar-full':
+        if rts_name == 'embedded':
             cnt = cnt.replace(
                 '"-nostartfiles"',
                 ('"-u", "_Unwind_Find_FDE", "-Wl,--eh-frame-hdr",\n'
@@ -300,7 +301,7 @@ class PPCBookETarget(DFBBTarget):
         # the frame to be properly built and thus prevents gdb from unwinding
         # the runtime (see R220-013).
         conf.build_flags['common_flags'] += ['-fno-shrink-wrap-separate']
-        if rts_profile == 'ravenscar-full':
+        if rts_profile == 'embedded':
             conf.config_files.update(
                 {'link-zcx.spec': readfile('powerpc/prep/link-zcx.spec')})
 
@@ -340,9 +341,9 @@ class Virtex5(PPCBookETarget):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-xi-ppc.ads',
-            'ravenscar-sfp': 'system-xi-ppc-xilinx-sfp.ads',
-            'ravenscar-full': 'system-xi-ppc-xilinx-full.ads'
+            'light': 'system-xi-ppc.ads',
+            'light-tasking': 'system-xi-ppc-xilinx-sfp.ads',
+            'embedded': 'system-xi-ppc-xilinx-full.ads'
         }
 
     def __init__(self):
@@ -376,9 +377,9 @@ class PPCSPETarget(PPC6XXTarget):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-xi-e500v2.ads',
-            'ravenscar-sfp': 'system-xi-e500v2-sfp.ads',
-            'ravenscar-full': 'system-xi-e500v2-full.ads'
+            'light': 'system-xi-e500v2.ads',
+            'light-tasking': 'system-xi-e500v2-sfp.ads',
+            'embedded': 'system-xi-e500v2-full.ads'
         }
 
 

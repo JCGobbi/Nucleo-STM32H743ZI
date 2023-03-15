@@ -45,9 +45,9 @@ class Aarch64Target(DFBBTarget):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-xi-arm.ads',
-            'ravenscar-sfp': 'system-xi-arm-sfp.ads',
-            'ravenscar-full': 'system-xi-arm-full.ads'
+            'light': 'system-xi-arm.ads',
+            'light-tasking': 'system-xi-arm-sfp.ads',
+            'embedded': 'system-xi-arm-full.ads'
         }
 
     def amend_rts(self, rts_profile, conf):
@@ -63,7 +63,7 @@ class Aarch64Target(DFBBTarget):
 
     def dump_runtime_xml(self, rts_name, rts):
         cnt = super(Aarch64Target, self).dump_runtime_xml(rts_name, rts)
-        if rts_name == 'ravenscar-full':
+        if rts_name == 'embedded':
             cnt = cnt.replace(
                 '"-nostartfiles"',
                 ('"-u", "_Unwind_Find_FDE", "-Wl,--eh-frame-hdr",\n'
@@ -90,9 +90,9 @@ class ZynqMP(Aarch64Target):
 
     @property
     def system_ads(self):
-        return {'zfp': 'system-xi-arm.ads',
-                'ravenscar-sfp': 'system-xi-arm-gic-sfp.ads',
-                'ravenscar-full': 'system-xi-arm-gic-full.ads'}
+        return {'light': 'system-xi-arm.ads',
+                'light-tasking': 'system-xi-arm-gic-sfp.ads',
+                'embedded': 'system-xi-arm-gic-full.ads'}
 
     @property
     def compiler_switches(self):
@@ -115,7 +115,9 @@ class ZynqMP(Aarch64Target):
             'src/trap_dump__aarch64.ads',
             'src/trap_dump__aarch64.adb',
             'src/s-textio__zynqmp.adb',
-            'src/s-macres__zynqmp.adb')
+            'src/s-macres__zynqmp.adb',
+            'src/s-mmu.ads',
+            'src/s-mmu__aarch64.adb')
         self.add_gnarl_sources(
             'src/a-intnam__zynqmp.ads',
             'src/s-bbbosu__armv8a.adb',

@@ -1,4 +1,5 @@
 import copy
+import sys
 
 from support import readfile, is_string
 from support.files_holder import FilesHolder
@@ -12,7 +13,7 @@ class TargetConfiguration(object):
 
     @property
     def name(self):
-        """Board's name, as used to name the runtime (e.g. zfp-<name>)"""
+        """Board's name, as used to name the runtime (e.g. light-<name>)"""
         raise Exception("not implemented")
 
     @property
@@ -33,6 +34,15 @@ class TargetConfiguration(object):
     @property
     def is_pikeos(self):
         return self.target is not None and 'pikeos' in self.target
+
+    @property
+    def is_legacy_format(self):
+        """Create the runtime with the legacy naming format.
+
+        Create the runtime with the legacy format with an rts-
+        prefix. By default this is only enabled for PikeOS.
+        """
+        return self.is_pikeos
 
     @property
     def is_native(self):
@@ -77,7 +87,7 @@ class TargetConfiguration(object):
         """True if the hardware provides a 64-bit timer. Else 32-bit timer is
         assumed.
         """
-        raise Exception("not implemented")
+        return False
 
     @property
     def has_compare_and_swap(self):
@@ -94,18 +104,18 @@ class TargetConfiguration(object):
 
     def has_libc(self, profile):
         """Whether libc is available and used on the target"""
-        if profile == 'ravenscar-full':
-            # By default, we provide the newlib with the ravenscar-full
+        if profile == 'embedded':
+            # By default, we provide the newlib with the Embedded
             # runtimes
             return True
         else:
-            # Otherwise, we don't assume any libc is available on zfp or
-            # ravenscar-sfp profiles
+            # Otherwise, we don't assume any libc is available on Light or
+            # Light-Tasking profiles
             return False
 
     @property
     def use_certifiable_packages(self):
-        """True if the ZFP and Ravenscar SFP runtimes are to use certifiable
+        """True if the Light and Light-Tasking runtimes are to use certifiable
         runtime components. In practise, most packages in these runtimes are
         certifiable with the notable exception of libgcc. When true, our Ada
         implementation of libgcc is used.
@@ -158,12 +168,21 @@ class Target(TargetConfiguration, ArchSupport):
             # Set the scenario variable values for the base profile
             rts = FilesHolder()
             self.runtimes[profile] = rts
-            if 'ravenscar' not in profile:
-                rts.rts_vars = self.rts_options.zfp_scenarios(math_lib=False)
-            elif 'full' in profile:
-                rts.rts_vars = self.rts_options.full_scenarios(math_lib=True)
+
+            # Setup the base profile
+            base_profile = self.base_profile(profile)
+            if base_profile == 'none':
+                rts.rts_vars = self.rts_options.no_scenario()
+            elif base_profile == 'light':
+                rts.rts_vars = self.rts_options.zfp_scenarios()
+            elif base_profile == 'light-tasking':
+                rts.rts_vars = self.rts_options.sfp_scenarios()
+            elif base_profile == 'embedded':
+                rts.rts_vars = self.rts_options.full_scenarios()
             else:
-                rts.rts_vars = self.rts_options.sfp_scenarios(math_lib=False)
+                print('Error: unknown profile %s' % profile)
+                sys.exit(2)
+
             # By default, system.ads files are searched for in
             # bb-runtimes/src/system.
             # This works fine in general, however, for custom runtimes, we may
@@ -193,6 +212,12 @@ class Target(TargetConfiguration, ArchSupport):
     def amend_rts(self, rts_profile, rts):
         """to be overriden by the actual target to refine the runtime"""
         pass
+
+    def base_profile(self, profile):
+        """Return the base profile for the given profile. Custom profiles
+        are required to overide this to point to an existing profile to use as
+        the base for the new profile."""
+        return profile
 
     def other_sources(self, profile):
         """Used to return a list of source dirs to install.
@@ -283,7 +308,7 @@ class Target(TargetConfiguration, ArchSupport):
         indent = 9
         blank = indent * ' '
 
-        if rts.rts_vars['RTS_Profile'] != "ravenscar-full":
+        if rts.rts_vars['RTS_Profile'] != "embedded":
             # For the ZFP and Ravenscar SFP runtime we have the choice of
             # either using libgcc or our Ada libgcc replacement. For the
             # later choice we do not link with any of the standard libraries.
@@ -292,13 +317,22 @@ class Target(TargetConfiguration, ArchSupport):
             else:
                 ret += blank + '"-nostartfiles", "-nolibc"'
         else:
-            # In the ravenscar-full case, the runtime depends on
+            # In the Embedded case, the runtime depends on
             # functionalities from newlib, such as memory allocation. This
             # runtime also does not support the certifiable packages option.
             # Also, there's interdependencies between libgnarl and libgnat,
             # so we need to force -lgnarl at link time, always.
+            #
+            # We provide the link arguments for libc ourselves. Inhibit the
+            # gcc mechanism doing so with -nolibc first. Then we need to
+            # account for intricacies in dependencies, e.g. libc depends on
+            # libgcc as everyone, libgcc on libc for strlen, libgnat on libc
+            # for __errno or other, libc on libgnat for sbrk, libgnat and
+            # libgnarl on each other...
+
             ret += blank + \
-                   '"-nostartfiles", "-lc", "-lgnarl", "-lgnat", "-lgnarl"'
+                '"-nostartfiles", "-nolibc", ' + \
+                '"-Wl,--start-group,-lgnarl,-lgnat,-lc,-lgcc,--end-group"'
 
         # Add the user script path first, so that they have precedence
         ret += ',\n' + blank + '"-L${RUNTIME_DIR(ada)}/ld_user"'

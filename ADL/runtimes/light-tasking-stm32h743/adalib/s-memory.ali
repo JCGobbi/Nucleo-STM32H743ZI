@@ -1,0 +1,100 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/light-tasking-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_EXCEPTIONS
+RV NO_IMPLEMENTATION_ATTRIBUTES
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_IMPLEMENTATION_RESTRICTIONS
+RR NO_ELABORATION_CODE
+
+U system.memory%b	s-memory.adb		bb747ac8 NE OL PK
+W system%s		system.ads		system.ali
+W system.atomic_primitives%s  s-atopri.adb	s-atopri.ali
+W system.storage_elements%s  s-stoele.adb	s-stoele.ali
+
+U system.memory%s	s-memory.ads		f3183fca EB NE OL PK
+W system%s		system.ads		system.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-unccon.ads		20230315001224 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20230315001224 edec285f interfaces%s
+D i-c.ads		20230315001224 2284bf7c interfaces.c%s
+D system.ads		20230315001224 8fcf39fb system%s
+D s-atopri.ads		20230315001224 1b132436 system.atomic_primitives%s
+D s-memory.ads		20230315001224 7cd70631 system.memory%s
+D s-memory.adb		20230315001224 b13e473b system.memory%b
+D s-parame.ads		20230315001224 8e90778f system.parameters%s
+D s-stoele.ads		20230315001224 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20230315001224 8f5a9db6 system.storage_elements%b
+G a e
+G c Z s b [alloc system__memory 55 13 none]
+G c Z s b [free system__memory 76 14 none]
+G c Z b b [malloc system__memory 63 13 none]
+G c Z b b [calloc system__memory 66 13 none]
+G c Z b b [c_free system__memory 69 14 none]
+X 5 system.ads
+60K9*System 174e11 7|47r9 55r42 76r26 86r5 8|41r6 41r36 42r6 44r14 45r8 63r43
+. 66r65 69r28 76r42 87r30 144r43 154r51 164r26 174r28 179r5
+90M9*Address 7|55r49 76r33 8|56r18 63r50 66r72 69r35 76r49 79r26 80r26 93r19
+. 144r50 154r58 164r33 174r35
+95N4*Word_Size 8|87r37
+X 6 s-atopri.ads
+38K16*Atomic_Primitives 154e29 8|41w13 41r43
+60N4*Seq_Cst 8|83r39 84r39
+63I12*Mem_Model{integer} 8|83r26 84r26
+X 7 s-memory.ads
+47K16*Memory 5|60k9 7|83E29 86l12 86e18 8|44b21 179l12 179t18
+50M9*size_t 55r27 8|63r28 66r30 66r50 76r27 109r20 144r28 154r16 154r36
+55V13*Alloc{5|90M9} 55>20 83i<c,__gnat_malloc>22 8|76b13 138l8 138t13 146s14
+55m20 Size{50M9} 8|76b20 96r10 109r13 116r29
+76U14*Free 76>20 84i<c,__gnat_free>22 8|164b14 168l8 168t12 176s7
+76m20 Ptr{5|90M9} 8|164b20 165r28
+X 8 s-memory.adb
+47e4 Heap_Start{character} 48r8 49m22 49r22 56m29 56r29
+52e4 Heap_End{character} 53m22 53r22 124m40 124r40
+56m4 Top{5|90M9} 120r17 132m13 132r13
+63V13 Malloc{5|90M9} 63>21 64i<c,malloc>22 144b13 147l8 147t14 157s14
+63m21 Size{7|50M9} 144b21 146r21
+66V13 Calloc{5|90M9} 66>21 66>38 67i<c,calloc>22 153b13 158l8 158t14
+66m21 N_Elem{7|50M9} 154b7 157r22
+66m38 Elem_Size{7|50M9} 154b24 157r31
+69U14 C_Free 69>22 70i<c,free>22 174b14 177l8 177t14
+69m22 Ptr{5|90M9} 174b22 176r13
+78V16*Atomic_Compare_Exchange{boolean} 79>10 80>10 81>10 82>10 83>10 84>10
+. 85b33 131s20
+79m10 Ptr{5|90M9}
+80m10 Expected{5|90M9} 133r13
+81m10 Desired{10|102M9} 134r13
+82b10 Weak{boolean}
+83i10 Success_Model{6|63I12}
+84i10 Failure_Model{6|63I12}
+91N7 Max_Align 102r22 109r49 116r37 116r54 116r67
+92i7 Max_Size{10|59I12} 102m10 115m10 124r13 134r48
+93m7 Res{5|90M9} 120m10 124r59 133m25 133r25 134r42 137r14
+X 10 s-stoele.ads
+40K16*Storage_Elements 8|42w13 45r15 10|114e28
+52I9*Storage_Offset<integer>
+59I12*Storage_Count{52I9} 8|92r19 109r28 116r14 124r25
+73V14*"+"{5|90M9} 8|134s46
+88V14*"-"{52I9} 8|124s57
+102M9*Integer_Address 8|81r26 134r25
+

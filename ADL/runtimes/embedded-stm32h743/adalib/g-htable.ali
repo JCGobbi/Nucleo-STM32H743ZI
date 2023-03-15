@@ -1,0 +1,53 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U gnat.htable%b		g-htable.adb		9f9cc922 NE OL PK
+W gnat%s		gnat.ads		gnat.ali
+
+U gnat.htable%s		g-htable.ads		4a45b320 EB NE OL PR PK
+W gnat%s		gnat.ads		gnat.ali
+W system%s		system.ads		system.ali
+W system.htable%s	s-htable.adb		s-htable.ali
+
+D gnat.ads		20230315001224 b5988c27 gnat%s
+D g-htable.ads		20230315001224 7e0467ec gnat.htable%s
+D g-htable.adb		20230315001224 e198aece gnat.htable%b
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-htable.ads		20230315001224 81d958eb system.htable%s
+G a e
+X 1 gnat.ads
+37K9*GNAT 60e9 2|44r9 58r5 3|37r14 38r5
+X 2 g-htable.ads
+44K14*HTable 1|37k9 2|58l10 58e16 3|37b19 38l10 38t16
+53k20*Simple_HTable
+54k20*Static_HTable
+56v21*Hash
+X 4 system.ads
+50K9*System 2|42r6 53r42 54r42 56r34 4|164e11
+X 5 s-htable.ads
+40K16*HTable 2|42w13 53r49 54r49 56r41 5|220e18
+68k12*Simple_HTable 2|53r56 5|111e21
+166k12*Static_HTable 2|54r56 5|208e21
+218v13*Hash 2|56r48
+

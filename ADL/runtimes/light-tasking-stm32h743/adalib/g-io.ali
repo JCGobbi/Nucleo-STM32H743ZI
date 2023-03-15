@@ -1,0 +1,97 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/light-tasking-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_EXCEPTIONS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_OBSOLESCENT_FEATURES
+
+U gnat.io%b		g-io.adb		22a4bf0f NE OL PK
+W ada%s			ada.ads			ada.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.big_numbers%s  a-nubinu.ads	a-nubinu.ali
+W gnat%s		gnat.ads		gnat.ali
+W system%s		system.ads		system.ali
+W system.text_io%s	s-textio.adb		s-textio.ali
+
+U gnat.io%s		g-io.ads		1ffb22d8 NE OL PR PK
+W gnat%s		gnat.ads		gnat.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-numeri.ads		20230315001224 84bea7a3 ada.numerics%s
+D a-nubinu.ads		20230315001224 93f1f3d1 ada.numerics.big_numbers%s
+D a-nbnbig.ads		20230315001224 511b9bab ada.numerics.big_numbers.big_integers_ghost%s
+D a-nbnbig.adb		20230315001224 e7f9abf0 ada.numerics.big_numbers.big_integers_ghost%b
+D gnat.ads		20230315001224 b5988c27 gnat%s
+D g-io.ads		20230315001224 aa63aeff gnat.io%s
+D g-io.adb		20230315001224 29cc92f9 gnat.io%b
+D g-io-put.adb		20230315001224 f01018a2 gnat.io.put
+D system.ads		20230315001224 8fcf39fb system%s
+D s-textio.ads		20230315001224 22178fc9 system.text_io%s
+G a e
+G c Z s b [put gnat__io 51 14 none]
+G c Z s b [put gnat__io 57 14 none]
+G c Z s b [put gnat__io 62 14 none]
+G c Z s b [put_line gnat__io 67 14 none]
+G c Z s b [new_line gnat__io 73 14 none]
+X 1 ada.ads
+16K9*Ada 20e8 8|40r6 41r5
+X 2 a-numeri.ads
+16K13*Numerics 35e17 8|40r10 41r9
+X 3 a-nubinu.ads
+16K22*Big_Numbers 21e29 8|40r19 41r18
+X 6 gnat.ads
+37K9*GNAT 60e9 7|43r9 78r5 8|43r14 187r5 9|41r11
+X 7 g-io.ads
+43K14*IO 6|37k9 7|78l10 78e12 8|43b19 187l10 187t12 9|41r16
+46@22*File_System 47r22 53r27 59r27 64r27 69r27 75r27 8|46r21
+51U14*Put 51>19 8|66b14 164l8 164t11
+51i19 X{integer} 8|66b19 132r18 132r29 132r37 158r10
+57U14*Put 57>19 8|49b14 58s10 173s10 9|42b11 62l5 62t8
+57e19 C{character} 8|49b19 9|42b16 49r7 61r24
+62U14*Put 62>19 8|163s7 170b14 175l8 175t11 183s7
+62a19 S{string} 8|170b19 172r16 173r15
+67U14*Put_Line 67>24 8|181b14 185l8 185t16
+67a24 S{string} 8|181b24 183r12
+73U14*New_Line 73>24 8|55b14 60l8 60t16 184s7
+73i24 Spacing{positive} 8|55b24 57r21
+X 8 g-io.adb
+57i11 J{integer}
+120i7 Int{integer} 132m7 133r19 136r33 142r17 143m10 143r18 149r44 152r39
+. 155r20
+121a7 S{string} 122r26 138r41 145m10 150r47 151r50 153r33 153r45 160m10 163r12
+. 163r24
+122i7 First{natural} 138r54 144m10 144r19 145r13 150r33 151r63 153r36 159m10
+. 159r19 160r13 163r15
+123i7 Val{integer} 142m10 143r24 145r60
+172i11 J{integer} 173r18
+X 10 system.ads
+60K9*System 9|39r6 39r26 54r7 61r4 10|174e11
+X 11 s-textio.ads
+35K16*Text_IO 9|39w13 39r33 54r14 61r11 11|82e19
+43U14*Initialize 9|45s7
+47b4*Initialized{boolean} 9|44r11
+55V13*Is_Tx_Ready{boolean} 9|50s17 57s14
+62U14*Put 9|54s22 61s19
+66V13*Use_Cr_Lf_For_New_Line{boolean} 9|49s29
+

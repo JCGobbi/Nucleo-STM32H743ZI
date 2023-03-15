@@ -1,0 +1,55 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTIONS
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.wid_int%s	s-widint.ads		65c41ef0 NE OL PK
+W ada%s			ada.ads			ada.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.big_numbers%s  a-nubinu.ads	a-nubinu.ali
+W system%s		system.ads		system.ali
+W system.width_i%s
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-numeri.ads		20230315001224 84bea7a3 ada.numerics%s
+D a-nubinu.ads		20230315001224 93f1f3d1 ada.numerics.big_numbers%s
+D a-nbnbig.ads		20230315001224 511b9bab ada.numerics.big_numbers.big_integers_ghost%s
+D a-nbnbig.adb		20230315001224 e7f9abf0 ada.numerics.big_numbers.big_integers_ghost%b
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-widint.ads		20230315001224 a7ec8f57 system.wid_int%s
+D s-widthi.ads		20230315001224 98fc7ef2 system.width_i%s
+D s-widthi.adb		20230315001224 b4ca8cdd system.width_i%b
+G a e
+G c Z s s [width_integerR system__wid_int__width_integerGP3070 51 13 none]
+G c Z s s [width_integer system__wid_int 51 13 none]
+X 6 system.ads
+50K9*System 164e11 7|45r6 47r9 54r5
+X 7 s-widint.ads
+47K16*Wid_Int 6|50k9 7|54l12 54e19
+51V13*Width_Integer[8|39]{natural} 52r26 9|35b17
+X 8 s-widthi.ads
+39v17*Width_I 6|50k9 7|45w13 51r34
+

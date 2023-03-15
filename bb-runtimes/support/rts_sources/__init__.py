@@ -156,36 +156,35 @@ class Rule(object):
 # Definitions of shared source files.
 
 class SourceTree(FilesHolder):
-    def __init__(self, is_bb, profile, rts_sources, rts_scenarios):
+    def __init__(self, sources, profile, rts_sources, rts_scenarios):
         """This initializes the framework to generate the runtime source tree.
 
         is_bb: whether we're generating a bare metal hierarchy or a PikeOS one
         profile: the most complete profile used by the target. e.g.
-         'ravenscar-full' will generate a full tree while 'zfp' will only
-         consider the sources appropriate for zfp, and 'ravenscar-sfp' will
-         consider the sources for both zfp and ravenscar-sfp, but will not
-         add the files that are ravenscar-full specific.
+        'embedded' will generate a full tree while 'light' will only consider
+        the sources appropriate for the Light runtime, and 'light-tasking' will
+        consider the sources for both Light and Light-Tasking, but will not
+        add the files that are Embedded runtime specific.
         """
         super(SourceTree, self).__init__()
-        self._is_bb = is_bb
         self.scenarios = deepcopy(rts_scenarios)
         self.lib_scenarios = {'gnat': [], 'gnarl': []}
         self.rules = {'gnat': {}, 'gnarl': {}}
         self.deps = {}
         SourceTree.__singleton = self
 
-        if profile != 'ravenscar-full':
-            if profile == 'zfp':
-                self.scenarios['RTS_Profile'] = ['zfp']
+        if profile != 'embedded':
+            if profile == 'light':
+                self.scenarios['RTS_Profile'] = ['light']
             else:
-                self.scenarios['RTS_Profile'] = ['zfp', 'ravenscar-sfp']
+                self.scenarios['RTS_Profile'] = ['light', 'light-tasking']
 
         for key, values in rts_sources.items():
             # filter out folders that are not used by the selected profiles
-            if profile == 'zfp':
+            if profile == 'light':
                 if 'gnarl' in key.split('/'):
                     continue
-            if profile in ('zfp', 'ravenscar-sfp'):
+            if profile in ('light', 'light-tasking'):
                 if 'full' in key.split('/'):
                     continue
                 if key == 'containers':
@@ -195,12 +194,8 @@ class SourceTree(FilesHolder):
                 srcs = values['srcs']
             else:
                 srcs = []
-            if self._is_bb:
-                if 'bb_srcs' in values:
-                    srcs += values['bb_srcs']
-            else:
-                if 'pikeos_srcs' in values:
-                    srcs += values['pikeos_srcs']
+            if sources in values:
+                srcs += values[sources]
             if len(srcs) > 0:
                 if 'conditions' not in values:
                     self.add_rule(key, None)

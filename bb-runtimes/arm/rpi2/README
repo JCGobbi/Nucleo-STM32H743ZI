@@ -4,9 +4,9 @@ Ravenscar for Raspberry Pi 2/3 boards
 Runtimes Supported
 ------------------
 
-* ZFP
-* Ravenscar-SFP
-* Ravenscar-Full
+* Light
+* Light-Tasking
+* Embedded
 
 Boot the board with an Ada program:
 -----------------------------------

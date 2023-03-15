@@ -1,0 +1,68 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.expont%b	s-expont.adb		7a5ed79c NE OL PK GE
+W system%s		system.ads		system.ali
+
+U system.expont%s	s-expont.ads		15f331ce BN NE OL PU PK GE
+W ada%s			ada.ads			ada.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.big_numbers%s  a-nubinu.ads	a-nubinu.ali
+W system%s		system.ads		system.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-numeri.ads		20230315001224 84bea7a3 ada.numerics%s
+D a-nubinu.ads		20230315001224 93f1f3d1 ada.numerics.big_numbers%s
+D a-nbnbig.ads		20230315001224 511b9bab ada.numerics.big_numbers.big_integers_ghost%s
+D a-nbnbig.adb		20230315001224 e7f9abf0 ada.numerics.big_numbers.big_integers_ghost%b
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-expont.ads		20230315001224 1e3c4530 system.expont%s
+D s-expont.adb		20230315001224 646292ac system.expont%b
+G a e
+G c Z s b [expont system 41 16 none]
+X 1 ada.ads
+16K9*Ada 20e8 7|34r6 35r5
+X 2 a-numeri.ads
+16K13*Numerics 35e17 7|34r10 35r9
+X 3 a-nubinu.ads
+16K22*Big_Numbers 21e29 7|34r19 35r18
+X 6 system.ads
+50K9*System 164e11 7|41r9 71r5 8|32r14 223r5
+X 7 s-expont.ads
+39I9 Int 56r64 58r24 63r27 63r44 66r27 66r56 8|82r32 98r27 98r56 103r16 104r16
+41k16*Expont 6|50k9 7|39z9 71l12 71e18 8|32b21 223l12 223t18
+66V13*Expon{39I9} 66>20 66>32 69r14 8|98b13 176l8 176t13
+66*20 Left{39I9} 68r33 69r29 8|98b20 104r27 123r13 131r55 144r42 157r49 164r39
+. 173r42
+66i32 Right{natural} 68r42 69r37 8|98b32 105r27 121r10 131r64 144r51 157r58
+. 164r48 173r51
+X 8 s-expont.adb
+103*7 Result{7|39I9} 131r18 142r42 146m16 146r26 157r18 163r39 173r27 175r14
+104*7 Factor{7|39I9} 129r33 131r33 139r24 140r26 140r41 141r41 142r57 143r42
+. 146r35 150r33 155r23 165r38 167m13 167r23 167r32 170r30
+105i7 Exp{natural} 128r33 131r44 132r44 134r13 139r35 140r53 141r50 143r54
+. 150r42 152m10 152r17 153r20 155r34 165r47 170r41
+

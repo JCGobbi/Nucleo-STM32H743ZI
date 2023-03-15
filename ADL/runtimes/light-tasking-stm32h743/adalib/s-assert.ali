@@ -1,0 +1,58 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/light-tasking-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -g
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_EXCEPTIONS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.assertions%b	s-assert.adb		2542d074 NE OL PK
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W system%s		system.ads		system.ali
+
+U system.assertions%s	s-assert.ads		a9cc4660 NE OL PK
+W ada%s			ada.ads			ada.ali
+W ada.assertions%s	a-assert.adb		a-assert.ali
+W system%s		system.ads		system.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-assert.ads		20230315001224 ba465f5c ada.assertions%s
+D a-except.ads		20230315001224 5b5f0f2f ada.exceptions%s
+D a-except.adb		20230315001224 4da5c77f ada.exceptions%b
+D system.ads		20230315001224 8fcf39fb system%s
+D s-assert.ads		20230315001224 9c4520c7 system.assertions%s
+D s-assert.adb		20230315001224 b907f0b3 system.assertions%b
+G a e
+G c Z s b [raise_assert_failure system__assertions 46 14 none]
+X 1 ada.ads
+16K9*Ada 20e8 6|39r6 43r39
+X 2 a-assert.ads
+42K13*Assertions 53e19 6|39w10 43r43
+45X4*Assertion_Error 6|43r54
+X 5 system.ads
+60K9*System 174e11 6|41r9 50r5 7|34r14 45r5
+X 6 s-assert.ads
+41K16*Assertions 5|60k9 6|50l12 50e22 7|34b21 45l12 45t22
+43X4*Assert_Failure 7|42r13
+46U14*Raise_Assert_Failure 46>36 47r22 7|40b14 43l8 43t28
+46a36 Msg{string} 7|40b36 42r33
+

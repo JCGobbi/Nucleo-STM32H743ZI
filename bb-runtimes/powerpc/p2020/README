@@ -4,9 +4,9 @@ P2020 Runtimes
 Runtimes Supported
 ------------------
 
-* ZFP
-* Ravenscar-SFP
-* Ravenscar-Full
+* Light
+* Light-Tasking
+* Embedded
 
 Targets Supported
 -----------------

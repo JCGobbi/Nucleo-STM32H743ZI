@@ -169,8 +169,10 @@ class Installer(object):
         projects = []
 
         for rts_base_name, rts_obj in self.tgt.runtimes.items():
-            if self.tgt.is_native or self.tgt.is_pikeos:
+            if self.tgt.is_native or self.tgt.is_legacy_format:
                 rtsname = 'rts-%s' % rts_base_name
+                if self.tgt.name.endswith("vx7r2cert-rtp"):
+                    rtsname += "-rtp"
             else:
                 rtsname = '%s-%s' % (rts_base_name, self.tgt.name)
             rts_path = os.path.join(destination, rtsname)
@@ -188,7 +190,7 @@ class Installer(object):
                     shutil.rmtree(rts_path)
             scenario_vars = rts_obj.rts_vars
 
-            if 'ravenscar' in rts_base_name:
+            if 'embedded' in rts_base_name or 'tasking' in rts_base_name:
                 libs = ('gnat', 'gnarl')
             else:
                 libs = ('gnat', )

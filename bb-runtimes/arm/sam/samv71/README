@@ -4,9 +4,9 @@ ARM SAMV71 Runtimes
 Runtimes Supported
 ------------------
 
-* ZFP
-* Ravenscar-SFP
-* Ravenscar-Full
+* Light
+* Light-Tasking
+* Embedded
 
 Targets Supported
 -----------------
@@ -49,13 +49,13 @@ subdirectory within the runtime.
 There are two assembly language files for the startup code, one each for
 executing from RAM or ROM, plus a common file shared by both (e.g., that
 starts the FPU). These are files named start-ram.S, start-rom.S, and
-common.S, respectively.
+start-common.S, respectively.
 
 The specific startup code is selected by the linker scripts' references to
 the unique symbols defined in the assembly files, via the entry point
 definitions.
 
-For the ZFP runtime these start-\*.S file is used to initialize the vector
+For the Light runtime these start-\*.S file is used to initialize the vector
 table.
 
 For the Ravenscar runtimes, the vector table is initialized by code in

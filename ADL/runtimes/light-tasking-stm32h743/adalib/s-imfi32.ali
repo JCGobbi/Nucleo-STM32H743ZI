@@ -1,0 +1,94 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/light-tasking-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.img_fixed_32%s	s-imfi32.ads		60c48d30 NE OL PU PK
+W interfaces%s		interfac.ads		interfac.ali
+W system%s		system.ads		system.ali
+W system.arith_32%s	s-arit32.adb		s-arit32.ali
+Z system.exn_int%s	s-exnint.ads		s-exnint.ali
+W system.image_f%s
+Z system.image_i%s
+Z system.img_util%s	s-imguti.adb		s-imguti.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-numeri.ads		20230315001224 84bea7a3 ada.numerics%s
+D a-nubinu.ads		20230315001224 93f1f3d1 ada.numerics.big_numbers%s
+D a-nbnbig.ads		20230315001224 511b9bab ada.numerics.big_numbers.big_integers_ghost%s
+D interfac.ads		20230315001224 edec285f interfaces%s
+D system.ads		20230315001224 8fcf39fb system%s
+D s-arit32.ads		20230315001224 e8522a76 system.arith_32%s
+D s-exnint.ads		20230315001224 3d33a4e5 system.exn_int%s
+D s-exponn.ads		20230315001224 f246e95f system.exponn%s
+D s-exponn.adb		20230315001224 0779c922 system.exponn%b
+D s-imagef.ads		20230315001224 019cdf69 system.image_f%s
+D s-imagef.adb		20230315001224 b79d6f1f system.image_f%b
+D s-imagei.ads		20230315001224 0d3f86a7 system.image_i%s
+D s-imagei.adb		20230315001224 5fb230a8 system.image_i%b
+D s-imfi32.ads		20230315001224 eb29698b system.img_fixed_32%s
+D s-imguti.ads		20230315001224 6b7a7f2f system.img_util%s
+G a e
+G c Z s s [image_fixed system__img_fixed_32__impl 48 14 44_4]
+G c Z s s [set_image_fixed system__img_fixed_32__impl 67 14 44_4]
+G c Z s s [image_integer system__img_fixed_32__impl__image_i 43 14 57_4_44_4]
+G c Z s s [set_image_integer system__img_fixed_32__impl__image_i 51 14 57_4_44_4]
+G c Z s s [set_digits system__img_fixed_32__impl__image_i 36 14 57_4_44_4]
+X 5 interfac.ads
+38K9*Interfaces 231e15 15|35w6 42r21
+52I9*Integer_32<integer> 15|42r32
+X 6 system.ads
+60K9*System 174e11 15|36r6 37r6 39r9 69r5
+X 7 s-arit32.ads
+50K16*Arith_32 117e20 15|36w13 44r40
+91U14*Scaled_Divide32 15|44r49
+X 11 s-imagef.ads
+45k16*Image_F 88e19 15|37w13 44r24
+48U14*Image_Fixed 15|54r19[44]
+67U14*Set_Image_Fixed 15|67r19[44]
+X 15 s-imfi32.ads
+39K16*Img_Fixed_32 6|60k9 15|69l12 69e24
+42I12*Int32{5|52I9} 44r33 47r14 50r14 51r14 57r14 60r14 61r14
+44K12*Impl[11|45] 54r14 67r14
+46U14*Image_Fixed32=54:19
+47i7 V{5|52I9}
+48a7 S{string}
+49i7 P{natural}
+50i7 Num{5|52I9}
+51i7 Den{5|52I9}
+52i7 For0{natural}
+53i7 Aft0{natural}
+56U14*Set_Image_Fixed32=67:19
+57i7 V{5|52I9}
+58a7 S{string}
+59i7 P{natural}
+60i7 Num{5|52I9}
+61i7 Den{5|52I9}
+62i7 For0{natural}
+63i7 Aft0{natural}
+64i7 Fore{natural}
+65i7 Aft{natural}
+66i7 Exp{natural}
+

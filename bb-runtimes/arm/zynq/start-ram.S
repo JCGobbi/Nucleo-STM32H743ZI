@@ -6,7 +6,7 @@
  *                                                                          *
  *                               Assembly File                              *
  *                                                                          *
- *                          Copyright (C) 2013 AdaCore                      *
+ *                     Copyright (C) 2013-2021 AdaCore                      *
  *                                                                          *
  * GNAT is free software;  you can  redistribute it  and/or modify it under *
  * terms of the  GNU General Public License as published  by the Free Soft- *
@@ -36,7 +36,6 @@
 	.global __start_ram
 
 	.section .traps
-	#include	"memmap.S"
 
 	/* The following provide default definitions for trap vectors that
 	loop back to the trap address, so the system will stop in a safe
@@ -49,6 +48,7 @@
         .weak	__gnat_dabt_trap	/* data abort trap */
         .weak	__gnat_irq_trap		/* Interrupt */
         .weak	__gnat_fiq_trap		/* Fast interrupt */
+        .weak   __gnat_irq_trap_asm
 
 	.p2align 5
 
@@ -59,9 +59,10 @@ __gnat_svc_trap:	b	__gnat_svc_trap
 __gnat_pabt_trap:	b	__gnat_pabt_trap
 __gnat_dabt_trap:	b	__gnat_dabt_trap
 			nop	/* 0x14: not used.  */
-__gnat_irq_trap:	b	__gnat_irq_trap
+__gnat_irq_trap:	b	__gnat_irq_trap_asm
 __gnat_fiq_trap:	b	__gnat_fiq_trap
 
+#include	"memmap.inc"
 
 	.type	__start_ram, %function
 __start_ram:
@@ -69,7 +70,7 @@ __start_ram:
 
 	/* Supervisor mode */
 	cps	#19 /* 10011 */
-	ldr	sp, svcSp0
+	ldr	sp, irqSp0
 
 	/* Abort mode */
 	cps	#23  /* 10111 */
@@ -84,12 +85,14 @@ __start_ram:
 	ldr	sp, fiqSp0
 
 	/* IRQ mode */
+        /* The stack of the IRQ mode should never be used, see
+           comment in __gnat_irq_trap_asm. */
 	cps	#18  /* 10010 */
-	ldr	sp, irqSp0
+	mov	sp, #0x0
 
 	/* System mode */
 	cps	#31  /* 11111 */
-	ldr	sp, userSp0	/* SYS mode shared stack with User mode */
+	ldr	sp, userSp0     /* SYS mode shared stack with User mode */
 
 	/* Write 0x020202 to the register at 0xf8000a1c.  */
 	movw	r0,#:lower16:0x20202
@@ -135,7 +138,7 @@ L_coreInit:
 	fmxr	fpexc, r0
 
 	/* Set VBAR (Vector Base Address Register).  */
-	adr	r0, __traps
+	adrl	r0, __traps
 	mcr	p15, #0, r0, c12, c0, #0
 
 	/* Invalidate TLBs  */
@@ -188,14 +191,24 @@ L_coreInit:
 	orr	r1,#0x47		@ SMP, L1 & L2 prefetch, FW
 	mcr	p15,#0,r1,c1,c0,#1
 
+        /* make sure MMU is disabled */
+	mrc	p15,#0,r1,c1,c0,#0	@ read sctlr
+	movw	r2,#0x1 		@ M bit
+	bic	r1,r1,r2
+	mcr	p15,0,r1,c1,c0,0	@ write sctlr
+
 	/* Initialize MMU.  */
+	mov	r1,#0
+	mcr	p15,#0,r1,c2,c0,#2	@ set TTBCR to disable LPAE
 	adrl	r0, __mmu_l0
 	orr	r0,r0,#0x5b		@ RGN=0b11, S=1, IRGN=0b11
 	mcr	p15,#0,r0,c2,c0,#0	@ set TTBR0
+        dsb
+        isb
 	mov	r1,#0
-	mcr	p15,#0,r1,c2,c0,#2	@ set TTBC0
 	mcr	p15,#0,r1,c13,c0,#1	@ set CONTEXTIDR
-	mov	r1,#1
+        movw    r1,#5555
+        movt    r1,#5555
 	mcr	p15,#0,r1,c3,c0,#0	@ set DACR
 
 	/*  Enable MMU, I-Cache and D-Cache.  */
@@ -225,7 +238,6 @@ L_coreInit:
 
 	bx	lr
 
-svcSp0:		.word __cpu0_svc_stack_end
 abortSp0:	.word __cpu0_abort_stack_end
 undefSp0:	.word __cpu0_undef_stack_end
 fiqSp0:		.word __cpu0_fiq_stack_end
@@ -238,7 +250,7 @@ __start_cpu1:
 
 	/* Supervisor mode */
 	cps	#19 /* 10011 */
-	ldr	sp, svcSp1
+	ldr	sp, irqSp1
 
 	/* Abort mode */
 	cps	#23  /* 10111 */
@@ -253,8 +265,10 @@ __start_cpu1:
 	ldr	sp, fiqSp1
 
 	/* IRQ mode */
+        /* The stack of the IRQ mode should never be used, see
+           comment in __gnat_irq_trap_asm. */
 	cps	#18  /* 10010 */
-	ldr	sp, irqSp1
+	mov	sp, #0x0
 
 	/* System mode */
 	cps	#31  /* 11111 */
@@ -272,14 +286,37 @@ __start_cpu1:
 
 	.size	__start_cpu1, . - __start_cpu1
 
-svcSp1:		.word __cpu1_svc_stack_end
+	.type	__gnat_irq_trap_asm %function
+__gnat_irq_trap_asm:
+        /* In order to allow nested IRQ support, we need to save the banked
+           registers LR and SPSR, and change CPU mode before allowing
+           IRQs to interrupt us.
+           Otherwise LR[IRQ] might get corrupted, and thus the interrupted
+           handler be corrupted.
+           The runtime uses the SVC mode to run the IRQ handlers.
+        */
+        sub     lr, lr, #4      @ adjust LR to the proper insn to srsfd
+        srsfd   sp!, #19        @ use SRS to save LR_irq and SPSR_irq in one
+                                @ step onto the SVC stack
+        cps     #19             @ switch to SVC mode
+        push    {r0-r3, r12}    @ save scratch registers
+        and     r1, sp, #4      @ ensure that stack is 8-byte aligned
+        sub     sp, sp, r1
+        push    {r1, lr}        @ store adjustment and LR_svc to stack
+        bl      __gnat_irq_trap
+        pop     {r1, lr}        @ restore adjustment and LR_svc
+        add     sp, sp, r1      @ unadjust stack
+        pop     {r0-r3, r12}    @ restore scratch registers
+        rfefd   sp!             @ return using rfe from the irq handler
+	.size	__gnat_irq_trap_asm, . - __gnat_irq_trap_asm
+
 abortSp1:	.word __cpu1_abort_stack_end
 undefSp1:	.word __cpu1_undef_stack_end
 fiqSp1:		.word __cpu1_fiq_stack_end
 irqSp1:		.word __cpu1_irq_stack_end
 userSp1:	.word __cpu1_stack_end
 
-	/* These routines are not available in zfp.  */
+	/* These routines are not available in Light.  */
 	.weak	__gnat_initialize_slave
 	.weak	__gnat_initialize_cpu_devices
 

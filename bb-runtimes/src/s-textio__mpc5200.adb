@@ -33,7 +33,6 @@
 --  This package uses PSC1 and configures it for UART operation with a baud
 --  speed of 115,200, 8 data bits, no parity and 1 stop bit.
 
-with System;
 with Interfaces;
 with System.BB.Board_Parameters;
 
@@ -78,6 +77,7 @@ package body System.Text_IO is
    Clock_Select_Offset             : constant := 16#04#;
    Command_Offset                  : constant := 16#08#;
    Buffer_Offset                   : constant := 16#0C#;
+   Interrupt_Mask_Offset           : constant := 16#14#;
    Counter_Timer_Upper_Offfset     : constant := 16#18#;
    Counter_Timer_Lower_Offfset     : constant := 16#1C#;
    Serial_Interface_Control_Offset : constant := 16#40#;
@@ -227,6 +227,11 @@ package body System.Text_IO is
      with Volatile_Full_Access,
        Address => System'To_Address (PSC1_Base_Address + Buffer_Offset);
 
+   Interrupt_Mask_Register : Unsigned_16
+     with Volatile_Full_Access,
+       Address =>
+         System'To_Address (PSC1_Base_Address + Interrupt_Mask_Offset);
+
    Counter_Timer_Upper_Register : Unsigned_8
      with Volatile_Full_Access,
        Address =>
@@ -268,7 +273,11 @@ package body System.Text_IO is
 
    procedure Initialize is
       Counter_Timer : constant Unsigned_16 :=
-        Unsigned_16 (IPB_Frequency / (32 * Baud_Rate) + 1);
+        Unsigned_16 (((IPB_Frequency * 10) / (32 * Baud_Rate) + 5) / 10);
+      --  Perform the Counter_Timer calculation so that it rounds to the
+      --  nearest integer. This helps produce an effective Baud Rate that is as
+      --  close to the requested Baud Rate as possible.
+
    begin
       --  Initialize PSC1 following the guide in MPC5200B User's Manual,
       --  Section 15.3.1.
@@ -322,6 +331,10 @@ package body System.Text_IO is
       Tx_FIFO_Control_Register := 1;
       Transmitter_FIFO_Alarm := 428;
       GPS_Port_Configuration_Register.PSC1 := UART;
+
+      --  Mask all PSC1 interrupts
+
+      Interrupt_Mask_Register := 0;
 
       --  Enable PSC1 transmitter and receiver units
 

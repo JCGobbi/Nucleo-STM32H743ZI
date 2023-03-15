@@ -21,14 +21,16 @@
 
 # default value is always the first value of the list. So for example for
 # optional features enabled via a "no" or "yes" value, always set 'no' as the
-# first option to disable the feature by default (zfp and ravenscar-sfp cases).
+# first option to disable the feature by default (light and light-tasking cases).
 
 all_scenarios = {
     # Main profile
-    'RTS_Profile': ['zfp', 'ravenscar-sfp', 'ravenscar-full'],
+    'RTS_Profile': ['light', 'light-tasking', 'embedded'],
+    # Runtime RTP support
+    'Is_RTP': ['no', 'yes'],
     # CPU architecture
-    'CPU_Family': ['arm', 'aarch64', 'leon', 'powerpc', 'x86', 'x86_64',
-                   'riscv32', 'riscv64'],
+    'CPU_Family': ['arm', 'aarch64', 'leon', 'powerpc', 'powerpc64',
+                   'x86', 'x86_64', 'riscv32', 'riscv64'],
     # Word size of target
     'Target_Word_Size': ['32', '64'],
     # FPU presence
@@ -131,51 +133,102 @@ all_scenarios = {
 # * a condition takes the forms:
 #     Scenario_Var_Name:accepted_values
 #   with accepted_values being:
-#     a) a simple value (e.g. RTS_Profile:zfp): evaluated to True if
-#        RTS_Profile is set to "zfp"
-#     b) a coma-separated list of values (e.g. RTS_Profile:zfp,ravenscar-sfp):
-#        evaluated to True if RTS_Profile is "zfp" or "ravenscar-sfp"
+#     a) a simple value (e.g. RTS_Profile:light): evaluated to True if
+#        RTS_Profile is set to "light"
+#     b) a coma-separated list of values (e.g. RTS_Profile:light,light-tasking):
+#        evaluated to True if RTS_Profile is "light" or "light-tasking"
 #     c) a negated value, preceded with an exclamation point (e.g.
-#        RTS_Profile:!zfp): evaluated to True if RTS_Profile is not "zfp".
+#        RTS_Profile:!light): evaluated to True if RTS_Profile is not "light".
 # If no condition is defined, then the folder is always used.
 sources = {
     # LIBGNAT
 
     'common': {
         'srcs': [
+            'libgnat/ada.ads',
             'libgnat/a-assert.ads', 'libgnat/a-assert.adb',
+            'libgnat/a-charac.ads',
+            'libgnat/a-chahan.ads', 'libgnat/a-chahan.adb',
+            'libgnat/a-chlat1.ads',
+            'libgnat/a-numeri.ads',
+            'libgnat/a-nubinu.ads',
+            'libgnat/a-nbnbig.ads', 'libgnat/a-nbnbig.adb',
+            'libgnat/a-string.ads',
+            'libgnat/a-strbou.ads', 'libgnat/a-strbou.adb',
+            'libgnat/a-strfix.ads', 'libgnat/a-strfix.adb',
+            'libgnat/a-strmap.ads', 'libgnat/a-strmap.adb',
+            'libgnat/a-stmaco.ads',
+            'libgnat/a-strsea.ads', 'libgnat/a-strsea.adb',
+            'libgnat/a-strsup.ads', 'libgnat/a-strsup.adb',
             'libgnat/a-unccon.ads',
             'libgnat/a-uncdea.ads',
-            'libgnat/ada.ads',
-            'hie/g-io__zfp.ads', 'hie/g-io__zfp.adb',
-            'hie/g-io-put__bb.adb',
-            'libgnat/g-souinf.ads',
             'libgnat/gnat.ads',
+            'libgnat/g-debuti.ads', 'libgnat/g-debuti.adb',
+            'libgnat/g-sestin.ads',
+            'libgnat/g-souinf.ads',
             'libgnat/interfac__2020.ads',
+            'libgnat/i-c.ads', 'libgnat/i-c.adb',
+            'libgnat/i-cstrin.ads', 'libgnat/i-cstrin.adb',
+            'libgnat/i-cpoint.ads', 'libgnat/i-cpoint.adb',
             'libgnat/machcode.ads',
-            'libgnat/s-assert.ads',
+            'libgnat/s-addope.ads', 'libgnat/s-addope.adb',
             'libgnat/s-atacco.ads', 'libgnat/s-atacco.adb',
-            'libgnat/s-imgboo.ads', 'libgnat/s-imgboo.adb',
+            'libgnat/s-arit32.ads', 'libgnat/s-arit32.adb',
+            'libgnat/s-assert.ads',
+            'libgnat/s-bitops.ads', 'libgnat/s-bitops.adb',
+            'libgnat/s-boarop.ads',
+            'libgnat/s-carsi8.ads', 'libgnat/s-carsi8.adb',
+            'libgnat/s-carun8.ads', 'libgnat/s-carun8.adb',
+            'libgnat/s-casi16.ads', 'libgnat/s-casi16.adb',
+            'libgnat/s-casi32.ads', 'libgnat/s-casi32.adb',
+            'libgnat/s-casi64.ads', 'libgnat/s-casi64.adb',
+            'libgnat/s-caun16.ads', 'libgnat/s-caun16.adb',
+            'libgnat/s-caun32.ads', 'libgnat/s-caun32.adb',
+            'libgnat/s-caun64.ads', 'libgnat/s-caun64.adb',
+            'libgnat/s-geveop.ads', 'libgnat/s-geveop.adb',
             'libgnat/s-imagei.ads', 'libgnat/s-imagei.adb',
             'libgnat/s-imageu.ads', 'libgnat/s-imageu.adb',
+            'libgnat/s-imgboo.ads', 'libgnat/s-imgboo.adb',
             'libgnat/s-imgint.ads',
             'libgnat/s-imglli.ads',
             'libgnat/s-imgllu.ads',
             'libgnat/s-imguns.ads',
             'libgnat/s-maccod.ads',
-            'hie/s-macres.ads',
             'hie/s-secsta__zfp.ads', 'hie/s-secsta__zfp.adb',
+            'libgnat/s-stache.ads', 'libgnat/s-stache.adb',
             'libgnat/s-stoele.ads', 'libgnat/s-stoele.adb',
-            'hie/s-textio.ads',
             'libgnat/s-unstyp.ads',
+            'libgnat/s-vector.ads',
+            'libgnat/s-veboop.ads', 'libgnat/s-veboop.adb',
+            'libgnat/s-widint.ads',
+            'libgnat/s-widlli.ads',
+            'libgnat/s-widllu.ads',
+            'libgnat/s-widuns.ads',
+            'libgnat/s-widthi.ads', 'libgnat/s-widthi.adb',
+            'libgnat/s-widthu.ads', 'libgnat/s-widthu.adb',
+            'libgnat/text_io.ads',
             'libgnat/unchconv.ads',
-            'libgnat/unchdeal.ads'],
+            'libgnat/unchdeal.ads',
+            'hie/s-macres.ads'],
         'bb_srcs': [
             'hie/a-textio.ads',
+            'hie/g-io__zfp.ads', 'hie/g-io__zfp.adb',
+            'hie/g-io-put__bb.adb',
             'hie/s-bb.ads',
-            'libgnat/text_io.ads'],
+            'hie/s-textio.ads'],
         'pikeos_srcs': [
-            'hie/s-parame__large.ads', 'hie/s-parame.adb']
+            'hie/a-textio.ads',
+            'hie/g-io__zfp.ads', 'hie/g-io__zfp.adb',
+            'hie/g-io-put__bb.adb',
+            'hie/s-parame__large.ads', 'hie/s-parame.adb',
+            'hie/s-textio.ads'],
+        'vx7r2cert_srcs': [
+            'libgnat/g-io.ads', 'hie/g-io__vxworks7cert.adb',
+            'hie/s-textio__vxworks7cert.ads', 'hie/s-textio__vxworks7cert.adb',
+            'hie/a-textio.ads', 'hie/a-textio__vxworks7cert.adb',
+            'libgnat/s-stchop__limit.ads', 'libgnat/s-stchop__vxworks.adb',
+            'vx_stack_info.c',
+        ]
     },
 
     'common/32': {
@@ -187,28 +240,87 @@ sources = {
         'conditions': ['Target_Word_Size:64'],
         'srcs': [
             'libgnat/i-cexten__128.ads',
-            'libgnat/s-imgllli.ads', 'libgnat/s-imglllu.ads']
+            'libgnat/s-casi128.ads', 'libgnat/s-casi128.adb',
+            'libgnat/s-caun128.ads', 'libgnat/s-caun128.adb',
+            'libgnat/s-imgllli.ads', 'libgnat/s-imglllu.ads',
+            'libgnat/s-widllli.ads',
+            'libgnat/s-widlllu.ads']
     },
 
-    'zfp': {
-        'conditions': ['RTS_Profile:zfp,ravenscar-sfp'],
+    'light': {
+        'conditions': ['RTS_Profile:light,light-tasking'],
         'srcs': [
             'hie/a-elchha__zfp.ads', 'hie/a-elchha__zfp.adb',
             'hie/s-sssita.ads', 'hie/s-sssita.adb',
             'hie/a-except__zfp.ads', 'hie/a-except__zfp.adb',
             'hie/a-tags__hie.ads', 'hie/a-tags__hie.adb',
-            'hie/i-c__hie.ads',
             'hie/s-assert__xi.adb',
-            'hie/s-memory__zfp.ads']
+            'hie/s-memory__light.ads'],
+        'vx7r2cert_srcs': [
+            'libgnat/s-traent.ads', 'libgnat/s-traent.adb',
+            'hie/s-traceb__cert.ads']
+    },
+    'light/non-tasking': {
+        'conditions': ['RTS_Profile:light'],
+        'pikeos_srcs': ['hie/a-textio__pikeos-light.adb'],
+        'vx7r2cert_srcs': [
+            'hie/s-parame__zfp_huge.ads',
+            'hie/s-thread.ads', 'hie/s-thread__vxworks7cert.adb']
+    },
+    'light/aarch64': {
+        'conditions': ['CPU_Family:aarch64'],
+        'vx7r2cert_srcs': [
+            'hie/s-traceb__zfp.adb',
+            'hie/s-tracon.ads', 'hie/s-tracon__zfp.adb'
+        ]
+    },
+    'light/arm': {
+        'conditions': ['CPU_Family:arm'],
+        'vx7r2cert_srcs': ['hie/s-traceb__dummy.adb']
+    },
+    'light/ppc': {
+        'conditions': ['CPU_Family:powerpc,powerpc64'],
+        'vx7r2cert_srcs': [
+            'hie/s-traceb__cert-ppc.adb',
+            'hie/s-tracon.ads', 'hie/s-tracon__ppc-vxcert.adb',
+        ]
+    },
+    'light/x86': {
+        'conditions': ['CPU_Family:x86'],
+        'vx7r2cert_srcs': ['hie/s-traceb__vx653-sim.adb']
+    },
+    'light/x86_64': {
+        'conditions': ['CPU_Family:x86_64'],
+        'vx7r2cert_srcs': ['hie/s-traceb__dummy.adb']
+    },
+    'light-tasking': {
+        'conditions': ['RTS_Profile:light-tasking'],
+        'vx7r2cert_srcs': [
+            'hie/s-parame__vxworks7cert.ads', 'libgnat/s-parame__vxworks.adb']
+    },
+    'gccmath': {
+        'conditions': ['RTS_Profile:light,light-tasking', 'Target_Word_Size:64'],
+        'srcs': [],
+        'vx7r2cert_srcs': [
+            'hie/s-gcc.ads',
+            'hie/s-gcc-ti.ads', 'hie/s-gcc-ti.adb',
+            'hie/s-gtasl3.ads', 'hie/s-gtasl3.adb',
+            'hie/s-gtasr3.ads', 'hie/s-gtasr3.adb',
+            'hie/s-gtlsr3.ads', 'hie/s-gtlsr3.adb',
+            'hie/s-gtimo3.ads', 'hie/s-gtimo3.adb',
+            'hie/s-gtium3.ads', 'hie/s-gtium3.adb',
+            'hie/s-gcdimo.ads', 'hie/s-gcdimo.adb',
+            'hie/s-gudmo4.ads', 'hie/s-gudmo4.adb',
+            'hie/s-gtdmo3.ads',
+            'hie/s-gtiud3.ads', 'hie/s-gtiud3.adb',
+            'hie/s-gtidi3.ads', 'hie/s-gtidi3.adb',
+            'hie/s-gtumo4.ads']
     },
 
     'full': {
-        'conditions': ['RTS_Profile:ravenscar-full'],
+        'conditions': ['RTS_Profile:embedded'],
         'srcs': [
             'libgnat/a-chacon.ads', 'libgnat/a-chacon.adb',
-            'libgnat/a-chahan.ads', 'libgnat/a-chahan.adb',
-            'libgnat/a-charac.ads',
-            'libgnat/a-chlat1.ads',
             'libgnat/a-chlat9.ads',
             'libgnat/a-cwila1.ads',
             'libgnat/a-cwila9.ads',
@@ -242,21 +354,13 @@ sources = {
             'libgnat/a-shcain.ads', 'libgnat/a-shcain.adb',
             'libgnat/a-slcain.ads', 'libgnat/a-slcain.adb',
             'libgnat/a-stboha.ads', 'libgnat/a-stboha.adb',
+            'libgnat/a-stbubo.ads', 'libgnat/a-stbubo.adb',
+            'libgnat/a-stbuut.ads', 'libgnat/a-stbuut.adb',
             'libgnat/a-stfiha.ads',
             'libgnat/a-strhas.adb', 'libgnat/a-strhas.ads',
-            'libgnat/a-stmaco.ads',
-            'libgnat/a-stobbu.ads', 'libgnat/a-stobbu.adb',
             'libgnat/a-storio.ads', 'libgnat/a-storio.adb',
-            'libgnat/a-stoubu.ads', 'libgnat/a-stoubu.adb',
-            'libgnat/a-stouut.ads', 'libgnat/a-stouut.adb',
-            'libgnat/a-strbou.ads', 'libgnat/a-strbou.adb',
-            'libgnat/a-strfix.ads', 'libgnat/a-strfix.adb',
-            'libgnat/a-string.ads',
-            'libgnat/a-strmap.ads', 'libgnat/a-strmap.adb',
-            'libgnat/a-strsea.ads', 'libgnat/a-strsea.adb',
-            'libgnat/a-strsup.ads', 'libgnat/a-strsup.adb',
             'libgnat/a-strunb.ads', 'libgnat/a-strunb.adb',
-            'libgnat/a-stteou.ads',
+            'libgnat/a-sttebu.ads', 'libgnat/a-sttebu.adb',
             'libgnat/a-stunau.ads', 'libgnat/a-stunau.adb',
             'libgnat/a-stunha.ads', 'libgnat/a-stunha.adb',
             'libgnat/a-stuten.ads', 'libgnat/a-stuten.adb',
@@ -307,7 +411,6 @@ sources = {
             'libgnat/g-casuti.ads', 'libgnat/g-casuti.adb',
             'libgnat/g-comver.ads', 'libgnat/g-comver.adb',
             'libgnat/g-crc32.ads', 'libgnat/g-crc32.adb',
-            'libgnat/g-debuti.ads', 'libgnat/g-debuti.adb',
             'libgnat/g-dyntab.ads', 'libgnat/g-dyntab.adb',
             'libgnat/g-except.ads',
             'libgnat/g-heasor.ads', 'libgnat/g-heasor.adb',
@@ -333,29 +436,15 @@ sources = {
             'libgnat/g-table.ads', 'libgnat/g-table.adb',
             'libgnat/g-tasloc.ads',
             'libgnat/g-wistsp.ads',
-            'libgnat/i-c.ads', 'libgnat/i-c.adb',
             'libgnat/i-cobol.ads', 'libgnat/i-cobol.adb',
-            'libgnat/i-cpoint.ads', 'libgnat/i-cpoint.adb',
-            'libgnat/i-cstrin.ads', 'libgnat/i-cstrin.adb',
             'libgnat/i-fortra.ads', 'libgnat/i-fortra.adb',
             'libgnat/i-pacdec.ads', 'libgnat/i-pacdec.adb',
             'libgnat/ioexcept.ads',
             'raise-gcc.c',
             'raise.h',
             'libgnat/s-addima.ads', 'libgnat/s-addima.adb',
-            'libgnat/s-addope.ads', 'libgnat/s-addope.adb',
             'libgnat/s-assert.adb',
-            'libgnat/s-bitops.ads', 'libgnat/s-bitops.adb',
-            'libgnat/s-boarop.ads',
             'libgnat/s-bytswa.ads',
-            'libgnat/s-carsi8.ads', 'libgnat/s-carsi8.adb',
-            'libgnat/s-carun8.ads', 'libgnat/s-carun8.adb',
-            'libgnat/s-casi16.ads', 'libgnat/s-casi16.adb',
-            'libgnat/s-casi32.ads', 'libgnat/s-casi32.adb',
-            'libgnat/s-casi64.ads', 'libgnat/s-casi64.adb',
-            'libgnat/s-caun16.ads', 'libgnat/s-caun16.adb',
-            'libgnat/s-caun32.ads', 'libgnat/s-caun32.adb',
-            'libgnat/s-caun64.ads', 'libgnat/s-caun64.adb',
             'libgnat/s-chepoo.ads',
             'libgnat/s-crc32.ads', 'libgnat/s-crc32.adb',
             'libgnat/s-excdeb.ads', 'libgnat/s-excdeb.adb',
@@ -368,7 +457,6 @@ sources = {
             'libgnat/s-fode32.ads', 'libgnat/s-fode64.ads',
             'libgnat/s-fofi32.ads', 'libgnat/s-fofi64.ads',
             'libgnat/s-forrea.ads', 'libgnat/s-forrea.adb',
-            'libgnat/s-geveop.ads', 'libgnat/s-geveop.adb',
             'libgnat/s-htable.ads', 'libgnat/s-htable.adb',
             'hie/s-init.ads',
             'libgnat/s-io.ads', 'hie/s-io.adb',
@@ -385,23 +473,22 @@ sources = {
             'libgnat/s-restri.ads', 'libgnat/s-restri.adb',
             'libgnat/s-rident.ads',
             'hie/s-soflin.ads', 'hie/s-soflin.adb',
-            'libgnat/s-sopco3.ads', 'libgnat/s-sopco3.adb',
-            'libgnat/s-sopco4.ads', 'libgnat/s-sopco4.adb',
-            'libgnat/s-sopco5.ads', 'libgnat/s-sopco5.adb',
             'libgnat/s-spsufi.ads', 'libgnat/s-spsufi.adb',
             'libgnat/s-stalib.ads', 'libgnat/s-stalib.adb',
+            'libgnat/a-stbubo.ads', 'libgnat/a-stbubo.adb',
+            'libgnat/a-stbuun.ads', 'libgnat/a-stbuun.adb',
+            'libgnat/a-stbuut.ads', 'libgnat/a-stbuut.adb',
             'libgnat/s-stopoo.ads', 'libgnat/s-stopoo.adb',
             'libgnat/s-stposu.ads', 'libgnat/s-stposu.adb',
             'libgnat/s-strhas.ads', 'libgnat/s-strhas.adb',
             'libgnat/s-string.ads', 'libgnat/s-string.adb',
+            'libgnat/a-sttebu.ads', 'libgnat/a-sttebu.adb',
             'libgnat/s-tasloc.ads', 'libgnat/s-tasloc.adb',
             'hie/s-traceb__cert.ads',
             'libgnat/s-traent.ads', 'libgnat/s-traent.adb',
             'libgnat/s-trasym.ads', 'libgnat/s-trasym.adb',
             'libgnat/s-utf_32.ads', 'libgnat/s-utf_32.adb',
-            'libgnat/s-veboop.ads', 'libgnat/s-veboop.adb',
-            'libgnat/s-vector.ads', 'libgnat/s-vercon.adb',
-            'libgnat/s-vercon.ads',
+            'libgnat/s-vercon.ads', 'libgnat/s-vercon.adb',
             'libgnat/s-wchcnv.ads', 'libgnat/s-wchcnv.adb',
             'libgnat/s-wchcon.ads', 'libgnat/s-wchcon.adb',
             'libgnat/s-wchjis.ads', 'libgnat/s-wchjis.adb',
@@ -410,9 +497,6 @@ sources = {
             'libgnat/s-widboo.ads', 'libgnat/s-widboo.adb',
             'libgnat/s-widcha.ads', 'libgnat/s-widcha.adb',
             'libgnat/s-widenu.ads', 'libgnat/s-widenu.adb',
-            'libgnat/s-widint.ads',
-            'libgnat/s-widlli.ads',
-            'libgnat/s-widllu.ads',
             'libgnat/s-widthi.ads', 'libgnat/s-widthi.adb',
             'libgnat/s-widthu.ads', 'libgnat/s-widthu.adb',
             'libgnat/s-widwch.ads', 'libgnat/s-widwch.adb',
@@ -433,14 +517,14 @@ sources = {
     },
 
     'full/32': {
-        'conditions': ['RTS_Profile:ravenscar-full', 'Target_Word_Size:32'],
+        'conditions': ['RTS_Profile:embedded', 'Target_Word_Size:32'],
         'srcs': [
             'libgnat/a-decima.ads',
             'libgnat/s-scaval.ads', 'libgnat/s-scaval.adb']
     },
 
     'full/64': {
-        'conditions': ['RTS_Profile:ravenscar-full', 'Target_Word_Size:64'],
+        'conditions': ['RTS_Profile:embedded', 'Target_Word_Size:64'],
         'srcs': [
             'libgnat/a-decima__128.ads',
             'libgnat/s-scaval__128.ads', 'libgnat/s-scaval__128.adb',
@@ -449,32 +533,38 @@ sources = {
 
     # Memory operations:
     'alloc/c': {
-        'conditions': ['Has_libc:yes', 'RTS_Profile:!ravenscar-full'],
-        'bb_srcs': ['hie/s-memory__libc.adb']
+        'conditions': ['Has_libc:yes', 'RTS_Profile:!embedded'],
+        'srcs': ['hie/s-memory__libc.adb']
     },
     'alloc/no-tasking': {
-        'conditions': ['Has_libc:no', 'RTS_Profile:zfp'],
+        'conditions': ['Has_libc:no', 'RTS_Profile:light'],
         'srcs': ['hie/s-memory__zfp.adb']
     },
     'alloc/no-cas': {
         'conditions': ['Has_libc:no',
-                       'RTS_Profile:ravenscar-sfp',
+                       'RTS_Profile:light-tasking',
                        'Has_Compare_And_Swap:no'],
         'srcs': ['hie/s-memory__zfp.adb']
     },
     'alloc/tasking': {
         'conditions': ['Has_libc:no',
-                       'RTS_Profile:ravenscar-sfp',
+                       'RTS_Profile:light-tasking',
                        'Has_Compare_And_Swap:yes',
                        'Certifiable_Packages:no'],
-        'srcs': ['hie/s-memory__raven.adb']
+        'srcs': [
+            'hie/s-memory__raven.adb',
+            'libgnat/s-atopri.ads',
+            'libgnat/s-atopri.adb']
     },
     'alloc/tasking-noc': {
         'conditions': ['Has_libc:no',
-                       'RTS_Profile:ravenscar-sfp',
+                       'RTS_Profile:light-tasking',
                        'Has_Compare_And_Swap:yes',
                        'Certifiable_Packages:yes'],
-        'srcs': ['hie/s-memory__raven_noc.adb']
+        'srcs': [
+            'hie/s-memory__raven_noc.adb',
+            'libgnat/s-atopri.ads',
+            'libgnat/s-atopri.adb']
     },
     'mem': {
         'conditions': ['Has_libc:no'],
@@ -569,7 +659,6 @@ sources = {
     'image/fixed': {
         'conditions': ['Add_Image_Fixed:yes'],
         'srcs': [
-            'libgnat/s-arit32.ads', 'libgnat/s-arit32.adb',
             'libgnat/s-imagef.ads', 'libgnat/s-imagef.adb',
             'libgnat/s-imfi32.ads'],
         'requires': ['Add_Image_Util:yes']
@@ -587,7 +676,7 @@ sources = {
         'requires': ['Add_Image_Fixed:yes', 'Add_Arith128:yes']
     },
     'image/float': {
-        'conditions': ['Add_Image_Float:yes', 'Has_FPU:yes'],
+        'conditions': ['Add_Image_Float:yes'],
         'srcs': [
             'libgnat/s-imager.ads', 'libgnat/s-imager.adb',
             'libgnat/s-imgrea.ads', 'libgnat/s-imgflt.ads',
@@ -686,7 +775,6 @@ sources = {
     'value/fixed': {
         'conditions': ['Add_Value_Fixed:yes'],
         'srcs': [
-            'libgnat/s-arit32.ads', 'libgnat/s-arit32.adb',
             'libgnat/s-valuer.ads', 'libgnat/s-valuer.adb',
             'libgnat/s-valuef.ads', 'libgnat/s-valuef.adb',
             'libgnat/s-vafi32.ads'],
@@ -705,7 +793,7 @@ sources = {
         'requires': ['Add_Value_Fixed:yes', 'Add_Arith128:yes']
     },
     'value/float': {
-        'conditions': ['Add_Value_Float:yes', 'Has_FPU:yes'],
+        'conditions': ['Add_Value_Float:yes'],
         'srcs': [
             'libgnat/s-valuer.ads', 'libgnat/s-valuer.adb',
             'libgnat/s-valrea.ads', 'libgnat/s-valrea.adb',
@@ -785,7 +873,6 @@ sources = {
 
     # FPU/Floating point operations support
     'fpu': {
-        'conditions': ['Has_FPU:yes'],
         'srcs': [
             'libgnat/s-fatgen.ads', 'libgnat/s-fatgen.adb',
             'libgnat/s-fatflt.ads',
@@ -795,31 +882,59 @@ sources = {
     'math': {
         'conditions': ['Add_Math_Lib:!no'],
         'srcs': [
+            'libgnat/a-nselfu.ads',
+            'hie/a-numaux__ada.ads',
+            'libgnat/s-gearop.ads',  'libgnat/s-gearop.adb',
+        ],
+        'bb_srcs': [
             'hie/a-ngelfu__ada.ads', 'hie/a-ngelfu__ada.adb',
             'hie/a-nlelfu__ada.ads',
-            'libgnat/a-nselfu.ads',
             'hie/a-nuelfu__ada.ads',
-            'hie/a-numaux__ada.ads',
-            'libgnat/a-numeri.ads',
             'hie/s-gcmain__ada.ads', 'hie/s-gcmain__ada.adb',
-            'libgnat/s-gearop.ads',  'libgnat/s-gearop.adb',
             'hie/s-libdou__ada.ads', 'hie/s-libdou__ada.adb',
-            'hie/s-libm__ada.ads', 'hie/s-libm__ada.adb',
-            'hie/s-libpre__ada.ads',
             'hie/s-libsin__ada.ads', 'hie/s-libsin__ada.adb',
             'hie/s-lidosq__ada.ads',
-            'hie/s-lisisq__ada.ads']
+            'hie/s-lisisq__ada.ads',
+            'hie/s-libm__ada.ads', 'hie/s-libm__ada.adb',
+            'hie/s-libpre__ada.ads'
+        ],
+        'pikeos_srcs': [
+            'hie/a-ngelfu__ada.ads', 'hie/a-ngelfu__ada.adb',
+            'hie/a-nlelfu__ada.ads',
+            'hie/a-nuelfu__ada.ads',
+            'hie/s-gcmain__ada.ads', 'hie/s-gcmain__ada.adb',
+            'hie/s-libdou__ada.ads', 'hie/s-libdou__ada.adb',
+            'hie/s-libsin__ada.ads', 'hie/s-libsin__ada.adb',
+            'hie/s-lidosq__ada.ads',
+            'hie/s-lisisq__ada.ads',
+            'hie/s-libm__ada.ads', 'hie/s-libm__ada.adb',
+            'hie/s-libpre__ada.ads'
+        ],
+        'vx7r2cert_srcs': [
+            'hie/a-ngelfu__cert.ads', 'hie/a-ngelfu__cert.adb',
+            'hie/a-nlelfu__cert.ads',
+            'hie/a-nuelfu__cert.ads', 'hie/a-nuelfu__cert.adb',
+            'hie/s-gcmain__cert.ads', 'hie/s-gcmain__cert.adb',
+            'hie/a-nllefu__cert.ads',
+            'hie/a-nalofl__light.ads',
+            'hie/a-nallfl__light.ads',
+            'libgnat/a-naliop__nolibm.ads']
     },
     'math/long_long_64bit': {
-        'conditions': ['Add_Math_Lib:!no', 'CPU_Family:!x86_64'],
-        'srcs': ['libgnat/a-nllefu.ads']
+        'conditions': ['Add_Math_Lib:!no', 'CPU_Family:!x86,!x86_64'],
+        'bb_srcs': ['libgnat/a-nllefu.ads'],
+        'pikeos_srcs': ['libgnat/a-nllefu.ads']
     },
     'math/long_long_80bit': {
-        'conditions': ['Add_Math_Lib:!no', 'CPU_Family:x86_64'],
-        'srcs': [
+        'conditions': ['Add_Math_Lib:!no', 'CPU_Family:x86,x86_64'],
+        'bb_srcs': [
             'hie/s-lilodo__ada.ads', 'hie/s-lilodo__ada.adb',
             'hie/s-lldosq__ada.ads', 'hie/s-lldosq__fpu.adb',
-            'hie/a-nllefu__ada.ads']
+            'hie/a-nllefu__ada.ads'],
+        'pikeos_srcs': [
+            'hie/s-lilodo__ada.ads', 'hie/s-lilodo__ada.adb',
+            'hie/s-lldosq__ada.ads', 'hie/s-lldosq__fpu.adb',
+            'hie/a-nllefu__ada.ads'],
     },
     'math/complex': {
         'conditions': ['Add_Math_Lib:!no', 'Add_Complex_Type_Support:yes'],
@@ -836,7 +951,7 @@ sources = {
             'libgnat/a-nucoty.ads']
     },
     'math/full': {
-        'conditions': ['Add_Math_Lib:!no', 'RTS_Profile:ravenscar-full'],
+        'conditions': ['Add_Math_Lib:!no', 'RTS_Profile:embedded'],
         'srcs': [
             'libgnat/a-ngcoar.ads',
             'libgnat/a-ngcoar.adb',
@@ -846,19 +961,23 @@ sources = {
     },
     'math/softsp': {
         'conditions': ['Add_Math_Lib:softfloat,hardfloat_dp'],
-        'srcs': ['hie/s-lisisq__ada.adb']
+        'bb_srcs': ['hie/s-lisisq__ada.adb'],
+        'pikeos_srcs': ['hie/s-lisisq__ada.adb']
     },
     'math/softdp': {
         'conditions': ['Add_Math_Lib:softfloat,hardfloat_sp'],
-        'srcs': ['hie/s-lidosq__ada.adb']
+        'bb_srcs': ['hie/s-lidosq__ada.adb'],
+        'pikeos_srcs': ['hie/s-lidosq__ada.adb']
     },
     'math/hardsp': {
         'conditions': ['Add_Math_Lib:hardfloat,hardfloat_sp'],
-        'srcs': ['hie/s-lisisq__fpu.adb']
+        'bb_srcs': ['hie/s-lisisq__fpu.adb'],
+        'pikeos_srcs': ['hie/s-lisisq__fpu.adb']
     },
     'math/harddp': {
         'conditions': ['Add_Math_Lib:hardfloat,hardfloat_dp'],
-        'srcs': ['hie/s-lidosq__fpu.adb']
+        'bb_srcs': ['hie/s-lidosq__fpu.adb'],
+        'pikeos_srcs': ['hie/s-lidosq__fpu.adb']
     },
     # Arithmetic
     'arith64': {
@@ -924,13 +1043,13 @@ sources = {
 
     # Zero-cost-exception support
     'full/zcx-arm': {
-        'conditions': ['RTS_Profile:ravenscar-full', 'CPU_Family:arm'],
+        'conditions': ['RTS_Profile:embedded', 'CPU_Family:arm'],
         'srcs': [
             'libgnat/s-excmac__arm.adb', 'libgnat/s-excmac__arm.ads',
             'hie/s-traceb__armeabi.adb']
     },
     'full/zcx-dw2': {
-        'conditions': ['RTS_Profile:ravenscar-full', 'CPU_Family:!arm'],
+        'conditions': ['RTS_Profile:embedded', 'CPU_Family:!arm'],
         'srcs': [
             'libgnat/s-excmac__gcc.ads', 'libgnat/s-excmac__gcc.adb',
             'libgcc/unwind-dw2-fde.h'],
@@ -938,36 +1057,36 @@ sources = {
             'hie/unwind-dw2-fde-bb.c']
     },
     'full/zcx-aarch64': {
-        'conditions': ['RTS_Profile:ravenscar-full', 'CPU_Family:aarch64'],
+        'conditions': ['RTS_Profile:embedded', 'CPU_Family:aarch64'],
         'srcs': ['hie/s-traceb__dwarf.adb']
     },
     'full/zcx-ppc': {
-        'conditions': ['RTS_Profile:ravenscar-full', 'CPU_Family:powerpc'],
+        'conditions': ['RTS_Profile:embedded', 'CPU_Family:powerpc'],
         'srcs': ['hie/s-traceb__ppc.adb']
     },
 
     'full/zcx-riscv': {
         'conditions':
-        ['RTS_Profile:ravenscar-full', 'CPU_Family:riscv64,riscv32'],
+        ['RTS_Profile:embedded', 'CPU_Family:riscv64,riscv32'],
         'srcs': ['hie/s-traceb__dwarf.adb']
     },
 
     'full/zcx-leon': {
-        'conditions': ['RTS_Profile:ravenscar-full', 'CPU_Family:leon'],
+        'conditions': ['RTS_Profile:embedded', 'CPU_Family:leon'],
         'srcs': ['hie/s-traceb__sparc.adb']
     },
     'full/zcx-x86': {
-        'conditions': ['RTS_Profile:ravenscar-full', 'CPU_Family:x86'],
+        'conditions': ['RTS_Profile:embedded', 'CPU_Family:x86'],
         'srcs': ['hie/s-traceb__vx653-sim.adb']
     },
     'full/zcx-x86_64': {
-        'conditions': ['RTS_Profile:ravenscar-full', 'CPU_Family:x86_64'],
+        'conditions': ['RTS_Profile:embedded', 'CPU_Family:x86_64'],
         'srcs': ['hie/s-traceb__dwarf.adb']
     },
 
     # Containers
     'containers': {
-        'conditions': ['RTS_Profile:ravenscar-full'],
+        'conditions': ['RTS_Profile:embedded'],
         'srcs': [
             'libgnat/a-btgbso.adb', 'libgnat/a-btgbso.ads',
             'libgnat/a-cbdlli.adb', 'libgnat/a-cbdlli.ads',
@@ -1018,6 +1137,7 @@ sources = {
             'libgnat/a-coormu.adb', 'libgnat/a-coormu.ads',
             'libgnat/a-coorse.adb', 'libgnat/a-coorse.ads',
             'libgnat/a-coprnu.adb', 'libgnat/a-coprnu.ads',
+            'libgnat/a-costso.adb', 'libgnat/a-costso.ads',
             'libgnat/a-crbltr.ads',
             'libgnat/a-crbtgk.adb', 'libgnat/a-crbtgk.ads',
             'libgnat/a-crbtgo.adb', 'libgnat/a-crbtgo.ads',
@@ -1027,7 +1147,8 @@ sources = {
             'libgnat/a-rbtgbo.adb', 'libgnat/a-rbtgbo.ads',
             'libgnat/a-rbtgso.adb', 'libgnat/a-rbtgso.ads',
             'libgnat/a-iteint.ads',
-            'libgnat/s-atocou__builtin.adb', 'libgnat/s-atocou.ads']
+            'libgnat/s-atocou__builtin.adb', 'libgnat/s-atocou.ads',
+            'libgnat/s-atopri.adb', 'libgnat/s-atopri.ads']
     },
     # Pragma Pack support
     'pack': {
@@ -1164,17 +1285,13 @@ sources = {
 
     'gnarl/common': {
         'srcs': [
-            'libgnarl/a-interr.ads', 'hie/a-interr__raven.adb',
-            'hie/a-reatim.ads', 'hie/a-reatim.adb',
             'libgnarl/a-retide.ads', 'hie/a-retide__raven.adb',
             'hie/a-sytaco__xi.ads', 'hie/a-sytaco__xi.adb',
             'libgnarl/a-taside.ads', 'hie/a-taside__raven.adb',
             'hie/a-taster.ads', 'hie/a-taster.adb',
-            'hie/s-interr__raven.ads',
             'hie/s-mufalo.ads', 'hie/s-mufalo.adb',
             'hie/s-musplo.ads',
             'hie/s-taprob__raven.ads', 'hie/s-taprob__raven.adb',
-            'hie/s-taprop.ads',
             'libgnarl/s-tarest.ads', 'hie/s-tarest.adb',
             'hie/s-tasdeb__xi.ads', 'hie/s-tasdeb__raven.adb',
             'libgnarl/s-tasinf.ads', 'libgnarl/s-tasinf.adb',
@@ -1182,8 +1299,10 @@ sources = {
             'libgnarl/s-tasres.ads',
             'libgnarl/s-tpobmu.ads'],
         'bb_srcs': [
+            'libgnarl/a-interr.ads', 'hie/a-interr__raven.adb',
             'hie/a-exetim.ads', 'hie/a-exetim.adb',
             'hie/a-extiin.ads', 'hie/a-extiin.adb',
+            'hie/a-reatim.ads', 'hie/a-reatim.adb',
             'hie/a-rttiev.ads', 'hie/a-rttiev.adb',
             'hie/s-bbexti.ads', 'hie/s-bbexti.adb',
             'hie/s-bbinte.ads', 'hie/s-bbinte.adb',
@@ -1193,21 +1312,103 @@ sources = {
             'hie/s-bbtiev.ads', 'hie/s-bbtiev.adb',
             'hie/s-bbtime.ads',
             'hie/s-bcprmu.ads', 'hie/s-bcprmu.adb',
-            'hie/s-interr.adb',
+            'hie/s-interr__raven.ads', 'hie/s-interr.adb',
             'hie/s-multip.ads', 'hie/s-multip.adb',
             'hie/s-taprop__bb.adb',
+            'hie/s-taprop.ads',
             'hie/s-taspri.ads',
             'hie/s-tpobmu.adb',
             'hie/s-osinte.ads'],
         'pikeos_srcs': [
-            'libgnat/text_io.ads',
-            'hie/a-textio.ads', 'hie/a-textio__pikeos.adb',
+            'libgnarl/a-interr.ads', 'hie/a-interr__raven.adb',
+            'hie/a-reatim.ads', 'hie/a-reatim.adb',
+            'hie/a-textio__pikeos.adb',
+            'hie/s-interr__raven.ads',
             'hie/s-multip__raven-default.ads',
             'hie/s-multip__raven-default.adb',
             'hie/s-musplo.adb',
+            'hie/s-taprop.ads',
             'hie/s-taprop__pikeos.adb',
             'hie/s-taspri__pikeos.ads',
-            'libgnarl/s-tpobmu.adb']
+            'libgnarl/s-tpobmu.adb'],
+        'vx7r2cert_srcs': [
+            'libgnarl/a-reatim.ads',
+            'libgnarl/a-reatim.adb',
+            'hie/s-soflin__light.ads',
+            'hie/s-taprop__raven-cert.ads',
+            'hie/s-taprop__vxworks7cert.adb',
+            'hie/s-tpopsp__vxworks7-cert-tls.adb',
+            'hie/s-taspri__raven-vxworks.ads',
+            'hie/s-multip__raven-default.ads',
+            'hie/s-multip__raven-default.adb',
+            'hie/s-musplo.adb',
+            'hie/s-osinte__vxworks-light-tasking.ads',
+            'hie/s-osinte__vxworks-light-tasking.adb',
+            'libgnarl/s-tpobmu.adb',
+            'clexco.c',
+            'initflt.c',
+            'sysdep-raven-cert-vxworks.c']
+    },
+    'gnarl/specs/arm': {
+        'conditions': ['Is_RTP:yes', 'CPU_Family:aarch64,arm'],
+        'vx7r2cert_srcs': [
+            'vxworks7-cert-rtp-base-link.spec',
+            'vxworks7-cert-rtp-link.spec']
+    },
+    'gnarl/specs/ppc': {
+        'conditions': ['Is_RTP:yes', 'CPU_Family:powerpc'],
+        'vx7r2cert_srcs': [
+            'vxworks7-cert-rtp-base-link.spec',
+            'vxworks7-cert-rtp-link__ppcXX.spec']
+    },
+    'gnarl/specs/ppc64': {
+        'conditions': ['Is_RTP:yes', 'CPU_Family:powerpc64'],
+        'vx7r2cert_srcs': [
+            'vxworks7-cert-rtp-base-link__ppc64.spec',
+            'vxworks7-cert-rtp-link__ppcXX.spec']
+    },
+    'gnarl/specs/x86': {
+        'conditions': ['Is_RTP:yes', 'CPU_Family:x86'],
+        'vx7r2cert_srcs': [
+            'vxworks7-cert-rtp-base-link__x86.spec',
+            'vxworks7-cert-rtp-link.spec']
+    },
+    'gnarl/specs/x86_64': {
+        'conditions': ['Is_RTP:yes', 'CPU_Family:x86_64'],
+        'vx7r2cert_srcs': [
+            'vxworks7-cert-rtp-base-link__x86_64.spec',
+            'vxworks7-cert-rtp-link.spec']
+    },
+    'gnarl/vx7r2cert': {
+        'conditions': ['Is_RTP:no'],
+        'vx7r2cert_srcs': {
+            'hie/s-vxwext__light-tasking.ads',
+            'hie/s-vxwext__light-tasking.adb',
+            'ivec.c',
+        }
+    },
+    'gnarl/vx7r2cert-rtp': {
+        'conditions': ['Is_RTP:yes'],
+        'vx7r2cert_srcs': {
+            'hie/s-vxwext__light-tasking-rtp.ads',
+            'hie/s-vxwext__light-tasking-rtp.adb',
+        }
+    },
+    'gnarl/aarch64': {
+        'conditions': ['CPU_Family:aarch64'],
+        'vx7r2cert_srcs': ['libgnarl/s-vxwork__aarch64.ads']
+    },
+    'gnarl/arm': {
+        'conditions': ['CPU_Family:arm'],
+        'vx7r2cert_srcs': ['libgnarl/s-vxwork__arm.ads']
+    },
+    'gnarl/ppc': {
+        'conditions': ['CPU_Family:powerpc,powerpc64'],
+        'vx7r2cert_srcs': ['libgnarl/s-vxwork__ppc.ads']
+    },
+    'gnarl/x86': {
+        'conditions': ['CPU_Family:x86,x86_64'],
+        'vx7r2cert_srcs': ['libgnarl/s-vxwork__x86.ads']
     },
     'gnarl/pikeos3': {
         'conditions': ['Pikeos_Version:pikeos3'],
@@ -1238,15 +1439,15 @@ sources = {
 
     # SFP-specific files
     'gnarl/sfp': {
-        'conditions': ['RTS_Profile:ravenscar-sfp'],
+        'conditions': ['RTS_Profile:light-tasking'],
         'srcs': [
             'hie/s-taskin__raven.ads',
             'hie/s-tposen__raven.ads', 'hie/s-tposen__raven.adb']
     },
 
-    # Ravenscar-full
+    # Embedded Runtime
     'gnarl/full': {
-        'conditions': ['RTS_Profile:ravenscar-full'],
+        'conditions': ['RTS_Profile:embedded'],
         'srcs': [
             'hie/s-taskin__full.ads',
             'hie/s-tposen__xi-full.adb', 'hie/s-tposen__xi-full.ads'],
@@ -1256,7 +1457,7 @@ sources = {
 
     # Extended Ravenscar profile
     'gnarl/full/extended': {
-        'conditions': ['RTS_Profile:ravenscar-full'],
+        'conditions': ['RTS_Profile:embedded'],
         'srcs': [
             # relative delays:
             'hie/s-reldel.ads', 'hie/s-reldel.adb',
@@ -1273,13 +1474,13 @@ sources = {
     # Timing support
     'gnarl/timer32': {
         'conditions': ['Timer:timer32'],
-        'srcs': [
+        'bb_srcs': [
             'hie/s-bbbosu__timer-32.ads',
             'hie/s-bbtime__timer-32.adb']
     },
     'gnarl/timer64': {
         'conditions': ['Timer:timer64'],
-        'srcs': [
+        'bb_srcs': [
             'hie/s-bbbosu__timer-64.ads',
             'hie/s-bbtime__timer-64.adb']
     },
@@ -1296,30 +1497,30 @@ sources = {
 
     # memory profile
     'gnat/parameters/small': {
-        'conditions': ['RTS_Profile:!zfp', 'Memory_Profile:small'],
+        'conditions': ['RTS_Profile:!light', 'Memory_Profile:small'],
         'bb_srcs': ['hie/s-parame__small.ads',
                     'hie/s-parame.adb']
     },
     'gnat/parameters/large': {
-        'conditions': ['RTS_Profile:!zfp', 'Memory_Profile:large'],
+        'conditions': ['RTS_Profile:!light', 'Memory_Profile:large'],
         'bb_srcs': ['hie/s-parame__large.ads',
                     'hie/s-parame.adb']
     },
     'gnat/parameters/huge': {
-        'conditions': ['RTS_Profile:!zfp', 'Memory_Profile:huge'],
+        'conditions': ['RTS_Profile:!light', 'Memory_Profile:huge'],
         'bb_srcs': ['hie/s-parame__huge.ads',
                     'hie/s-parame.adb']
     },
-    'gnat/parameters/zfp-small': {
-        'conditions': ['RTS_Profile:zfp', 'Memory_Profile:small'],
+    'gnat/parameters/light-small': {
+        'conditions': ['RTS_Profile:light', 'Memory_Profile:small'],
         'bb_srcs': ['hie/s-parame__zfp_small.ads']
     },
-    'gnat/parameters/zfp-large': {
-        'conditions': ['RTS_Profile:zfp', 'Memory_Profile:large'],
+    'gnat/parameters/light-large': {
+        'conditions': ['RTS_Profile:light', 'Memory_Profile:large'],
         'bb_srcs': ['hie/s-parame__zfp.ads']
     },
-    'gnat/parameters/zfp-huge': {
-        'conditions': ['RTS_Profile:zfp', 'Memory_Profile:huge'],
+    'gnat/parameters/light-huge': {
+        'conditions': ['RTS_Profile:light', 'Memory_Profile:huge'],
         'bb_srcs': ['hie/s-parame__zfp_huge.ads']
     },
 }

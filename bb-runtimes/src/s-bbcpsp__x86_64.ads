@@ -38,13 +38,9 @@ pragma Restrictions (No_Elaboration_Code);
 
 with Ada.Unchecked_Conversion;
 with Interfaces;
-with System;
-with System.BB.Interrupts;
 
 package System.BB.CPU_Specific is
    pragma Preelaborate;
-
-   package SBI renames System.BB.Interrupts;
 
    ------------------
    -- CPU Features --
@@ -385,6 +381,9 @@ package System.BB.CPU_Specific is
    Local_APIC_Timer_Current_Count_Address  : constant := 16#390#;
    Local_APIC_Divide_Config_Offset_Address : constant := 16#3E0#;
 
+   subtype LAPIC_Vector is Natural range 0 .. 255;
+   --  Local APIC IDs
+
    type APIC_ID is new Interfaces.Unsigned_8;
 
    type Local_APIC_ID is record
@@ -399,7 +398,7 @@ package System.BB.CPU_Specific is
    for Local_APIC_EOI use (Signal => 0);
 
    type Local_APIC_Spurious_Interrupt is record
-      Spurious_Vector          : Interrupts.Interrupt_ID;
+      Spurious_Vector          : LAPIC_Vector;
       APIC_Enabled             : Boolean;
       Focus_Processor_Checking : Boolean;
       Suppress_EOI_Broadcast   : Boolean;
@@ -439,7 +438,7 @@ package System.BB.CPU_Specific is
       Delivery         : Delivery_Status;
       Destination_Mode : Destination_Mode_Type;
       Delivery_Mode    : Delivery_Mode_Type;
-      Vector           : Interrupts.Interrupt_ID;
+      Vector           : LAPIC_Vector;
    end record;
 
    for Interrupt_Command_Low use record
@@ -458,7 +457,7 @@ package System.BB.CPU_Specific is
       Timer_Mode : Timer_Type;
       Mask       : Boolean;
       Delivery   : Delivery_Status;
-      Vector     : Interrupts.Interrupt_ID;
+      Vector     : LAPIC_Vector;
    end record with Size => 32;
 
    for LVT_Timer use record
@@ -475,10 +474,14 @@ package System.BB.CPU_Specific is
       Divide_by_64, Divide_by_128, Divide_by_1);
 
    for Divide_Configuration use
-     (Divide_by_2   => 2#0000#, Divide_by_4  => 2#0001#,
-      Divide_by_8   => 2#0010#, Divide_by_16 => 2#0011#,
-      Divide_by_32  => 2#1000#, Divide_by_64 => 2#1001#,
-      Divide_by_128 => 2#1010#, Divide_by_1  => 2#1011#);
+     (Divide_by_2   => 2#0000#,
+      Divide_by_4   => 2#0001#,
+      Divide_by_8   => 2#0010#,
+      Divide_by_16  => 2#0011#,
+      Divide_by_32  => 2#1000#,
+      Divide_by_64  => 2#1001#,
+      Divide_by_128 => 2#1010#,
+      Divide_by_1   => 2#1011#);
 
    Local_APIC_ID_Register : Local_APIC_ID
      with Volatile_Full_Access,
@@ -538,14 +541,20 @@ package System.BB.CPU_Specific is
    -- APIC Timer --
    ----------------
 
-   APIC_Timer_Interrupt_ID : constant Interrupts.Interrupt_ID := 255;
+   APIC_Timer_Vector : constant LAPIC_Vector := 255;
+   --  Local APIC vector for the APIC Timer
+
+   APIC_Frequency_In_kHz : Interfaces.Unsigned_64;
+   --  The frequency Local APIC Timer in kHz. We use kHz because is gives us
+   --  more head room when converting from ticks to nanoseconds and vice
+   --  versa (since we need to multiply ticks with the frequency, which caps
+   --  the maximum number of ticks the clock can accumulate until we can no
+   --  longer perform that conversion).
 
    TSC_Frequency_In_kHz : Interfaces.Unsigned_64;
    --  The frequency of the Time Stamp Counter in kHz. We use kHz because is
-   --  gives us more head room when when convert from ticks to nanoseconds and
-   --  vice versa (since we need to multiply ticks with the frequency, which
-   --  caps the maximum number of ticks the clock can accumulate until we can
-   --  no longer perform that conversion).
+   --  gives us more head room when converting from ticks to nanoseconds and
+   --  vice versa.
 
    ---------
    -- PIT --
@@ -585,9 +594,9 @@ package System.BB.CPU_Specific is
    -- CPU Clock --
    ---------------
 
-   function Read_Raw_Clock return Interfaces.Unsigned_64
+   function Read_TSC return Interfaces.Unsigned_64
      with Inline;
-   --  Read the hardware clock source
+   --  Read the TSC
 
    -------------------------
    -- Hardware Exceptions --
@@ -599,26 +608,48 @@ package System.BB.CPU_Specific is
 
    --  Exceptions IDs
 
-   Divide_Error_Exception         : constant SBI.Interrupt_ID := 0;
-   Dedug_Execption                : constant SBI.Interrupt_ID := 1;
-   NMI_Interrupt                  : constant SBI.Interrupt_ID := 2;
-   Breakpoint_Execption           : constant SBI.Interrupt_ID := 3;
-   Overflow_Exception             : constant SBI.Interrupt_ID := 4;
-   BOUND_Range_Exceeded_Exception : constant SBI.Interrupt_ID := 5;
-   Invalid_Opcode_Exception       : constant SBI.Interrupt_ID := 6;
-   Device_Not_Available_Exception : constant SBI.Interrupt_ID := 7;
-   Double_Fault_Exception         : constant SBI.Interrupt_ID := 8;
-   Invalid_TSS_Exception          : constant SBI.Interrupt_ID := 10;
-   Segment_Not_Present_Exception  : constant SBI.Interrupt_ID := 11;
-   Stack_Segment_Fault_Exception  : constant SBI.Interrupt_ID := 12;
-   General_Protection_Exception   : constant SBI.Interrupt_ID := 13;
-   Page_Fault_Exception           : constant SBI.Interrupt_ID := 14;
-   Math_Fault_Exception           : constant SBI.Interrupt_ID := 16;
-   Alignment_Check_Exception      : constant SBI.Interrupt_ID := 17;
-   Machine_Check_Exception        : constant SBI.Interrupt_ID := 18;
-   SIMD_Floating_Point_Exception  : constant SBI.Interrupt_ID := 19;
-   Virtualization_Exception       : constant SBI.Interrupt_ID := 20;
-   Control_Protection_Exception   : constant SBI.Interrupt_ID := 21;
+   Divide_Error_Exception         : constant LAPIC_Vector := 0;
+   Dedug_Execption                : constant LAPIC_Vector := 1;
+   NMI_Interrupt                  : constant LAPIC_Vector := 2;
+   Breakpoint_Execption           : constant LAPIC_Vector := 3;
+   Overflow_Exception             : constant LAPIC_Vector := 4;
+   BOUND_Range_Exceeded_Exception : constant LAPIC_Vector := 5;
+   Invalid_Opcode_Exception       : constant LAPIC_Vector := 6;
+   Device_Not_Available_Exception : constant LAPIC_Vector := 7;
+   Double_Fault_Exception         : constant LAPIC_Vector := 8;
+   Invalid_TSS_Exception          : constant LAPIC_Vector := 10;
+   Segment_Not_Present_Exception  : constant LAPIC_Vector := 11;
+   Stack_Segment_Fault_Exception  : constant LAPIC_Vector := 12;
+   General_Protection_Exception   : constant LAPIC_Vector := 13;
+   Page_Fault_Exception           : constant LAPIC_Vector := 14;
+   Math_Fault_Exception           : constant LAPIC_Vector := 16;
+   Alignment_Check_Exception      : constant LAPIC_Vector := 17;
+   Machine_Check_Exception        : constant LAPIC_Vector := 18;
+   SIMD_Floating_Point_Exception  : constant LAPIC_Vector := 19;
+   Virtualization_Exception       : constant LAPIC_Vector := 20;
+   Control_Protection_Exception   : constant LAPIC_Vector := 21;
+
+   -----------------------
+   -- Hardware Platform --
+   -----------------------
+
+   --  Some hypervisors and bootloaders can provide extra information that can
+   --  assist the setup of the runtime.
+
+   type Hardware_Type is (Bare_Metal, LynxSecure);
+   for Hardware_Type use (Bare_Metal => 1, LynxSecure => 2);
+   --  Use a non-zero for our default Bare_Metal to ensure the Host_Hardware
+   --  object is not placed in the .bss section. This is because our startup
+   --  code will change it before the .bss has been initialised.
+
+   Host_Hardware : Hardware_Type := Bare_Metal with
+     Export, External_Name => "__gnat_host_hardware";
+   --  The type of host we are running on. To be set by the target specific
+   --  startup code.
+
+   Host_Info : System.Address := System.Null_Address with
+     Export, External_Name => "__gnat_host_info";
+   --  Pointer to a data structure provided by the host on boot
 
    ------------------
    -- Helper Types --

@@ -41,7 +41,7 @@ class PikeOS(Target):
 
     def amend_rts(self, rts_profile, conf):
         super(PikeOS, self).amend_rts(rts_profile, conf)
-        if rts_profile == 'ravenscar-full':
+        if rts_profile == 'embedded':
             # Register ZCX frames (for pikeos-cert-app.c)
             conf.build_flags['c_flags'] += ['-DUSE_ZCX']
         if self.pikeos_version == 'pikeos3':
@@ -72,9 +72,9 @@ class ArmPikeOS(PikeOS):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-pikeos-arm.ads',
-            'ravenscar-sfp': 'system-pikeos-arm-ravenscar-sfp.ads',
-            'ravenscar-full': 'system-pikeos-arm-ravenscar-full.ads'
+            'light': 'system-pikeos-arm.ads',
+            'light-tasking': 'system-pikeos-arm-ravenscar-sfp.ads',
+            'embedded': 'system-pikeos-arm-embedded.ads'
         }
 
     def __init__(self):
@@ -104,9 +104,9 @@ class ArmPikeOS42(PikeOS):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-pikeos42-arm.ads',
-            'ravenscar-sfp': 'system-pikeos42-arm-ravenscar-sfp.ads',
-            'ravenscar-full': 'system-pikeos42-arm-ravenscar-full.ads'
+            'light': 'system-pikeos42-arm.ads',
+            'light-tasking': 'system-pikeos42-arm-ravenscar-sfp.ads',
+            'embedded': 'system-pikeos42-arm-embedded.ads'
         }
 
     def dump_runtime_xml(self, rts_name, rts):
@@ -139,9 +139,9 @@ class AArch64PikeOS5(PikeOS):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-pikeos5-aarch64.ads',
-            'ravenscar-sfp': 'system-pikeos5-aarch64-ravenscar-sfp.ads',
-            'ravenscar-full': 'system-pikeos5-aarch64-ravenscar-full.ads'
+            'light': 'system-pikeos5-aarch64.ads',
+            'light-tasking': 'system-pikeos5-aarch64-ravenscar-sfp.ads',
+            'embedded': 'system-pikeos5-aarch64-embedded.ads'
         }
 
     def dump_runtime_xml(self, rts_name, rts):
@@ -174,9 +174,9 @@ class ArmPikeOS5(PikeOS):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-pikeos5-arm.ads',
-            'ravenscar-sfp': 'system-pikeos5-arm-ravenscar-sfp.ads',
-            'ravenscar-full': 'system-pikeos5-arm-ravenscar-full.ads'
+            'light': 'system-pikeos5-arm.ads',
+            'light-tasking': 'system-pikeos5-arm-ravenscar-sfp.ads',
+            'embedded': 'system-pikeos5-arm-embedded.ads'
         }
 
     def dump_runtime_xml(self, rts_name, rts):
@@ -209,9 +209,9 @@ class PPCPikeOS5(PikeOS):
     @property
     def system_ads(self):
         return {
-            'zfp': 'system-pikeos5-ppc.ads',
-            'ravenscar-sfp': 'system-pikeos5-ppc-ravenscar-sfp.ads',
-            'ravenscar-full': 'system-pikeos5-ppc-ravenscar-full.ads'
+            'light': 'system-pikeos5-ppc.ads',
+            'light-tasking': 'system-pikeos5-ppc-ravenscar-sfp.ads',
+            'embedded': 'system-pikeos5-ppc-embedded.ads'
         }
 
     def dump_runtime_xml(self, rts_name, rts):

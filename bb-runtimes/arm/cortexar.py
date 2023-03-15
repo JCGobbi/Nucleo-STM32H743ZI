@@ -17,8 +17,7 @@ class CortexARArch(ArchSupport):
             'src/i-cache__armv7.adb')
         self.add_gnarl_sources(
             'src/s-bbcpsp__arm.ads',
-            'src/s-bbcppr__new.ads',
-            'src/s-bbcppr__arm.adb')
+            'src/s-bbcppr__new.ads')
 
 
 class CortexARTarget(DFBBTarget):
@@ -36,7 +35,7 @@ class CortexARTarget(DFBBTarget):
 
     def amend_rts(self, rts_profile, conf):
         super(CortexARTarget, self).amend_rts(rts_profile, conf)
-        if 'ravenscar' in rts_profile:
+        if 'embedded' in rts_profile or 'tasking' in rts_profile:
             # s-bbcppr.adb uses the r7 register during context switching: this
             # is not compatible with the use of frame pointers that is emited
             # at -O0 by gcc. Let's disable fp even at -O0.
@@ -78,9 +77,9 @@ class Rpi2Base(CortexARTarget):
 
     @property
     def system_ads(self):
-        return {'zfp': 'system-xi-arm.ads',
-                'ravenscar-sfp': 'system-xi-arm-sfp.ads',
-                'ravenscar-full': 'system-xi-arm-full.ads'}
+        return {'light': 'system-xi-arm.ads',
+                'light-tasking': 'system-xi-arm-sfp.ads',
+                'embedded': 'system-xi-arm-full.ads'}
 
     def __init__(self):
         super(Rpi2Base, self).__init__()
@@ -91,7 +90,8 @@ class Rpi2Base(CortexARTarget):
             'src/s-macres__rpi2.adb')
         self.add_gnarl_sources(
             'src/a-intnam__rpi2.ads',
-            'src/s-bbbosu__rpi2.adb')
+            'src/s-bbbosu__rpi2.adb',
+            'src/s-bbcppr__armv7r.adb')
 
 
 class Rpi2(Rpi2Base):
@@ -179,9 +179,9 @@ class TMS570(CortexARTarget):
 
     @property
     def system_ads(self):
-        return {'zfp': 'system-xi-arm.ads',
-                'ravenscar-sfp': 'system-xi-arm-sfp.ads',
-                'ravenscar-full': 'system-xi-arm-full.ads'}
+        return {'light': 'system-xi-arm.ads',
+                'light-tasking': 'system-xi-arm-sfp.ads',
+                'embedded': 'system-xi-arm-full.ads'}
 
     def add_linker_scripts(self):
         self.add_linker_script('arm/tms570/common.ld')
@@ -216,7 +216,8 @@ class TMS570(CortexARTarget):
             'src/a-intnam__%s.ads' % self.variant,
             'src/s-bbpara__%s.ads' % self.variant,
             'src/s-bbbosu__tms570.adb',
-            'src/s-bbsumu__generic.adb')
+            'src/s-bbsumu__generic.adb',
+            'src/s-bbcppr__armv7r.adb')
 
 
 class ZynqmpR5(CortexARTarget):
@@ -248,9 +249,9 @@ class ZynqmpR5(CortexARTarget):
 
     @property
     def system_ads(self):
-        return {'zfp': 'system-xi-arm.ads',
-                'ravenscar-sfp': 'system-xi-arm-gic-sfp.ads',
-                'ravenscar-full': 'system-xi-arm-gic-full.ads'}
+        return {'light': 'system-xi-arm.ads',
+                'light-tasking': 'system-xi-arm-gic-sfp.ads',
+                'embedded': 'system-xi-arm-gic-full.ads'}
 
     def add_linker_scripts(self):
         self.add_linker_script('arm/zynqmpr5/common.ld')
@@ -276,7 +277,8 @@ class ZynqmpR5(CortexARTarget):
             'src/s-armgic.ads', 'src/s-armgic.adb',
             'src/s-bbpara__zynqmpr5.ads',
             'src/s-bbbosu__zynqmpr5.adb',
-            'src/s-bbsumu__generic.adb')
+            'src/s-bbsumu__generic.adb',
+            'src/s-bbcppr__armv7r.adb')
 
 
 class Zynq7000(CortexARTarget):
@@ -310,20 +312,21 @@ class Zynq7000(CortexARTarget):
 
     @property
     def system_ads(self):
-        return {'zfp': 'system-xi-arm.ads',
-                'ravenscar-sfp': 'system-xi-arm-gic-sfp.ads',
-                'ravenscar-full': 'system-xi-arm-gic-full.ads'}
+        return {'light': 'system-xi-arm.ads',
+                'light-tasking': 'system-xi-arm-gic-sfp.ads',
+                'embedded': 'system-xi-arm-gic-full.ads'}
 
     def __init__(self):
         super(Zynq7000, self).__init__()
         self.add_linker_script('arm/zynq/ram.ld', loader='RAM')
         self.add_gnat_sources(
             'arm/zynq/start-ram.S',
-            'arm/zynq/memmap.S',
+            'arm/zynq/memmap.inc',
             'src/s-textio__zynq.adb',
             'src/s-macres__zynq.adb')
         self.add_gnarl_sources(
             'src/a-intnam__zynq.ads',
             'src/s-bbpara__cortexa9.ads',
             'src/s-armgic.ads', 'src/s-armgic.adb',
-            'src/s-bbbosu__cortexa9.adb')
+            'src/s-bbbosu__cortexa9.adb',
+            'src/s-bbcppr__arm.adb')

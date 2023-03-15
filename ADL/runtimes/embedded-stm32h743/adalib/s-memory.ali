@@ -1,0 +1,92 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/embedded-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_IMPLEMENTATION_ATTRIBUTES
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.memory%b	s-memory.adb		a7f7cbc6 NE OL PK
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W system%s		system.ads		system.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+
+U system.memory%s	s-memory.ads		0150dd85 EB NE OL PK
+W system%s		system.ads		system.ali
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-except.ads		20230315001224 2a7d8d70 ada.exceptions%s
+D a-unccon.ads		20230315001224 0e9b276f ada.unchecked_conversion%s
+D system.ads		20230315001224 5ad4ef55 system%s
+D s-memory.ads		20230315001224 5b8432d0 system.memory%s
+D s-memory.adb		20230315001224 df9e7846 system.memory%b
+D s-parame.ads		20230315001224 8e90778f system.parameters%s
+D s-soflin.ads		20230315001224 09900c20 system.soft_links%s
+D s-stalib.ads		20230315001224 1c9580f6 system.standard_library%s
+D s-traent.ads		20230315001224 c81cbf8c system.traceback_entries%s
+G a e
+G c Z s b [alloc system__memory 51 13 none]
+G c Z s b [free system__memory 66 14 none]
+G c Z s b [realloc system__memory 74 13 none]
+G c Z b b [c_malloc system__memory 47 13 none]
+G c Z b b [c_free system__memory 50 14 none]
+G c Z b b [c_realloc system__memory 53 13 none]
+X 1 ada.ads
+16K9*Ada 20e8 6|38r6 44r8
+X 2 a-except.ads
+44K13*Exceptions 295e19 6|38w10 44r12
+80U14*Raise_Exception 6|67s10 86s10 118s10 128s10
+X 4 system.ads
+50K9*System 164e11 5|43r9 51r42 66r26 75r14 76r29 105r5 6|40r6 42r14 45r8
+. 47r45 50r28 54r13 54r51 61r42 62r21 85r19 96r26 110r14 112r13 114r16 127r19
+. 134r5
+80M9*Address 5|51r49 66r33 75r21 76r36 6|47r52 50r35 54r20 54r58 61r49 62r28
+. 96r33 110r21 112r20 114r23
+82m4*Null_Address{80M9} 6|85r26 127r26
+94V14*"="{boolean} 6|85r17 127r17
+X 5 s-memory.ads
+43K16*Memory 4|50k9 5|101E31 105l12 105e18 6|42b21 134l12 134t18
+46M9*size_t 51r27 76r14 6|47r30 54r36 61r27 63r21 66r17 111r14 117r17
+51V13*Alloc{4|80M9} 51>20 101i<c,__gnat_malloc>22 6|61b13 90l8 90t13
+51m20 Size{46M9} 6|61b20 63r31 66r10 75r10
+66U14*Free 66>20 102i<c,__gnat_free>22 6|96b14 103l8 103t12
+66m20 Ptr{4|80M9} 6|96b20 100r15
+74V13*Realloc{4|80M9} 75>7 76>7 103i<c,__gnat_realloc>22 6|109b13 132l8 132t15
+75m7 Ptr{4|80M9} 6|110b7 123r28
+76m7 Size{46M9} 6|111b7 117r10 123r33
+X 6 s-memory.adb
+47V13 c_malloc{4|80M9} 47>23 48b<c,malloc>22 81s17
+47m23 Size{5|46M9}
+50U14 c_free 50>22 51b<c,free>22 100s7
+50m22 Ptr{4|80M9}
+53V13 c_realloc{4|80M9} 54>7 54>29 55b<c,realloc>22 123s17
+54m7 Ptr{4|80M9}
+54m29 Size{5|46M9}
+62m7 Result{4|80M9} 81m7 85r10 89r14
+63m7 Actual_Size{5|46M9} 76m10 81r27
+114m7 Result{4|80M9} 123m7 127r10 131r14
+X 8 s-soflin.ads
+45K16*Soft_Links 6|40w13 45r15 8|179e22
+55P9*No_Param_Proc
+88p4*Lock_Task{55P9} 6|79r7 98r7 121r7
+96p4*Unlock_Task{55P9} 6|83r7 102r7 125r7
+

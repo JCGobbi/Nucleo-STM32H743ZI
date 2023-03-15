@@ -1,0 +1,57 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/light-tasking-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.stack_checking%b  s-stache.adb		8599b27b NE OL PK
+W system%s		system.ads		system.ali
+
+U system.stack_checking%s  s-stache.ads		e9c0e7f1 EB NE OL PR PK
+W system%s		system.ads		system.ali
+W system.storage_elements%s  s-stoele.adb	s-stoele.ali
+
+D system.ads		20230315001224 8fcf39fb system%s
+D s-stache.ads		20230315001224 0b81c1fe system.stack_checking%s
+D s-stache.adb		20230315001224 8e187385 system.stack_checking%b
+D s-stoele.ads		20230315001224 6d8e1ff4 system.storage_elements%s
+G a e
+G c Z s s [stack_infoIP system__stack_checking 48 9 none]
+X 1 system.ads
+60K9*System 174e11 2|38r6 40r9 49r15 49r33 50r15 50r33 51r15 71r16 72r16
+. 80r5 3|35r14 36r5
+90M9*Address 2|49r22 50r22
+92m4*Null_Address{90M9} 2|49r40 50r40 71r23 72r23
+X 2 s-stache.ads
+40K16*Stack_Checking 1|60k9 2|70E4 80l12 80e26 3|35b21 36l12 36t26
+48R9*Stack_Info 52e14 58r36 70r31
+49m7*Limit{1|90M9} 71m7
+50m7*Base{1|90M9} 72m7
+51i7*Size{4|52I9} 73m7
+58P9*Stack_Access(48R9) 76r26
+66b4*Multi_Processor{boolean}
+70r4 Null_Stack_Info{48R9} 76m42 76r42
+76p4 Null_Stack{58P9}
+X 4 s-stoele.ads
+40K16*Storage_Elements 2|38w13 51r22 4|114e28
+52I9*Storage_Offset<integer> 2|51r39
+

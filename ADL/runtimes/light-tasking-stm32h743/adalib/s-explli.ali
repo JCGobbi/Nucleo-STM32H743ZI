@@ -1,0 +1,67 @@
+V "GNAT Lib v12"
+A -nostdinc
+A -O2
+A -gnatA
+A --RTS=/run/media/julio/Dados/Workspace/GitHub/Nucleo-STM32H743ZI/bb-runtimes/runtimes/light-tasking-stm32h743/
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m7
+A -mfpu=fpv5-d16
+A -mthumb
+A -gnatg
+A -fno-delete-null-pointer-checks
+A -gnatp
+A -gnatn2
+A -fcallgraph-info=su,da
+A -ffunction-sections
+A -fdata-sections
+A -mlibarch=armv7e-m+fp.dp
+A -march=armv7e-m+fp.dp
+P DB ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTIONS
+RV NO_LONG_LONG_INTEGERS
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U system.exp_lli%s	s-explli.ads		178c747d NE OL PK
+W ada%s			ada.ads			ada.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.big_numbers%s  a-nubinu.ads	a-nubinu.ali
+W system%s		system.ads		system.ali
+W system.expont%s
+
+D ada.ads		20230315001224 76789da1 ada%s
+D a-numeri.ads		20230315001224 84bea7a3 ada.numerics%s
+D a-nubinu.ads		20230315001224 93f1f3d1 ada.numerics.big_numbers%s
+D a-nbnbig.ads		20230315001224 511b9bab ada.numerics.big_numbers.big_integers_ghost%s
+D a-nbnbig.adb		20230315001224 e7f9abf0 ada.numerics.big_numbers.big_integers_ghost%b
+D system.ads		20230315001224 8fcf39fb system%s
+D s-explli.ads		20230315001224 867f08b6 system.exp_lli%s
+D s-expont.ads		20230315001224 1e3c4530 system.expont%s
+D s-expont.adb		20230315001224 646292ac system.expont%b
+G a e
+G c Z s s [to_big_integer system__exp_lli__expont_integer__signed_conversion 104 16 56_4_51_4]
+G c Z s s [from_big_integer system__exp_lli__expont_integer__signed_conversion 108 16 56_4_51_4]
+G c Z s s [big system__exp_lli__expont_integer 58 13 51_4]
+G c Z s s [in_int_range system__exp_lli__expont_integer 62 13 51_4]
+G c Z s s [expon system__exp_lli__expont_integer 66 13 51_4]
+G c Z s s [lemma_exp_expand system__exp_lli__expont_integer 49 14 51_4]
+G c Z s s [lemma_exp_in_range system__exp_lli__expont_integer 59 14 51_4]
+G c Z s s [lemma_exp_not_zero system__exp_lli__expont_integer 65 14 51_4]
+G c Z s s [lemma_exp_positive system__exp_lli__expont_integer 71 14 51_4]
+G c Z s s [lemma_mult_in_range system__exp_lli__expont_integer 78 14 51_4]
+X 6 system.ads
+60K9*System 174e11 7|45r6 47r9 57r5
+X 7 s-explli.ads
+47K16*Exp_LLI 6|60k9 7|57l12 57e19
+51K12*Expont_Integer[8|41] 55r14
+53V13*Exp_Long_Long_Integer=55:29{long_long_integer}
+54i7 Left{long_long_integer}
+54i33 Right{natural}
+X 8 s-expont.ads
+41k16*Expont 7|45w13 51r34 8|71e18
+66V13*Expon{long_long_integer} 7|55r29[51]
+
