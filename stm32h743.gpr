@@ -29,7 +29,10 @@ project STM32H743 is
 
    package Builder is
       for Global_Configuration_Pragmas use "gnat.adc";
-      for Executable("main.adb") use "main";
+      for Executable ("test_led_pwm.adb") use "led_pwm";
+      for Executable ("test_led_rt.adb") use "led_rt";
+      for Executable ("demo_inverter.adb") use "demo_inverter";
+      for Executable ("main.adb") use "inverter";
       for Executable_Suffix use ".elf";
    end Builder;
 
