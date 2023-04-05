@@ -112,8 +112,6 @@ package STM32.ADC is
 
    function Enabled (This : Analog_To_Digital_Converter) return Boolean;
 
-   function Disabled (This : Analog_To_Digital_Converter) return Boolean;
-
    type ADC_Resolution is
      (ADC_Resolution_16_Bits,
       ADC_Resolution_14_Bits, --  Devices revision Y, legacy for revision V
@@ -376,7 +374,7 @@ package STM32.ADC is
    --  Starts the conversion(s) for the regular channels.
 
    procedure Stop_Conversion (This : in out Analog_To_Digital_Converter) with
-     Pre => Conversion_Started (This) and not Disabled (This);
+     Pre => Conversion_Started (This) and Enabled (This);
    --  Stops the conversion(s) for the regular channels.
 
    function Conversion_Started (This : Analog_To_Digital_Converter)
