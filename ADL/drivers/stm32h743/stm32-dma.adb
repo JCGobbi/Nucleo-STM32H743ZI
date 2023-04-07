@@ -42,7 +42,8 @@
 with Ada.Unchecked_Conversion;
 with System.Storage_Elements;
 
-with STM32_SVD.DMA; use STM32_SVD.DMA;
+with STM32_SVD.DMA;    use STM32_SVD.DMA;
+with STM32_SVD.DMAMUX; use STM32_SVD.DMAMUX;
 
 package body STM32.DMA is
 
@@ -834,9 +835,47 @@ package body STM32.DMA is
    is
    begin
       if Get_Stream (This, Stream).CR.EN = True then
-         return DMA_Channel_Selector'Val (DMA_Stream_Selector'Pos (Stream));
+         if This'Address = DMA1_Periph'Address then
+            case Stream is
+               when Stream_1 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C0CR.DMAREQ_ID);
+               when Stream_2 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C1CR.DMAREQ_ID);
+               when Stream_3 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C2CR.DMAREQ_ID);
+               when Stream_4 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C3CR.DMAREQ_ID);
+               when Stream_5 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C4CR.DMAREQ_ID);
+               when Stream_6 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C5CR.DMAREQ_ID);
+               when Stream_7 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C6CR.DMAREQ_ID);
+               when Stream_8 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C7CR.DMAREQ_ID);
+            end case;
+         elsif This'Address = DMA2_Periph'Address then
+            case Stream is
+               when Stream_1 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C8CR.DMAREQ_ID);
+               when Stream_2 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C9CR.DMAREQ_ID);
+               when Stream_3 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C10CR.DMAREQ_ID);
+               when Stream_4 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C11CR.DMAREQ_ID);
+               when Stream_5 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C12CR.DMAREQ_ID);
+               when Stream_6 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C13CR.DMAREQ_ID);
+               when Stream_7 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C14CR.DMAREQ_ID);
+               when Stream_8 =>
+                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C15CR.DMAREQ_ID);
+            end case;
+         end if;
       end if;
-      return Channel_0;
+      return DMA_Channel_Selector'First;
    end Selected_Channel;
 
    --------------------
@@ -886,6 +925,46 @@ package body STM32.DMA is
 
       This_Stream.CR.EN := True;
 
+      if This'Address = DMA1_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C0CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_2 =>
+               DMAMUX1_Periph.C1CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_3 =>
+               DMAMUX1_Periph.C2CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_4 =>
+               DMAMUX1_Periph.C3CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_5 =>
+               DMAMUX1_Periph.C4CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_6 =>
+               DMAMUX1_Periph.C5CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_7 =>
+               DMAMUX1_Periph.C6CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_8 =>
+               DMAMUX1_Periph.C7CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+         end case;
+      elsif This'Address = DMA2_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C8CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_2 =>
+               DMAMUX1_Periph.C9CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_3 =>
+               DMAMUX1_Periph.C10CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_4 =>
+               DMAMUX1_Periph.C11CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_5 =>
+               DMAMUX1_Periph.C12CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_6 =>
+               DMAMUX1_Periph.C13CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_7 =>
+               DMAMUX1_Periph.C14CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+            when Stream_8 =>
+               DMAMUX1_Periph.C15CR.DMAREQ_ID := Config.Channel'Enum_Rep;
+         end case;
+      end if;
+
       This_Stream.CR.DIR := Config.Direction'Enum_Rep;
 
       This_Stream.CR.PINC := Config.Increment_Peripheral_Address;
@@ -929,5 +1008,608 @@ package body STM32.DMA is
             return True;
       end case;
    end Aligned;
+
+   --------------------------------
+   -- Set_DMAMUX_Synchronization --
+   --------------------------------
+
+   procedure Set_DMAMUX_Synchronization
+     (This    : DMA_Controller;
+      Stream  : DMA_Stream_Selector;
+      Enabled : Boolean)
+   is
+   begin
+      if This'Address = DMA1_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C0CR.SE := Enabled;
+            when Stream_2 =>
+               DMAMUX1_Periph.C1CR.SE := Enabled;
+            when Stream_3 =>
+               DMAMUX1_Periph.C2CR.SE := Enabled;
+            when Stream_4 =>
+               DMAMUX1_Periph.C3CR.SE := Enabled;
+            when Stream_5 =>
+               DMAMUX1_Periph.C4CR.SE := Enabled;
+            when Stream_6 =>
+               DMAMUX1_Periph.C5CR.SE := Enabled;
+            when Stream_7 =>
+               DMAMUX1_Periph.C6CR.SE := Enabled;
+            when Stream_8 =>
+               DMAMUX1_Periph.C7CR.SE := Enabled;
+         end case;
+      elsif This'Address = DMA2_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C8CR.SE := Enabled;
+            when Stream_2 =>
+               DMAMUX1_Periph.C9CR.SE := Enabled;
+            when Stream_3 =>
+               DMAMUX1_Periph.C10CR.SE := Enabled;
+            when Stream_4 =>
+               DMAMUX1_Periph.C11CR.SE := Enabled;
+            when Stream_5 =>
+               DMAMUX1_Periph.C12CR.SE := Enabled;
+            when Stream_6 =>
+               DMAMUX1_Periph.C13CR.SE := Enabled;
+            when Stream_7 =>
+               DMAMUX1_Periph.C14CR.SE := Enabled;
+            when Stream_8 =>
+               DMAMUX1_Periph.C15CR.SE := Enabled;
+         end case;
+      end if;
+   end Set_DMAMUX_Synchronization;
+
+   ------------------------------------
+   -- DMAMUX_Synchronization_Enabled --
+   ------------------------------------
+
+   function DMAMUX_Synchronization_Enabled
+     (This    : DMA_Controller;
+      Stream  : DMA_Stream_Selector) return Boolean
+   is
+   begin
+      if This'Address = DMA1_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               return DMAMUX1_Periph.C0CR.SE;
+            when Stream_2 =>
+               return DMAMUX1_Periph.C1CR.SE;
+            when Stream_3 =>
+               return DMAMUX1_Periph.C2CR.SE;
+            when Stream_4 =>
+               return DMAMUX1_Periph.C3CR.SE;
+            when Stream_5 =>
+               return DMAMUX1_Periph.C4CR.SE;
+            when Stream_6 =>
+               return DMAMUX1_Periph.C5CR.SE;
+            when Stream_7 =>
+               return DMAMUX1_Periph.C6CR.SE;
+            when Stream_8 =>
+               return DMAMUX1_Periph.C7CR.SE;
+         end case;
+      else --  This'Address = DMA2_Periph'Address
+         case Stream is
+            when Stream_1 =>
+               return DMAMUX1_Periph.C8CR.SE;
+            when Stream_2 =>
+               return DMAMUX1_Periph.C9CR.SE;
+            when Stream_3 =>
+               return DMAMUX1_Periph.C10CR.SE;
+            when Stream_4 =>
+               return DMAMUX1_Periph.C11CR.SE;
+            when Stream_5 =>
+               return DMAMUX1_Periph.C12CR.SE;
+            when Stream_6 =>
+               return DMAMUX1_Periph.C13CR.SE;
+            when Stream_7 =>
+               return DMAMUX1_Periph.C14CR.SE;
+            when Stream_8 =>
+               return DMAMUX1_Periph.C15CR.SE;
+         end case;
+      end if;
+   end DMAMUX_Synchronization_Enabled;
+
+   ----------------------
+   -- Set_DMAMUX_Event --
+   ----------------------
+
+   procedure Set_DMAMUX_Event
+     (This    : DMA_Controller;
+      Stream  : DMA_Stream_Selector;
+      Enabled : Boolean)
+   is
+   begin
+      if This'Address = DMA1_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C0CR.EGE := Enabled;
+            when Stream_2 =>
+               DMAMUX1_Periph.C1CR.EGE := Enabled;
+            when Stream_3 =>
+               DMAMUX1_Periph.C2CR.EGE := Enabled;
+            when Stream_4 =>
+               DMAMUX1_Periph.C3CR.EGE := Enabled;
+            when Stream_5 =>
+               DMAMUX1_Periph.C4CR.EGE := Enabled;
+            when Stream_6 =>
+               DMAMUX1_Periph.C5CR.EGE := Enabled;
+            when Stream_7 =>
+               DMAMUX1_Periph.C6CR.EGE := Enabled;
+            when Stream_8 =>
+               DMAMUX1_Periph.C7CR.EGE := Enabled;
+         end case;
+      elsif This'Address = DMA2_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C8CR.EGE := Enabled;
+            when Stream_2 =>
+               DMAMUX1_Periph.C9CR.EGE := Enabled;
+            when Stream_3 =>
+               DMAMUX1_Periph.C10CR.EGE := Enabled;
+            when Stream_4 =>
+               DMAMUX1_Periph.C11CR.EGE := Enabled;
+            when Stream_5 =>
+               DMAMUX1_Periph.C12CR.EGE := Enabled;
+            when Stream_6 =>
+               DMAMUX1_Periph.C13CR.EGE := Enabled;
+            when Stream_7 =>
+               DMAMUX1_Periph.C14CR.EGE := Enabled;
+            when Stream_8 =>
+               DMAMUX1_Periph.C15CR.EGE := Enabled;
+         end case;
+      end if;
+   end Set_DMAMUX_Event;
+
+   --------------------------
+   -- DMAMUX_Event_Enabled --
+   --------------------------
+
+   function DMAMUX_Event_Enabled
+     (This    : DMA_Controller;
+      Stream  : DMA_Stream_Selector) return Boolean
+   is
+   begin
+      if This'Address = DMA1_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               return DMAMUX1_Periph.C0CR.EGE;
+            when Stream_2 =>
+               return DMAMUX1_Periph.C1CR.EGE;
+            when Stream_3 =>
+               return DMAMUX1_Periph.C2CR.EGE;
+            when Stream_4 =>
+               return DMAMUX1_Periph.C3CR.EGE;
+            when Stream_5 =>
+               return DMAMUX1_Periph.C4CR.EGE;
+            when Stream_6 =>
+               return DMAMUX1_Periph.C5CR.EGE;
+            when Stream_7 =>
+               return DMAMUX1_Periph.C6CR.EGE;
+            when Stream_8 =>
+               return DMAMUX1_Periph.C7CR.EGE;
+         end case;
+      else --  This'Address = DMA2_Periph'Address
+         case Stream is
+            when Stream_1 =>
+               return DMAMUX1_Periph.C8CR.EGE;
+            when Stream_2 =>
+               return DMAMUX1_Periph.C9CR.EGE;
+            when Stream_3 =>
+               return DMAMUX1_Periph.C10CR.EGE;
+            when Stream_4 =>
+               return DMAMUX1_Periph.C11CR.EGE;
+            when Stream_5 =>
+               return DMAMUX1_Periph.C12CR.EGE;
+            when Stream_6 =>
+               return DMAMUX1_Periph.C13CR.EGE;
+            when Stream_7 =>
+               return DMAMUX1_Periph.C14CR.EGE;
+            when Stream_8 =>
+               return DMAMUX1_Periph.C15CR.EGE;
+         end case;
+      end if;
+   end DMAMUX_Event_Enabled;
+
+   --------------------------------------
+   -- Configure_DMAMUX_Synchronization --
+   --------------------------------------
+
+   procedure Configure_DMAMUX_Synchronization
+     (This   : DMA_Controller;
+      Stream : DMA_Stream_Selector;
+      Config : DMAMUX_Synchronization_Configuration)
+   is
+   begin
+      if This'Address = DMA1_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C0CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C0CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C0CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_2 =>
+               DMAMUX1_Periph.C1CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C1CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C1CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_3 =>
+               DMAMUX1_Periph.C2CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C2CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C2CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_4 =>
+               DMAMUX1_Periph.C3CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C3CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C3CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_5 =>
+               DMAMUX1_Periph.C4CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C4CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C4CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_6 =>
+               DMAMUX1_Periph.C5CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C5CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C5CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_7 =>
+               DMAMUX1_Periph.C6CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C6CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C6CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_8 =>
+               DMAMUX1_Periph.C7CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C7CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C7CR.NBREQ := Config.DMA_Req'Enum_Rep;
+         end case;
+      elsif This'Address = DMA2_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C8CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C8CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C8CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_2 =>
+               DMAMUX1_Periph.C9CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C9CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C9CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_3 =>
+               DMAMUX1_Periph.C10CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C10CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C10CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_4 =>
+               DMAMUX1_Periph.C11CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C11CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C11CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_5 =>
+               DMAMUX1_Periph.C12CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C12CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C12CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_6 =>
+               DMAMUX1_Periph.C13CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C13CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C13CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_7 =>
+               DMAMUX1_Periph.C14CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C14CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C14CR.NBREQ := Config.DMA_Req'Enum_Rep;
+            when Stream_8 =>
+               DMAMUX1_Periph.C15CR.SYNC_ID := Config.Input'Enum_Rep;
+               DMAMUX1_Periph.C15CR.SPOL := Config.Polarity'Enum_Rep;
+               DMAMUX1_Periph.C15CR.NBREQ := Config.DMA_Req'Enum_Rep;
+         end case;
+      end if;
+   end Configure_DMAMUX_Synchronization;
+
+   -------------------------------------------
+   -- Set_Synchronization_Overrun_Interrupt --
+   -------------------------------------------
+
+   procedure Set_Synchronization_Overrun_Interrupt
+     (This    : DMA_Controller;
+      Stream  : DMA_Stream_Selector;
+      Enabled : Boolean)
+   is
+   begin
+      if This'Address = DMA1_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C0CR.SOIE := Enabled;
+            when Stream_2 =>
+               DMAMUX1_Periph.C1CR.SOIE := Enabled;
+            when Stream_3 =>
+               DMAMUX1_Periph.C2CR.SOIE := Enabled;
+            when Stream_4 =>
+               DMAMUX1_Periph.C3CR.SOIE := Enabled;
+            when Stream_5 =>
+               DMAMUX1_Periph.C4CR.SOIE := Enabled;
+            when Stream_6 =>
+               DMAMUX1_Periph.C5CR.SOIE := Enabled;
+            when Stream_7 =>
+               DMAMUX1_Periph.C6CR.SOIE := Enabled;
+            when Stream_8 =>
+               DMAMUX1_Periph.C7CR.SOIE := Enabled;
+         end case;
+      elsif This'Address = DMA2_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               DMAMUX1_Periph.C8CR.SOIE := Enabled;
+            when Stream_2 =>
+               DMAMUX1_Periph.C9CR.SOIE := Enabled;
+            when Stream_3 =>
+               DMAMUX1_Periph.C10CR.SOIE := Enabled;
+            when Stream_4 =>
+               DMAMUX1_Periph.C11CR.SOIE := Enabled;
+            when Stream_5 =>
+               DMAMUX1_Periph.C12CR.SOIE := Enabled;
+            when Stream_6 =>
+               DMAMUX1_Periph.C13CR.SOIE := Enabled;
+            when Stream_7 =>
+               DMAMUX1_Periph.C14CR.SOIE := Enabled;
+            when Stream_8 =>
+               DMAMUX1_Periph.C15CR.SOIE := Enabled;
+         end case;
+      end if;
+   end Set_Synchronization_Overrun_Interrupt;
+
+   -----------------------------------------------
+   -- Synchronization_Overrun_Interrupt_Enabled --
+   -----------------------------------------------
+
+   function Synchronization_Overrun_Interrupt_Enabled
+     (This   : DMA_Controller;
+      Stream : DMA_Stream_Selector)
+      return Boolean
+   is
+   begin
+      if This'Address = DMA1_Periph'Address then
+         case Stream is
+            when Stream_1 =>
+               return DMAMUX1_Periph.C0CR.SOIE;
+            when Stream_2 =>
+               return DMAMUX1_Periph.C1CR.SOIE;
+            when Stream_3 =>
+               return DMAMUX1_Periph.C2CR.SOIE;
+            when Stream_4 =>
+               return DMAMUX1_Periph.C3CR.SOIE;
+            when Stream_5 =>
+               return DMAMUX1_Periph.C4CR.SOIE;
+            when Stream_6 =>
+               return DMAMUX1_Periph.C5CR.SOIE;
+            when Stream_7 =>
+               return DMAMUX1_Periph.C6CR.SOIE;
+            when Stream_8 =>
+               return DMAMUX1_Periph.C7CR.SOIE;
+         end case;
+      else --  This'Address = DMA2_Periph'Address
+         case Stream is
+            when Stream_1 =>
+               return DMAMUX1_Periph.C8CR.SOIE;
+            when Stream_2 =>
+               return DMAMUX1_Periph.C9CR.SOIE;
+            when Stream_3 =>
+               return DMAMUX1_Periph.C10CR.SOIE;
+            when Stream_4 =>
+               return DMAMUX1_Periph.C11CR.SOIE;
+            when Stream_5 =>
+               return DMAMUX1_Periph.C12CR.SOIE;
+            when Stream_6 =>
+               return DMAMUX1_Periph.C13CR.SOIE;
+            when Stream_7 =>
+               return DMAMUX1_Periph.C14CR.SOIE;
+            when Stream_8 =>
+               return DMAMUX1_Periph.C15CR.SOIE;
+         end case;
+      end if;
+   end Synchronization_Overrun_Interrupt_Enabled;
+
+   ------------------------------------
+   -- Synchronization_Overrun_Status --
+   ------------------------------------
+
+   function Synchronization_Overrun_Status
+     (This   : DMA_Controller;
+      Stream : DMA_Stream_Selector)
+      return Boolean
+   is
+   begin
+      if This'Address = DMA1_Periph'Address then
+         return Boolean'Val (DMAMUX1_Periph.CSR.SOF and 2 ** Stream'Enum_Rep);
+      else --  This'Address = DMA2_Periph'Address
+         return Boolean'Val (DMAMUX1_Periph.CSR.SOF and Shift_Left (2 ** Stream'Enum_Rep, 8));
+      end if;
+   end Synchronization_Overrun_Status;
+
+   ------------------------------------------
+   -- Clear_Synchronization_Overrun_Status --
+   ------------------------------------------
+
+   procedure Clear_Synchronization_Overrun_Status
+     (This   : DMA_Controller;
+      Stream : DMA_Stream_Selector)
+   is
+   begin
+      if This'Address = DMA1_Periph'Address then
+         DMAMUX1_Periph.CFR.CSOF := DMAMUX1_Periph.CFR.CSOF or 2 ** Stream'Enum_Rep;
+      else --  This'Address = DMA2_Periph'Address
+         DMAMUX1_Periph.CFR.CSOF := DMAMUX1_Periph.CFR.CSOF or Shift_Left (2 ** Stream'Enum_Rep, 8);
+      end if;
+   end Clear_Synchronization_Overrun_Status;
+
+   ----------------------------------
+   -- Set_DMAMUX_Request_Generator --
+   ----------------------------------
+
+   procedure Set_DMAMUX_Request_Generator
+     (Channel : DMAMUX_Req_Gen_Channel;
+      Enabled   : Boolean)
+   is
+   begin
+      case Channel is
+         when Channel_1 =>
+            DMAMUX1_Periph.RG0CR.GE := Enabled;
+         when Channel_2 =>
+            DMAMUX1_Periph.RG1CR.GE := Enabled;
+         when Channel_3 =>
+            DMAMUX1_Periph.RG2CR.GE := Enabled;
+         when Channel_4 =>
+            DMAMUX1_Periph.RG3CR.GE := Enabled;
+         when Channel_5 =>
+            DMAMUX1_Periph.RG4CR.GE := Enabled;
+         when Channel_6 =>
+            DMAMUX1_Periph.RG5CR.GE := Enabled;
+         when Channel_7 =>
+            DMAMUX1_Periph.RG6CR.GE := Enabled;
+         when Channel_8 =>
+            DMAMUX1_Periph.RG7CR.GE := Enabled;
+      end case;
+   end Set_DMAMUX_Request_Generator;
+
+   --------------------------------------
+   -- DMAMUX_Request_Generator_Enabled --
+   --------------------------------------
+
+   function DMAMUX_Request_Generator_Enabled
+     (Channel : DMAMUX_Req_Gen_Channel) return Boolean
+   is
+   begin
+      case Channel is
+         when Channel_1 =>
+            return DMAMUX1_Periph.RG0CR.GE;
+         when Channel_2 =>
+            return DMAMUX1_Periph.RG1CR.GE;
+         when Channel_3 =>
+            return DMAMUX1_Periph.RG2CR.GE;
+         when Channel_4 =>
+            return DMAMUX1_Periph.RG3CR.GE;
+         when Channel_5 =>
+            return DMAMUX1_Periph.RG4CR.GE;
+         when Channel_6 =>
+            return DMAMUX1_Periph.RG5CR.GE;
+         when Channel_7 =>
+            return DMAMUX1_Periph.RG6CR.GE;
+         when Channel_8 =>
+            return DMAMUX1_Periph.RG7CR.GE;
+      end case;
+   end DMAMUX_Request_Generator_Enabled;
+
+   ----------------------------------------
+   -- Configure_DMAMUX_Request_Generator --
+   ----------------------------------------
+
+   procedure Configure_DMAMUX_Request_Generator
+     (Channel : DMAMUX_Req_Gen_Channel;
+      Config  : DMAMUX_Req_Gen_Configuration)
+   is
+   begin
+      case Channel is
+         when Channel_1 =>
+            DMAMUX1_Periph.RG0CR.SIG_ID := Config.Input'Enum_Rep;
+            DMAMUX1_Periph.RG0CR.GPOL := Config.Polarity'Enum_Rep;
+            DMAMUX1_Periph.RG0CR.GNBREQ := Config.DMA_Req'Enum_Rep;
+         when Channel_2 =>
+            DMAMUX1_Periph.RG1CR.SIG_ID := Config.Input'Enum_Rep;
+            DMAMUX1_Periph.RG1CR.GPOL := Config.Polarity'Enum_Rep;
+            DMAMUX1_Periph.RG1CR.GNBREQ := Config.DMA_Req'Enum_Rep;
+         when Channel_3 =>
+            DMAMUX1_Periph.RG2CR.SIG_ID := Config.Input'Enum_Rep;
+            DMAMUX1_Periph.RG2CR.GPOL := Config.Polarity'Enum_Rep;
+            DMAMUX1_Periph.RG2CR.GNBREQ := Config.DMA_Req'Enum_Rep;
+         when Channel_4 =>
+            DMAMUX1_Periph.RG3CR.SIG_ID := Config.Input'Enum_Rep;
+            DMAMUX1_Periph.RG3CR.GPOL := Config.Polarity'Enum_Rep;
+            DMAMUX1_Periph.RG3CR.GNBREQ := Config.DMA_Req'Enum_Rep;
+         when Channel_5 =>
+            DMAMUX1_Periph.RG4CR.SIG_ID := Config.Input'Enum_Rep;
+            DMAMUX1_Periph.RG4CR.GPOL := Config.Polarity'Enum_Rep;
+            DMAMUX1_Periph.RG4CR.GNBREQ := Config.DMA_Req'Enum_Rep;
+         when Channel_6 =>
+            DMAMUX1_Periph.RG5CR.SIG_ID := Config.Input'Enum_Rep;
+            DMAMUX1_Periph.RG5CR.GPOL := Config.Polarity'Enum_Rep;
+            DMAMUX1_Periph.RG5CR.GNBREQ := Config.DMA_Req'Enum_Rep;
+         when Channel_7 =>
+            DMAMUX1_Periph.RG6CR.SIG_ID := Config.Input'Enum_Rep;
+            DMAMUX1_Periph.RG6CR.GPOL := Config.Polarity'Enum_Rep;
+            DMAMUX1_Periph.RG6CR.GNBREQ := Config.DMA_Req'Enum_Rep;
+         when Channel_8 =>
+            DMAMUX1_Periph.RG7CR.SIG_ID := Config.Input'Enum_Rep;
+            DMAMUX1_Periph.RG7CR.GPOL := Config.Polarity'Enum_Rep;
+            DMAMUX1_Periph.RG7CR.GNBREQ := Config.DMA_Req'Enum_Rep;
+      end case;
+   end Configure_DMAMUX_Request_Generator;
+
+   -----------------------------------
+   -- Set_Trigger_Overrun_Interrupt --
+   -----------------------------------
+
+   procedure Set_Trigger_Overrun_Interrupt
+     (Channel : DMAMUX_Req_Gen_Channel;
+      Enabled : Boolean)
+   is
+   begin
+      case Channel is
+         when Channel_1 =>
+            DMAMUX1_Periph.RG0CR.OIE := Enabled;
+         when Channel_2 =>
+            DMAMUX1_Periph.RG1CR.OIE := Enabled;
+         when Channel_3 =>
+            DMAMUX1_Periph.RG2CR.OIE := Enabled;
+         when Channel_4 =>
+            DMAMUX1_Periph.RG3CR.OIE := Enabled;
+         when Channel_5 =>
+            DMAMUX1_Periph.RG4CR.OIE := Enabled;
+         when Channel_6 =>
+            DMAMUX1_Periph.RG5CR.OIE := Enabled;
+         when Channel_7 =>
+            DMAMUX1_Periph.RG6CR.OIE := Enabled;
+         when Channel_8 =>
+            DMAMUX1_Periph.RG7CR.OIE := Enabled;
+      end case;
+   end Set_Trigger_Overrun_Interrupt;
+
+   ---------------------------------------
+   -- Trigger_Overrun_Interrupt_Enabled --
+   ---------------------------------------
+
+   function Trigger_Overrun_Interrupt_Enabled
+     (Channel : DMAMUX_Req_Gen_Channel)
+      return Boolean
+   is
+   begin
+      case Channel is
+         when Channel_1 =>
+            return DMAMUX1_Periph.RG0CR.OIE;
+         when Channel_2 =>
+            return DMAMUX1_Periph.RG1CR.OIE;
+         when Channel_3 =>
+            return DMAMUX1_Periph.RG2CR.OIE;
+         when Channel_4 =>
+            return DMAMUX1_Periph.RG3CR.OIE;
+         when Channel_5 =>
+            return DMAMUX1_Periph.RG4CR.OIE;
+         when Channel_6 =>
+            return DMAMUX1_Periph.RG5CR.OIE;
+         when Channel_7 =>
+            return DMAMUX1_Periph.RG6CR.OIE;
+         when Channel_8 =>
+            return DMAMUX1_Periph.RG7CR.OIE;
+      end case;
+   end Trigger_Overrun_Interrupt_Enabled;
+
+   ----------------------------
+   -- Trigger_Overrun_Status --
+   ----------------------------
+
+   function Trigger_Overrun_Status
+     (Channel : DMAMUX_Req_Gen_Channel)
+      return Boolean
+   is
+   begin
+      return Boolean'Val (DMAMUX1_Periph.RGSR.OF_k and 2 ** Channel'Enum_Rep);
+   end Trigger_Overrun_Status;
+
+   ----------------------------------
+   -- Clear_Trigger_Overrun_Status --
+   ----------------------------------
+
+   procedure Clear_Trigger_Overrun_Status
+     (Channel : DMAMUX_Req_Gen_Channel)
+   is
+   begin
+      DMAMUX1_Periph.RGCFR.COF := DMAMUX1_Periph.RGCFR.COF or 2 ** Channel'Enum_Rep;
+   end Clear_Trigger_Overrun_Status;
 
 end STM32.DMA;
