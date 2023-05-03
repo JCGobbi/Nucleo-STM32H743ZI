@@ -178,9 +178,10 @@ package body STM32.HRTimers is
    -- Current_Prescaler --
    -----------------------
 
-   function Current_Prescaler (This : HRTimer_Master) return UInt16 is
+   function Current_Prescaler (This : HRTimer_Master) return HRTimer_Prescaler
+   is
    begin
-      return HRTimer_Prescaler_Value (HRTimer_Prescaler'Val (This.MCR.CKPSC));
+      return HRTimer_Prescaler'Val (This.MCR.CKPSC);
    end Current_Prescaler;
 
    -------------------------------------
@@ -315,12 +316,12 @@ package body STM32.HRTimers is
       fHRCK := Hardware_Frequency * 32;
 
       --  We use a numeric prescaler value to calculate the Hardware_Frequency
-      --  division considering that the clock prescaler is a power of 2 of this
-      --  value, as are the HRTimer_Prescaler discrete values.
+      --  division considering that this counter can be greater then the last
+      --  HRTimer_Prescaler'Enum_Rep.
       Prescaler_Enum := 0;
       loop
          --  Compute the Counter's clock
-         CK_CNT := fHRCK / UInt32 (2**Integer (Prescaler_Enum));
+         CK_CNT := fHRCK / UInt32 (2 ** Natural (Prescaler_Enum));
          --  Determine the CK_CNT periods to achieve the requested frequency
          Period := CK_CNT / Requested_Frequency;
 
@@ -849,9 +850,10 @@ package body STM32.HRTimers is
    -- Current_Prescaler --
    -----------------------
 
-   function Current_Prescaler (This : HRTimer_Channel) return UInt16 is
+   function Current_Prescaler (This : HRTimer_Channel) return HRTimer_Prescaler
+   is
    begin
-      return HRTimer_Prescaler_Value (HRTimer_Prescaler'Val (This.TIMxCR.CKPSCx));
+      return HRTimer_Prescaler'Val (This.TIMxCR.CKPSCx);
    end Current_Prescaler;
 
    -----------------------
@@ -1023,12 +1025,12 @@ package body STM32.HRTimers is
       fHRCK := Hardware_Frequency;
 
       --  We use a numeric prescaler value to calculate the Hardware_Frequency
-      --  division considering that the clock prescaler is a power of 2 of this
-      --  value, as are the HRTimer_Prescaler discrete values.
+      --  division considering that this counter can be greater then the last
+      --  HRTimer_Prescaler'Enum_Rep.
       Prescaler_Enum := 0;
       loop
          --  Compute the Counter's clock
-         CK_CNT := fHRCK / UInt32 (2**Integer (Prescaler_Enum));
+         CK_CNT := fHRCK / UInt32 (2 ** Natural (Prescaler_Enum));
          --  Determine the CK_CNT periods to achieve the requested frequency
          Period := CK_CNT / Requested_Frequency;
 
@@ -3019,20 +3021,16 @@ package body STM32.HRTimers is
    ----------------------------------
 
    procedure Configure_Burst_Mode_Trigger
-     (Triggers : Burst_Mode_Trigger_List;
-      Enable   : Boolean)
+     (Trigger : Burst_Mode_Trigger_Event;
+      Enabled : Boolean)
    is
    begin
-      if Enable then
-         for Trigger of Triggers loop
-            HRTimer_Common_Periph.BMTRGR :=
-              HRTimer_Common_Periph.BMTRGR or (2 ** Trigger'Enum_Rep);
-         end loop;
+      if Enabled then
+         HRTimer_Common_Periph.BMTRGR :=
+           HRTimer_Common_Periph.BMTRGR or (2 ** Trigger'Enum_Rep);
       else
-         for Trigger of Triggers loop
-            HRTimer_Common_Periph.BMTRGR :=
-              HRTimer_Common_Periph.BMTRGR and not (2 ** Trigger'Enum_Rep);
-         end loop;
+         HRTimer_Common_Periph.BMTRGR :=
+           HRTimer_Common_Periph.BMTRGR and not (2 ** Trigger'Enum_Rep);
       end if;
    end Configure_Burst_Mode_Trigger;
 
