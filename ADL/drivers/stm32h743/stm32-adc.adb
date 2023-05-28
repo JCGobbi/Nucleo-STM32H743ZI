@@ -64,13 +64,6 @@ package body STM32.ADC is
       Rank    : Injected_Channel_Rank)
      with Inline;
 
-   procedure Set_Injected_Channel_Offset
-     (This    : in out Analog_To_Digital_Converter;
-      Channel : Analog_Input_Channel;
-      Rank    : Injected_Channel_Rank;
-      Offset  : Injected_Data_Offset)
-     with Inline;
-
    ------------
    -- Enable --
    ------------
@@ -339,13 +332,11 @@ package body STM32.ADC is
      (This        : in out Analog_To_Digital_Converter;
       Channel     : Analog_Input_Channel;
       Rank        : Injected_Channel_Rank;
-      Sample_Time : Channel_Sampling_Times;
-      Offset      : Injected_Data_Offset)
+      Sample_Time : Channel_Sampling_Times)
    is
    begin
       Set_Sampling_Time (This, Channel, Sample_Time);
       Set_Injected_Channel_Sequence_Position (This, Channel, Rank);
-      Set_Injected_Channel_Offset (This, Channel, Rank, Offset);
    end Configure_Injected_Channel;
 
    ------------------------------------
@@ -395,8 +386,7 @@ package body STM32.ADC is
               (This,
                Conversion.Channel,
                Rank,
-               Conversion.Sample_Time,
-               Conversion.Offset);
+               Conversion.Sample_Time);
 
             --  We check the VBat first because that channel is also used for
             --  the temperature sensor channel on some MCUs, in which case the
@@ -421,6 +411,38 @@ package body STM32.ADC is
    function Injected_Conversions_Expected (This : Analog_To_Digital_Converter)
      return Natural is
      (Natural (This.JSQR.JL) + 1);
+
+   ------------------------------
+   -- Configure_Channel_Offset --
+   ------------------------------
+
+   procedure Configure_Channel_Offset
+     (This       : in out Analog_To_Digital_Converter;
+      Channel    : Analog_Input_Channel;
+      Rank       : Offset_Channel_Rank;
+      Offset     : Data_Offset;
+      Saturation : Boolean)
+   is
+   begin
+      case Rank is
+         when 1 =>
+            This.OFR1.OFFSET1_CH := Channel;
+            This.OFR1.OFFSET1 := Offset;
+            This.OFR1.SSATE := Saturation;
+         when 2 =>
+            This.OFR2.OFFSET2_CH := Channel;
+            This.OFR2.OFFSET2 := Offset;
+            This.OFR2.SSATE := Saturation;
+         when 3 =>
+            This.OFR3.OFFSET3_CH := Channel;
+            This.OFR3.OFFSET3 := Offset;
+            This.OFR3.SSATE := Saturation;
+         when 4 =>
+            This.OFR4.OFFSET4_CH := Channel;
+            This.OFR4.OFFSET4 := Offset;
+            This.OFR4.SSATE := Saturation;
+      end case;
+   end Configure_Channel_Offset;
 
    ----------------------------
    -- Enable_VBat_Connection --
@@ -1270,32 +1292,5 @@ package body STM32.ADC is
               Channel_Sampling_Times'Enum_Rep (Sample_Time);
       end case;
    end Set_Sampling_Time;
-
-   ---------------------------------
-   -- Set_Injected_Channel_Offset --
-   ---------------------------------
-
-   procedure Set_Injected_Channel_Offset
-     (This    : in out Analog_To_Digital_Converter;
-      Channel : Analog_Input_Channel;
-      Rank    : Injected_Channel_Rank;
-      Offset  : Injected_Data_Offset)
-   is
-   begin
-      case Rank is
-         when 1 =>
-            This.OFR1.OFFSET1_CH := Channel;
-            This.OFR1.OFFSET1 := Offset;
-         when 2 =>
-            This.OFR2.OFFSET2_CH := Channel;
-            This.OFR2.OFFSET2 := Offset;
-         when 3 =>
-            This.OFR3.OFFSET3_CH := Channel;
-            This.OFR3.OFFSET3 := Offset;
-         when 4 =>
-            This.OFR4.OFFSET4_CH := Channel;
-            This.OFR4.OFFSET4 := Offset;
-      end case;
-   end Set_Injected_Channel_Offset;
 
 end STM32.ADC;

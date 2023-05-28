@@ -345,20 +345,16 @@ package STM32.ADC is
                  (if AutoInjection then
                    not Discontinuous_Mode_Injected_Enabled (This));
 
-   subtype Injected_Data_Offset is UInt26;
-
    type Injected_Channel_Conversion is record
       Channel     : Analog_Input_Channel;
       Sample_Time : Channel_Sampling_Times;
-      Offset      : Injected_Data_Offset := 0;
    end record;
 
    procedure Configure_Injected_Channel
      (This        : in out Analog_To_Digital_Converter;
       Channel     : Analog_Input_Channel;
       Rank        : Injected_Channel_Rank;
-      Sample_Time : Channel_Sampling_Times;
-      Offset      : Injected_Data_Offset);
+      Sample_Time : Channel_Sampling_Times);
 
    procedure Configure_Injected_Channel_Nbr
      (This   : in out Analog_To_Digital_Converter;
@@ -394,6 +390,28 @@ package STM32.ADC is
    function Injected_Conversions_Expected (This : Analog_To_Digital_Converter)
      return Natural;
    --  Returns the total number of injected channel conversions to be done.
+
+   subtype Data_Offset is UInt26;
+   type Offset_Channel_Rank is new Natural range 1 .. 4;
+
+   procedure Configure_Channel_Offset
+     (This       : in out Analog_To_Digital_Converter;
+      Channel    : Analog_Input_Channel;
+      Rank       : Offset_Channel_Rank;
+      Offset     : Data_Offset;
+      Saturation : Boolean)
+     with Inline;
+   --  A maximum number of 4 regular or injected channels may have an offset.
+   --  The converted value is decreased by the user-defined offset written in
+   --  the bits OFFSETy[25:0]. The result may be a negative value so the read
+   --  data is signed and the SEXT bit represents the extended sign value.
+   --  When reading data from ADC_DR (regular channel) or from ADC_JDRy
+   --  (injected channel, y=1,2,3,4), the offset compensation is disabled when
+   --  ADC_OFRy [25:0] bitfield is reset. Otherwise, the offset for
+   --  ADC_OFRy[30:26] channel is enabled.
+   --  With saturation, the offset result can be signed, otherwise it occurs at
+   --  0x000 and 0xFFF and the offset result is unsigned. See RM0433 rev 7
+   --  chapter 25.4.27 Data management, Offset.
 
    function VBat_Enabled (This : Analog_To_Digital_Converter) return Boolean;
    --  Returns whether the hardware has the VBat internal connection enabled.
