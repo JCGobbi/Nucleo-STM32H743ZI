@@ -249,14 +249,12 @@ package body STM32.COMP is
       Param : Init_Parameters)
    is
    begin
-      This.CFGR :=
-        (INMSEL   => Param.Input_Minus'Enum_Rep,
-         INPSEL   => Boolean'Val (Param.Input_Plus'Enum_Rep),
-         POLARITY => Param.Output_Pol = Inverted,
-         HYST     => Param.Hysteresis'Enum_Rep,
-         BLANKING => Param.Blanking_Source'Enum_Rep,
-         PWRMODE  => Param.Power_Mode'Enum_Rep,
-         others   => <>);
+      Set_Inverting_Input_Port (This, Param.Input_Minus);
+      Set_NonInverting_Input_Port (This, Param.Input_Plus);
+      Set_Output_Polarity (This, Param.Output_Pol);
+      Set_Comparator_Hysteresis (This, Param.Hysteresis);
+      Set_Output_Blanking (This, Param.Blanking_Source);
+      Set_Power_Mode (This, Param.Power_Mode);
    end Configure_Comparator;
 
    ------------

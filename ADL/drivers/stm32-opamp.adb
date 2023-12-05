@@ -146,12 +146,10 @@ package body STM32.OPAMP is
       Param : Init_Parameters)
    is
    begin
-      This.CSR :=
-        (VM_SEL   => Param.Input_Minus'Enum_Rep,
-         VP_SEL   => Param.Input_Plus'Enum_Rep,
-         PGA_GAIN => Param.PGA_Mode'Enum_Rep,
-         OPAHSM   => Boolean'Val (Param.Power_Mode'Enum_Rep),
-         others   => <>);
+      Set_I_Input_Port (This, Param.Input_Minus);
+      Set_NI_Input_Port (This, Param.Input_Plus);
+      Set_PGA_Mode_Gain (This, Param.PGA_Mode);
+      Set_Speed_Mode (This, Param.Power_Mode);
    end Configure_Opamp;
 
    -----------------------
