@@ -280,8 +280,8 @@ package body STM32.HRTimers is
       Period    : UInt16)
    is
    begin
-      This.MCR.CKPSC := Prescaler'Enum_Rep;
-      This.MPER.MPER := Period;
+      Configure_Prescaler (This, Prescaler);
+      Set_Period (This, Period);
    end Configure;
 
    ----------------------------------
@@ -405,7 +405,7 @@ package body STM32.HRTimers is
       DMA_Request : Boolean)
    is
    begin
-      This.MREP.MREP := Repetitions;
+      Set_Repetition_Counter (This, Repetitions);
       This.MDIER.MREPIE := Interrupt;
       This.MDIER.MREPDE := DMA_Request;
    end Configure_Repetition_Counter;
@@ -419,14 +419,12 @@ package body STM32.HRTimers is
       Compare : HRTimer_Compare_Number;
       Value   : UInt16)
    is
-      pragma Unreferenced (This);
-
       --  The minimum value for timer compare is 3 periods of fHRTIM clock,
       --  that is 0x30 for CKPSC[2:0] = 5, 6 or 7. See chapter 37.5.8 in RM0433
       --  rev. 7.
-      Prescaler : constant UInt3 := HRTIM_Master_Periph.MCR.CKPSC;
-      Pre_Value : constant UInt16 := UInt16 (2 ** Natural (Prescaler));
-      Min_Value : constant UInt16 := 16#60# / Pre_Value;
+      Prescaler : constant UInt2 := HRTimer_Prescaler'Pos (Current_Prescaler (This));
+      Presc_Value : constant UInt16 := UInt16 (2 ** Natural (Prescaler));
+      Min_Value : constant UInt16 := 16#60# / Presc_Value;
       Final_Value : constant UInt16 := UInt16'Max (Value, Min_Value);
    begin
       case Compare is
@@ -969,8 +967,8 @@ package body STM32.HRTimers is
       Period    : UInt16)
    is
    begin
-      This.TIMxCR.CKPSCx := Prescaler'Enum_Rep;
-      This.PERxR.PERx := Period;
+      Configure_Prescaler (This, Prescaler);
+      Set_Period (This, Period);
    end Configure;
 
    ----------------------------------
@@ -1092,7 +1090,7 @@ package body STM32.HRTimers is
       DMA_Request : Boolean)
    is
    begin
-      This.REPxR.REPx := Repetitions;
+      Set_Repetition_Counter (This, Repetitions);
       This.TIMxDIER.REPIE := Interrupt;
       This.TIMxDIER.REPDE := DMA_Request;
    end Configure_Repetition_Counter;
@@ -1126,7 +1124,7 @@ package body STM32.HRTimers is
       --  The minimum value for timer compare is 3 periods of fHRTIM clock,
       --  that is 0x30 for CKPSC[2:0] = 5, 6 or 7. See chapter 37.5.8 in RM0433
       --  rev. 7.
-      Prescaler : constant UInt3 := This.TIMxCR.CKPSCx;
+      Prescaler : constant UInt2 := HRTimer_Prescaler'Pos (Current_Prescaler (This));
       Presc_Value : constant UInt16 := UInt16 (2 ** Natural (Prescaler));
       Min_Value : constant UInt16 := 16#60# / Presc_Value;
       Final_Value : constant UInt16 := UInt16'Max (Value, Min_Value);
@@ -1905,8 +1903,7 @@ package body STM32.HRTimers is
       Start_PulseWidth  : Chopper_Start_PulseWidth)
    is
    begin
-      This.OUTxR.CHP1 := Output1;
-      This.OUTxR.CHP2 := Output2;
+      Set_Chopper_Mode (This, Output1, Output2);
       This.CHPxR.CHPFRQ := Carrier_Frequency'Enum_Rep;
       This.CHPxR.CHPDTY := Duty_Cycle'Enum_Rep;
       This.CHPxR.STRTPW := Start_PulseWidth'Enum_Rep;
