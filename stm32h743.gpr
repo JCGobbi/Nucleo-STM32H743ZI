@@ -15,14 +15,14 @@ project STM32H743 is
    for Main use ("main.adb");
 
    case Ada_Drivers_Library.RTS is
-      when "ravenscar-sfp" =>
+      when "light-tasking" =>
          for Runtime ("Ada") use Project'Project_Dir &
            "ADL/runtimes/light-tasking-stm32h743";
-         for Source_Dirs use Project'Source_Dirs & ("src/errors/lch_sfp");
-      when "ravenscar-full" =>
+         for Source_Dirs use Project'Source_Dirs & ("src/errors/lch_light-tasking");
+      when "embedded" =>
          for Runtime ("Ada") use Project'Project_Dir &
            "ADL/runtimes/embedded-stm32h743";
-         for Source_Dirs use Project'Source_Dirs & ("src/errors/lch_full");
+         for Source_Dirs use Project'Source_Dirs & ("src/errors/lch_embedded");
    end case;
 
    package Compiler renames Ada_Drivers_Library.Compiler;

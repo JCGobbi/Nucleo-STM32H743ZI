@@ -11,8 +11,8 @@ library project Ada_Drivers_Library is
    Target := Project'Target;
 
    --  Run-time system
-   type RTS_Type is ("ravenscar-sfp", "ravenscar-full");
-   RTS : RTS_Type := External ("RTS_Profile", "ravenscar-sfp");
+   type RTS_Type is ("light-tasking", "embedded");
+   RTS : RTS_Type := External ("RTS_Profile", "light-tasking");
 
    --  Callgraph info is not available on all architectures
    Callgraph_Switch := ();
@@ -288,10 +288,10 @@ library project Ada_Drivers_Library is
      Src_Dirs_Root & "svd");
 
    case RTS is
-      when "ravenscar-sfp" =>
-         for Source_Dirs use Ada_Drivers_Library'Source_Dirs & ("src/sfp");
-      when "ravenscar-full" =>
-         for Source_Dirs use Ada_Drivers_Library'Source_Dirs & ("src/full");
+      when "light-tasking" =>
+         for Source_Dirs use Ada_Drivers_Library'Source_Dirs & ("src/light-tasking");
+      when "embedded" =>
+         for Source_Dirs use Ada_Drivers_Library'Source_Dirs & ("src/embedded");
    end case;
 
 end Ada_Drivers_Library;
