@@ -153,12 +153,6 @@ package body STM32.DMA is
    is
    begin
       Get_Stream (This, Stream).CR.EN := False;
-      --  the STMicro Reference Manual RM0090, Doc Id 018909 Rev 6, pg 319,
-      --  step 1 says we must await the bit actually clearing, to confirm no
-      --  ongoing operation remains active.
-      loop
-         exit when not Enabled (This, Stream);
-      end loop;
    end Disable;
 
    -----------
@@ -269,7 +263,7 @@ package body STM32.DMA is
       Data_Count  : UInt16)
    is
    begin
-      Disable (This, Stream);  --  per the RM, eg section 10.5.6 for the NDTR
+      Disable (This, Stream);
 
       Configure_Data_Flow
         (This,
@@ -371,7 +365,7 @@ package body STM32.DMA is
       Enabled_Interrupts : Interrupt_Selections := (others => True))
    is
    begin
-      Disable (This, Stream);  --  per the RM, eg section 10.5.6 for the NDTR
+      Disable (This, Stream);
 
       Configure_Data_Flow
         (This,
@@ -919,11 +913,10 @@ package body STM32.DMA is
       --  see HAL_DMA_Init in STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h
       This_Stream : DMA_Stream renames Get_Stream (This, Stream);
    begin
-      --  the STMicro Reference Manual RM0090, Doc Id 018909 Rev 6, pg 319 says
-      --  we must disable the stream before configuring it
+      --  RM0433, chapter 15.5.5 says the configuration and FIFO bits registers
+      --  only may be written when EN = 0, so we must disable the stream
+      --  before configuring it.
       Disable (This, Stream);
-
-      This_Stream.CR.EN := True;
 
       if This'Address = DMA1_Periph'Address then
          case Stream is
