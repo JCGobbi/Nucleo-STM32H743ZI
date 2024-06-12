@@ -193,6 +193,13 @@ package STM32.HRTimers is
 
    procedure Set_Period (This : in out HRTimer_Master;  Value : UInt16)
      with Post => Current_Period (This) = Value;
+   --  The period values must be within a lower and an upper limit related to
+   --  the high-resolution implementation and listed in table 301 of the RM0433
+   --  rev 7 chapter 37.3.4.
+   --  Prescaler  CKPSC[2:0] Min      Max
+   --  Div_1      5          0x0003   0xFFFD
+   --  Div_2      6          0x0003   0xFFFD
+   --  Div_4      7          0x0003   0xFFFD
 
    function Current_Period (This : HRTimer_Master) return UInt16;
 
@@ -265,7 +272,15 @@ package STM32.HRTimers is
       Compare : HRTimer_Compare_Number;
       Value   : UInt16)
      with Post => Read_Compare_Value (This, Compare) = Value;
-   --  Set the value for Compare registers 1 to 4.
+   --  Set the value for Compare registers 1 to 4. A compare value greater than
+   --  the period register value will not generate a compare match event.
+   --  The compare values must be within a lower and an upper limit related to
+   --  the high-resolution implementation and listed in table 301 of the RM0433
+   --  rev 7 chapter 37.3.4.
+   --  Prescaler  CKPSC[2:0] Min      Max
+   --  Div_1      5          0x0003   0xFFFD
+   --  Div_2      6          0x0003   0xFFFD
+   --  Div_4      7          0x0003   0xFFFD
 
    function Read_Compare_Value
      (This    : HRTimer_Master;
