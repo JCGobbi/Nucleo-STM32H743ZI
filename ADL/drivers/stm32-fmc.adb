@@ -185,7 +185,7 @@ package body STM32.FMC is
          when FMC_Bank2_SDRAM =>
             Val := FMC_Periph.SDSR.MODES.Arr (2);
       end case;
-      return FMC_SDRAM_Status_Mode'Val (Val);
+      return FMC_SDRAM_Status_Mode'Enum_Val (Val);
    end FMC_SDRAM_Get_Status;
 
    ---------------------------

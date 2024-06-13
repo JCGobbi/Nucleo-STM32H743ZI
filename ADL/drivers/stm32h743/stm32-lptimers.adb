@@ -47,7 +47,7 @@ package body STM32.LPTimers is
 
    function Current_Prescaler (This : LPTimer) return LPTimer_Prescaler is
    begin
-      return LPTimer_Prescaler'Val (This.CFGR.PRESC);
+      return LPTimer_Prescaler'Enum_Val (This.CFGR.PRESC);
    end Current_Prescaler;
 
    -----------------------
@@ -150,7 +150,7 @@ package body STM32.LPTimers is
          raise Invalid_Request with "Frequency too low";
       end if;
 
-      Prescaler := LPTimer_Prescaler'Val (Prescaler_Enum);
+      Prescaler := LPTimer_Prescaler'Enum_Val (Prescaler_Enum);
    end Compute_Prescaler_And_Period;
 
    ------------------------------

@@ -241,7 +241,7 @@ package body STM32.DMA is
       --  peripheral. The hardware resets it to 16#FFFF#, see RM0090 10.3.15.
       This_Stream.NDTR.NDT := Data_Count;
 
-      case DMA_Data_Transfer_Direction'Val (This_Stream.CR.DIR) is
+      case DMA_Data_Transfer_Direction'Enum_Val (This_Stream.CR.DIR) is
          when Memory_To_Peripheral =>
             This_Stream.M0AR := W (Source);
             This_Stream.PAR  := W (Destination);
@@ -790,7 +790,7 @@ package body STM32.DMA is
       return DMA_Data_Transfer_Direction
    is
    begin
-      return DMA_Data_Transfer_Direction'Val (Get_Stream (This, Stream).CR.DIR);
+      return DMA_Data_Transfer_Direction'Enum_Val (Get_Stream (This, Stream).CR.DIR);
    end Transfer_Direction;
 
    ---------------------------
@@ -802,7 +802,7 @@ package body STM32.DMA is
       return DMA_Data_Transfer_Widths
    is
    begin
-      return DMA_Data_Transfer_Widths'Val
+      return DMA_Data_Transfer_Widths'Enum_Val
         (Get_Stream (This, Stream).CR.PSIZE);
    end Peripheral_Data_Width;
 
@@ -815,7 +815,7 @@ package body STM32.DMA is
       return DMA_Data_Transfer_Widths
    is
    begin
-      return DMA_Data_Transfer_Widths'Val
+      return DMA_Data_Transfer_Widths'Enum_Val
         (Get_Stream (This, Stream).CR.MSIZE);
    end Memory_Data_Width;
 
@@ -832,40 +832,40 @@ package body STM32.DMA is
          if This'Address = DMA1_Periph'Address then
             case Stream is
                when Stream_1 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C0CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C0CR.DMAREQ_ID);
                when Stream_2 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C1CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C1CR.DMAREQ_ID);
                when Stream_3 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C2CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C2CR.DMAREQ_ID);
                when Stream_4 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C3CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C3CR.DMAREQ_ID);
                when Stream_5 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C4CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C4CR.DMAREQ_ID);
                when Stream_6 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C5CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C5CR.DMAREQ_ID);
                when Stream_7 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C6CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C6CR.DMAREQ_ID);
                when Stream_8 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C7CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C7CR.DMAREQ_ID);
             end case;
          elsif This'Address = DMA2_Periph'Address then
             case Stream is
                when Stream_1 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C8CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C8CR.DMAREQ_ID);
                when Stream_2 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C9CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C9CR.DMAREQ_ID);
                when Stream_3 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C10CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C10CR.DMAREQ_ID);
                when Stream_4 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C11CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C11CR.DMAREQ_ID);
                when Stream_5 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C12CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C12CR.DMAREQ_ID);
                when Stream_6 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C13CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C13CR.DMAREQ_ID);
                when Stream_7 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C14CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C14CR.DMAREQ_ID);
                when Stream_8 =>
-                  return DMA_Channel_Selector'Val (DMAMUX1_Periph.C15CR.DMAREQ_ID);
+                  return DMA_Channel_Selector'Enum_Val (DMAMUX1_Periph.C15CR.DMAREQ_ID);
             end case;
          end if;
       end if;
@@ -898,7 +898,7 @@ package body STM32.DMA is
       return DMA_Priority_Level
    is
    begin
-      return DMA_Priority_Level'Val (Get_Stream (This, Stream).CR.PL);
+      return DMA_Priority_Level'Enum_Val (Get_Stream (This, Stream).CR.PL);
    end Priority;
 
    ---------------

@@ -53,7 +53,7 @@ package body STM32.COMP is
    function Get_Inverting_Input_Port
      (This : Comparator) return Inverting_Input_Port is
    begin
-      return Inverting_Input_Port'Val (This.CFGR.INMSEL);
+      return Inverting_Input_Port'Enum_Val (This.CFGR.INMSEL);
    end Get_Inverting_Input_Port;
 
    ---------------------------------
@@ -74,7 +74,7 @@ package body STM32.COMP is
    function Get_NonInverting_Input_Port
      (This : Comparator) return NonInverting_Input_Port is
    begin
-      return NonInverting_Input_Port'Val (Boolean'Pos (This.CFGR.INPSEL));
+      return NonInverting_Input_Port'Enum_Val (Boolean'Pos (This.CFGR.INPSEL));
    end Get_NonInverting_Input_Port;
 
    -------------------------
@@ -93,7 +93,7 @@ package body STM32.COMP is
 
    function Get_Output_Polarity (This : Comparator) return Output_Polarity is
    begin
-      return Output_Polarity'Val (Boolean'Pos (This.CFGR.POLARITY));
+      return Output_Polarity'Enum_Val (Boolean'Pos (This.CFGR.POLARITY));
    end Get_Output_Polarity;
 
    -------------------------------
@@ -117,7 +117,7 @@ package body STM32.COMP is
       return Comparator_Hysteresis
    is
    begin
-      return Comparator_Hysteresis'Val (This.CFGR.HYST);
+      return Comparator_Hysteresis'Enum_Val (This.CFGR.HYST);
    end Get_Comparator_Hysteresis;
 
    -------------------------
@@ -138,7 +138,7 @@ package body STM32.COMP is
 
    function Get_Output_Blanking (This : Comparator) return Output_Blanking is
    begin
-      return Output_Blanking'Val (This.CFGR.BLANKING);
+      return Output_Blanking'Enum_Val (This.CFGR.BLANKING);
    end Get_Output_Blanking;
 
    ---------------------------------

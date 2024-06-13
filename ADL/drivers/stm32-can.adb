@@ -229,7 +229,7 @@ package body STM32.CAN is
 
    function Get_Calibration_State return Calibration_State is
    begin
-      return Calibration_State'Val (CAN_CCU_Periph.CSTAT.CALS);
+      return Calibration_State'Enum_Val (CAN_CCU_Periph.CSTAT.CALS);
    end Get_Calibration_State;
 
    ----------------------------
@@ -2221,61 +2221,61 @@ package body STM32.CAN is
    begin
       case Source is
          when Rx_FIFO_0_Msg_Pending =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.RF0NL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.RF0NL));
          when Rx_FIFO_0_Watermark =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.RF0WL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.RF0WL));
          when Rx_FIFO_0_Full =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.RF0FL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.RF0FL));
          when Rx_FIFO_0_Msg_Lost =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.RF0LL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.RF0LL));
          when Rx_FIFO_1_Msg_Pending =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.RF1NL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.RF1NL));
          when Rx_FIFO_1_Watermark =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.RF1WL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.RF1WL));
          when Rx_FIFO_1_Full =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.RF1FL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.RF1FL));
          when Rx_FIFO_1_Msg_Lost =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.RF1LL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.RF1LL));
          when High_Prio_Msg_Received =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.HPML));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.HPML));
          when Transmission_Completed =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.TCL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.TCL));
          when Transmission_Abort_Finished =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.TCFL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.TCFL));
          when Tx_FIFO_Empty =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.TFEL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.TFEL));
          when Tx_Event_Fifo_Pending =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.TEFNL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.TEFNL));
          when Tx_Event_Fifo_Watermark =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.TEFWL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.TEFWL));
          when Tx_Event_Fifo_Full =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.TEFFL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.TEFFL));
          when Tx_Event_Fifo_Msg_Lost =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.TEFLL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.TEFLL));
          when Timestanp_Wraparound =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.TSWL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.TSWL));
          when Rx_Msg_RAM_Access_Failure =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.MRAFL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.MRAFL));
          when Timeout_Occurred =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.TOOL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.TOOL));
          when Rx_Buffer_Msg_Stored =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.DRXL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.DRXL));
          when Error_Logging_Overflow =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.ELOL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.ELOL));
          when Error_Passive =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.EPL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.EPL));
          when Error_Warning =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.EWL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.EWL));
          when Bus_Off =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.BOL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.BOL));
          when Msg_RAM_Watchdog =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.WDIL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.WDIL));
          when Error_Arbitration_Phase =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.PEAL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.PEAL));
          when Error_Data_Phase =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.PEDL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.PEDL));
          when Access_Reserved_Address =>
-            return Interrupt_Line'Val (Boolean'Pos (This.ILS.ARAL));
+            return Interrupt_Line'Enum_Val (Boolean'Pos (This.ILS.ARAL));
          when others =>
             raise STM32.Device.Unknown_Device;
       end case;
@@ -2290,12 +2290,12 @@ package body STM32.CAN is
       Status : out Protocol_Status)
    is
    begin
-      Status.Last_Error_Code := Last_Error_Code_Enum'Val (This.PSR.LEC);
-      Status.Communication_Activity := Communication_Activity_Enum'Val (This.PSR.ACT);
+      Status.Last_Error_Code := Last_Error_Code_Enum'Enum_Val (This.PSR.LEC);
+      Status.Communication_Activity := Communication_Activity_Enum'Enum_Val (This.PSR.ACT);
       Status.Error_Passive := This.PSR.EP;
       Status.Error_Counter_Warning := This.PSR.EW;
       Status.Bus_Off := This.PSR.BO;
-      Status.Data_Last_Error_Code := Last_Error_Code_Enum'Val (This.PSR.DLEC);
+      Status.Data_Last_Error_Code := Last_Error_Code_Enum'Enum_Val (This.PSR.DLEC);
       Status.Rx_ESI_Flag := This.PSR.RESI;
       Status.Rx_BRS_Flag := This.PSR.RBRS;
       Status.Rx_FDF_Flag := This.PSR.REDL;

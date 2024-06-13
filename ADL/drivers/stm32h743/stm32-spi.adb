@@ -246,7 +246,7 @@ package body STM32.SPI is
    function Current_Data_Direction (This : SPI_Port) return SPI_Data_Direction
    is
    begin
-      return SPI_Data_Direction'Val (This.Periph.CFG2.COMM);
+      return SPI_Data_Direction'Enum_Val (This.Periph.CFG2.COMM);
    end Current_Data_Direction;
 
    -----------------
@@ -358,7 +358,7 @@ package body STM32.SPI is
    overriding
    function Data_Size (This : SPI_Port) return HAL.SPI.SPI_Data_Size is
    begin
-      return HAL.SPI.SPI_Data_Size'Val (This.Periph.CFG1.DSIZE);
+      return HAL.SPI.SPI_Data_Size'Enum_Val (This.Periph.CFG1.DSIZE);
    end Data_Size;
 
    --------------
