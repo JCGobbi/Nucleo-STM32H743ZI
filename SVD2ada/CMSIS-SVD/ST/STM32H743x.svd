@@ -35922,11 +35922,144 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>DIFSEL</name>
+              <name>DIFSEL_0</name>
               <description>ADC channel differential or single-ended
-              mode for channel</description>
+              mode for channel 0</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>20</bitWidth>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_1</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 1</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_2</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 2</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_3</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 3</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_4</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 4</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_5</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 5</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_6</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 6</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_7</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 7</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_8</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 8</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_9</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 9</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_10</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 10</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_11</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 0</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_12</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 12</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_13</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 13</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_14</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 14</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_15</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 15</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_16</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 16</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_17</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 17</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_18</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 18</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DIFSEL_19</name>
+              <description>ADC channel differential or single-ended
+              mode for channel 19</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
             </field>
           </fields>
         </register>

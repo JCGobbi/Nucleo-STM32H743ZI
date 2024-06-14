@@ -886,12 +886,48 @@ package STM32_SVD.ADC is
       Reserved_26_31 at 0 range 26 .. 31;
    end record;
 
-   subtype DIFSEL_DIFSEL_Field is HAL.UInt20;
-
    --  ADC channel differential or single-ended mode selection register
    type DIFSEL_Register is record
-      --  ADC channel differential or single-ended mode for channel
-      DIFSEL         : DIFSEL_DIFSEL_Field := 16#0#;
+      --  ADC channel differential or single-ended mode for channel 0
+      DIFSEL_0       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 1
+      DIFSEL_1       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 2
+      DIFSEL_2       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 3
+      DIFSEL_3       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 4
+      DIFSEL_4       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 5
+      DIFSEL_5       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 6
+      DIFSEL_6       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 7
+      DIFSEL_7       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 8
+      DIFSEL_8       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 9
+      DIFSEL_9       : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 10
+      DIFSEL_10      : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 0
+      DIFSEL_11      : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 12
+      DIFSEL_12      : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 13
+      DIFSEL_13      : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 14
+      DIFSEL_14      : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 15
+      DIFSEL_15      : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 16
+      DIFSEL_16      : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 17
+      DIFSEL_17      : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 18
+      DIFSEL_18      : Boolean := False;
+      --  ADC channel differential or single-ended mode for channel 19
+      DIFSEL_19      : Boolean := False;
       --  unspecified
       Reserved_20_31 : HAL.UInt12 := 16#0#;
    end record
@@ -899,7 +935,26 @@ package STM32_SVD.ADC is
           Bit_Order => System.Low_Order_First;
 
    for DIFSEL_Register use record
-      DIFSEL         at 0 range 0 .. 19;
+      DIFSEL_0       at 0 range 0 .. 0;
+      DIFSEL_1       at 0 range 1 .. 1;
+      DIFSEL_2       at 0 range 2 .. 2;
+      DIFSEL_3       at 0 range 3 .. 3;
+      DIFSEL_4       at 0 range 4 .. 4;
+      DIFSEL_5       at 0 range 5 .. 5;
+      DIFSEL_6       at 0 range 6 .. 6;
+      DIFSEL_7       at 0 range 7 .. 7;
+      DIFSEL_8       at 0 range 8 .. 8;
+      DIFSEL_9       at 0 range 9 .. 9;
+      DIFSEL_10      at 0 range 10 .. 10;
+      DIFSEL_11      at 0 range 11 .. 11;
+      DIFSEL_12      at 0 range 12 .. 12;
+      DIFSEL_13      at 0 range 13 .. 13;
+      DIFSEL_14      at 0 range 14 .. 14;
+      DIFSEL_15      at 0 range 15 .. 15;
+      DIFSEL_16      at 0 range 16 .. 16;
+      DIFSEL_17      at 0 range 17 .. 17;
+      DIFSEL_18      at 0 range 18 .. 18;
+      DIFSEL_19      at 0 range 19 .. 19;
       Reserved_20_31 at 0 range 20 .. 31;
    end record;
 
