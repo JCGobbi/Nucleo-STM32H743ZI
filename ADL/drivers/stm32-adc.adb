@@ -138,11 +138,7 @@ package body STM32.ADC is
       --  ADC Characteristics at symbol tADCVREG_STUP.
       delay until (Clock + Microseconds (10));
 
-      if Convertion = Single_Ended then
-         This.CR.ADCALDIF := False;
-      else
-         This.CR.ADCALDIF := True;
-      end if;
+      This.CR.ADCALDIF := Convertion = Differential;
 
       --  Start offset and linearity calibration
       This.CR.ADCALLIN := Linearity;
@@ -198,45 +194,45 @@ package body STM32.ADC is
    begin
       case Channel is
          when 0 =>
-            This.DIFSEL.DIFSEL_0 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_0 := Convertion = Differential;
          when 1 =>
-            This.DIFSEL.DIFSEL_1 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_1 := Convertion = Differential;
          when 2 =>
-            This.DIFSEL.DIFSEL_2 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_2 := Convertion = Differential;
          when 3 =>
-            This.DIFSEL.DIFSEL_3 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_3 := Convertion = Differential;
          when 4 =>
-            This.DIFSEL.DIFSEL_4 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_4 := Convertion = Differential;
          when 5 =>
-            This.DIFSEL.DIFSEL_5 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_5 := Convertion = Differential;
          when 6 =>
-            This.DIFSEL.DIFSEL_6 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_6 := Convertion = Differential;
          when 7 =>
-            This.DIFSEL.DIFSEL_7 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_7 := Convertion = Differential;
          when 8 =>
-            This.DIFSEL.DIFSEL_8 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_8 := Convertion = Differential;
          when 9 =>
-            This.DIFSEL.DIFSEL_9 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_9 := Convertion = Differential;
          when 10 =>
-            This.DIFSEL.DIFSEL_10 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_10 := Convertion = Differential;
          when 11 =>
-            This.DIFSEL.DIFSEL_11 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_11 := Convertion = Differential;
          when 12 =>
-            This.DIFSEL.DIFSEL_12 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_12 := Convertion = Differential;
          when 13 =>
-            This.DIFSEL.DIFSEL_13 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_13 := Convertion = Differential;
          when 14 =>
-            This.DIFSEL.DIFSEL_14 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_14 := Convertion = Differential;
          when 15 =>
-            This.DIFSEL.DIFSEL_15 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_15 := Convertion = Differential;
          when 16 =>
-            This.DIFSEL.DIFSEL_16 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_16 := Convertion = Differential;
          when 17 =>
-            This.DIFSEL.DIFSEL_17 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_17 := Convertion = Differential;
          when 18 =>
-            This.DIFSEL.DIFSEL_18 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_18 := Convertion = Differential;
          when 19 =>
-            This.DIFSEL.DIFSEL_19 := Boolean'Val (Convertion'Enum_Rep);
+            This.DIFSEL.DIFSEL_19 := Convertion = Differential;
       end case;
    end Set_Convertion_Mode;
 
