@@ -187,7 +187,7 @@ package body STM32.CRC is
       Order : Data_Output_Order)
    is
    begin
-      This.CR.REV_OUT := Boolean'Val (Order'Enum_Rep);
+      This.CR.REV_OUT := Order = Bit_Reversed;
    end Set_Data_Output_Order;
 
 end STM32.CRC;
