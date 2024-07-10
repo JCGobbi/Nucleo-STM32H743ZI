@@ -108,6 +108,9 @@ package body STM32.ADC is
    begin
       if This.CR.ADEN then
          This.CR.ADDIS := True;
+         loop
+            exit when This.CR.ADDIS = False and This.CR.ADEN = False;
+         end loop;
       end if;
    end Disable;
 
