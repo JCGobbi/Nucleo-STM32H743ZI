@@ -385,15 +385,17 @@ package body STM32.I2C is
       --  Reset the timing register to Standard mode 100_000 Hz.
       --  The STM32CubeMX tool calculates and provides the I2C_TIMINGR content
       --  in the I2C configuration window.
-      --  For the STM32F334R8 nucleo board, the I2C Clock Mux has two options:
+      --  For the STM32H743ZI nucleo board, the I2C Clock Mux has four options:
       --                    PRESC   SCLDEL   SDADEL   SCLH       SCLL
-      --  HSI (8 MHz)       2       0        0        9 (09)     14 (0E)
-      --  SYSCLK (72 MHz)   1       8        0        141 (8D)   211 (D3)
+      --  PCLK1 (100 MHz)   1       C        0        236 (EC)   255 (FF)
+      --  PLL3R (120 MHz)   3       7        0        117 (75)   177 (B1)
+      --  HSI (64 MHz)      1       7        0        125 (7D)   188 (BC)
+      --  CSI (4 MHz)       0       0        0        14 (0E)     20 (14)
       This.Periph.TIMINGR :=
-        (SCLL   => 211,
-         SCLH   => 141,
+        (SCLL   => 255,
+         SCLH   => 236,
          SDADEL => 0,
-         SCLDEL => 8,
+         SCLDEL => 12,
          PRESC  => 1,
          others => <>);
 
