@@ -225,13 +225,13 @@ package STM32.LPTimers is
       Option_7,
       Option_8)
      with Size => 3;
-   --  Option  LPTIM1         LPTIM3         LPTIM2      LPTIM2      LPTIM3
+   --  Option  LPTIM1         LPTIM2         LPTIM3      LPTIM4      LPTIM5
    --  1       GPIO           GPIO           LPTIM2_OUT  LPTIM2_OUT  LPTIM2_OUT
-   --  2       RTC_ALARMA     RTC_ALARMB                 LPTIM3_OUT  LPTIM3_OUT
-   --  3       RTC_TAMP1_OUT  RTC_TAMP1_OUT  LPTIM4_OUT              LPTIM4_OUT
-   --  4       RTC_TAMP2_OUT  RTC_TAMP2_OUT  LPTIM5_OUT  LPTIM5_OUT  SAI4_FS_A
-   --  5       RTC_TAMP3_OUT  RTC_TAMP3_OUT  SAI1_FS_A   SAI2_FS_A   SAI4_FS_B
-   --  6       RTC_TAMP4_OUT  RTC_TAMP4_OUT  SAI1_FS_B   SAI2_FS_B
+   --  2       RTC_ALARMA     RTC_ALARMA                 LPTIM3_OUT  LPTIM3_OUT
+   --  3       RTC_ALARMB     RTC_ALARMB     LPTIM4_OUT              LPTIM4_OUT
+   --  4       RTC_TAMP1_OUT  RTC_TAMP1_OUT  LPTIM5_OUT  LPTIM5_OUT  SAI4_FS_A
+   --  5       RTC_TAMP2_OUT  RTC_TAMP2_OUT  SAI1_FS_A   SAI2_FS_A   SAI4_FS_B
+   --  6       RTC_TAMP3_OUT  RTC_TAMP3_OUT  SAI1_FS_B   SAI2_FS_B
    --  7       COMP1_OUT      COMP1_OUT
    --  8       COMP2_OUT      COMP2_OUT
    --  See RM0433 rev 7 Chapter 43.4.3 "LPTIM input and trigger mapping".
