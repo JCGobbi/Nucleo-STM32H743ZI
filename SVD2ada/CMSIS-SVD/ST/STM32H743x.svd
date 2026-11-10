@@ -45588,7 +45588,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
-            
+
           </fields>
         </register>
         <register>
@@ -51925,7 +51925,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
       </registers>
-    </peripheral>   
+    </peripheral>
     <peripheral>
       <name>DCMI</name>
       <description>Digital camera interface</description>
@@ -63506,7 +63506,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <offset>0x0</offset>
         <size>0x400</size>
         <usage>registers</usage>
-      </addressBlock>     
+      </addressBlock>
       <registers>
         <register>
           <name>DMAMR</name>
@@ -64203,7 +64203,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
           </fields>
-        </register>   
+        </register>
 	 </registers>
     </peripheral>
 	 <peripheral>
@@ -64215,8 +64215,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <offset>0x0</offset>
         <size>0x200</size>
         <usage>registers</usage>
-      </addressBlock>     
-      <registers>      
+      </addressBlock>
+      <registers>
         <register>
           <name>MTLOMR</name>
           <displayName>MTLOMR</displayName>
@@ -64565,7 +64565,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>14</bitWidth>
             </field>
           </fields>
-        </register> 
+        </register>
         </registers>
     </peripheral>
 	 <peripheral>
@@ -64583,7 +64583,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <description>Ethernet global interrupt</description>
         <value>61</value>
       </interrupt>
-      <registers>       
+      <registers>
         <register>
           <name>MACCR</name>
           <displayName>MACCR</displayName>
@@ -65527,7 +65527,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitOffset>20</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
-            </field>           
+            </field>
           </fields>
         </register>
         <register>
@@ -65967,7 +65967,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>32</bitWidth>
             </field>
           </fields>
-        </register>       
+        </register>
         <register>
           <name>MACA1HR</name>
           <displayName>MACA1HR</displayName>
@@ -66601,7 +66601,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>16</bitWidth>
             </field>
           </fields>
-        </register>       
+        </register>
         <register>
           <name>MACL3A00R</name>
           <displayName>MACL3A00R</displayName>
@@ -92062,7 +92062,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>TAINV</name>
+              <name>DATAINV</name>
               <description>Binary data inversion</description>
               <bitOffset>18</bitOffset>
               <bitWidth>1</bitWidth>

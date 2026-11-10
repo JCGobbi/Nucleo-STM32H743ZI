@@ -189,7 +189,7 @@ package Interfaces.STM32.USART is
    subtype CR2_SWAP_Field is Interfaces.STM32.Bit;
    subtype CR2_RXINV_Field is Interfaces.STM32.Bit;
    subtype CR2_TXINV_Field is Interfaces.STM32.Bit;
-   subtype CR2_TAINV_Field is Interfaces.STM32.Bit;
+   subtype CR2_DATAINV_Field is Interfaces.STM32.Bit;
    subtype CR2_MSBFIRST_Field is Interfaces.STM32.Bit;
    subtype CR2_ABREN_Field is Interfaces.STM32.Bit;
    --  CR2_ABRMOD array element
@@ -282,7 +282,7 @@ package Interfaces.STM32.USART is
       --  TX pin active level inversion
       TXINV        : CR2_TXINV_Field := 16#0#;
       --  Binary data inversion
-      TAINV        : CR2_TAINV_Field := 16#0#;
+      DATAINV      : CR2_DATAINV_Field := 16#0#;
       --  Most significant bit first
       MSBFIRST     : CR2_MSBFIRST_Field := 16#0#;
       --  Auto baud rate enable
@@ -314,7 +314,7 @@ package Interfaces.STM32.USART is
       SWAP         at 0 range 15 .. 15;
       RXINV        at 0 range 16 .. 16;
       TXINV        at 0 range 17 .. 17;
-      TAINV        at 0 range 18 .. 18;
+      DATAINV      at 0 range 18 .. 18;
       MSBFIRST     at 0 range 19 .. 19;
       ABREN        at 0 range 20 .. 20;
       ABRMOD       at 0 range 21 .. 22;
